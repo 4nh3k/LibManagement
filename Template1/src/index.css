@@ -13,10 +13,23 @@ body {
   font-weight: 400;
 }
 
-label {
+.custom-label {
   @apply text-sm font-semibold;
 }
 
-input[type="text"] {
-  @apply rounded py-1 px-3 border-1 border-textboxBorder;
+.custom-input {
+  @apply rounded py-1 px-3 w-full border-1 text-sm border-textboxBorder;
+}
+.custom-input-icon {
+  @apply custom-input;
+  padding-right: 2rem;
+}
+.custom-input:focus {
+  @apply outline-none border-2 border-primary;
+}
+.primary-btn {
+  @apply rounded py-2 px-3 w-full bg-primaryBtn text-white text-sm;
+}
+::-ms-reveal {
+  display: none;
 }

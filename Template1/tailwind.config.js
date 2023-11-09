@@ -13,6 +13,7 @@ export default {
       colors: {
         background: '#F2F6FF',
         primary: '#8352FD',
+        primaryBtn: '#5632A1',
         primaryBorder: '#C0BBF4',
         primary2: '#3913B8',
         neutralDark: '#1A2151',

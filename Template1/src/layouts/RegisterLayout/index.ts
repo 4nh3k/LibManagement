@@ -1,3 +1,3 @@
-import RegisterLayout from './RegisterLayout';
+import FormLayout from './FormLayout';
 
-export default RegisterLayout;
+export default FormLayout;
