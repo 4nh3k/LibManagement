@@ -10,7 +10,7 @@ import ResetPass from './pages/ResetPassword/ResetPass';
 export default function useRouteElement() {
   const routeElement = useRoutes([
     {
-      path: '/',
+      path: '/books',
       element: <ProductList />
     },
     {

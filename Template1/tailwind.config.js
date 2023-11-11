@@ -11,6 +11,7 @@ export default {
         ladingBg: "url('/src/assets/img/bg.svg')",
       },
       colors: {
+        sidebarColor: '#E3E7F3',
         background: '#F2F6FF',
         primary: '#8352FD',
         primaryBtn: '#5632A1',
