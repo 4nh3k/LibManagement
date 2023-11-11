@@ -30,6 +30,9 @@ body {
 .primary-btn {
   @apply rounded py-2 px-3 w-full bg-primaryBtn text-white text-sm;
 }
+.primary-btn-fit {
+  @apply rounded py-1 px-2 bg-primaryBtn text-white text-sm;
+}
 ::-ms-reveal {
   display: none;
 }
