@@ -14,10 +14,11 @@ import Book from 'src/components/Book/Book';
 export default function ProductList() {
   return (
     <div className='flex flex-row h-screen'>
-      <div className='bg-sidebarColor w-[113px]'>
+      <div className='bg-sidebarColor w-[100px] mr-10'>
         <div className='flex flex-col items-center justify-center gap-10'>
-          <div className='items-center justify-center'>
+          <div className='text-center items-center justify-center'>
             <img src={website_logo} className='p-2 text-center' width={60} height={60}></img>
+            <span className='font-bold text-xl'>LibMa</span>
           </div>
           <MenuItem iconSrc={library_img} label='Library'></MenuItem>
           <MenuItem iconSrc={book_img} label='Book'></MenuItem>
@@ -26,12 +27,13 @@ export default function ProductList() {
         </div>
       </div>
       <div className='bg-white flex-1 flex-row h-screen'>
-        <div id='horizontal-header'>
-          <DropdownList></DropdownList>
-          <label>Keywords</label>
+        <div id='horizontal-header' className='mb-10 mt-2 static'>
+          <DropdownList list={['All books', 'Genre', 'Subject', 'Author', 'Publisher']}></DropdownList>
+          <label className='ml-20 mr-5'>Keywords</label>
           <InputBox placeholder='Enter keywords' type='text'></InputBox>
-          <label>Quantity</label>
+          <label className='ml-20 mr-5'>Quantity</label>
           <InputBox placeholder='9568' type='number'></InputBox>
+          <div id='button-container' className='inline space-x-20 absolute right-20'>
           <Button
             label='Search'
             bg_color='#5632A1'
@@ -40,27 +42,94 @@ export default function ProductList() {
             border_color='#D7C9FF'
           ></Button>
           <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black'></Button>
+          </div>
         </div>
-        <div className='grid grid-cols-4 gap-4'>
-          {/* Column 1 */}
-          <div className='bg-gray-100 p-4 w-200 h-150'>Column 1</div>
+        <div className='grid grid-cols-4 gap-4 mb-10'>
+          <Book
+          coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
+          overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+          title='Enceladus'
+          rating={2}
+        ></Book>
 
-          {/* Column 2 */}
-          <div className='bg-blue-100 p-4 w-200 h-150'>Column 2</div>
-
-          {/* Column 3 */}
-          <div className='bg-green-100 p-4 w-200 h-150'>Column 3</div>
-
-          {/* Column 3 */}
-          <div className='bg-green-100 p-4 w-200 h-150 '>Column 4</div>
-        </div>
         <Book
           coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
           overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
           title='Enceladus'
-          rating={4}
+          rating={2}
+        ></Book>
+
+        <Book
+          coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
+          overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+          title='Enceladus'
+          rating={2}
+        ></Book>
+        
+        <Book
+          coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
+          overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+          title='Enceladus'
+          rating={2}
+        ></Book>
+
+        <Book
+          coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
+          overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+          title='Enceladus'
+          rating={2}
+        ></Book>
+
+        <Book
+          coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
+          overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+          title='Enceladus'
+          rating={2}
+        ></Book>
+
+        <Book
+          coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
+          overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+          title='Enceladus'
+          rating={2}
+        ></Book>
+        
+        <Book
+          coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
+          overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+          title='Enceladus'
+          rating={2}
+        ></Book>
+
+        <Book
+          coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
+          overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+          title='Enceladus'
+          rating={2}
+        ></Book>
+
+        <Book
+          coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
+          overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+          title='Enceladus'
+          rating={2}
+        ></Book>
+
+        <Book
+          coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
+          overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+          title='Enceladus'
+          rating={2}
+        ></Book>
+        
+        <Book
+          coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
+          overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+          title='Enceladus'
+          rating={2}
         ></Book>
       </div>
+    </div>
     </div>
   );
 }

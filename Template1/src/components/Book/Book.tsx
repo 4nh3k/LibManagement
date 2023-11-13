@@ -14,7 +14,7 @@ const Book: React.FC<BookProps> = ({ coverImg, title, overview, rating }) => {
       <img className='w-32 h-45' src={coverImg} alt={title} />
       <div className='w-32 ml-2'>
         <h2 className='text-primary2 text-lg font-bold'>{title}</h2>
-        <RatingStar rating={4}></RatingStar>
+        <RatingStar rating={rating}></RatingStar>
         <p className='text-gray-500 text-xs mt-1 font-semibold'>{overview}</p>
         <button className='primary-btn-fit mt-1'>See more</button>
       </div>
