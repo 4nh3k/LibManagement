@@ -6,12 +6,17 @@ import RegisterLayout from './layouts/RegisterLayout';
 import FormLayout from './layouts/RegisterLayout';
 import ForgotPass from './pages/ForgotPass/ForgotPass';
 import ResetPass from './pages/ResetPassword/ResetPass';
+import Transactions from './pages/Transactions';
 
 export default function useRouteElement() {
   const routeElement = useRoutes([
     {
       path: '/books',
       element: <ProductList />
+    },
+    {
+      path: '/transactions',
+      element: <Transactions />
     },
     {
       path: '/login',
