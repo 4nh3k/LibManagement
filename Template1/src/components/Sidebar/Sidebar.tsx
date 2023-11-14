@@ -7,7 +7,7 @@ import MenuItem from 'src/components/MenuItem/MenuItem';
 
 const Sidebar = () => {
   return (
-    <div className='bg-sidebarColor w-[100px] mr-10'>
+    <div className='bg-sidebarColor w-[100px]'>
         <div className='flex flex-col items-center justify-center gap-10'>
           <div className='text-center items-center justify-center'>
             <img src={website_logo} className='p-2 text-center' width={60} height={60}></img>
