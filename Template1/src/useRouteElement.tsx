@@ -6,6 +6,7 @@ import RegisterLayout from './layouts/RegisterLayout';
 import FormLayout from './layouts/RegisterLayout';
 import ForgotPass from './pages/ForgotPass/ForgotPass';
 import ResetPass from './pages/ResetPassword/ResetPass';
+import BorrowCard from './pages/BorrowCard/BorrowCard';
 
 export default function useRouteElement() {
   const routeElement = useRoutes([
@@ -43,6 +44,12 @@ export default function useRouteElement() {
         <RegisterLayout>
           <ForgotPass />
         </RegisterLayout>
+      )
+    },
+    {
+      path: '/borrow_card',
+      element: (
+        <BorrowCard></BorrowCard>
       )
     }
   ]);

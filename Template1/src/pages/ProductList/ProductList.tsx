@@ -1,31 +1,16 @@
-import website_logo from '../../assets/img/logo.png';
-import library_img from '../../assets/img/library.png';
-import book_img from '../../assets/img/book.png';
-import member_img from '../../assets/img/group-chat.png';
-import transaction_img from '../../assets/img/transaction.png';
 import search_icon from '../../assets/img/icons8-search-128.png';
 import user_icon from '../../assets/img/user.png';
-import MenuItem from 'src/components/MenuItem/MenuItem';
+
 import DropdownList from 'src/components/BookFilterDropdown/BookFilterDropdown';
 import InputBox from 'src/components/InputBox';
 import Button from 'src/components/Button';
 import Book from 'src/components/Book/Book';
+import Sidebar from 'src/components/Sidebar/Sidebar';
 
 export default function ProductList() {
   return (
     <div className='flex flex-row h-screen'>
-      <div className='bg-sidebarColor w-[100px] mr-10'>
-        <div className='flex flex-col items-center justify-center gap-10'>
-          <div className='text-center items-center justify-center'>
-            <img src={website_logo} className='p-2 text-center' width={60} height={60}></img>
-            <span className='font-bold text-xl'>LibMa</span>
-          </div>
-          <MenuItem iconSrc={library_img} label='Library'></MenuItem>
-          <MenuItem iconSrc={book_img} label='Book'></MenuItem>
-          <MenuItem iconSrc={member_img} label='Member'></MenuItem>
-          <MenuItem iconSrc={transaction_img} label='Transaction'></MenuItem>
-        </div>
-      </div>
+      <Sidebar></Sidebar>
       <div className='bg-white flex-1 flex-row h-screen'>
         <div id='horizontal-header' className='mb-10 mt-2 static'>
           <DropdownList list={['All books', 'Genre', 'Subject', 'Author', 'Publisher']}></DropdownList>
