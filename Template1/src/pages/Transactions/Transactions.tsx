@@ -2,6 +2,7 @@ import React from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import ReturnCard from '../ReturnCard/ReturnCard';
 import Table from 'src/components/Table/Table';
+import ReturnCardList from '../ReturnCard/ReturnCardList';
 const headers = ['Name', 'Age', 'Email'];
 const data = [
   { Name: 'John', Age: 25, Email: 'john@example.com' },
@@ -11,7 +12,7 @@ const data = [
 
 const Transactions = () => {
   return (
-    <div>
+    <div className='bg-background'>
       <Tabs>
         <TabList>
           <Tab>Borrow Card</Tab>
@@ -25,6 +26,9 @@ const Transactions = () => {
         </TabPanel>
         <TabPanel>
           <Table headers={headers} data={data} />
+        </TabPanel>
+        <TabPanel>
+          <ReturnCardList></ReturnCardList>
         </TabPanel>
       </Tabs>
     </div>

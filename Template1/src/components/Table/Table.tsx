@@ -1,7 +1,12 @@
 import React from 'react';
 
+interface Header {
+  title: string;
+  dataIndex: string;
+}
+
 interface TableProps {
-  headers: string[];
+  headers: Header[];
   data: any[];
 }
 
@@ -11,8 +16,8 @@ const Table: React.FC<TableProps> = ({ headers, data }) => {
       <thead className='bg-gray-50'>
         <tr>
           {headers.map(header => (
-            <th className='px-6 py-4 font-medium text-gray-900' key={header}>
-              {header}
+            <th className='px-6 py-4 font-medium text-gray-900' key={header.dataIndex}>
+              {header.title}
             </th>
           ))}
         </tr>
@@ -21,8 +26,8 @@ const Table: React.FC<TableProps> = ({ headers, data }) => {
         {data.map((row, index) => (
           <tr className='hover:bg-gray-50' key={index}>
             {headers.map(header => (
-              <td className='px-6 py-4' key={header}>
-                {row[header]}
+              <td className='px-6 py-4' key={header.dataIndex}>
+                {row[header.dataIndex]}
               </td>
             ))}
           </tr>

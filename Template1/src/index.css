@@ -18,12 +18,21 @@ body {
 }
 
 .custom-label {
-  @apply text-sm font-semibold;
+  @apply text-sm font-semibold block;
 }
 
 .custom-input {
   @apply rounded py-1 px-3 w-full border-1 text-sm border-textboxBorder;
 }
+
+.custom-select {
+  @apply bg-gray-50 border-2 border-transparent text-gray-900 text-sm rounded-lg focus:bg-gray-100 focus:ring-primaryBorder focus:border-primaryBorder block p-2.5;
+}
+
+.secondary-btn {
+  @apply border-2 text-xs font-semibold border-primaryBorder rounded-md px-4 py-2 text-primary2 active:border-black hover:border-primary bg-primaryBg;
+}
+
 .custom-input-icon {
   @apply custom-input;
   padding-right: 2rem;
@@ -32,10 +41,10 @@ body {
   @apply outline-none border-2 border-primary;
 }
 .primary-btn {
-  @apply rounded py-2 px-3 w-full bg-primaryBtn text-white text-sm;
+  @apply rounded py-2 px-3 w-full bg-primaryBtn text-white text-sm hover:bg-primary active:bg-primaryBtnPress;
 }
 .primary-btn-fit {
-  @apply rounded py-1 px-2 bg-primaryBtn text-white text-sm;
+  @apply rounded py-1 px-2 bg-primaryBtn text-white text-sm hover:bg-primary active:bg-primaryBtnPress;
 }
 ::-ms-reveal {
   display: none;

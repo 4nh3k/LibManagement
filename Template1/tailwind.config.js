@@ -8,13 +8,15 @@ export default {
       },
       backgroundImage: {
         readingBook: "url('/src/assets/img/illustration.svg')",
-        ladingBg: "url('/src/assets/img/bg.svg')",
+        ladingBg: "url('/src/assets/img/bg.svg')"
       },
       colors: {
         sidebarColor: '#E3E7F3',
         background: '#F2F6FF',
         primary: '#8352FD',
+        primaryBg: '#E8E7FD',
         primaryBtn: '#5632A1',
+        primaryBtnPress: '#33196B',
         primaryBorder: '#C0BBF4',
         primary2: '#3913B8',
         neutralDark: '#1A2151',
