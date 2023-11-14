@@ -1,7 +1,7 @@
 import Sidebar from 'src/components/Sidebar/Sidebar'
 import Button from 'src/components/Button'
 import user_icon from '../../assets/img/user.png';
-
+import Table from 'src/components/Table/Table';
 function BorrowCard() {
   return (
     <div className='flex flex-row h-screen'>
@@ -13,8 +13,9 @@ function BorrowCard() {
 						<Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black'></Button>
 					</div>
         </div>
-				<div id='body'>
-				<span className='absolute left-50 text-xl font-bold'>Borrow Card List</span>
+				<div id='body' className='mt-20 mr-20'>
+					<span className='text-xl font-bold'>Borrow Card List</span>
+					<Table headers={["BorrowCardID", "AdminID", "ReaderID", "Date", "Status", "Action"]} data={[]}></Table>
 				</div>
       </div>
     </div>

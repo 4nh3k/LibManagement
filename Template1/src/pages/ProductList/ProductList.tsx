@@ -19,7 +19,7 @@ export default function ProductList() {
           <label className='ml-20 mr-5'>Keywords</label>
           <InputBox placeholder='Enter keywords' type='text'></InputBox>
           <label className='ml-20 mr-5'>Quantity</label>
-          <InputBox placeholder='9568' type='number'></InputBox>
+          <InputBox placeholder='1' type='number'></InputBox>
           <div id='button-container' className='inline space-x-20 absolute right-20'>
             <Button
               label='Search'
