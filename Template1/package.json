@@ -16,7 +16,8 @@
     "@phosphor-icons/react": "^2.0.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.16.0"
+    "react-router-dom": "^6.16.0",
+    "react-tabs": "^6.0.2"
   },
   "devDependencies": {
     "@types/node": "^20.6.5",

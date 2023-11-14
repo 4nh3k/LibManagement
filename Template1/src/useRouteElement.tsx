@@ -7,12 +7,17 @@ import FormLayout from './layouts/RegisterLayout';
 import ForgotPass from './pages/ForgotPass/ForgotPass';
 import ResetPass from './pages/ResetPassword/ResetPass';
 import BorrowCard from './pages/BorrowCard/BorrowCard';
+import Transactions from './pages/Transactions';
 
 export default function useRouteElement() {
   const routeElement = useRoutes([
     {
       path: '/books',
       element: <ProductList />
+    },
+    {
+      path: '/transactions',
+      element: <Transactions />
     },
     {
       path: '/login',
