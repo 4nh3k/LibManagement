@@ -6,6 +6,7 @@ import RegisterLayout from './layouts/RegisterLayout';
 import FormLayout from './layouts/RegisterLayout';
 import ForgotPass from './pages/ForgotPass/ForgotPass';
 import ResetPass from './pages/ResetPassword/ResetPass';
+import BorrowCard from './pages/BorrowCard/BorrowCard';
 import Transactions from './pages/Transactions';
 
 export default function useRouteElement() {
@@ -48,6 +49,12 @@ export default function useRouteElement() {
         <RegisterLayout>
           <ForgotPass />
         </RegisterLayout>
+      )
+    },
+    {
+      path: '/borrow_card',
+      element: (
+        <BorrowCard></BorrowCard>
       )
     }
   ]);
