@@ -15,9 +15,10 @@ interface Header {
 interface TableProps {
   headers: Header[];
   data: any[];
+  onToggle?: () => void;
 }
 
-const Table: React.FC<TableProps> = ({ headers, data }) => {
+const Table: React.FC<TableProps> = ({ headers, data, onToggle }) => {
   return (
     <>
       <div id='utilsRow' className='bg-white flex'>
@@ -41,7 +42,13 @@ const Table: React.FC<TableProps> = ({ headers, data }) => {
         </div>
         <div className='inline-flex items-center align-middle mr-5 space-x-5'>
           <Button label='All' bg_color='#C0BBF4' color='#5632A1'></Button>
-          <Button label='Add' icon={icon_add} bg_color='#E8E7FD' color='#9C55F6'></Button>
+          <Button
+            label='Add'
+            icon={icon_add}
+            bg_color='#E8E7FD'
+            color='#9C55F6'
+            onclick={onToggle}
+          ></Button>
         </div>
       </div>
       <table className='w-full border-collapse table-auto bg-white text-left text-sm text-black'>

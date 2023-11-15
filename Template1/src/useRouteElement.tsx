@@ -8,6 +8,7 @@ import ForgotPass from './pages/ForgotPass/ForgotPass';
 import ResetPass from './pages/ResetPassword/ResetPass';
 import BorrowCard from './pages/BorrowCard/BorrowCard';
 import Transactions from './pages/Transactions';
+import ReturnCardForm from './pages/BorrowCard/BorrowCardForm';
 
 export default function useRouteElement() {
   const routeElement = useRoutes([
@@ -54,6 +55,10 @@ export default function useRouteElement() {
     {
       path: '/borrow_card',
       element: <BorrowCard></BorrowCard>
+    },
+    {
+      path: '/return_card_form',
+      element: <ReturnCardForm></ReturnCardForm>
     }
   ]);
   return routeElement;

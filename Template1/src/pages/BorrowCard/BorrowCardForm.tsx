@@ -6,19 +6,33 @@ interface Props {
 }
 
 // eslint-disable-next-line no-empty-pattern
-const ReturnCardForm: React.FC<Props> = ({ onToggle }) => {
+const BorrowCardForm: React.FC<Props> = ({ onToggle }) => {
   return (
     <div>
-      <h2 className='font-bold text-xl'>Return Card</h2>
-      <div className='mt-9'>
-        <label className='custom-label' htmlFor='borrow-card-id'>
-          Borrow Card ID:
-        </label>
-        <select className='w-56 custom-select mt-1' id='borrow-card-id'>
-          <option value='1'>Borrow Card 1</option>
-          <option value='2'>Borrow Card 2</option>
-          <option value='3'>Borrow Card 3</option>
-        </select>
+      <h2 className='font-bold text-xl'>Borrow Card</h2>
+      <div className='flex-row inline-flex gap-x-20'>
+        <div className='w-72 mt-5'>
+          <label className='custom-label' htmlFor='book-id'>
+            Member name
+          </label>
+          <input
+            type='text'
+            className='custom-input mt-1'
+            id='member_name'
+            placeholder='Enter member name'
+          />
+        </div>
+        <div className='w-72 mt-5'>
+          <label className='custom-label' htmlFor='book-id'>
+            Book ID
+          </label>
+          <input
+            type='text'
+            className='custom-input mt-1'
+            id='member_id'
+            placeholder='Enter member id'
+          />
+        </div>
       </div>
       <div className='mt-6'>
         <label className='custom-label' htmlFor='book-name'>
@@ -64,4 +78,4 @@ const ReturnCardForm: React.FC<Props> = ({ onToggle }) => {
   );
 };
 
-export default ReturnCardForm;
+export default BorrowCardForm;

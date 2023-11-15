@@ -1,6 +1,10 @@
 import Table from 'src/components/Table/Table';
 
-const ReturnCardList = () => {
+interface ReturnCardProps {
+  onToggle?: () => void;
+}
+
+const ReturnCard: React.FC<ReturnCardProps> = ({ onToggle }) => {
   const headers = [
     { title: 'Return Card ID', dataIndex: 'returnCardId' },
     { title: 'Admin ID', dataIndex: 'adminId' },
@@ -26,10 +30,10 @@ const ReturnCardList = () => {
     <div>
       <div id='body' className='mt-5 mr-20'>
         <span className='text-xl font-bold'>Return Card List</span>
-        <Table headers={headers} data={data}></Table>
+        <Table headers={headers} data={data} onToggle={onToggle}></Table>
       </div>
     </div>
   );
 };
 
-export default ReturnCardList;
+export default ReturnCard;

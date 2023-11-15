@@ -4,8 +4,23 @@ import Sidebar from 'src/components/Sidebar/Sidebar';
 import Button from 'src/components/Button';
 import user_icon from '../../assets/img/user.png';
 import BorrowCard from '../BorrowCard/BorrowCard';
+import { useState } from 'react';
+import BorrowCardForm from '../BorrowCard/BorrowCardForm';
+import ReturnCardForm from '../ReturnCard/ReturnCardForm';
+
 // import React, { useState } from 'react';
 const Transactions = () => {
+  const [showBorrowForm, setShowBorrowForm] = useState(false);
+
+  const toggleBorrowForm = () => {
+    setShowBorrowForm(showBorrowForm => !showBorrowForm);
+  };
+
+  const [showReturnForm, setShowReturnForm] = useState(false);
+
+  const toggleReturnForm = () => {
+    setShowReturnForm(showReturnForm => !showReturnForm);
+  };
 
   return (
     <div className='bg-background flex flex-row h-screen'>
@@ -27,10 +42,12 @@ const Transactions = () => {
             </TabList>
 
             <TabPanel>
-              <BorrowCard />
+              {!showBorrowForm && <BorrowCard onToggle={toggleBorrowForm} />}
+              {showBorrowForm && <BorrowCardForm onToggle={toggleBorrowForm}></BorrowCardForm>}
             </TabPanel>
             <TabPanel>
-              <ReturnCard></ReturnCard>
+              {!showReturnForm && <ReturnCard onToggle={toggleReturnForm}></ReturnCard>}
+              {showReturnForm && <ReturnCardForm onToggle={toggleReturnForm}></ReturnCardForm>}
             </TabPanel>
             <TabPanel></TabPanel>
             <TabPanel></TabPanel>

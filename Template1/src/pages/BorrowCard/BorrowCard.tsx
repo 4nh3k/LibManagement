@@ -1,6 +1,10 @@
 import Table from 'src/components/Table/Table';
 
-function BorrowCard() {
+interface BorrowCardProps {
+  onToggle?: () => void;
+}
+
+const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
   const headers = [
     { title: 'Borrow Card ID', dataIndex: 'borrowCardID' },
     { title: 'Admin ID', dataIndex: 'adminID' },
@@ -56,9 +60,9 @@ function BorrowCard() {
   return (
     <div id='body' className='mt-5 mr-20'>
       <span className='text-xl font-bold'>Borrow Card List</span>
-      <Table headers={headers} data={data}></Table>
+      <Table headers={headers} data={data} onToggle={onToggle}></Table>
     </div>
   );
-}
+};
 
 export default BorrowCard;
