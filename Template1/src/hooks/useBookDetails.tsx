@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useQuery } from 'react-query';
 
 const fetchBook = (bookId: string) => {
-  return axios.get(`https://book-library-management.onrender.com/api/v1/books/${bookId}`);
+  return axios.get(`http://localhost:3001/api/v1/books/${bookId}`);
 };
 
 export const useBookDetails = (bookId: string) => {
