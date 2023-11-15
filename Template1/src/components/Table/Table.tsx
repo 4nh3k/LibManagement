@@ -5,6 +5,7 @@ import Button from '../Button';
 import icon_search from '../../assets/img/search_icon.svg';
 import icon_edit from '../../assets/img/edit.png';
 import icon_trash from '../../assets/img/trash.png';
+import icon_add from '../../assets/img/add.png'
 
 interface Header {
   title: string;
@@ -35,11 +36,12 @@ const Table: React.FC<TableProps> = ({ headers, data }) => {
             ></input>
           </div>
         </div>
-        <div className='inline-flex ml-auto items-center align-middle'>
+        <div className='inline-flex ml-auto items-center align-middle mr-10'>
           <DropdownList list={['UserID', 'BorrowCardID']}></DropdownList>
         </div>
-        <div className='inline-flex items-center align-middle'>
+        <div className='inline-flex items-center align-middle mr-5 space-x-5'>
           <Button label='All' bg_color='#C0BBF4' color='#5632A1'></Button>
+          <Button label='Add' icon={icon_add} bg_color='#E8E7FD' color='#9C55F6'></Button>
         </div>
       </div>
       <table className='w-full border-collapse table-auto bg-white text-left text-sm text-black'>

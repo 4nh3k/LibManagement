@@ -53,9 +53,7 @@ export default function useRouteElement() {
     },
     {
       path: '/borrow_card',
-      element: (
-        <BorrowCard></BorrowCard>
-      )
+      element: <BorrowCard></BorrowCard>
     }
   ]);
   return routeElement;
