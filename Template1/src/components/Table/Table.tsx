@@ -73,9 +73,6 @@ const Table: React.FC<TableProps> = ({ headers, data }) => {
               ))}
             </tr>
           ))}
-          <tr>
-            <td className=''></td>
-          </tr>
         </tbody>
       </table>
       <div
