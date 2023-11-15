@@ -57,7 +57,7 @@ body {
   @apply mb-2 p-0;
 }
 .react-tabs__tab {
-  @apply inline-block relative list-none px-4 py-2 cursor-pointer -bottom-px text-2xl font-semibold;
+  @apply inline-block relative list-none px-4 py-2 cursor-pointer -bottom-px text-xl font-semibold;
 }
 .react-tabs__tab--selected {
   @apply border-b-4 border-primaryBtn text-primaryBtn;
