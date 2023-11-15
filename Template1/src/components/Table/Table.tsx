@@ -19,13 +19,13 @@ interface TableProps {
 const Table: React.FC<TableProps> = ({ headers, data }) => {
   return (
     <>
-      <div id='utilsRow' className='bg-white flex-1'>
-        <div className='inline-flex items-center gap-5 align-middle'>
+      <div id='utilsRow' className='bg-white flex'>
+        <div className='inline-flex ml-6 items-center gap-5 align-middle'>
           <span className='inline-block align-middle'>Show</span>
           <InputBox placeholder='1' type='number'></InputBox>
           <span className='inline-block align-middle'>entries</span>
         </div>
-        <div className='inline-flex items-center align-middle'>
+        <div className='inline-flex ml-12 md:ml-20 items-center align-middle'>
           <div className='inline-flex bg-white text-black pt-2 pb-2 pl-3 pr-3 rounded-xl border-2 overflow-hidden'>
             <img alt='icon-search' src={icon_search} className='w-6 mr-3'></img>
             <input
@@ -35,7 +35,7 @@ const Table: React.FC<TableProps> = ({ headers, data }) => {
             ></input>
           </div>
         </div>
-        <div className='inline-flex items-center align-middle'>
+        <div className='inline-flex ml-auto items-center align-middle'>
           <DropdownList list={['UserID', 'BorrowCardID']}></DropdownList>
         </div>
         <div className='inline-flex items-center align-middle'>
@@ -74,26 +74,29 @@ const Table: React.FC<TableProps> = ({ headers, data }) => {
             </tr>
           ))}
           <tr>
-            <td colSpan={6} className='px-6 py-6 align-middle items-center justify-center'>
-              <div className='text-center flex-row gap-5'>
-                <div className='inline pr-10 hover:text-[#4d6be3]'>Previous</div>
-                <div id='pagination' className='inline flex-row gap-5'>
-                  <button className='bg-[#9E9E9E] hover:bg-[#624DE3] text-white font-bold py-2 px-3 rounded-lg mx-3'>
-                    1
-                  </button>
-                  <button className='bg-[#E0E0E0] hover:bg-[#624DE3] text-white font-bold py-2 px-3 rounded-lg mx-3'>
-                    2
-                  </button>
-                  <button className='bg-[#E0E0E0] hover:bg-[#624DE3] text-white font-bold py-2 px-3 rounded-lg mx-3'>
-                    3
-                  </button>
-                </div>
-                <div className='inline pl-10 hover:text-[#4d6be3]'>Next</div>
-              </div>
-            </td>
+            <td className=''></td>
           </tr>
         </tbody>
       </table>
+      <div
+        className={`text-center px-6 py-6 align-middle items-center ${
+          data.length % 2 === 0 ? 'bg-[#F7F6FE]' : 'bg-white'
+        } justify-center flex-row gap-5`}
+      >
+        <div className='inline pr-10 hover:text-[#4d6be3]'>Previous</div>
+        <div id='pagination' className='inline flex-row gap-5'>
+          <button className='bg-[#9E9E9E] hover:bg-[#624DE3] text-white font-bold py-2 px-3 rounded-lg mx-3'>
+            1
+          </button>
+          <button className='bg-[#E0E0E0] hover:bg-[#624DE3] text-white font-bold py-2 px-3 rounded-lg mx-3'>
+            2
+          </button>
+          <button className='bg-[#E0E0E0] hover:bg-[#624DE3] text-white font-bold py-2 px-3 rounded-lg mx-3'>
+            3
+          </button>
+        </div>
+        <div className='inline pl-10 hover:text-[#4d6be3]'>Next</div>
+      </div>
     </>
   );
 };

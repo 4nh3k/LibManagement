@@ -5,6 +5,7 @@ const ReturnCardList = () => {
   const data = [
     { returnCardId: 1, adminId: 1, action: 'Return' },
     { returnCardId: 2, adminId: 2, action: 'Return' },
+    { returnCardId: 2, adminId: 2, action: 'Return' },
     {
       returnCardId: 3,
       adminId: 3,
