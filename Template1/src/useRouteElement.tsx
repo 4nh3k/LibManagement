@@ -1,20 +1,19 @@
 import { useRoutes } from 'react-router-dom';
-import ProductList from './pages/ProductList';
+import Library from './pages/Library';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import RegisterLayout from './layouts/RegisterLayout';
 import FormLayout from './layouts/RegisterLayout';
 import ForgotPass from './pages/ForgotPass/ForgotPass';
 import ResetPass from './pages/ResetPassword/ResetPass';
-import BorrowCard from './pages/BorrowCard/BorrowCard';
 import Transactions from './pages/Transactions';
-import ReturnCardForm from './pages/BorrowCard/BorrowCardForm';
+import AddBookForm from './pages/BookPage/AddBookForm';
 
 export default function useRouteElement() {
   const routeElement = useRoutes([
     {
-      path: '/books',
-      element: <ProductList />
+      path: '/library',
+      element: <Library />
     },
     {
       path: '/transactions',
@@ -53,12 +52,8 @@ export default function useRouteElement() {
       )
     },
     {
-      path: '/borrow_card',
-      element: <BorrowCard></BorrowCard>
-    },
-    {
-      path: '/return_card_form',
-      element: <ReturnCardForm></ReturnCardForm>
+      path: '/book',
+      element: <AddBookForm></AddBookForm>
     }
   ]);
   return routeElement;

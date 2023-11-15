@@ -7,11 +7,11 @@ import Button from 'src/components/Button';
 import Book from 'src/components/Book/Book';
 import Sidebar from 'src/components/Sidebar/Sidebar';
 
-export default function ProductList() {
+export default function Library() {
   return (
     <div className='flex flex-row h-screen'>
       <Sidebar></Sidebar>
-      <div className='bg-white flex-1 flex-row h-screen'>
+      <div className='bg-white flex-1 flex-row h-screen pl-20 pr-20'>
         <div id='horizontal-header' className='mb-10 mt-2 static'>
           <DropdownList
             list={['All books', 'Genre', 'Subject', 'Author', 'Publisher']}
@@ -31,7 +31,7 @@ export default function ProductList() {
             <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black'></Button>
           </div>
         </div>
-        <div className='grid grid-cols-4 gap-4 mb-10'>
+        <div className='grid grid-cols-4 gap-12 mb-10'>
           <Book
             coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
             overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
