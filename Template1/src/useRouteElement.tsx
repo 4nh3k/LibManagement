@@ -8,12 +8,17 @@ import ForgotPass from './pages/ForgotPass/ForgotPass';
 import ResetPass from './pages/ResetPassword/ResetPass';
 import BorrowCard from './pages/BorrowCard/BorrowCard';
 import Transactions from './pages/Transactions';
+import BookDetails from './pages/BookDetails/BookDetails';
 
 export default function useRouteElement() {
   const routeElement = useRoutes([
     {
       path: '/books',
       element: <ProductList />
+    },
+    {
+      path: '/books/:id',
+      element: <BookDetails />
     },
     {
       path: '/transactions',
@@ -53,9 +58,7 @@ export default function useRouteElement() {
     },
     {
       path: '/borrow_card',
-      element: (
-        <BorrowCard></BorrowCard>
-      )
+      element: <BorrowCard></BorrowCard>
     }
   ]);
   return routeElement;
