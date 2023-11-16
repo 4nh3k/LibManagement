@@ -92,6 +92,7 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
                 className='custom-input mt-1'
                 id='member_name'
                 placeholder='Enter year'
+                min={1} 
               />
             </div>
             <div className='w-72 mt-5'>
@@ -103,6 +104,8 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
                 className='custom-input mt-1'
                 id='member_id'
                 placeholder='Enter month'
+                min={1}
+                max={12}
               />
             </div>
             <div className='w-72 mt-5'>
@@ -114,31 +117,34 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
                 className='custom-input mt-1'
                 id='member_id'
                 placeholder='Enter day'
+                min={1} 
+                max={31}
               />
             </div>
           </div>
         </div>
         <div className='flex-row inline-flex gap-x-20'>
           <div className='w-72 mt-5'>
-            <label className='custom-label' htmlFor='book-title'>
-              Book title
+            <label className='custom-label' htmlFor='book-page'>
+              Page
             </label>
             <input
               type='text'
               className='custom-input mt-1'
               id='member_name'
-              placeholder='Enter book title'
+              placeholder='Enter number of pages'
             />
           </div>
           <div className='w-72 mt-5'>
-            <label className='custom-label' htmlFor='book-publisher'>
-              Book publisher
+            <label className='custom-label' htmlFor='book-price'>
+              Price
             </label>
             <input
-              type='text'
+              type='number'
               className='custom-input mt-1'
               id='member_id'
-              placeholder='Enter book publisher'
+              placeholder='Enter book price'
+              min={0}
             />
           </div>
         </div>
