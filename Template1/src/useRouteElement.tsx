@@ -8,6 +8,7 @@ import ForgotPass from './pages/ForgotPass/ForgotPass';
 import ResetPass from './pages/ResetPassword/ResetPass';
 import Transactions from './pages/Transactions';
 import BookPage from './pages/BookPage/BookPage';
+import FailModal from './components/Modals/FailModal';
 
 export default function useRouteElement() {
   const routeElement = useRoutes([
@@ -54,6 +55,10 @@ export default function useRouteElement() {
     {
       path: '/book',
       element: <BookPage></BookPage>
+    },
+    {
+      path: '/fail_modal',
+      element: <FailModal></FailModal>
     }
   ]);
   return routeElement;
