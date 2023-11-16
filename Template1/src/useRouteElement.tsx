@@ -7,7 +7,7 @@ import FormLayout from './layouts/RegisterLayout';
 import ForgotPass from './pages/ForgotPass/ForgotPass';
 import ResetPass from './pages/ResetPassword/ResetPass';
 import Transactions from './pages/Transactions';
-import AddBookForm from './pages/BookPage/AddBookForm';
+import BookPage from './pages/BookPage/BookPage';
 
 export default function useRouteElement() {
   const routeElement = useRoutes([
@@ -53,7 +53,7 @@ export default function useRouteElement() {
     },
     {
       path: '/book',
-      element: <AddBookForm></AddBookForm>
+      element: <BookPage></BookPage>
     }
   ]);
   return routeElement;
