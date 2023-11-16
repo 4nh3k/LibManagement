@@ -7,6 +7,8 @@ import BorrowCard from '../BorrowCard/BorrowCard';
 import { useState } from 'react';
 import BorrowCardForm from '../BorrowCard/BorrowCardForm';
 import ReturnCardForm from '../ReturnCard/ReturnCardForm';
+import FeeCard from '../FeeCard/FeeCard';
+import RemindCard from '../RemindCard/RemindCard';
 
 // import React, { useState } from 'react';
 const Transactions = () => {
@@ -49,8 +51,12 @@ const Transactions = () => {
               {!showReturnForm && <ReturnCard onToggle={toggleReturnForm}></ReturnCard>}
               {showReturnForm && <ReturnCardForm onToggle={toggleReturnForm}></ReturnCardForm>}
             </TabPanel>
-            <TabPanel></TabPanel>
-            <TabPanel></TabPanel>
+            <TabPanel>
+              <FeeCard></FeeCard>
+            </TabPanel>
+            <TabPanel>
+              <RemindCard></RemindCard>
+            </TabPanel>
           </Tabs>
         </div>
       </div>
