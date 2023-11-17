@@ -9,6 +9,8 @@ import ResetPass from './pages/ResetPassword/ResetPass';
 import Transactions from './pages/Transactions';
 import BookPage from './pages/BookPage/BookPage';
 import FailModal from './components/Modals/FailModal';
+import SuccessfulModal from './components/Modals/SuccessfulModal';
+import WarningModal from './components/Modals/WarningModal';
 
 export default function useRouteElement() {
   const routeElement = useRoutes([
@@ -58,7 +60,7 @@ export default function useRouteElement() {
     },
     {
       path: '/fail_modal',
-      element: <FailModal></FailModal>
+      element: <WarningModal title='Successfully' description='Test modal'></WarningModal>
     }
   ]);
   return routeElement;
