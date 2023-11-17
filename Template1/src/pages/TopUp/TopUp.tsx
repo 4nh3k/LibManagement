@@ -19,8 +19,11 @@ const TopUp = () => {
             </div>
             Top up account
           </div>
-          <div className='flex flex-col mr-[1250px] gap-10'>
-            <div id='member-name-input' className='ml-6 flex flex-row items-center align-middle'>
+          <div className='flex flex-col gap-10'>
+            <div
+              id='member-name-input'
+              className='ml-auto mr-auto flex flex-row items-center align-middle'
+            >
               <label
                 htmlFor='member_name'
                 id='member-label'
@@ -35,7 +38,10 @@ const TopUp = () => {
                 placeholder='Enter member name'
               />
             </div>
-            <div id='member-id-input' className='ml-6 flex flex-row items-center align-middle'>
+            <div
+              id='member-id-input'
+              className='ml-auto mr-auto flex flex-row items-center align-middle'
+            >
               <label
                 htmlFor='member-id'
                 id='member-label'
@@ -63,12 +69,20 @@ const TopUp = () => {
           </div>
           Top up
         </div>
-        <div id='top-up-container' className='ml-6 space-x-[30px] mb-3'>
+      </div>
+      <div className='flex flex-col'>
+        <div id='top-up-container' className='ml-auto mr-auto space-x-10 mb-3'>
           <div
             id='price'
-            className='inline-flex h-[35px] items-center align-middle space-x-[150px] bg-white px-5 py-6 rounded-lg border-1 border-[#1F78E8]'
+            className='inline-flex h-[35px] items-center align-middle space-x-[50px] bg-white px-5 py-6 rounded-lg border-1 border-[#1F78E8] '
           >
-            <span className='text-[20px]'>69,000</span>
+            <input
+              className='text-[20px] border-none outline-0'
+              type='number'
+              min={0}
+              id='top-up-amount'
+              placeholder='1,000đ'
+            ></input>
             <img
               src={money_icon}
               className='inline text-right'
@@ -79,7 +93,7 @@ const TopUp = () => {
           </div>
           <Button label='Top up' bg_color='#C0BBF4' color='#5632A1'></Button>
         </div>
-        <span className='ml-11'>Your balance will be 120,000đ</span>
+        <span className='ml-auto mr-auto'>Your balance will be 120,000đ</span>
       </div>
     </div>
   );

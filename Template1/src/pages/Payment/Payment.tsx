@@ -2,8 +2,8 @@ import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import Sidebar from 'src/components/Sidebar/Sidebar';
 import Button from 'src/components/Button';
 import user_icon from '../../assets/img/user.png';
-import { useState } from 'react';
 import TopUp from '../TopUp/TopUp';
+import PaymentForm from './PaymentForm';
 
 // import React, { useState } from 'react';
 const Payment = () => {
@@ -28,7 +28,7 @@ const Payment = () => {
               <TopUp></TopUp>
             </TabPanel>
             <TabPanel>
-              
+              <PaymentForm></PaymentForm>
             </TabPanel>
           </Tabs>
         </div>
