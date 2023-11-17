@@ -1,5 +1,5 @@
 import React from 'react';
-import money_icon from '../../assets/img/dong.png';
+import money_icon from '../../../assets/img/dong.png';
 import Button from 'src/components/Button';
 const TopUp = () => {
   return (

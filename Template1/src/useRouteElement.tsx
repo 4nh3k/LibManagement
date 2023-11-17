@@ -9,6 +9,7 @@ import ResetPass from './pages/ResetPassword/ResetPass';
 import Transactions from './pages/Transactions';
 import BookPage from './pages/BookPage/BookPage';
 import Payment from './pages/Payment';
+import Configuration from './pages/Configuration/MainConfig';
 
 export default function useRouteElement() {
   const routeElement = useRoutes([
@@ -59,6 +60,10 @@ export default function useRouteElement() {
     {
       path: '/payment',
       element: <Payment></Payment>
+    },
+    {
+      path: '/configuration',
+      element: <Configuration></Configuration>
     }
   ]);
   return routeElement;

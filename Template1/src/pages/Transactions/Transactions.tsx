@@ -1,14 +1,14 @@
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
-import ReturnCard from '../ReturnCard/ReturnCard';
+import ReturnCard from './ReturnCard/ReturnCard';
 import Sidebar from 'src/components/Sidebar/Sidebar';
 import Button from 'src/components/Button';
 import user_icon from '../../assets/img/user.png';
-import BorrowCard from '../BorrowCard/BorrowCard';
+import BorrowCard from './BorrowCard/BorrowCard';
 import { useState } from 'react';
-import BorrowCardForm from '../BorrowCard/BorrowCardForm';
-import ReturnCardForm from '../ReturnCard/ReturnCardForm';
-import FeeCard from '../FeeCard/FeeCard';
-import RemindCard from '../RemindCard/RemindCard';
+import BorrowCardForm from './BorrowCard/BorrowCardForm';
+import ReturnCardForm from './ReturnCard/ReturnCardForm';
+import FeeCard from './FeeCard/FeeCard';
+import RemindCard from './RemindCard/RemindCard';
 
 // import React, { useState } from 'react';
 const Transactions = () => {
