@@ -2,8 +2,7 @@ import { useRoutes } from 'react-router-dom';
 import Library from './pages/Library';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import RegisterLayout from './layouts/RegisterLayout';
-import FormLayout from './layouts/RegisterLayout';
+import FormLayout from './layouts/FormLayout';
 import ForgotPass from './pages/ForgotPass/ForgotPass';
 import ResetPass from './pages/ResetPassword/ResetPass';
 import Transactions from './pages/Transactions';
@@ -11,16 +10,15 @@ import BookDetails from './pages/BookDetails/BookDetails';
 import BookPage from './pages/BookPage/BookPage';
 import Payment from './pages/Payment';
 import Configuration from './pages/Configuration/MainConfig';
+import NavLayout from './layouts/NavLayout/NavLayout';
+import Member from './pages/Member';
+import { useUser } from './hooks/useUser';
 
 export default function useRouteElement() {
   const routeElement = useRoutes([
     {
       path: '/library',
       element: <Library />
-    },
-    {
-      path: '/books/:id',
-      element: <BookDetails />
     },
     {
       path: '/books/:id',
@@ -41,25 +39,25 @@ export default function useRouteElement() {
     {
       path: '/register',
       element: (
-        <RegisterLayout>
+        <FormLayout>
           <Register />
-        </RegisterLayout>
+        </FormLayout>
       )
     },
     {
       path: '/resetpass',
       element: (
-        <RegisterLayout>
+        <FormLayout>
           <ResetPass />
-        </RegisterLayout>
+        </FormLayout>
       )
     },
     {
       path: '/forgotpass',
       element: (
-        <RegisterLayout>
+        <FormLayout>
           <ForgotPass />
-        </RegisterLayout>
+        </FormLayout>
       )
     },
     {
@@ -69,6 +67,14 @@ export default function useRouteElement() {
     {
       path: '/payment',
       element: <Payment></Payment>
+    },
+    {
+      path: '/member',
+      element: (
+        <NavLayout>
+          <Member></Member>
+        </NavLayout>
+      )
     },
     {
       path: '/configuration',
