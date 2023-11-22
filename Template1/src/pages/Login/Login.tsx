@@ -7,20 +7,25 @@ export default function Login() {
   return (
     <>
       <h1 className='text-3xl text-center text-primary2 mb-7 font-bold'>Sign in</h1>
-      <label htmlFor='username' className='block custom-label'>
+      <label htmlFor='username' className='block custom-label mb-1'>
         Username
       </label>
-      <input className='custom-input' id='username' type='text' placeholder='Username' />
-      <label htmlFor='password' className='block custom-label mt-7'>
+      <div className='min-h-[2rem]'>
+        <input className='custom-input' id='username' type='text' placeholder='Username' />
+      </div>
+
+      <label htmlFor='password' className='block custom-label mt-7 mb-1'>
         Password
       </label>
       <div className='relative'>
-        <input
-          className='custom-input-icon'
-          id='password'
-          type={showPassword ? 'text' : 'password'}
-          placeholder='Password'
-        />
+        <div className='min-h-[2rem]'>
+          <input
+            className='custom-input-icon max-h-[2rem]'
+            id='password'
+            type={showPassword ? 'text' : 'password'}
+            placeholder='Password'
+          />
+        </div>
         <button
           className='absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600'
           onClick={() => setShowPassword(!showPassword)}
@@ -28,6 +33,7 @@ export default function Login() {
           {!showPassword ? <Eye size={16} /> : <EyeSlash size={16} />}
         </button>
       </div>
+
       <a href='forgotpass' className=' ml-auto'>
         <span className='text-xs text-primaryBorder hover:text-primary'>Forgot password?</span>
       </a>

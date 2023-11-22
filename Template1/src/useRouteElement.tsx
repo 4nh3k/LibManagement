@@ -10,15 +10,16 @@ import Transactions from './pages/Transactions';
 import BookPage from './pages/BookPage/BookPage';
 import Payment from './pages/Payment';
 import Configuration from './pages/Configuration/MainConfig';
+import { path } from './constants/path';
 
 export default function useRouteElement() {
   const routeElement = useRoutes([
     {
-      path: '/library',
+      path: path.library,
       element: <Library />
     },
     {
-      path: '/transactions',
+      path: path.transactions,
       element: <Transactions />
     },
     {
