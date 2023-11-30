@@ -23,7 +23,7 @@ export default function useRouteElement() {
       element: <Transactions />
     },
     {
-      path: '/login',
+      path: 'login',
       element: (
         <FormLayout>
           <Login />
@@ -31,29 +31,46 @@ export default function useRouteElement() {
       )
     },
     {
-      path: '/register',
-      element: (
-        <RegisterLayout>
-          <Register />
-        </RegisterLayout>
-      )
+      element: <RegisterLayout />,
+      children: [
+        {
+          path: 'register',
+          element: <Register />
+        },
+        {
+          path: 'reset-pass',
+          element: <ResetPass />
+        },
+        {
+          path: 'forgot-pass',
+          element: <ForgotPass />
+        }
+      ]
     },
-    {
-      path: '/resetpass',
-      element: (
-        <RegisterLayout>
-          <ResetPass />
-        </RegisterLayout>
-      )
-    },
-    {
-      path: '/forgotpass',
-      element: (
-        <RegisterLayout>
-          <ForgotPass />
-        </RegisterLayout>
-      )
-    },
+    // {
+    //   path: '/register',
+    //   element: (
+    //     <RegisterLayout>
+    //       <Register />
+    //     </RegisterLayout>
+    //   )
+    // },
+    // {
+    //   path: '/resetpass',
+    //   element: (
+    //     <RegisterLayout>
+    //       <ResetPass />
+    //     </RegisterLayout>
+    //   )
+    // },
+    // {
+    //   path: '/forgotpass',
+    //   element: (
+    //     <RegisterLayout>
+    //       <ForgotPass />
+    //     </RegisterLayout>
+    //   )
+    // },
     {
       path: '/book',
       element: <BookPage></BookPage>
