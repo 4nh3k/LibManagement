@@ -14,7 +14,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className='bg-sidebarColor'>
+    <div className='bg-sidebarColor fixed top-0 left-0 bottom-0'>
       <div className='flex flex-col items-center justify-center'>
         <div className='text-center items-center justify-center px-6'>
           <img
