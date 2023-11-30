@@ -8,12 +8,12 @@ interface Props {
 
 const BookPage: React.FC<Props> = ({ onToggle }) => {
   return (
-    <div className='bg-background flex flex-row h-screen mr'>
+    <div className='bg-background flex-row flex mr w-full h-full'>
       <Sidebar></Sidebar>
-      <div className='flex-1 flex-row h-screen pl-10'>
-        <div id='horizontal-header' className='mb-16 mt-2 relative'>
-          <span className='absolute left-50 text-2xl font-bold'>Book</span>
-          <div id='button-container' className='absolute right-20'>
+      <div className='flex-1 flex-row pl-10 items-center align-middle'>
+        <div id='horizontal-header' className='mb-[30px] mt-2 flex-row items-center align-middle'>
+          <span className='inline align-middle text-2xl font-bold'>Book</span>
+          <div id='button-container' className='inline align-middle'>
             <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black'></Button>
           </div>
         </div>

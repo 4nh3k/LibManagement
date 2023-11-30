@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'src/components/Button';
-import user_icon from '../../assets/img/user.png';
+// import user_icon from '../../assets/img/user.png';
 import upload_img from '../../assets/img/upload-img.png';
 import submit_img from '../../assets/img/submit.png';
 interface Props {
@@ -11,15 +11,15 @@ interface Props {
 // eslint-disable-next-line no-empty-pattern
 const AddBookForm: React.FC<Props> = ({ onToggle }) => {
   return (
-    <div className='flex-row mr-10'>
+    <div className='flex-col tablet:flex-row mr-10 mb-10'>
       <div id='horizontal-header' className='flex items-center relative mt-5 mb-10'>
         <h2 className='font-bold text-xl'>Add book</h2>
       </div>
       <div
         id='img-submit'
-        className='inline-block text-center flex-col items-center space-y-10 align-middle mr-10'
+        className='inline-block text-center flex-col items-center space-y-10 align-middle mr-5'
       >
-        <img className='text-center ml-auto mr-auto' alt='upload image' src={upload_img}></img>
+        <img className='text-center ml-auto mr-auto' alt='upload' src={upload_img}></img>
         <Button
           label='Submit'
           icon={submit_img}
@@ -30,7 +30,7 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
         ></Button>
       </div>
       <div className='inline-block align-middle'>
-        <div className='flex-row inline-flex gap-x-20'>
+        <div className='flex-col inline-flex gap-x-20 tablet:flex-row'>
           <div className='w-72 mt-5'>
             <label className='custom-label' htmlFor='book-title'>
               Book title
@@ -82,7 +82,7 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
           <label className='custom-label' htmlFor='book-published-date'>
             Published date
           </label>
-          <div className='flex-row inline-flex gap-x-20'>
+          <div className='inline-flex flex-col gap-x-20 tablet:flex-row'>
             <div className='w-72 mt-5'>
               <label className='custom-label' htmlFor='book-year'>
                 Year
@@ -92,7 +92,7 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
                 className='custom-input mt-1'
                 id='member_name'
                 placeholder='Enter year'
-                min={1} 
+                min={1}
               />
             </div>
             <div className='w-72 mt-5'>
@@ -117,13 +117,13 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
                 className='custom-input mt-1'
                 id='member_id'
                 placeholder='Enter day'
-                min={1} 
+                min={1}
                 max={31}
               />
             </div>
           </div>
         </div>
-        <div className='flex-row inline-flex gap-x-20'>
+        <div className='flex-col tablet:flex-row inline-flex gap-x-20'>
           <div className='w-72 mt-5'>
             <label className='custom-label' htmlFor='book-page'>
               Page
