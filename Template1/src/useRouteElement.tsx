@@ -46,30 +46,6 @@ export default function useRouteElement() {
         }
       ]
     },
-    // {
-    //   path: '/register',
-    //   element: (
-    //     <RegisterLayout>
-    //       <Register />
-    //     </RegisterLayout>
-    //   )
-    // },
-    // {
-    //   path: '/resetpass',
-    //   element: (
-    //     <RegisterLayout>
-    //       <ResetPass />
-    //     </RegisterLayout>
-    //   )
-    // },
-    // {
-    //   path: '/forgotpass',
-    //   element: (
-    //     <RegisterLayout>
-    //       <ForgotPass />
-    //     </RegisterLayout>
-    //   )
-    // },
     {
       path: '/book',
       element: <BookPage></BookPage>
