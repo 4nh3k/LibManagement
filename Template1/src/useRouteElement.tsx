@@ -2,8 +2,7 @@ import { useRoutes } from 'react-router-dom';
 import Library from './pages/Library';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import RegisterLayout from './layouts/RegisterLayout';
-import FormLayout from './layouts/RegisterLayout';
+import FormLayout from './layouts/FormLayout';
 import ForgotPass from './pages/ForgotPass/ForgotPass';
 import ResetPass from './pages/ResetPassword/ResetPass';
 import Transactions from './pages/Transactions';
@@ -31,7 +30,7 @@ export default function useRouteElement() {
       )
     },
     {
-      element: <RegisterLayout />,
+      element: <FormLayout />,
       children: [
         {
           path: 'register',
