@@ -10,7 +10,7 @@ const BookPage: React.FC<Props> = ({ onToggle }: Props) => {
   return (
     <div className='h-screen w-screen overflow-auto'>
       <Sidebar />
-      <div className='bg-background pt-2 ml-auto w-[calc(100%-6.75rem)] h-screen overflow-auto'>
+      <div className='bg-background pt-2 pl-[4.25rem] desktop:pl-[4.75rem] w-full h-screen overflow-auto'>
         <div className='pl-10 pr-10'>
           <div className='flex justify-between  items-center'>
             <span className='text-2xl font-bold'>Book</span>
