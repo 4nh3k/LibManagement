@@ -10,6 +10,7 @@ import BookPage from './pages/BookPage/BookPage';
 import Payment from './pages/Payment';
 import Configuration from './pages/Configuration/MainConfig';
 import { path } from './constants/path';
+import MainLayout from './layouts/MainLayout/MainLayout';
 
 export default function useRouteElement() {
   const routeElement = useRoutes([
@@ -35,8 +36,13 @@ export default function useRouteElement() {
       ]
     },
     {
-      path: path.library,
-      element: <Library />
+      element: <MainLayout />,
+      children: [
+        {
+          path: path.library,
+          element: <Library />
+        }
+      ]
     },
     {
       path: path.transactions,
@@ -44,7 +50,7 @@ export default function useRouteElement() {
     },
     {
       path: 'book',
-      element: <BookPage></BookPage>
+      element: <BookPage />
     },
     {
       path: 'payment',
