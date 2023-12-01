@@ -11,7 +11,7 @@ const Configuration = () => {
   return (
     <div className='h-screen w-screen overflow-auto'>
       <Sidebar></Sidebar>
-      <div className=' bg-background pt-2 pl-[5rem] desktop:pl-[7rem] w-full overflow-auto flex-1 flex-row h-screen'>
+      <div className='bg-background pt-2 pl-[5rem] desktop:pl-[7rem] w-full overflow-auto flex-1 flex-row h-screen'>
         <div className='pr-5 desktop:pr-10 py-2'>
           <div className='flex justify-between  items-center'>
             <span className='text-xl desktop:text-2xl font-bold'>Configuration</span>
