@@ -5,17 +5,19 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Schema, schema } from 'src/utils/rules';
 import { useMutation } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
+import { setAccessTokenToLS } from 'src/utils/auth';
+import authApi from 'src/apis/auth.api';
 
 export default function Login() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   type FormData = Pick<Schema, 'email' | 'password'>;
+
   const loginSchema = schema.pick(['email', 'password']);
+
   const loginMutation = useMutation({
-    mutationFn: (data: FormData) => {},
-    onSuccess: () => {
-      navigate('/');
-    }
+    mutationFn: (body: FormData) => authApi.login(body)
   });
 
   const {
@@ -28,12 +30,27 @@ export default function Login() {
   });
 
   const onSubmit = handleSubmit(data => {
-    console.log(data);
+    loginMutation.mutate(data, {
+      onSuccess: data => {
+        toast.success('Successfully login!', {
+          position: toast.POSITION.TOP_RIGHT
+        });
+        setTimeout(() => {
+          setAccessTokenToLS(data.data?.token as string);
+        }, 1000);
+      },
+      onError: error => {
+        toast.error('Login failed!', {
+          position: toast.POSITION.TOP_RIGHT
+        });
+      }
+    });
   });
 
   return (
     <form onSubmit={onSubmit}>
       <h1 className='text-3xl text-center text-primary2 mb-7 font-bold'>Sign in</h1>
+      {/* USERNAME */}
       <>
         <label htmlFor='username' className='block custom-label mb-1'>
           Username
@@ -44,11 +61,12 @@ export default function Login() {
             id='username'
             type='text'
             placeholder='Username'
-            {...register('username')}
+            {...register('email')}
           />
         </div>
       </>
 
+      {/* PASS WORD */}
       <>
         <label htmlFor='password' className='block custom-label mt-7 mb-1'>
           Password
@@ -60,6 +78,7 @@ export default function Login() {
               id='password'
               type={showPassword ? 'text' : 'password'}
               placeholder='Password'
+              autoComplete='on'
               {...register('password')}
             />
           </div>
@@ -72,7 +91,7 @@ export default function Login() {
         </div>
       </>
 
-      <a href='forgotpass' className=' ml-auto'>
+      <a href='forgotpass' className='ml-auto'>
         <span className='text-xs text-primaryBorder hover:text-primary'>Forgot password?</span>
       </a>
       <button className='primary-btn mt-6'>Sign in</button>

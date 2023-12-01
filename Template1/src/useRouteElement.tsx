@@ -14,22 +14,6 @@ import { path } from './constants/path';
 export default function useRouteElement() {
   const routeElement = useRoutes([
     {
-      path: path.library,
-      element: <Library />
-    },
-    {
-      path: path.transactions,
-      element: <Transactions />
-    },
-    {
-      path: 'login',
-      element: (
-        <FormLayout>
-          <Login />
-        </FormLayout>
-      )
-    },
-    {
       element: <FormLayout />,
       children: [
         {
@@ -43,19 +27,31 @@ export default function useRouteElement() {
         {
           path: 'forgot-pass',
           element: <ForgotPass />
+        },
+        {
+          path: 'login',
+          element: <Login />
         }
       ]
     },
     {
-      path: '/book',
+      path: path.library,
+      element: <Library />
+    },
+    {
+      path: path.transactions,
+      element: <Transactions />
+    },
+    {
+      path: 'book',
       element: <BookPage></BookPage>
     },
     {
-      path: '/payment',
+      path: 'payment',
       element: <Payment></Payment>
     },
     {
-      path: '/configuration',
+      path: 'configuration',
       element: <Configuration></Configuration>
     }
   ]);

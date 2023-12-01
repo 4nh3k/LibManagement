@@ -9,15 +9,17 @@ import Sidebar from 'src/components/Sidebar/Sidebar';
 
 export default function Library() {
   return (
-    <div className='flex flex-row h-screen'>
-      <Sidebar></Sidebar>
-      <div className='bg-white flex-1 flex-row h-screen pl-20 pr-20'>
+    <div className='h-screen w-screen'>
+      <Sidebar />
+      <div className='bg-white ml-auto w-[calc(100%-6.75rem)] h-full'>
         <div id='horizontal-header' className='mb-10 mt-2 static'>
           <DropdownList
             list={['All books', 'Genre', 'Subject', 'Author', 'Publisher']}
           ></DropdownList>
+
           <label className='ml-20 mr-5'>Keywords</label>
           <InputBox placeholder='Enter keywords' type='text'></InputBox>
+
           <label className='ml-20 mr-5'>Quantity</label>
           <InputBox placeholder='1' type='number'></InputBox>
           <div id='button-container' className='inline space-x-20 absolute right-20'>
