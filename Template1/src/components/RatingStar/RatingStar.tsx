@@ -1,10 +1,11 @@
 import React from 'react';
 
 type RatingStarProps = {
+  className?: string;
   rating: number;
 };
 
-const RatingStar: React.FC<RatingStarProps> = ({ rating }) => {
+const RatingStar: React.FC<RatingStarProps> = ({ rating, className }) => {
   const stars = [];
 
   for (let i = 0; i < 5; i++) {
@@ -43,7 +44,7 @@ const RatingStar: React.FC<RatingStarProps> = ({ rating }) => {
     }
   }
 
-  return <div className='flex'>{stars}</div>;
+  return <div className={`flex ${className}`}>{stars}</div>;
 };
 
 export default RatingStar;

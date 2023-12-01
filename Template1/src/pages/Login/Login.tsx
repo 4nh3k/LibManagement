@@ -75,7 +75,9 @@ export default function Login() {
       <a href='forgotpass' className=' ml-auto'>
         <span className='text-xs text-primaryBorder hover:text-primary'>Forgot password?</span>
       </a>
-      <button className='primary-btn mt-6'>Sign in</button>
+      <button className='primary-btn mt-6' onClick={handleLogin}>
+        Sign in
+      </button>
       <div className='mt-1 flex'>
         <span className='text-xs text-primaryBorder'>Don&apos;t have an account?</span>
         <a className='ml-auto text-primary hover:text-primaryBtn' href='register'>

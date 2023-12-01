@@ -8,7 +8,7 @@ interface BookProps {
   rating: number;
 }
 
-const Book: React.FC<BookProps> = ({ coverImg, title, overview, rating }) => {
+const BookCard: React.FC<BookProps> = ({ coverImg, title, overview, rating }) => {
   return (
     <div className='flex items-center'>
       <img className='w-32 h-45' src={coverImg} alt={title} />
@@ -22,4 +22,4 @@ const Book: React.FC<BookProps> = ({ coverImg, title, overview, rating }) => {
   );
 };
 
-export default Book;
+export default BookCard;

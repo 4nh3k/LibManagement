@@ -25,12 +25,16 @@ body {
   @apply text-sm font-semibold block;
 }
 
+.member-label {
+  @apply text-xl font-semibold text-primary2 whitespace-nowrap w-40;
+}
+
 .custom-input {
   @apply rounded py-1 px-3 w-full border-1 text-sm border-textboxBorder;
 }
 
 .custom-select {
-  @apply bg-gray-50 border-2 border-transparent text-gray-900 text-sm rounded-lg focus:bg-gray-100 focus:ring-primaryBorder focus:border-primaryBorder block p-2.5;
+  @apply bg-gray-50 border-2 border-transparent shadow-md text-gray-900 text-sm rounded-lg focus:bg-gray-100 focus:ring-primaryBorder focus:border-primaryBorder block px-2.5 py-1;
 }
 
 .secondary-btn {

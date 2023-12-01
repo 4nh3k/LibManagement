@@ -29,7 +29,8 @@ export default {
         neutralLight: '#E3E8FF',
         secondary1: '#00CFFD',
         secondary2: '#2FB5FC',
-        textboxBorder: '#E0E0E0'
+        textboxBorder: '#E0E0E0',
+        linkText: '#007185'
       },
       borderWidth: {
         1: '1px',
