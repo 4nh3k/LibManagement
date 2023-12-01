@@ -4,7 +4,7 @@ import user_icon from '../../assets/img/user.png';
 import DropdownList from 'src/components/BookFilterDropdown/BookFilterDropdown';
 import InputBox from 'src/components/InputBox';
 import Button from 'src/components/Button';
-import Book from 'src/components/Book/Book';
+import Book from 'src/components/Book';
 
 export default function Library() {
   return (

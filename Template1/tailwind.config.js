@@ -4,13 +4,9 @@ export default {
   theme: {
     screens: {
       tablet: '640px',
-      // => @media (min-width: 640px) { ... }
-
-      laptop: '1024px',
-      // => @media (min-width: 1024px) { ... }
-
-      desktop: '1280px'
-      // => @media (min-width: 1280px) { ... }
+      // => @media (max-width: 640px) { ... }
+      desktop: '1100px',
+      large: '1500px',
     },
     extend: {
       fontFamily: {
@@ -33,7 +29,8 @@ export default {
         neutralLight: '#E3E8FF',
         secondary1: '#00CFFD',
         secondary2: '#2FB5FC',
-        textboxBorder: '#E0E0E0'
+        textboxBorder: '#E0E0E0',
+        linkText: '#007185'
       },
       borderWidth: {
         1: '1px',
