@@ -12,7 +12,7 @@ import Payment from './pages/Payment';
 import Configuration from './pages/Configuration/MainConfig';
 import NavLayout from './layouts/NavLayout/NavLayout';
 import Member from './pages/Member';
-import { useUser } from './hooks/useUser';
+// import { useUser } from './hooks/useUser';
 import { path } from './constants/path';
 
 export default function useRouteElement() {
@@ -20,14 +20,6 @@ export default function useRouteElement() {
     {
       path: path.library,
       element: <Library />
-    },
-    {
-      path: '/books/:id',
-      element: <BookDetails />
-    },
-    {
-      path: path.transactions,
-      element: <Transactions />
     },
     {
       path: 'login',
@@ -63,16 +55,24 @@ export default function useRouteElement() {
       element: <Payment></Payment>
     },
     {
+      path: '/configuration',
+      element: <Configuration></Configuration>
+    },
+    {
+      path: '/books/:id',
+      element: <BookDetails />
+    },
+    {
+      path: '/transactions',
+      element: <Transactions></Transactions>
+    },
+    {
       path: '/member',
       element: (
         <NavLayout>
           <Member></Member>
         </NavLayout>
       )
-    },
-    {
-      path: '/configuration',
-      element: <Configuration></Configuration>
     }
   ]);
   return routeElement;
