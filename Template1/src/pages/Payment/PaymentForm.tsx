@@ -25,7 +25,7 @@ const PaymentForm = () => {
             <span className='ml-auto mr-auto text-[1.5rem] font-bold'>Payment Detail</span>
             <div
               id='member-name-input'
-              className='w-18 desktop:w-72 ml-flex flex-col desktop:flex-row desktop:mr-auto ml-[1rem] desktop:ml-auto items-center align-middle'
+              className='w-18 lg:w-72 ml-flex flex-col lg:flex-row lg:mr-auto ml-[1rem] lg:ml-auto items-center align-middle'
             >
               <label
                 htmlFor='member_name'
@@ -43,7 +43,7 @@ const PaymentForm = () => {
             </div>
             <div
               id='member-id-input'
-              className='w-18 desktop:w-72 ml-flex flex-col desktop:flex-row desktop:mr-auto ml-[1rem] desktop:ml-auto items-center align-middle'
+              className='w-18 lg:w-72 ml-flex flex-col lg:flex-row lg:mr-auto ml-[1rem] lg:ml-auto items-center align-middle'
             >
               <label
                 htmlFor='member-id'
@@ -61,7 +61,7 @@ const PaymentForm = () => {
             </div>
             <div
               id='top-up-container'
-              className='flex flex-col mr-auto ml-auto desktop:ml-auto mb-3'
+              className='flex flex-col mr-auto ml-auto lg:ml-auto mb-3'
             >
               <label
                 htmlFor='member-price'
@@ -92,7 +92,7 @@ const PaymentForm = () => {
             </div>
             <div
               id='total-fee-container'
-              className='w-18 desktop:w-72 flex desktop:mr-auto ml-[1rem] desktop:ml-auto items-center justify-between'
+              className='w-18 lg:w-72 flex lg:mr-auto ml-[1rem] lg:ml-auto items-center justify-between'
             >
               <label
                 htmlFor='total-fee'
@@ -106,7 +106,7 @@ const PaymentForm = () => {
 
             <div
               id='wallet-container'
-              className='w-18 desktop:w-72 flex desktop:mr-auto ml-[1rem] desktop:ml-auto items-center justify-between'
+              className='w-18 lg:w-72 flex lg:mr-auto ml-[1rem] lg:ml-auto items-center justify-between'
             >
               <label
                 htmlFor='wallet'

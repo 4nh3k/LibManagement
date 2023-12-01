@@ -7,9 +7,9 @@ const ForgotPass = () => {
       </p>
       <input className='custom-input mt-6' id='email' type='text' placeholder='Email' />
       <button className='primary-btn mt-6'>Sign in</button>
-    <a className='mx-auto mt-8 text-primary hover:text-primaryBtn' href='login'>
+      <a className='mx-auto mt-8 text-primary hover:text-primaryBtn' href='login'>
         <span className='text-sm'>Submit</span>
-    </a>
+      </a>
     </>
   );
 };

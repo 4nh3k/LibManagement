@@ -28,7 +28,7 @@ const ReaderConfig = () => {
           <div className='flex flex-col gap-10'>
             <div
               id='member-max-publication-year-input'
-              className='w-18 desktop:w-72 ml-flex flex-col desktop:flex-row desktop:mr-auto ml-[1rem] items-center align-middle'
+              className='w-18 lg:w-72 ml-flex flex-col lg:flex-row lg:mr-auto ml-[1rem] items-center align-middle'
             >
               <label
                 htmlFor='max-publication'
@@ -49,7 +49,7 @@ const ReaderConfig = () => {
             <div className='flex flex-col gap-10'>
               <div
                 id='member-max-amount-book-input'
-                className='w-18 desktop:w-72 ml-flex flex-col desktop:flex-row desktop:mr-auto ml-[1rem] items-center align-middle'
+                className='w-18 lg:w-72 ml-flex flex-col lg:flex-row lg:mr-auto ml-[1rem] items-center align-middle'
               >
                 <label
                   htmlFor='max-book-amount'
@@ -69,7 +69,7 @@ const ReaderConfig = () => {
 
               <div
                 id='pay-button-container'
-                className='flex ml-auto mr-auto desktop:ml-[4rem] space-x-10'
+                className='flex ml-auto mr-auto lg:ml-[4rem] space-x-10'
               >
                 <Button label='Save' bg_color='#FFD900' color='black'></Button>
                 <Button label='Undo' bg_color='#FFEC80' color='black'></Button>

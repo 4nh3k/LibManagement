@@ -15,9 +15,9 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
       <div id='horizontal-header' className='flex items-center relative mt-5 mb-10'>
         <h2 className='font-bold text-xl'>Add book</h2>
       </div>
-      <div className='flex flex-col gap-y-5 desktop:flex-row gap-x-20'>
+      <div className='flex flex-col gap-y-5 lg:flex-row gap-x-20'>
         <div className='flex flex-col items-center mr-3 shrink-0'>
-          <img className='text-center h-48 mb-4 desktop:h-96' alt='upload' src={upload_img}></img>
+          <img className='text-center h-48 mb-4 lg:h-96' alt='upload' src={upload_img}></img>
           <Button
             label='Submit'
             icon={submit_img}
@@ -28,8 +28,8 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
           ></Button>
         </div>
         <div className='grow flex flex-col gap-2'>
-          <div className='flex flex-col gap-y-5 desktop:flex-row'>
-            <div className='w-30 desktop:w-72 desktop:mr-11'>
+          <div className='flex flex-col gap-y-5 lg:flex-row'>
+            <div className='w-30 lg:w-72 lg:mr-11'>
               <label className='custom-label' htmlFor='book-title'>
                 Book title
               </label>
@@ -40,7 +40,7 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
                 placeholder='Enter book title'
               />
             </div>
-            <div className='w-30 desktop:w-72'>
+            <div className='w-30 lg:w-72'>
               <label className='custom-label' htmlFor='book-publisher'>
                 Book publisher
               </label>
@@ -53,7 +53,7 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
             </div>
           </div>
 
-          <div className='w-30 desktop:w-72'>
+          <div className='w-30 lg:w-72'>
             <label className='custom-label' htmlFor='book-publisher'>
               Book author
             </label>
@@ -65,13 +65,13 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
             />
           </div>
 
-          <div className='w-30 desktop:w-72'>
+          <div className='w-30 lg:w-72'>
             <label className='custom-label' htmlFor='book-order-list'>
               Description
             </label>
             <div className=''>
               <textarea
-                className='w-full desktop:w-72 focus:outline-none focus:border-2 focus:border-primary rounded py-1 px-3 border-1 text-sm border-textboxBorder mt-1'
+                className='w-full lg:w-72 focus:outline-none focus:border-2 focus:border-primary rounded py-1 px-3 border-1 text-sm border-textboxBorder mt-1'
                 id='book-description'
               />
             </div>
@@ -81,8 +81,8 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
             <label className='custom-label' htmlFor='book-published-date'>
               Published date
             </label>
-            <div className='flex flex-col gap-x-20 desktop:flex-row'>
-              <div className='w-20 desktop:w-30 mt-5'>
+            <div className='flex flex-col gap-x-20 lg:flex-row'>
+              <div className='w-20 lg:w-30 mt-5'>
                 <label className='custom-label' htmlFor='book-year'>
                   Year
                 </label>
@@ -94,7 +94,7 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
                   min={1}
                 />
               </div>
-              <div className='w-20 desktop:w-30 mt-5'>
+              <div className='w-20 lg:w-30 mt-5'>
                 <label className='custom-label' htmlFor='book-month'>
                   Month
                 </label>
@@ -107,7 +107,7 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
                   max={12}
                 />
               </div>
-              <div className='w-20 desktop:w-30 mt-5'>
+              <div className='w-20 lg:w-30 mt-5'>
                 <label className='custom-label' htmlFor='book-day'>
                   Day
                 </label>
@@ -123,8 +123,8 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
             </div>
           </div>
 
-          <div className='flex-col tablet:flex-row inline-flex gap-x-10'>
-            <div className='w-30 desktop:w-72 mt-5'>
+          <div className='flex-col sm:flex-row inline-flex gap-x-10'>
+            <div className='w-30 lg:w-72 mt-5'>
               <label className='custom-label' htmlFor='book-page'>
                 Page
               </label>
@@ -135,7 +135,7 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
                 placeholder='Enter number of pages'
               />
             </div>
-            <div className='w-30 desktop:w-72 mt-5'>
+            <div className='w-30 lg:w-72 mt-5'>
               <label className='custom-label' htmlFor='book-price'>
                 Price
               </label>

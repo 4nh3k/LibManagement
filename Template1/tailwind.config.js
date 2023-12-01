@@ -3,10 +3,9 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     screens: {
-      tablet: '640px',
+      sm: '640px',
       // => @media (max-width: 640px) { ... }
-      desktop: '1100px',
-      large: '1500px'
+      lg: '1100px'
     },
     extend: {
       fontFamily: {
