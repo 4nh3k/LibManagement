@@ -2,13 +2,12 @@ import axios, { type AxiosInstance } from 'axios';
 
 class Http {
   private static _instance: Http;
-  private accessToken: string;
-  private refreshToken: string;
+  // private accessToken: string;
   public instance: AxiosInstance;
 
   private constructor() {
     this.instance = axios.create({
-      baseURL: 'http://localhost:3000',
+      baseURL: 'http://localhost:8000',
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json'

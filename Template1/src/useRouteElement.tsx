@@ -14,6 +14,7 @@ import NavLayout from './layouts/NavLayout/NavLayout';
 import Member from './pages/Member';
 // import { useUser } from './hooks/useUser';
 import { path } from './constants/path';
+import MainLayout from './layouts/MainLayout/MainLayout';
 
 export default function useRouteElement() {
   const routeElement = useRoutes([
@@ -43,15 +44,32 @@ export default function useRouteElement() {
         {
           path: 'forgot-pass',
           element: <ForgotPass />
+        },
+        {
+          path: 'login',
+          element: <Login />
         }
       ]
     },
     {
-      path: '/book',
-      element: <BookPage></BookPage>
+      element: <MainLayout />,
+      children: [
+        {
+          path: path.library,
+          element: <Library />
+        }
+      ]
     },
     {
-      path: '/payment',
+      path: path.transactions,
+      element: <Transactions />
+    },
+    {
+      path: 'book',
+      element: <BookPage />
+    },
+    {
+      path: 'payment',
       element: <Payment></Payment>
     },
     {

@@ -6,7 +6,7 @@ interface Props {
   onToggle?: () => void;
 }
 
-const BookPage: React.FC<Props> = ({ onToggle }: Props) => {
+function BookPage({ onToggle }: Props) {
   return (
     <div className='h-screen w-screen overflow-auto'>
       <Sidebar />
@@ -23,6 +23,6 @@ const BookPage: React.FC<Props> = ({ onToggle }: Props) => {
       </div>
     </div>
   );
-};
+}
 
 export default BookPage;
