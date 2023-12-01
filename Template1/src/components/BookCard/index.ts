@@ -1,2 +1,2 @@
-import Book from './Book';
-export default Book;
+import BookCard from './BookCard';
+export default BookCard;
