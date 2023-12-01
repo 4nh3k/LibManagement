@@ -5,7 +5,8 @@ export default {
     screens: {
       tablet: '640px',
       // => @media (max-width: 640px) { ... }
-      desktop: '1100px'
+      desktop: '1100px',
+      large: '1500px',
     },
     extend: {
       fontFamily: {

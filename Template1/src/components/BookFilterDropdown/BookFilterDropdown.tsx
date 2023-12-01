@@ -12,8 +12,12 @@ const DropdownList: React.FC<DropdownListProps> = ({ list }) => {
   };
 
   return (
-    <select value={selectedValue} onChange={handleSelectChange} className="p-2">
-      {list.map((option) => (
+    <select
+      value={selectedValue}
+      onChange={handleSelectChange}
+      className='p-2 bg-[#E5E1E1] rounded-lg block desktop:inline border-none outline-0'
+    >
+      {list.map(option => (
         <option key={option} value={option.toLowerCase()}>
           {option}
         </option>
