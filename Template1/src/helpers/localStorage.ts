@@ -1,7 +1,6 @@
-
 export type LoginResponse = {
   token: string;
-  data : User;
+  data: User;
 };
 
 export type User = {
@@ -10,7 +9,7 @@ export type User = {
   lastName: string;
   email: string;
   role: string;
-}
+};
 
 const USER_LOCAL_STORAGE_KEY = 'USER';
 

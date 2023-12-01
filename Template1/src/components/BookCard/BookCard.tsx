@@ -1,4 +1,3 @@
-import React from 'react';
 import RatingStar from '../RatingStar/RatingStar';
 
 interface BookProps {
@@ -8,7 +7,7 @@ interface BookProps {
   rating: number;
 }
 
-function Book({ coverImg, title, overview, rating }: BookProps) {
+function BookCard({ coverImg, title, overview, rating }: BookProps) {
   return (
     <div className='flex items-center'>
       <img className='w-32 h-45' src={coverImg} alt={title} />
@@ -22,4 +21,4 @@ function Book({ coverImg, title, overview, rating }: BookProps) {
   );
 }
 
-export default Book;
+export default BookCard;

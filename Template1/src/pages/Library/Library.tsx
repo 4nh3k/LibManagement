@@ -4,10 +4,20 @@ import user_icon from '../../assets/img/user.png';
 import DropdownList from 'src/components/BookFilterDropdown/BookFilterDropdown';
 import InputBox from 'src/components/InputBox';
 import Button from 'src/components/Button';
-import Book from 'src/components/BookCard';
 import Sidebar from 'src/components/Sidebar/Sidebar';
+import { useQuery } from 'react-query';
+import { bookApi } from 'src/apis/book.api';
+import BookCard from 'src/components/BookCard/BookCard';
 
 export default function Library() {
+  const { data: booksData } = useQuery({
+    queryKey: ['books'],
+    queryFn: () => bookApi.getAllBooks()
+  });
+
+  console.log(booksData);
+  const books = booksData?.data.data;
+
   return (
     <div className='h-screen w-screen overflow-auto'>
       <Sidebar></Sidebar>
@@ -42,91 +52,25 @@ export default function Library() {
             <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black'></Button>
           </div>
         </div>
-        <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-12 mb-10 mr-10'>
-          <Book
-            coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
-            overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            title='Enceladus'
-            rating={2}
-          ></Book>
-
-          <Book
-            coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
-            overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            title='Enceladus'
-            rating={2}
-          ></Book>
-
-          <Book
-            coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
-            overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            title='Enceladus'
-            rating={2}
-          ></Book>
-
-          <Book
-            coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
-            overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            title='Enceladus'
-            rating={2}
-          ></Book>
-
-          <Book
-            coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
-            overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            title='Enceladus'
-            rating={2}
-          ></Book>
-
-          <Book
-            coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
-            overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            title='Enceladus'
-            rating={2}
-          ></Book>
-
-          <Book
-            coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
-            overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            title='Enceladus'
-            rating={2}
-          ></Book>
-
-          <Book
-            coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
-            overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            title='Enceladus'
-            rating={2}
-          ></Book>
-
-          <Book
-            coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
-            overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            title='Enceladus'
-            rating={2}
-          ></Book>
-
-          <Book
-            coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
-            overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            title='Enceladus'
-            rating={2}
-          ></Book>
-
-          <Book
-            coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
-            overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            title='Enceladus'
-            rating={2}
-          ></Book>
-
-          <Book
-            coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
-            overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-            title='Enceladus'
-            rating={2}
-          ></Book>
-        </div>
+        {books && (
+          <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-12 mb-10 mr-10'>
+            {books.map(book => (
+              <BookCard
+                key={book._id}
+                coverImg={book.photoUrls[0]}
+                overview={book.description}
+                title={book.nameBook}
+                rating={book.ratingsAverage}
+              />
+            ))}
+            {/* <Book
+              coverImg='https://th.bing.com/th/id/R.78230fd6985cb19fa95fea3268f5b3cc?rik=YUGIVNKQEz8fwg&pid=ImgRaw&r=0'
+              overview='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+              title='Enceladus'
+              rating={2}
+            /> */}
+          </div>
+        )}
       </div>
     </div>
   );

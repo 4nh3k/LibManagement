@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 export default function FormLayout() {
   return (
     <div className='w-screen h-screen flex relative'>
-      <div className='hidden md:flex h-full items-center justify-center '>
+      <div className='hidden sm:flex h-full items-center justify-center '>
         <img
           className='w-[39.4rem] h-[29.18rem]'
           src='/src/assets/img/illustration.svg'

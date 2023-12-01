@@ -19,14 +19,6 @@ import MainLayout from './layouts/MainLayout/MainLayout';
 export default function useRouteElement() {
   const routeElement = useRoutes([
     {
-      path: 'login',
-      element: (
-        <FormLayout>
-          <Login />
-        </FormLayout>
-      )
-    },
-    {
       element: <FormLayout />,
       children: [
         {

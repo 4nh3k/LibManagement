@@ -1,5 +1,4 @@
 import { useMutation } from 'react-query';
-import axios from 'axios';
 import { signup } from 'src/helpers/api';
 
 type SignUpParams = {
@@ -11,7 +10,6 @@ type SignUpParams = {
 };
 
 const useSignUp = () => {
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   const signUpMutation = useMutation({
@@ -19,7 +17,6 @@ const useSignUp = () => {
       signup(data.email, data.password, data.firstName, data.lastName, data.passwordConfirmation),
     onSuccess: data => {
       console.log('data', data);
-      queryClient.setQueryData(['user'], data);
       navigate('/');
     }
   });
