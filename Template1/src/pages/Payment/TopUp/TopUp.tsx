@@ -76,7 +76,7 @@ const TopUp = () => {
         </div>
       </div>
       <div className='flex flex-col text-center'>
-        <div id='top-up-container' className='ml-[1rem] desktop:ml-auto mr-auto mb-3'>
+        <div id='top-up-container' className='ml-auto desktop:ml-auto mr-auto mb-3'>
           <div
             id='price'
             className='w-64 flex h-[2.1875rem] items-center align-middle space-x-[3.125rem] bg-white px-5 py-6 rounded-lg border-1 border-[#1F78E8] mb-5'

@@ -61,7 +61,7 @@ const PaymentForm = () => {
             </div>
             <div
               id='top-up-container'
-              className='flex flex-col mr-auto ml-[1rem] desktop:ml-auto mb-3'
+              className='flex flex-col mr-auto ml-auto desktop:ml-auto mb-3'
             >
               <label
                 htmlFor='member-price'

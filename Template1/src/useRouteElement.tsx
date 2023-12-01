@@ -19,10 +19,6 @@ import MainLayout from './layouts/MainLayout/MainLayout';
 export default function useRouteElement() {
   const routeElement = useRoutes([
     {
-      path: path.library,
-      element: <Library />
-    },
-    {
       path: 'login',
       element: (
         <FormLayout>
@@ -79,10 +75,6 @@ export default function useRouteElement() {
     {
       path: '/books/:id',
       element: <BookDetails />
-    },
-    {
-      path: '/transactions',
-      element: <Transactions></Transactions>
     },
     {
       path: '/member',
