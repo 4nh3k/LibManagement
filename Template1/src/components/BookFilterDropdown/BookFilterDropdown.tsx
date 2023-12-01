@@ -15,7 +15,7 @@ const DropdownList: React.FC<DropdownListProps> = ({ list }) => {
     <select
       value={selectedValue}
       onChange={handleSelectChange}
-      className='p-2 bg-[#E5E1E1] rounded-lg block desktop:inline border-none outline-0'
+      className='p-2 bg-[#E5E1E1] rounded-lg block lg:inline border-none outline-0'
     >
       {list.map(option => (
         <option key={option} value={option.toLowerCase()}>

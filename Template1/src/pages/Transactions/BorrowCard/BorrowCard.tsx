@@ -29,7 +29,7 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
       readerID: 'Matt Dickerson',
       date: '13/05/2022',
       status: 'delivered',
-      action: ''
+      action: []
     },
     {
       borrowCardID: '#20462',
@@ -58,7 +58,7 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
   ];
 
   return (
-    <div id='body' className='mt-5 mr-20'>
+    <div id='body' className='mt-5 m-3 lg:mr-20'>
       <span className='text-xl font-bold'>Borrow Card List</span>
       <Table headers={headers} data={data} onToggle={onToggle}></Table>
     </div>

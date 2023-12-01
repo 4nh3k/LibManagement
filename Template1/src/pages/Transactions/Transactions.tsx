@@ -25,18 +25,20 @@ const Transactions = () => {
   };
 
   return (
-    <div className='bg-background flex flex-row h-screen'>
+    <div className='bg-background flex flex-row h-screen w-screen overflow-auto'>
       <Sidebar></Sidebar>
-      <div className='flex-1 flex-row h-screen pl-10'>
-        <div id='horizontal-header' className='mb-10 mt-2 relative'>
-          <span className='absolute left-50 text-2xl font-bold'>Transaction</span>
-          <div id='button-container' className='absolute right-20'>
-            <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black'></Button>
+      <div className='bg-background pt-2 pl-[5rem] lg:pl-[8rem] w-full overflow-auto flex-1 flex-row h-screen'>
+        <div id='horizontal-header' className='pl-2 pr-5 lg:pr-10 py-2'>
+          <div className='flex justify-between items-center'>
+            <span className='text-xl lg:text-2xl font-bold'>Transaction</span>
+            <div className='inline'>
+              <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black'></Button>
+            </div>
           </div>
         </div>
-        <div id='tab-navigator'>
+        <div id='tab-navigator text-center'>
           <Tabs>
-            <TabList>
+            <TabList className='flex flex-col lg:flex-row max-w-fit mb-10'>
               <Tab>Borrow Card</Tab>
               <Tab>Return Card</Tab>
               <Tab>Fee Card</Tab>

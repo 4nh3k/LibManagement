@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-
+import icon_edit from '../../assets/img/edit.png';
+import icon_trash from '../../assets/img/trash.png';
 interface Header {
   title: string;
   dataIndex: string;
@@ -54,13 +55,23 @@ const SimpleTable: React.FC<TableProps> = ({
             >
               {headers.map(header => (
                 <td className='px-6 py-4' key={header.dataIndex}>
-                  {/* Check if the cell value is a React component */}
+                  {header.dataIndex === 'action' ? (
+                    <div className='inline-flex gap-1 lg:gap-5'>
+                      <img alt='icon-edit' src={icon_edit}></img>
+                      <img alt='icon-trash' src={icon_trash}></img>
+                    </div>
+                  ) : // If it's not a component, render the text
+                  row[header.dataIndex] !== undefined ? (
+                    row[header.dataIndex]
+                  ) : (
+                    'N/A'
+                  /*{ Check if the cell value is a React component
                   {typeof row[header.dataIndex] === 'object' ? (
                     // If it's a component, render it
                     <>{row[header.dataIndex]}</>
                   ) : (
                     // If it's not a component, render the text
-                    row[header.dataIndex]
+                    row[header.dataIndex] */
                   )}
                 </td>
               ))}

@@ -16,13 +16,13 @@ const Sidebar = () => {
   return (
     <div className='bg-sidebarColor fixed top-0 left-0 bottom-0'>
       <div className='flex flex-col items-center justify-center'>
-        <div className='text-center items-center justify-center mx-1 desktop:mx-2'>
+        <div className='text-center items-center justify-center mx-1 lg:mx-2'>
           <img
             alt='Website Logo'
             src={website_logo}
             className='p-2 text-center w-[3.75rem] h-[3.75rem]'
           ></img>
-          <span className='font-bold text-xl hidden desktop:visible'>LibMa</span>
+          <span className='font-bold text-xl hidden lg:block'>LibMa</span>
         </div>
         <MenuItem
           iconSrc={library_img}

@@ -40,15 +40,15 @@ const Member: React.FC = () => {
   };
 
   return (
-    <div className='w-full my-2'>
+    <div className='bg-background pt-2 pl-[4.25rem] lg:pl-[6rem] w-full h-screen overflow-y-auto lg:overflow-y-hidden my-2'>
       <select className='custom-select ml-5 mt-5'>
         <option value='1'>All Members</option>
       </select>
-      <div className='w-full flex'>
-        <div className='ml-5 mt-5 w-2/5'>
-          <h2 className='text-3xl text-primary2 font-bold'>All Members</h2>
+      <div className='w-full flex flex-col lg:flex-row'>
+        <div className='ml-5 mt-5 w-5/6 lg:w-2/5'>
+          <h2 className='text-xl lg:text-3xl text-primary2 font-bold'>All Members</h2>
           <SimpleTable
-            className='rounded-md overflow-hidden shadow-md mt-4'
+            className='overflow-x-auto rounded-md overflow-hidden shadow-md mt-4'
             headers={headers}
             data={data}
           ></SimpleTable>
@@ -56,9 +56,9 @@ const Member: React.FC = () => {
             See more
           </button>
         </div>
-        <div className='ml-12 mr-9 mt-5 w-3/5'>
+        <div className='ml-4 lg:ml-12 mr-9 mt-5 w-5/6 lg:w-3/5'>
           <div className='flex items-center'>
-            <h2 className='text-3xl text-primary2 font-bold'>Member latest record</h2>
+            <h2 className='text-xl lg:text-3xl text-primary2 font-bold'>Member latest record</h2>
             <ul className='ml-auto flex space-x-4 text-primary2'>
               <li>
                 <PencilSimple size={24} />
@@ -72,7 +72,7 @@ const Member: React.FC = () => {
             </ul>
           </div>
           <FileDrop
-            className='w-48 h-48 m-auto rounded-full cursor-pointer '
+            className='lg:w-48 lg:h-48 m-auto rounded-full cursor-pointer block'
             targetClassName={`w-48 h-48 border-2 mx-auto ${
               file === null ? 'border-dashed' : 'border-solid'
             } overflow-hidden bg-gray-50 border-gray-400 rounded-full md-4 flex flex-col items-center justify-center`}
@@ -105,7 +105,7 @@ const Member: React.FC = () => {
             className='hidden'
           />
           <div className='flex mt-5'>
-            <label className='member-label mr-16'>Member ID</label>
+            <label className='member-label text-lg mr-16'>Member ID</label>
             <input className='custom-input'></input>
           </div>
           <div className='flex mt-5'>
@@ -143,7 +143,7 @@ const Member: React.FC = () => {
             </button>
           </div>
           <div className='flex mt-8'>
-            <h2 className='text-3xl text-primary2 font-bold'>Borrowed History</h2>
+            <h2 className='text-xl lg:text-3xl text-primary2 font-bold'>Borrowed History</h2>
             <select className='custom-select ml-auto'>
               <option value='1'>All</option>
             </select>

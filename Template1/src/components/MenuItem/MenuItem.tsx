@@ -24,7 +24,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ iconSrc, label, isActive, onClick }
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <div
-      className={`w-full px-2 py-2 mx-0 desktop:px-2 menu-item flex flex-col items-center justify-center gap-2 
+      className={`w-full px-2 py-2 mx-0 lg:px-2 menu-item flex flex-col items-center justify-center gap-2 
       ${isHover && !isActive ? 'bg-[#bab6c3]' : ''} 
       ${isActive ? 'bg-[#74727a]' : ''}`}
       onMouseEnter={handleMouseEnter}
@@ -32,7 +32,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ iconSrc, label, isActive, onClick }
       onClick={onClick}
     >
       <img alt='menu-icon' src={iconSrc} className='w-8 h-8'></img>
-      <span className='hidden desktop:block'>{label}</span>
+      <span className='hidden lg:block'>{label}</span>
     </div>
   );
 };

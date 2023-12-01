@@ -10,7 +10,7 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle }) => {
   return (
     <div>
       <h2 className='font-bold text-xl'>Borrow Card</h2>
-      <div className='flex-row inline-flex gap-x-20'>
+      <div className='flex flex-col lg:flex-row lg:inline-flex gap-x-20'>
         <div className='w-72 mt-5'>
           <label className='custom-label' htmlFor='book-id'>
             Member name

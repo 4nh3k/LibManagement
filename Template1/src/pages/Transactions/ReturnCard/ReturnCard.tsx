@@ -28,7 +28,7 @@ const ReturnCard: React.FC<ReturnCardProps> = ({ onToggle }) => {
 
   return (
     <div>
-      <div id='body' className='mt-5 mr-20'>
+      <div id='body' className='mt-5 m-3 lg:mr-20'>
         <span className='text-xl font-bold'>Return Card List</span>
         <Table headers={headers} data={data} onToggle={onToggle}></Table>
       </div>
