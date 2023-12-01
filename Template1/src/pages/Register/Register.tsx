@@ -11,7 +11,9 @@ export default function Register() {
       <label htmlFor='email' className='block custom-label'>
         Email
       </label>
-      <input className='custom-input' id='email' type='email' placeholder='example@email.com' />
+      <div>
+        <input className='custom-input' id='email' type='email' placeholder='example@email.com' />
+      </div>
       <label htmlFor='username' className='block custom-label mt-3'>
         Username
       </label>

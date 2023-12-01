@@ -2,6 +2,12 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    screens: {
+      tablet: '640px',
+      // => @media (max-width: 640px) { ... }
+      desktop: '1100px',
+      large: '1500px',
+    },
     extend: {
       fontFamily: {
         nunito: ['Nunito', 'sans-serif']

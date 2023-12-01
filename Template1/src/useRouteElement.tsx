@@ -13,11 +13,12 @@ import Configuration from './pages/Configuration/MainConfig';
 import NavLayout from './layouts/NavLayout/NavLayout';
 import Member from './pages/Member';
 import { useUser } from './hooks/useUser';
+import { path } from './constants/path';
 
 export default function useRouteElement() {
   const routeElement = useRoutes([
     {
-      path: '/library',
+      path: path.library,
       element: <Library />
     },
     {
@@ -25,11 +26,11 @@ export default function useRouteElement() {
       element: <BookDetails />
     },
     {
-      path: '/transactions',
+      path: path.transactions,
       element: <Transactions />
     },
     {
-      path: '/login',
+      path: 'login',
       element: (
         <FormLayout>
           <Login />
@@ -37,28 +38,21 @@ export default function useRouteElement() {
       )
     },
     {
-      path: '/register',
-      element: (
-        <FormLayout>
-          <Register />
-        </FormLayout>
-      )
-    },
-    {
-      path: '/resetpass',
-      element: (
-        <FormLayout>
-          <ResetPass />
-        </FormLayout>
-      )
-    },
-    {
-      path: '/forgotpass',
-      element: (
-        <FormLayout>
-          <ForgotPass />
-        </FormLayout>
-      )
+      element: <FormLayout />,
+      children: [
+        {
+          path: 'register',
+          element: <Register />
+        },
+        {
+          path: 'reset-pass',
+          element: <ResetPass />
+        },
+        {
+          path: 'forgot-pass',
+          element: <ForgotPass />
+        }
+      ]
     },
     {
       path: '/book',
