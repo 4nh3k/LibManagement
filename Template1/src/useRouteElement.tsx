@@ -22,19 +22,19 @@ export default function useRouteElement() {
       element: <FormLayout />,
       children: [
         {
-          path: 'register',
+          path: path.register,
           element: <Register />
         },
         {
-          path: 'reset-pass',
+          path: path.reset_password,
           element: <ResetPass />
         },
         {
-          path: 'forgot-pass',
+          path: path.forgot_password,
           element: <ForgotPass />
         },
         {
-          path: 'login',
+          path: path.login,
           element: <Login />
         }
       ]
@@ -53,12 +53,12 @@ export default function useRouteElement() {
       element: <Transactions />
     },
     {
-      path: 'book',
+      path: path.book,
       element: <BookPage />
     },
     {
-      path: 'payment',
-      element: <Payment></Payment>
+      path: path.payment,
+      element: <Payment />
     },
     {
       path: '/configuration',
