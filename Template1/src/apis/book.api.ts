@@ -9,5 +9,8 @@ export const bookApi = {
         doc: Book[];
       }>
     >('/api/v1/books');
+  },
+  getBook(id: string) {
+    return http.get<SuccessResponse<{ doc: Book }>>(`/api/v1/books/${id}`);
   }
 };

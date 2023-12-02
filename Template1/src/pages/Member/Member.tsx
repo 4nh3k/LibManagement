@@ -1,5 +1,5 @@
 import { DotsThreeOutline, PencilSimple, Trash, UploadSimple } from '@phosphor-icons/react';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { FileDrop } from 'react-file-drop';
 import SimpleTable from 'src/components/Table/SimpleTable';
 
@@ -8,13 +8,13 @@ interface MemberProps {
   age: number;
 }
 
-const Member: React.FC = () => {
-  const fileInputRef = useRef(null);
+export default function Member() {
+  const fileInputRef = useRef<File | null>(null);
   const [file, setFile] = useState(null); // array of currently uploaded files
-  const onFileInputChange = event => {
+  const onFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
-    setFile(files[0]);
-    console.log(files[0]);
+    if (!files) return;
+    // setFile(files[0]);
     // do something with your files...
   };
   const onFileDrop = (files, event) => {
@@ -36,11 +36,12 @@ const Member: React.FC = () => {
 
   const onTargetClick = () => {
     console.log('onTargetClick');
-    fileInputRef.current.click();
+
+    fileInputRef?.current.click();
   };
 
   return (
-    <div className='bg-background pt-2 pl-[4.25rem] lg:pl-[6rem] w-full h-screen overflow-y-auto lg:overflow-y-hidden my-2'>
+    <div className='w-full h-screen overflow-y-auto lg:overflow-y-hidden'>
       <select className='custom-select ml-5 mt-5'>
         <option value='1'>All Members</option>
       </select>
@@ -159,6 +160,4 @@ const Member: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default Member;
+}

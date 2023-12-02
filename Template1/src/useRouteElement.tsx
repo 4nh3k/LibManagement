@@ -10,9 +10,7 @@ import BookDetails from './pages/BookDetails/BookDetails';
 import BookPage from './pages/BookPage/BookPage';
 import Payment from './pages/Payment';
 import Configuration from './pages/Configuration/MainConfig';
-import NavLayout from './layouts/NavLayout/NavLayout';
 import Member from './pages/Member';
-// import { useUser } from './hooks/useUser';
 import { path } from './constants/path';
 import MainLayout from './layouts/MainLayout/MainLayout';
 
@@ -45,6 +43,14 @@ export default function useRouteElement() {
         {
           path: path.library,
           element: <Library />
+        },
+        {
+          path: 'books/:id',
+          element: <BookDetails />
+        },
+        {
+          path: path.member,
+          element: <Member />
         }
       ]
     },
@@ -54,13 +60,7 @@ export default function useRouteElement() {
     },
     {
       path: path.book,
-      element: <BookPage />,
-      children: [
-        {
-          path: ':id',
-          element: <BookDetails />
-        }
-      ]
+      element: <BookPage />
     },
     {
       path: path.payment,
@@ -69,14 +69,6 @@ export default function useRouteElement() {
     {
       path: '/configuration',
       element: <Configuration />
-    },
-    {
-      path: '/member',
-      element: (
-        <NavLayout>
-          <Member />
-        </NavLayout>
-      )
     }
     // Con member & transaction
   ]);

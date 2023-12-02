@@ -6,7 +6,7 @@ interface Props {
 export default function NavLayout({ children }: Props) {
   return (
     <div className='bg-background flex flex-row min-h-screen'>
-      <Sidebar></Sidebar>
+      <Sidebar />
       {children}
     </div>
   );

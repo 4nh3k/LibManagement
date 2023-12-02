@@ -4,7 +4,9 @@ export default function MainLayout() {
   return (
     <div className='h-screen w-screen'>
       <Sidebar />
-      <Outlet />
+      <div className='bg-background w-[calc(100%-4rem)] lg:w-[calc(100%-9rem)] h-screen ml-auto'>
+        <Outlet />
+      </div>
     </div>
   );
 }

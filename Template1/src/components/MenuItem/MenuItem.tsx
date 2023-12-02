@@ -1,40 +1,29 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 // MenuItem.tsx
-import React from 'react';
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 interface MenuItemProps {
   iconSrc: string;
   label: string;
-  isActive: boolean;
-  onClick: () => void;
+  to?: string;
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({ iconSrc, label, isActive, onClick }) => {
-  const [isHover, setIsHover] = useState(false);
-
-  const handleMouseEnter = () => {
-    setIsHover(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHover(false);
-  };
-
+export function MenuItem({ iconSrc, label }: MenuItemProps) {
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-    <div
-      className={`w-full px-2 py-2 mx-0 lg:px-2 menu-item flex flex-col items-center justify-center gap-2 
-      ${isHover && !isActive ? 'bg-[#bab6c3]' : ''} 
-      ${isActive ? 'bg-[#74727a]' : ''}`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={onClick}
+    <NavLink
+      to={`/${label.toLowerCase()}`}
+      className={({ isActive }) =>
+        `hover:bg-gray-300 w-full px-2 py-2 mx-0 lg:px-2 menu-item flex items-center justify-center gap-2 ${
+          isActive ? 'bg-gray-300' : ''
+        }`
+      }
     >
-      <img alt='menu-icon' src={iconSrc} className='w-8 h-8'></img>
-      <span className='hidden lg:block'>{label}</span>
-    </div>
+      <img alt='menu-icon' src={iconSrc} className='w-8 h-8 md:w-8 md:h-8'></img>
+      <span className='hidden lg:block font-normal text-base'>{label}</span>
+    </NavLink>
   );
-};
+}
 
 export default MenuItem;
