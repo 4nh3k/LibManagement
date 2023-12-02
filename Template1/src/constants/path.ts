@@ -5,6 +5,6 @@ export const path = {
   register: 'register',
   forgot_password: 'forgot-password',
   reset_password: 'reset-password',
-  book: 'book',
+  book: 'books',
   payment: 'payment'
 };
