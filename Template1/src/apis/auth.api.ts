@@ -10,7 +10,6 @@ const authApi = {
     return http.post(URL_REGISTER, body);
   },
   login(body: { email: string; password: string }) {
-    console.log(body);
     return http.post<AuthResponse>(URL_LOGIN, body);
   },
   logout() {

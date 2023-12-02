@@ -8,7 +8,6 @@ import Button from 'src/components/Button';
 import { bookApi } from 'src/apis/book.api';
 import BookCard from 'src/components/BookCard/BookCard';
 import { useQuery } from '@tanstack/react-query';
-import Book from 'src/types/book.type';
 
 export default function Library() {
   const { data: booksData } = useQuery({
