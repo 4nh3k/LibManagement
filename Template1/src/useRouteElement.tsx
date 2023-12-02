@@ -54,7 +54,13 @@ export default function useRouteElement() {
     },
     {
       path: path.book,
-      element: <BookPage />
+      element: <BookPage />,
+      children: [
+        {
+          path: ':id',
+          element: <BookDetails />
+        }
+      ]
     },
     {
       path: path.payment,
@@ -62,17 +68,13 @@ export default function useRouteElement() {
     },
     {
       path: '/configuration',
-      element: <Configuration></Configuration>
-    },
-    {
-      path: '/books/:id',
-      element: <BookDetails />
+      element: <Configuration />
     },
     {
       path: '/member',
       element: (
         <NavLayout>
-          <Member></Member>
+          <Member />
         </NavLayout>
       )
     }
