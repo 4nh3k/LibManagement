@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 const fetchBook = (bookId: string) => {
   return axios.get(`http://localhost:3001/api/v1/books/${bookId}`);

@@ -4,9 +4,11 @@ import user_icon from '../../assets/img/user.png';
 import DropdownList from 'src/components/BookFilterDropdown/BookFilterDropdown';
 import InputBox from 'src/components/InputBox';
 import Button from 'src/components/Button';
-import { useQuery } from 'react-query';
+
 import { bookApi } from 'src/apis/book.api';
 import BookCard from 'src/components/BookCard/BookCard';
+import { useQuery } from '@tanstack/react-query';
+import Book from 'src/types/book.type';
 
 export default function Library() {
   const { data: booksData } = useQuery({
@@ -14,8 +16,7 @@ export default function Library() {
     queryFn: () => bookApi.getAllBooks()
   });
 
-  // console.log(booksData);
-  // const books = booksData?.data.data;
+  const books = booksData?.data.data.doc;
 
   return (
     <div className='bg-background pt-2 pl-[7rem] lg:pl-[9rem] w-full h-screen overflow-auto'>
@@ -49,19 +50,20 @@ export default function Library() {
           <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black'></Button>
         </div>
       </div>
-      {/* {books && (
-        <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-12 mb-10 mr-10'>
+
+      {books && (
+        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-12 mb-10 mr-10'>
           {books.map(book => (
             <BookCard
               key={book._id}
               coverImg={book.photoUrls[0]}
               overview={book.description}
               title={book.nameBook}
-              rating={book.ratingsAverage}
+              rating={Math.floor(book.ratingsAverage) || 4}
             />
           ))}
         </div>
-      )} */}
+      )}
     </div>
   );
 }

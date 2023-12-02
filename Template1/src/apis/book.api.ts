@@ -4,6 +4,10 @@ import http from 'src/utils/http';
 
 export const bookApi = {
   getAllBooks() {
-    return http.get<SuccessResponse<Book[]>>('/api/v1/books');
+    return http.get<
+      SuccessResponse<{
+        doc: Book[];
+      }>
+    >('/api/v1/books');
   }
 };

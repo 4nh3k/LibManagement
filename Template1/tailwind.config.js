@@ -5,6 +5,7 @@ export default {
     screens: {
       sm: '640px',
       // => @media (max-width: 640px) { ... }
+      md: '768px',
       lg: '1100px',
       xl: '1500px'
     },
