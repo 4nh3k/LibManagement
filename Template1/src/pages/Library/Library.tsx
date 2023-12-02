@@ -51,7 +51,7 @@ export default function Library() {
       </div>
 
       {books && (
-        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-12 mb-10 mr-10'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 mb-10 mr-10'>
           {books.map(book => (
             <BookCard
               key={book._id}

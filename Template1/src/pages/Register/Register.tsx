@@ -1,5 +1,6 @@
 import { Eye, EyeSlash } from '@phosphor-icons/react';
 import { useState } from 'react';
+import Input from 'src/components/Input';
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,17 +13,17 @@ export default function Register() {
         Email
       </label>
       <div>
-        <input className='custom-input' id='email' type='email' placeholder='example@email.com' />
+        <Input className='custom-input' id='email' type='email' placeholder='example@email.com' />
       </div>
       <label htmlFor='username' className='block custom-label mt-3'>
         Username
       </label>
-      <input className='custom-input' id='username' type='text' placeholder='Username' />
+      <Input className='custom-input' id='username' type='text' placeholder='Username' />
       <label htmlFor='password' className='block custom-label mt-3'>
         Password
       </label>
       <div className='relative'>
-        <input
+        <Input
           className='custom-input-icon'
           id='password'
           type={showPassword ? 'text' : 'password'}
@@ -31,6 +32,7 @@ export default function Register() {
         <button
           className='absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600'
           onClick={() => setShowPassword(!showPassword)}
+          type='button'
         >
           {!showPassword ? <Eye size={16} /> : <EyeSlash size={16} />}
         </button>
@@ -39,7 +41,7 @@ export default function Register() {
         Repeat Password
       </label>
       <div className='relative'>
-        <input
+        <Input
           className='custom-input-icon'
           id='repeat-password'
           type={showRepeatPassword ? 'text' : 'password'}
@@ -48,11 +50,14 @@ export default function Register() {
         <button
           className='absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600'
           onClick={() => setShowRepeatPassword(!showRepeatPassword)}
+          type='button'
         >
           {!showRepeatPassword ? <Eye size={16} /> : <EyeSlash size={16} />}
         </button>
       </div>
-      <button className='primary-btn mt-6'>Sign up</button>
+      <button className='primary-btn mt-6' type='submit'>
+        Sign up
+      </button>
       <div className='mt-1 flex'>
         <span className='text-xs text-primaryBorder'>Already have a account?</span>
         <a className='ml-auto text-primary hover:text-primaryBtn' href='login'>
