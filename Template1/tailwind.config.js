@@ -9,6 +9,7 @@ export default {
       lg: '1100px',
       xl: '1500px'
     },
+
     extend: {
       fontFamily: {
         nunito: ['Nunito', 'sans-serif']
@@ -39,6 +40,9 @@ export default {
       },
       outlineWidth: {
         6: '6px'
+      },
+      boxShadow: {
+        default: '0 0 10px rgba(0, 0, 0, 25)'
       }
     }
   },

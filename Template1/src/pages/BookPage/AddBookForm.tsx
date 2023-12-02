@@ -9,9 +9,9 @@ interface Props {
 }
 
 // eslint-disable-next-line no-empty-pattern
-const AddBookForm: React.FC<Props> = ({ onToggle }) => {
+function AddBookForm({ onToggle }: Props) {
   return (
-    <div className='flex flex-col mr-10 mb-10'>
+    <div className='flex flex-col mb-10'>
       <div id='horizontal-header' className='flex items-center relative mt-5 mb-10'>
         <h2 className='font-bold text-xl'>Add book</h2>
       </div>
@@ -25,7 +25,7 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
             color='#4BB543'
             border_color='#4bb543'
             onclick={onToggle}
-          ></Button>
+          />
         </div>
         <div className='grow flex flex-col gap-2'>
           <div className='flex flex-col gap-y-5 lg:flex-row'>
@@ -152,6 +152,6 @@ const AddBookForm: React.FC<Props> = ({ onToggle }) => {
       </div>
     </div>
   );
-};
+}
 
 export default AddBookForm;

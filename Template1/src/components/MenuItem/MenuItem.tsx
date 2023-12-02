@@ -9,11 +9,11 @@ interface MenuItemProps {
   to?: string;
 }
 
-export function MenuItem({ iconSrc, label }: MenuItemProps) {
+export function MenuItem({ iconSrc, label, to }: MenuItemProps) {
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events
     <NavLink
-      to={`/${label.toLowerCase()}`}
+      to={`/${to || label.toLowerCase()}`}
       className={({ isActive }) =>
         `hover:bg-gray-300 w-full px-2 py-2 mx-0 lg:px-2 menu-item flex items-center justify-center gap-2 ${
           isActive ? 'bg-gray-300' : ''

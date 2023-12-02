@@ -48,7 +48,7 @@ export default function Library() {
         </div>
       </div>
 
-      <div className='flex flex-col items-center md:grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-12 mb-10 mr-10'>
+      <div className='flex flex-col items-center md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 mb-10 mr-10'>
         {isLoading && (
           <div role='status'>
             <svg

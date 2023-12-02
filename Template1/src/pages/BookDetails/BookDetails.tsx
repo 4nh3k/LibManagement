@@ -18,7 +18,7 @@ const BookDetails = () => {
 
   return (
     <>
-      <div className='bg-background pt-2 pl-[7rem] lg:pl-[8rem] overflow-auto w-full h-screen'>
+      <div className='pl-6 overflow-auto w-full h-screen'>
         <div
           id='horizontal-header'
           className='mr-14 mb-10 mt-4 flex items-center justify-between ml-'
@@ -51,27 +51,33 @@ const BookDetails = () => {
             <span className='sr-only'>Loading...</span>
           </div>
         )}
+
         {!isLoading && book && (
           <>
-            <div className='flex flex-col items-center md:items-start md:flex-row gap-y-3 shadow-[0_0px_10px_rgba(0,0,0,0.25)] mt-12 mr-14 p-4'>
+            <div className='flex flex-col items-center md:items-start md:flex-row gap-y-3 shadow-[0_0px_10px_rgba(0,0,0,0.25)] mt-12 mr-14 p-6'>
               <img
-                className='w-40 h-60 lg:w-60 lg:h-[23rem] shrink-0'
+                className='w-40 h-60 lg:w-60 lg:h-80 shrink-0'
                 crossOrigin='anonymous'
                 src={book.photoUrls[0]}
                 alt={book.nameBook}
               />
 
               <div className='flex flex-col gap-2 md:ml-6'>
-                <h1 className='block text-2xl font-bold'>{book.nameBook}</h1>
-                <h2>
-                  by <span className='text-linkText font-semibold'>{book.author}</span>
+                <h1 className='block text-3xl font-bold'>
+                  {book.nameBook}
+                  <span className='font-medium text-gray-700 text-xl'>
+                    {` - ${book.publicationYear}`}
+                  </span>
+                </h1>
+                <h2 className='text-sm font-semibold'>
+                  by <span className='text-linkText text-base font-semibold'>{book.author}</span>
                 </h2>
-                <p className='text-lg font-semibold'>{book.publicationYear}</p>
+
                 <div className='flex items-center'>
                   <p className='text-xl font-semibold'>{book.ratingsAverage || 4}.0</p>
                   <RatingStar className='ml-5 scale-125' rating={book.ratingsAverage || 4} />
                 </div>
-                <p className='mt-2 text-justify leading-6 font-normal'>{book.description}</p>
+                <p className='text-justify leading-6 font-normal'>{book.description}</p>
               </div>
             </div>
           </>

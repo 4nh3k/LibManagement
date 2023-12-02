@@ -45,6 +45,10 @@ export default function useRouteElement() {
           element: <Library />
         },
         {
+          path: path.book,
+          element: <BookPage />
+        },
+        {
           path: 'books/:id',
           element: <BookDetails />
         },
@@ -57,10 +61,6 @@ export default function useRouteElement() {
     {
       path: path.transactions,
       element: <Transactions />
-    },
-    {
-      path: path.book,
-      element: <BookPage />
     },
     {
       path: path.payment,

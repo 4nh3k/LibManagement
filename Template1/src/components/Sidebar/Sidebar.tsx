@@ -18,7 +18,7 @@ const Sidebar = () => {
           <span className='font-bold text-xl hidden lg:block'>LibMa</span>
         </div>
         <MenuItem iconSrc={library_img} label='Library' />
-        <MenuItem iconSrc={book_img} label='Book' />
+        <MenuItem iconSrc={book_img} label='Book' to='books' />
         <MenuItem iconSrc={member_img} label='Member' />
         <MenuItem iconSrc={transaction_img} label='Transaction' />
       </div>
