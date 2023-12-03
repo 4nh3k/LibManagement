@@ -48,6 +48,7 @@ export default function Library() {
         </div>
       </div>
 
+<<<<<<< HEAD
       <div className='flex flex-col items-center md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 mb-10 mr-10'>
         {isLoading && (
           <div role='status'>
@@ -74,6 +75,11 @@ export default function Library() {
         {!isLoading &&
           books &&
           books.map(book => (
+=======
+      {books && (
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 mb-10 mr-10'>
+          {books.map(book => (
+>>>>>>> f556f8d7c37de918ca5e36b39b0685190e778243
             <BookCard
               key={book._id}
               id={book._id}

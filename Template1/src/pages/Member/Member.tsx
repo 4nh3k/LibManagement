@@ -1,6 +1,7 @@
 import { DotsThreeOutline, PencilSimple, Trash, UploadSimple } from '@phosphor-icons/react';
 import { useRef, useState } from 'react';
 import { FileDrop } from 'react-file-drop';
+import Input from 'src/components/Input';
 import SimpleTable from 'src/components/Table/SimpleTable';
 
 interface MemberProps {
@@ -105,36 +106,63 @@ export default function Member() {
             type='file'
             className='hidden'
           />
-          <div className='flex mt-5'>
-            <label className='member-label text-lg mr-16'>Member ID</label>
-            <input className='custom-input'></input>
+          <div className='space-y-5 mt-5'>
+            <div className='flex justify-between'>
+              <label htmlFor='member-id' className='member-label text-lg mr-16'>
+                Member ID
+              </label>
+              <Input
+                id='member-id'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-[32rem]'
+              />
+            </div>
+            <div className='flex justify-between'>
+              <label htmlFor='member-name' className='member-label mr-16'>
+                Name
+              </label>
+              <Input
+                id='member-name'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder  w-[32rem]'
+              />
+            </div>
+            <div className='flex justify-between'>
+              <label htmlFor='member-email' className='member-label mr-16'>
+                Email
+              </label>
+              <Input
+                id='member-email'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder  w-[32rem]'
+              />
+            </div>
+            <div className='flex justify-between'>
+              <label htmlFor='member-dob' className='member-label mr-16'>
+                Date of birth
+              </label>
+              <Input
+                id='member-dob'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder  w-[32rem]'
+              />
+            </div>
+            <div className='flex justify-between'>
+              <label htmlFor='member-address' className='member-label mr-16'>
+                Address
+              </label>
+              <Input
+                id='member-address'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder  w-[32rem]'
+              />
+            </div>
+            <div className='flex justify-between'>
+              <label htmlFor='member-date' className='member-label mr-16'>
+                Member date
+              </label>
+              <Input
+                id='member-date'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder  w-[32rem]'
+              />
+            </div>
           </div>
-          <div className='flex mt-5'>
-            <label className='member-label mr-16'>Name</label>
-            <input className='custom-input'></input>
-          </div>
-          <div className='flex mt-5'>
-            <label className='member-label mr-16'>Email</label>
-            <input className='custom-input'></input>
-          </div>
-          <div className='flex mt-5'>
-            <label className='member-label mr-16'>Date of birth</label>
-            <input className='custom-input'></input>
-          </div>
-          <div className='flex mt-5'>
-            <label className='member-label mr-16'>Adsress</label>
-            <input className='custom-input'></input>
-          </div>
-          <div className='flex mt-5'>
-            <label className='member-label mr-16'>Member date</label>
-            <input className='custom-input'></input>
-          </div>
-          <div className='flex mt-5'>
-            <label className='member-label mr-16'>Reader type</label>
-            <select className='w-full border-2 text-sm border-textboxBorder rounded-md py-1 focus:border-primary2'>
-              <option value='1'>Reader type 1</option>
-            </select>
-          </div>
+
           <div className='flex mt-4'>
             <button type='button' className='primary-btn-fit ml-auto w-20'>
               Save

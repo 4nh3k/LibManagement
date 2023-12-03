@@ -4,10 +4,10 @@ import React from 'react';
 interface InputBoxProps {
   placeholder: string;
   type: string;
-  children?: unknown;
+  children?: React.ReactNode;
 }
 
-const InputBox: React.FC<InputBoxProps> = ({ placeholder, type }) => {
+function InputBox({ placeholder, type }: InputBoxProps) {
   const inputWidth = type === 'number' ? '4ch' : '20ch';
 
   return (
@@ -18,9 +18,9 @@ const InputBox: React.FC<InputBoxProps> = ({ placeholder, type }) => {
         type={type}
         min={type === 'number' ? 1 : undefined}
         style={{ width: inputWidth }}
-      ></input>
+      />
     </div>
   );
-};
+}
 
 export default InputBox;
