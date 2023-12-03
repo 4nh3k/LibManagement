@@ -55,13 +55,14 @@ export default function useRouteElement() {
         {
           path: path.member,
           element: <Member />
+        },
+        {
+          path: path.transactions,
+          element: <Transactions />
         }
       ]
     },
-    {
-      path: path.transactions,
-      element: <Transactions />
-    },
+
     {
       path: path.payment,
       element: <Payment />
