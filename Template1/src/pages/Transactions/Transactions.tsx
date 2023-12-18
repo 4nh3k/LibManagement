@@ -23,7 +23,7 @@ const Transactions = () => {
   };
 
   return (
-    <div className='p-4'>
+    <div className='p-4 w-full h-screen overflow-y-auto lg:overflow-y-hidden'>
       <div id='horizontal-header' className='pl-2 pr-5 lg:pr-10 py-2'>
         <div className='flex justify-between items-center'>
           <span className='text-xl lg:text-2xl font-bold'>Transaction</span>

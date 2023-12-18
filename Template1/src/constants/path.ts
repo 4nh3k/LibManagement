@@ -7,5 +7,6 @@ export const path = {
   reset_password: 'reset-password',
   book: 'books',
   payment: 'payment',
-  member: 'member'
+  member: 'member',
+  id: ':id'
 };

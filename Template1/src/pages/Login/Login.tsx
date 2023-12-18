@@ -9,17 +9,20 @@ import { toast } from 'react-toastify';
 import { setAccessTokenToLS } from 'src/utils/auth';
 import authApi from 'src/apis/auth.api';
 import Input from 'src/components/Input';
+import { useAppContext } from 'src/contexts/app.contexts';
 
 const loginSchema = schema.pick(['email', 'password']);
 
 export default function Login() {
+  const navigate = useNavigate();
+  const { setIsAuthenticated } = useAppContext();
+
   const [showPassword, setShowPassword] = useState(false);
   type FormData = Pick<Schema, 'email' | 'password'>;
 
   const loginMutation = useMutation({
     mutationFn: (body: FormData) => authApi.login(body)
   });
-  const navigate = useNavigate();
 
   const {
     register,
@@ -38,6 +41,7 @@ export default function Login() {
         });
         setTimeout(() => {
           setAccessTokenToLS(data.data?.token as string);
+          setIsAuthenticated(true);
         }, 1000);
         navigate('/');
       },

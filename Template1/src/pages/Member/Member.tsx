@@ -107,58 +107,58 @@ export default function Member() {
             className='hidden'
           />
           <div className='space-y-5 mt-5'>
-            <div className='flex justify-between'>
+            <div className='flex flex-col lg:flex-row justify-between'>
               <label htmlFor='member-id' className='member-label text-lg mr-16'>
                 Member ID
               </label>
               <Input
                 id='member-id'
-                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-[32rem]'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
               />
             </div>
-            <div className='flex justify-between'>
+            <div className='flex flex-col lg:flex-row justify-between'>
               <label htmlFor='member-name' className='member-label mr-16'>
                 Name
               </label>
               <Input
                 id='member-name'
-                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder  w-[32rem]'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
               />
             </div>
-            <div className='flex justify-between'>
+            <div className='flex flex-col lg:flex-row justify-between'>
               <label htmlFor='member-email' className='member-label mr-16'>
                 Email
               </label>
               <Input
                 id='member-email'
-                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder  w-[32rem]'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
               />
             </div>
-            <div className='flex justify-between'>
+            <div className='flex flex-col lg:flex-row justify-between'>
               <label htmlFor='member-dob' className='member-label mr-16'>
                 Date of birth
               </label>
               <Input
                 id='member-dob'
-                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder  w-[32rem]'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
               />
             </div>
-            <div className='flex justify-between'>
+            <div className='flex flex-col lg:flex-row justify-between'>
               <label htmlFor='member-address' className='member-label mr-16'>
                 Address
               </label>
               <Input
                 id='member-address'
-                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder  w-[32rem]'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
               />
             </div>
-            <div className='flex justify-between'>
+            <div className='flex flex-col lg:flex-row justify-between'>
               <label htmlFor='member-date' className='member-label mr-16'>
                 Member date
               </label>
               <Input
                 id='member-date'
-                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder  w-[32rem]'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
               />
             </div>
           </div>
