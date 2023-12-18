@@ -10,9 +10,12 @@ import { setAccessTokenToLS } from 'src/utils/auth';
 import authApi from 'src/apis/auth.api';
 import { type } from './../../helpers/localStorage';
 import Input from 'src/components/Input';
+import { useAppContext } from 'src/contexts/app.contexts';
 
 export default function Login() {
   const navigate = useNavigate();
+  const { setIsAuthenticated } = useAppContext();
+
   const [showPassword, setShowPassword] = useState(false);
   type FormData = Pick<Schema, 'email' | 'password'>;
 
@@ -32,6 +35,7 @@ export default function Login() {
   });
 
   const onSubmit = handleSubmit(data => {
+    console.log(data);
     loginMutation.mutate(data, {
       onSuccess: data => {
         toast.success('Successfully login!', {
@@ -39,6 +43,7 @@ export default function Login() {
         });
         setTimeout(() => {
           setAccessTokenToLS(data.data?.token as string);
+          setIsAuthenticated(true);
         }, 1000);
       },
       onError: error => {
