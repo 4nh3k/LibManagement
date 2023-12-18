@@ -64,10 +64,7 @@ const TransactionConfig = () => {
                 placeholder='10'
               />
             </div>
-            <div
-              id='pay-button-container'
-              className='flex ml-auto mr-auto lg:ml-[4rem] space-x-10'
-            >
+            <div id='pay-button-container' className='flex ml-auto mr-auto lg:ml-[4rem] space-x-10'>
               <Button label='Save' bg_color='#FFD900' color='black'></Button>
               <Button label='Undo' bg_color='#FFEC80' color='black'></Button>
             </div>
