@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Input from 'src/components/Input';
 
 const ForgotPass = () => {
@@ -11,9 +12,9 @@ const ForgotPass = () => {
       <button className='primary-btn mt-6' type='submit'>
         Sign in
       </button>
-      <a className='mx-auto mt-8 text-primary hover:text-primaryBtn' href='login'>
+      <Link className='mx-auto mt-8 text-primary hover:text-primaryBtn' to='/login'>
         <span className='text-sm'>Back to login</span>
-      </a>
+      </Link>
     </>
   );
 };
