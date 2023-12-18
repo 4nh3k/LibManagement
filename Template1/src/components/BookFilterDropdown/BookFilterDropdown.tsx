@@ -15,10 +15,10 @@ const DropdownList: React.FC<DropdownListProps> = ({ list }) => {
     <select
       value={selectedValue}
       onChange={handleSelectChange}
-      className='p-2 bg-[#E5E1E1] rounded-lg block lg:inline border-none outline-0'
+      className='px-3 py-1 rounded block lg:inline border-2 focus:ring-1 focus:ring-gray-500 border-gray-500 appearance-none  outline-0 font-semibold cursor-pointer'
     >
       {list.map(option => (
-        <option key={option} value={option.toLowerCase()}>
+        <option key={option} value={option.toLowerCase()} className='rounded-none font-medium'>
           {option}
         </option>
       ))}
@@ -27,4 +27,3 @@ const DropdownList: React.FC<DropdownListProps> = ({ list }) => {
 };
 
 export default DropdownList;
-

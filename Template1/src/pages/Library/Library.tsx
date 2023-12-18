@@ -23,14 +23,14 @@ export default function Library() {
         <DropdownList list={['All books', 'Genre', 'Subject', 'Author', 'Publisher']} />
 
         <div id='keyword-search-input' className='mr-10 flex flex-col lg:inline'>
-          <label htmlFor='keyword' className='mt-2 mb-2 lg:ml-20 lg:mr-5'>
+          <label htmlFor='keyword' className='mt-2 mb-2 lg:ml-20 lg:mr-5 font-normal'>
             Keywords
           </label>
           <InputBox placeholder='Enter keywords' type='text'></InputBox>
         </div>
 
         <div id='input-search-quantity' className='mb-5 mr-10 flex flex-col lg:inline'>
-          <label htmlFor='quantity' className='mt-2 mb-2 lg:ml-20 lg:mr-5'>
+          <label htmlFor='quantity' className='mt-2 mb-2 lg:ml-20 lg:mr-5 font-normal'>
             Quantity
           </label>
           <InputBox placeholder='1' type='number'></InputBox>

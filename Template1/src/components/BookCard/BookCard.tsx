@@ -10,11 +10,6 @@ interface BookProps {
 }
 
 function BookCard({ coverImg, title, overview, rating, id }: BookProps) {
-  const navigate = useNavigate();
-  const onClick = () => {
-    navigate(`/books/${id}`);
-  };
-
   return (
     <Link className='flex p-2 rounded-sm hover:shadow-xl transition-all' to={`/books/${id}`}>
       <img className='w-32 h-48' src={coverImg} alt={title} crossOrigin='anonymous' />
@@ -22,7 +17,7 @@ function BookCard({ coverImg, title, overview, rating, id }: BookProps) {
         <h2 className='text-primary2 text-lg font-bold line-clamp-3'>{title}</h2>
         <RatingStar rating={rating} />
         <p className='text-gray-500 h-12 text-xs font-semibold line-clamp-3'>{overview}</p>
-        <button className='primary-btn-fit w-24 font-normal' onClick={onClick}>
+        <button className='bg-indigo-500 hover:opacity-80 text-white w-24 font-normal h-8 rounded-md'>
           See more
         </button>
       </div>
