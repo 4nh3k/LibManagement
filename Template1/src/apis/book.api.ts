@@ -17,9 +17,15 @@ export const bookApi = {
   createBook(book: CreateBookDto) {
     return http.post<SuccessResponse<{ doc: Book }>>('/api/v1/books', book);
   },
-  updateImageBook(id: string, image: File) {
+  updateImageBook(data: { id: string; image: File }) {
     const formData = new FormData();
-    formData.append('photos', image);
-    return http.put<SuccessResponse<{ doc: Book }>>(`/api/v1/books/${id}/image`, formData);
+    console.log(data.image.name);
+    formData.append('photos', data.image);
+    console.log(formData.get('photos'));
+    return http.patch<SuccessResponse<{ doc: Book }>>(`/api/v1/books/${data.id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
   }
 };

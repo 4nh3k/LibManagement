@@ -7,6 +7,8 @@ import { FileDrop } from 'react-file-drop';
 import { CreateBookDto } from 'src/types/create-book-dto.type';
 import { useMutation } from '@tanstack/react-query';
 import { bookApi } from 'src/apis/book.api';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
 interface Props {
   id?: string;
   onToggle?: () => void;
@@ -16,7 +18,7 @@ interface Props {
 function AddBookForm({ onToggle }: Props) {
   const fileInputRef = useRef<File | null>(null);
 
-  const [file, setFile] = useState(null); // array of currently uploaded files
+  const [file, setFile] = useState<File | null>(null); // array of currently uploaded files
 
   const [book, setBook] = useState<CreateBookDto>({
     nameBook: '',
@@ -54,15 +56,34 @@ function AddBookForm({ onToggle }: Props) {
     mutationFn: (body: CreateBookDto) => bookApi.createBook(body)
   });
 
+  const updateImageBookMutation = useMutation({
+    mutationFn: (data: { id: string; image: File }) => bookApi.updateImageBook(data),
+    onSuccess: data => {
+      toast.success('Create book successfully!');
+      console.log(data);
+    },
+    onError: (error: unknown) => {
+      console.log(error);
+    }
+  });
+
   const onSubmit = (e: React.FormEventHandler<HTMLFormElement>) => {
     e.preventDefault();
+    if (file === null) {
+      toast.error('Please upload book image!', {
+        position: toast.POSITION.TOP_RIGHT
+      });
+      return;
+    }
+    console.log(file);
     console.log('Submitted book:', book);
     createBookMutation.mutate(book, {
       onSuccess: data => {
-        console.log(data);
+        updateImageBookMutation.mutate({ id: data.data.data.doc._id, image: file });
       },
-      onError: (error: unknown) => {
+      onError: (error: AxiosError) => {
         console.log(error);
+        toast.error(error.response.data.message);
       }
     });
   };
@@ -224,6 +245,7 @@ function AddBookForm({ onToggle }: Props) {
                 value={book.numberOfBooks}
                 onChange={handleInputChange}
                 min={1}
+                max={200}
                 placeholder='Enter number of books'
               />
             </div>
