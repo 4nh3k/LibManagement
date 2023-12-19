@@ -7,14 +7,14 @@ interface Props {
 const RemindCard: React.FC<Props> = ({ onToggle }) => {
   const headers = [
     { title: 'Remind Card ID', dataIndex: 'remindCardID' },
-    { title: 'Admin ID', dataIndex: 'adminID' },
+    { title: 'Violate time', dataIndex: 'violateTime' },
     { title: 'Action', dataIndex: 'action' }
   ];
 
   const data = [
     {
       remindCardID: '#20462',
-      adminID: 'Hat',
+      violateTime: '1',
       action: ''
     },
   ];
@@ -22,7 +22,7 @@ const RemindCard: React.FC<Props> = ({ onToggle }) => {
   return (
     <div id='body' className='mt-5 m-3 lg:mr-20'>
       <span className='text-xl font-bold'>Borrow Card List</span>
-      <Table headers={headers} data={data} onToggle={onToggle}></Table>
+      <Table headers={headers} data={data} onToggle={onToggle} onAdd={false}></Table>
     </div>
   );
 };
