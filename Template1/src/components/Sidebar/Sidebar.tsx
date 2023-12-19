@@ -8,13 +8,13 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
-    <div className='bg-gray-300 shadow fixed top-0 left-0 bottom-0 w-36'>
+    <div className='bg-gray-300 shadow fixed top-0 left-0 bottom-0 w-12 lg:w-36'>
       <div className='flex flex-col items-center justify-center'>
-        <Link to='/' className='text-center items-center justify-center mx-1 lg:mx-2'>
+        <Link to='/' className='text-center items-center justify-center mx-1 lg:mx-2 shrink-0'>
           <img
             alt='Website Logo'
             src={website_logo}
-            className='p-2 text-center w-[3.75rem] h-[3.75rem]'
+            className='block p-2 text-center w-[3.75rem] h-[3.75rem]'
           />
           <span className='font-bold text-xl hidden lg:inline-block'>LibMa</span>
         </Link>
