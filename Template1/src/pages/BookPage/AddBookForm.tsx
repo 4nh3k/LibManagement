@@ -89,11 +89,7 @@ function AddBookForm({ onToggle }: Props) {
   };
 
   return (
-<<<<<<< HEAD
-    <form className='flex flex-col mb-10 ml-2'>
-=======
     <form onSubmit={onSubmit} className='flex flex-col mb-10'>
->>>>>>> 85aa8e8b0584cfeed6b1fd3bd67cf4fd280260b5
       <div id='horizontal-header' className='flex items-center relative mt-5 mb-10'>
         <h2 className='font-bold text-xl'>Add book</h2>
       </div>
