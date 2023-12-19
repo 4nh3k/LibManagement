@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Schema, schema } from 'src/utils/rules';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { setAccessTokenToLS } from 'src/utils/auth';
+import { setAccessTokenToLS, setProfileToLS } from 'src/utils/auth';
 import authApi from 'src/apis/auth.api';
 import Input from 'src/components/Input';
 import { useAppContext } from 'src/contexts/app.contexts';
@@ -15,7 +15,7 @@ const loginSchema = schema.pick(['email', 'password']);
 
 export default function Login() {
   const navigate = useNavigate();
-  const { setIsAuthenticated } = useAppContext();
+  const { setIsAuthenticated, setProfile } = useAppContext();
 
   const [showPassword, setShowPassword] = useState(false);
   type FormData = Pick<Schema, 'email' | 'password'>;
@@ -42,6 +42,8 @@ export default function Login() {
         setTimeout(() => {
           setAccessTokenToLS(data.data?.token as string);
           setIsAuthenticated(true);
+          setProfileToLS(data.data?.data.user);
+          setProfile(data.data?.data.user);
         }, 1000);
         navigate('/');
       },

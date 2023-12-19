@@ -7,9 +7,13 @@ import Button from 'src/components/Button';
 
 import { bookApi } from 'src/apis/book.api';
 import BookCard from 'src/components/BookCard/BookCard';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import Search from 'src/components/Search';
 import { useState } from 'react';
+import authApi from 'src/apis/auth.api';
+import { clearLS } from 'src/utils/auth';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export default function Library() {
   const { data: booksData, isLoading } = useQuery({
@@ -17,11 +21,25 @@ export default function Library() {
     queryFn: () => bookApi.getAllBooks()
   });
 
+  const navigate = useNavigate();
+
   const books = booksData?.data.data.doc;
   const groupList = ['All books', 'Author', 'Publisher'];
   const [isAllBook, setAllBook] = useState(true);
   const [isAuthorGrouped, setAuthorGroup] = useState(true);
   const [isPublishGrouped, setPublishGroup] = useState(true);
+
+  const logoutMutation = useMutation({
+    mutationFn: authApi.logout,
+    onSuccess: () => {
+      clearLS();
+      toast.success('Log out successfully.');
+      navigate('/');
+    },
+    onError: () => {
+      toast.error('Somethings went wrong.');
+    }
+  });
 
   return (
     <div className='w-full h-screen overflow-auto px-4'>
@@ -48,7 +66,13 @@ export default function Library() {
             color='white'
             border_color='#D7C9FF'
           />
-          <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black'></Button>
+          <Button
+            label='User'
+            bg_color='#E0E0E0'
+            icon={user_icon}
+            color='black'
+            onclick={() => logoutMutation.mutate()}
+          ></Button>
         </div>
       </div>
 

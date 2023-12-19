@@ -15,9 +15,18 @@ import { path } from './constants/path';
 import MainLayout from './layouts/MainLayout/MainLayout';
 import { useAppContext } from './contexts/app.contexts';
 
-function ProtectedRoute() {
-  const { isAuthenticated } = useAppContext();
-  return isAuthenticated ? <Outlet /> : <Navigate to='/login' />;
+function AdminRoute() {
+  const { isAuthenticated, profile } = useAppContext();
+  const isAdmin = isAuthenticated && profile?.role === 'admin';
+
+  return isAdmin ? <Outlet /> : <Navigate to='/login' />;
+}
+
+function UserRoute() {
+  const { isAuthenticated, profile } = useAppContext();
+  const isUser = isAuthenticated && profile?.role === 'user';
+
+  return isUser ? <Outlet /> : <Navigate to='/login' />;
 }
 
 function RejectedRoute() {
@@ -56,7 +65,7 @@ export default function useRouteElement() {
       ]
     },
     {
-      element: <ProtectedRoute />,
+      element: <AdminRoute />,
       children: [
         {
           element: <MainLayout />,
@@ -80,16 +89,38 @@ export default function useRouteElement() {
             {
               path: path.transactions,
               element: <Transactions />
+            },
+            {
+              path: '/configuration',
+              element: <Configuration />
             }
           ]
         },
         {
           path: path.payment,
           element: <Payment />
+        }
+      ]
+    },
+    {
+      element: <UserRoute />,
+      children: [
+        {
+          element: <MainLayout />,
+          children: [
+            {
+              path: path.library,
+              element: <Library />
+            },
+            {
+              path: 'books/:id',
+              element: <BookDetails />
+            }
+          ]
         },
         {
-          path: '/configuration',
-          element: <Configuration />
+          path: path.payment,
+          element: <Payment />
         }
       ]
     }
