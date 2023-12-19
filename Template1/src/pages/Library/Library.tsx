@@ -9,6 +9,7 @@ import { bookApi } from 'src/apis/book.api';
 import BookCard from 'src/components/BookCard/BookCard';
 import { useQuery } from '@tanstack/react-query';
 import Search from 'src/components/Search';
+import { useState } from 'react';
 
 export default function Library() {
   const { data: booksData, isLoading } = useQuery({
@@ -17,6 +18,10 @@ export default function Library() {
   });
 
   const books = booksData?.data.data.doc;
+  const groupList = ['All books', 'Author', 'Publisher'];
+  const [isAllBook, setAllBook] = useState(true);
+  const [isAuthorGrouped, setAuthorGroup] = useState(true);
+  const [isPublishGrouped, setPublishGroup] = useState(true);
 
   return (
     <div className='w-full h-screen overflow-auto px-4'>
@@ -24,7 +29,7 @@ export default function Library() {
         id='horizontal-header'
         className='mb-10 mt-2 relative flex flex-col space-y-3 lg:flex-row lg:space-y-0 items-center justify-between ml-2 mr-6'
       >
-        <DropdownList list={['All books', 'Genre', 'Subject', 'Author', 'Publisher']} />
+        <DropdownList list={groupList} />
 
         <Search />
 
@@ -70,7 +75,7 @@ export default function Library() {
           </div>
         )}
 
-        {!isLoading &&
+        {isAllBook && !isLoading &&
           books &&
           books.map(book => (
             <BookCard
