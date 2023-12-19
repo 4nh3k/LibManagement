@@ -68,10 +68,10 @@ export default function Member() {
     setSelectedMember({
       id: row._id.toString(),
       name: row.fullName,
-      dob: row.dateOfBirth, // Replace with the actual property name in your data
-      address: row.address, // Replace with the actual property name in your data
-      email: row.email, // Replace with the actual property name in your data
-      date: row.cardCreatedAt // Replace with the actual property name in your data
+      dob: new Date(row.dateOfBirth).toLocaleDateString('en-GB'),
+      address: row.address,
+      email: row.email,
+      date: new Date(row.cardCreatedAt).toLocaleDateString('en-GB')
     });
   };
 

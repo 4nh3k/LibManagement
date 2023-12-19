@@ -1,4 +1,6 @@
 import Table from 'src/components/Table/Table';
+import { borrowCardApi } from 'src/apis/borrow-card.api';
+import { useQuery } from '@tanstack/react-query';
 
 interface BorrowCardProps {
   onToggle?: () => void;
@@ -56,6 +58,14 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
       action: ''
     }
   ];
+
+  const { data: BorrowCardData, isLoading } = useQuery({
+    queryKey: ['BorrowCard'],
+    queryFn: () => borrowCardApi.getAllBorrowCard()
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  console.log(BorrowCardData);
 
   return (
     <div id='body' className='mt-5 m-3 lg:mr-20'>
