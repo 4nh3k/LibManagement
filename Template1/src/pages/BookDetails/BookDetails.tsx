@@ -17,18 +17,14 @@ const BookDetails = () => {
   const book = bookData?.data.data.doc;
 
   return (
-    <>
-      <div
-        id='horizontal-header'
-        className='mr-14 mb-10 mt-4 flex items-center justify-between ml-'
-      >
+    <div className='p-4'>
+      <div className='mr-14 mb-10 mt-4 flex items-center justify-between ml-'>
         <button onClick={() => navigate(-1)}>
           <ArrowLeft size={32} />
         </button>
-        <div id='button-container'>
-          <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black' />
-        </div>
+        <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black' />
       </div>
+
       {isLoading && (
         <div role='status'>
           <svg
@@ -79,6 +75,7 @@ const BookDetails = () => {
               <p className='text-justify leading-6 font-normal'>{book.description}</p>
             </div>
           </div>
+
           <section className='bg-white dark:bg-gray-900 mt-4 antialiased'>
             <div className='max-w-2xl mx-auto'>
               <div className='flex justify-between items-center mb-6'>
@@ -272,7 +269,7 @@ const BookDetails = () => {
           </section>
         </>
       )}
-    </>
+    </div>
   );
 };
 export default BookDetails;
