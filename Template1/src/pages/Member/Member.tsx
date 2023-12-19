@@ -42,7 +42,7 @@ export default function Member() {
   };
 
   return (
-    <div className='w-full h-screen overflow-y-auto lg:overflow-y-hidden'>
+    <div className='w-full min-h-screen overflow-y-auto lg:overflow-y-hidden'>
       <select className='custom-select ml-5 mt-5'>
         <option value='1'>All Members</option>
       </select>
