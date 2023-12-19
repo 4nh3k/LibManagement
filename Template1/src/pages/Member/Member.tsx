@@ -3,6 +3,8 @@ import { useRef, useState } from 'react';
 import { FileDrop } from 'react-file-drop';
 import Input from 'src/components/Input';
 import SimpleTable from 'src/components/Table/SimpleTable';
+import { useQuery } from '@tanstack/react-query';
+import { memberApi } from 'src/apis/member.api';
 
 interface MemberProps {
   name: string;
@@ -23,22 +25,59 @@ export default function Member() {
     setFile(files[0]);
     // do something with your files...
   };
-  const headers = [
+  const dummyHeaders = [
     { title: 'ID', dataIndex: 'memberId' },
     { title: 'Name', dataIndex: 'name' },
     { title: 'Member date', dataIndex: 'memberDate' }
   ];
 
-  const data = [
+  const dummyData = [
     { memberId: 21520579, name: 'John Doe', memberDate: '2021-01-01' },
     { memberId: 2, name: 'Jane Smith', memberDate: '2021-02-15' },
     { memberId: 3, name: 'Bob Johnson', memberDate: '2021-03-10' }
   ];
 
+  const headers = [
+    { title: 'Name', dataIndex: 'fullName' },
+    { title: 'Address', dataIndex: 'address' },
+    { title: 'Email', dataIndex: 'email' }
+  ];
+
+  const { data: readerMemberData, isLoading } = useQuery({
+    queryKey: ['readers'],
+    queryFn: () => memberApi.getAllMembers()
+  });
+
+  const data = readerMemberData?.data.data.doc;
   const onTargetClick = () => {
     console.log('onTargetClick');
 
     fileInputRef?.current.click();
+  };
+
+  const [selectedMember, setSelectedMember] = useState({
+    id: '',
+    name: '',
+    dob: '',
+    address: '',
+    email: '',
+    date: ''
+  });
+
+  const onRowClick = row => {
+    setSelectedMember({
+      id: row._id.toString(),
+      name: row.fullName,
+      dob: row.dateOfBirth, // Replace with the actual property name in your data
+      address: row.address, // Replace with the actual property name in your data
+      email: row.email, // Replace with the actual property name in your data
+      date: row.cardCreatedAt // Replace with the actual property name in your data
+    });
+  };
+
+  const [onEditMember, setEditMember] = useState(false);
+  const onEditMemberClick = () => {
+    setEditMember(true);
   };
 
   return (
@@ -49,11 +88,14 @@ export default function Member() {
       <div className='w-full flex flex-col lg:flex-row'>
         <div className='ml-5 mt-5 w-5/6 lg:w-2/5'>
           <h2 className='text-xl lg:text-3xl text-primary2 font-bold'>All Members</h2>
-          <SimpleTable
-            className='overflow-x-auto rounded-md overflow-hidden shadow-md mt-4'
-            headers={headers}
-            data={data}
-          ></SimpleTable>
+          {!isLoading && data && (
+            <SimpleTable
+              className='overflow-x-auto rounded-md overflow-hidden shadow-md mt-4'
+              headers={headers}
+              data={data}
+              onRowClick={onRowClick}
+            ></SimpleTable>
+          )}
           <button type='button' className='primary-btn-fit block mt-5 ml-auto'>
             See more
           </button>
@@ -63,7 +105,9 @@ export default function Member() {
             <h2 className='text-xl lg:text-3xl text-primary2 font-bold'>Member latest record</h2>
             <ul className='ml-auto flex space-x-4 text-primary2'>
               <li>
-                <PencilSimple size={24} />
+                <button onClick={onEditMemberClick}>
+                  <PencilSimple size={24} />
+                </button>
               </li>
               <li>
                 <Trash size={24} />
@@ -114,6 +158,8 @@ export default function Member() {
               <Input
                 id='member-id'
                 className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
+                readOnly={!onEditMember}
+                value={selectedMember.id}
               />
             </div>
             <div className='flex flex-col lg:flex-row justify-between'>
@@ -123,6 +169,8 @@ export default function Member() {
               <Input
                 id='member-name'
                 className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
+                readOnly={!onEditMember}
+                value={selectedMember.name}
               />
             </div>
             <div className='flex flex-col lg:flex-row justify-between'>
@@ -132,6 +180,8 @@ export default function Member() {
               <Input
                 id='member-email'
                 className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
+                readOnly={!onEditMember}
+                value={selectedMember.email}
               />
             </div>
             <div className='flex flex-col lg:flex-row justify-between'>
@@ -141,6 +191,8 @@ export default function Member() {
               <Input
                 id='member-dob'
                 className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
+                readOnly={!onEditMember}
+                value={selectedMember.dob}
               />
             </div>
             <div className='flex flex-col lg:flex-row justify-between'>
@@ -150,6 +202,8 @@ export default function Member() {
               <Input
                 id='member-address'
                 className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
+                readOnly={!onEditMember}
+                value={selectedMember.address}
               />
             </div>
             <div className='flex flex-col lg:flex-row justify-between'>
@@ -159,18 +213,22 @@ export default function Member() {
               <Input
                 id='member-date'
                 className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
+                readOnly={!onEditMember}
+                value={selectedMember.date}
               />
             </div>
           </div>
 
-          <div className='flex mt-4'>
-            <button type='button' className='primary-btn-fit ml-auto w-20'>
-              Save
-            </button>
-            <button type='button' className='secondary-btn w-20 ml-5'>
-              Cancel
-            </button>
-          </div>
+          {onEditMember && (
+            <div className='flex mt-4'>
+              <button type='button' className='primary-btn-fit ml-auto w-20'>
+                Save
+              </button>
+              <button type='button' className='secondary-btn w-20 ml-5'>
+                Cancel
+              </button>
+            </div>
+          )}
           <div className='flex mt-8'>
             <h2 className='text-xl lg:text-3xl text-primary2 font-bold'>Borrowed History</h2>
             <select className='custom-select ml-auto'>
@@ -180,8 +238,8 @@ export default function Member() {
           <div>
             <SimpleTable
               className='rounded-md overflow-hidden shadow-md mt-4'
-              headers={headers}
-              data={data}
+              headers={dummyHeaders}
+              data={dummyData}
             ></SimpleTable>
           </div>
         </div>
