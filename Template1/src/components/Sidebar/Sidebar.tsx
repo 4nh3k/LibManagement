@@ -16,7 +16,7 @@ interface SidebarProp{
 
 const Sidebar: React.FC<SidebarProp> = ({isAdmin = false}) => {
   return (
-    <div className='bg-gray-300 shadow fixed top-0 left-0 bottom-0 w-12 lg:w-36'>
+    <div className='bg-gray-300 shadow fixed top-0 left-0 bottom-0 w-18 lg:w-36'>
       <div className='flex flex-col items-center justify-center'>
         <Link to='/' className='text-center items-center justify-center mx-1 lg:mx-2 shrink-0'>
           <img
