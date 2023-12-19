@@ -13,13 +13,13 @@ export function MenuItem({ iconSrc, label, to }: MenuItemProps) {
     <NavLink
       to={`/${to === '' || to ? to : label.toLowerCase()}`}
       className={({ isActive }) =>
-        `hover:bg-gray-300 lg:w-36 w-fit px-4 py-2 mx-0 lg:px-2 menu-item flex items-center gap-2 ${
+        `hover:bg-gray-300 lg:w-36 w-full px-4 py-2 mx-0 lg:px-2 menu-item flex justify-center lg:justify-start items-center gap-2 ${
           isActive ? 'bg-gray-300' : ''
         }`
       }
     >
-      <img alt='menu-icon' src={iconSrc} className='w-8 h-8 md:w-8 md:h-8' />
-      <span className='hidden lg:block font-medium text-sm'>{label}</span>
+      <img alt='menu-icon' src={iconSrc} className='w-6 h-6 md:w-6 md:h-6' />
+      <span className='hidden lg:block font-medium text-xs uppercase'>{label}</span>
     </NavLink>
   );
 }

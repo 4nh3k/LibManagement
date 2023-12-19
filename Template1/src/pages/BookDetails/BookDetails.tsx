@@ -100,7 +100,7 @@ const BookDetails = () => {
                 </div>
                 <button
                   type='submit'
-                  className='inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800'
+                  className='inline-flex items-center py-2.5 px-4 text-xs font-medium text-white bg-blue-500 rounded-lg active:opacity-90'
                 >
                   Post comment
                 </button>
@@ -186,6 +186,7 @@ const BookDetails = () => {
                 </p>
                 <div className='flex items-center mt-4 space-x-4'></div>
               </article>
+
               <article className='p-6 mb-3 text-base bg-white border-t border-gray-200 dark:border-gray-700 dark:bg-gray-900'>
                 <footer className='flex justify-between items-center mb-2'>
                   <div className='flex items-center'>
