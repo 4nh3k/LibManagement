@@ -1,4 +1,4 @@
-export interface BorrowCard {
+export interface BorrowCardType {
   _id: string;
   books: {
     bookId: string;

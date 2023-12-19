@@ -1,6 +1,7 @@
 import Table from 'src/components/Table/Table';
 import { borrowCardApi } from 'src/apis/borrow-card.api';
 import { useQuery } from '@tanstack/react-query';
+import { BorrowCardType } from 'src/types/borrow-card.type';
 
 interface BorrowCardProps {
   onToggle?: () => void;
@@ -8,60 +9,28 @@ interface BorrowCardProps {
 
 const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
   const headers = [
-    { title: 'Borrow Card ID', dataIndex: 'borrowCardID' },
-    { title: 'Admin ID', dataIndex: 'adminID' },
-    { title: 'Reader ID', dataIndex: 'readerID' },
-    { title: 'Date', dataIndex: 'date' },
-    { title: 'Status', dataIndex: 'status' },
+    { title: 'Borrow Card ID', dataIndex: 'borrowCardId'},
+    { title: 'Borrower', dataIndex: 'borrower'},
+    { title: 'Borrow Date', dataIndex: 'borrowDate' },
+    { title: 'Expected Return Date', dataIndex: 'expectedReturnDate'},
+    { title: 'Status', dataIndex: 'isReturned' },
     { title: 'Action', dataIndex: 'action' }
   ];
 
-  const data = [
-    {
-      borrowCardID: '#20462',
-      adminID: 'Hat',
-      readerID: 'Matt Dickerson',
-      date: '13/05/2022',
-      status: 'delivered',
-      action: ''
-    },
-    {
-      borrowCardID: '#20462',
-      adminID: 'Hat',
-      readerID: 'Matt Dickerson',
-      date: '13/05/2022',
-      status: 'delivered',
-      action: []
-    },
-    {
-      borrowCardID: '#20462',
-      adminID: 'Hat',
-      readerID: 'Matt Dickerson',
-      date: '13/05/2022',
-      status: 'delivered',
-      action: ''
-    },
-    {
-      borrowCardID: '#20462',
-      adminID: 'Hat',
-      readerID: 'Matt Dickerson',
-      date: '13/05/2022',
-      status: 'delivered',
-      action: ''
-    },
-    {
-      borrowCardID: '#20462',
-      adminID: 'Hat',
-      readerID: 'Matt Dickerson',
-      date: '13/05/2022',
-      status: 'delivered',
-      action: ''
-    }
-  ];
-
   const { data: BorrowCardData, isLoading } = useQuery({
-    queryKey: ['BorrowCard'],
-    queryFn: () => borrowCardApi.getAllBorrowCard()
+    queryKey: ['BorrowCardType'],
+    queryFn: () => borrowCardApi.getAllBorrowCard(),
+    select: data => {
+      return data.data.data.doc.map((item: BorrowCardType) => {
+        return {
+          borrowCardId: item._id,
+          borrower: item.borrower.fullName,
+          borrowDate: new Date(item.borrowDate).toLocaleDateString('en-GB'),
+          expectedReturnDate: new Date(item.expectedReturnDate).toLocaleDateString('en-GB'),
+          isReturned: item.isReturned ? 'Returned' : 'Not returned'
+        };
+      });
+    }
   });
 
   if (isLoading) return <div>Loading...</div>;
@@ -70,7 +39,7 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
   return (
     <div id='body' className='mt-5 m-3 lg:mr-20'>
       <span className='text-xl font-bold'>Borrow Card List</span>
-      <Table headers={headers} data={data} onToggle={onToggle}></Table>
+      <Table headers={headers} data={BorrowCardData} onToggle={onToggle}></Table>
     </div>
   );
 };
