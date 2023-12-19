@@ -3,11 +3,11 @@ import { SuccessResponse } from 'src/types/utils.type';
 import http from 'src/utils/http';
 
 export const borrowCardApi = {
-  getAllBorrowCard() {
+  getAllBorrowCard(params?: any) {
     return http.get<
       SuccessResponse<{
         doc: BorrowCard[];
       }>
-    >('/api/v1/borrow-book-forms');
+    >('/api/v1/borrow-book-forms', { params });
   }
 };
