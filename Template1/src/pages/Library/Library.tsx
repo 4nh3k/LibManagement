@@ -22,7 +22,7 @@ export default function Library() {
     <div className='w-full h-screen overflow-auto px-4'>
       <div
         id='horizontal-header'
-        className='mb-10 mt-2 relative flex items-center justify-between ml-2 mr-6'
+        className='mb-10 mt-2 relative flex flex-col space-y-3 lg:flex-row lg:space-y-0 items-center justify-between ml-2 mr-6'
       >
         <DropdownList list={['All books', 'Genre', 'Subject', 'Author', 'Publisher']} />
 
