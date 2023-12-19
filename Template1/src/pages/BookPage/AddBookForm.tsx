@@ -11,7 +11,7 @@ interface Props {
 // eslint-disable-next-line no-empty-pattern
 function AddBookForm({ onToggle }: Props) {
   return (
-    <form className='flex flex-col mb-10'>
+    <form className='flex flex-col mb-10 ml-2'>
       <div id='horizontal-header' className='flex items-center relative mt-5 mb-10'>
         <h2 className='font-bold text-xl'>Add book</h2>
       </div>

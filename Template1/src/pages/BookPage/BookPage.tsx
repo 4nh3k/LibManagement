@@ -8,16 +8,14 @@ interface Props {
 
 function BookPage({ onToggle }: Props) {
   return (
-    <div className='w-full h-screen overflow-auto'>
-      <div className='p-4'>
-        <div className='flex justify-between items-center'>
-          <span className='text-2xl font-bold'>Book</span>
-          <div className='inline'>
-            <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black'></Button>
-          </div>
+    <div className='w-full h-full'>
+      <div className='flex justify-between items-center pt-2 pl-2'>
+        <span className='text-2xl font-bold'>Book</span>
+        <div className='inline'>
+          <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black'></Button>
         </div>
-        <AddBookForm onToggle={onToggle}></AddBookForm>
       </div>
+      <AddBookForm onToggle={onToggle}></AddBookForm>
     </div>
   );
 }
