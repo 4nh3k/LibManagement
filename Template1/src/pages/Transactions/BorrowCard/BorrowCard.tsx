@@ -24,7 +24,7 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
       return data.data.data.doc.map((item: BorrowCardType) => {
         return {
           borrowCardId: item._id,
-          borrower: item.borrower.fullName,
+          borrower: item.borrower.fullName ? item.borrower.fullName : "",
           borrowDate: new Date(item.borrowDate).toLocaleDateString('en-GB'),
           expectedReturnDate: new Date(item.expectedReturnDate).toLocaleDateString('en-GB'),
           isReturned: item.isReturned ? 'Returned' : 'Not returned'

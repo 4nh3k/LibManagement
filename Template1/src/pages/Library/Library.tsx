@@ -75,16 +75,17 @@ export default function Library() {
           </div>
         )}
 
-        {isAllBook && !isLoading &&
+        {isAllBook &&
+          !isLoading &&
           books &&
           books.map(book => (
             <BookCard
               key={book._id}
               id={book._id}
-              coverImg={book.photoUrls[0]}
+              coverImg={book.coverImg}
               overview={book.description}
-              title={book.nameBook}
-              rating={Math.floor(book.ratingsAverage) || 4}
+              title={book.title}
+              rating={Math.floor(book.rating) || 4}
             />
           ))}
       </div>
