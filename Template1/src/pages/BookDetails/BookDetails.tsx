@@ -53,24 +53,35 @@ const BookDetails = () => {
             <img
               className='w-40 h-60 lg:w-60 lg:h-80 shrink-0'
               crossOrigin='anonymous'
-              src={book.photoUrls[0]}
-              alt={book.nameBook}
+              src={book.coverImg}
+              alt={book.title}
             />
 
             <div className='flex flex-col gap-2 md:ml-6'>
               <h1 className='block text-3xl font-bold'>
-                {book.nameBook}
+                {book.title}
                 <span className='font-medium text-gray-700 text-xl'>
-                  {` - ${book.publicationYear}`}
+                  {` - ${book.publishDate}`}
                 </span>
               </h1>
               <h2 className='text-sm font-semibold'>
                 by <span className='text-linkText text-base font-semibold'>{book.author}</span>
               </h2>
+              <h2 className='text-sm font-semibold'>{book.pages} pages</h2>
+              <h2 className='text-sm font-semibold'>
+                Publisher:{' '}
+                <span className='text-linkText text-base font-semibold'>{book.publisher}</span>
+              </h2>
+              <h2 className='text-sm font-semibold'>
+                Genres:{' '}
+                <span className='text-linkText text-base font-semibold'>
+                  {book.genres.join(', ')}
+                </span>
+              </h2>
 
               <div className='flex items-center'>
-                <p className='text-xl font-semibold'>{book.ratingsAverage || 4}.0</p>
-                <RatingStar className='ml-5 scale-125' rating={book.ratingsAverage || 4} />
+                <p className='text-xl font-semibold'>{book.rating || 4}</p>
+                <RatingStar className='ml-5 scale-125' rating={book.rating || 4} />
               </div>
               <p className='text-justify leading-6 font-normal'>{book.description}</p>
             </div>

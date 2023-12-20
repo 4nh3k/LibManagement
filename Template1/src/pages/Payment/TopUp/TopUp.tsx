@@ -1,11 +1,11 @@
-import money_icon from '../../../assets/img/dong.png';
+import money_icon from '../../../assets/icons/dollar.svg';
 import Button from 'src/components/Button';
 const TopUp = () => {
   return (
     <div>
       <div id='current-balance' className='text-center space-y-[1.5rem] mt-5 mb-5'>
         <span className='text-[1.5rem] block'>Current balance</span>
-        <span className='text-[2.5rem] block'>69,000đ</span>
+        <span className='text-[2.5rem] block'>20$</span>
       </div>
       <div className=''>
         <div id='top-up-account' className='mb-5 w-full pr-10'>
@@ -21,7 +21,7 @@ const TopUp = () => {
             </div>
             Top up account
           </div>
-          <div className='flex flex-col gap-10'>
+          <div className='ml-auto mr-auto w-18 lg:w-72 flex flex-col gap-10'>
             <div
               id='member-name-input'
               className='w-18 desktop:w-72 ml-flex flex-col desktop:flex-row desktop:mr-auto ml-[1rem] desktop:ml-auto items-center align-middle'
@@ -86,7 +86,7 @@ const TopUp = () => {
               type='number'
               min={0}
               id='top-up-amount'
-              placeholder='1,000đ'
+              placeholder='5'
             ></input>
             <img
               src={money_icon}
@@ -98,7 +98,7 @@ const TopUp = () => {
           </div>
           <Button label='Top up' bg_color='#C0BBF4' color='#5632A1'></Button>
         </div>
-        <span className='ml-auto mr-auto'>Your balance will be 120,000đ</span>
+        <span className='ml-auto mr-auto'>Your balance will be 25$</span>
       </div>
     </div>
   );

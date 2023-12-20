@@ -18,12 +18,13 @@ const ReturnCard: React.FC<ReturnCardProps> = ({ onToggle }) => {
     queryKey: ['ReturnCard'],
     queryFn: () => returnCardApi.getAllReturnCard(),
     select: data => {
+      console.log(data);
       return data.data.data.doc.map((item: ReturnCard) => {
         return {
           returnCardId: item._id,
-          username: item.borrower.fullName,
+          username: item.borrower != null ? item.borrower.fullName : 'N/A',
           returnDate: new Date(item.returnDate).toLocaleDateString('en-GB'),
-          fee: item.fee.toFixed(2),
+          fee: item.fee.toFixed(2) + '$',
           action: (
             <button type='button' className='primary-btn'>
               auto

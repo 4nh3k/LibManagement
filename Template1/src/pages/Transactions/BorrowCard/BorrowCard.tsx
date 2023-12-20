@@ -9,10 +9,10 @@ interface BorrowCardProps {
 
 const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
   const headers = [
-    { title: 'Borrow Card ID', dataIndex: 'borrowCardId'},
-    { title: 'Borrower', dataIndex: 'borrower'},
+    { title: 'Borrow Card ID', dataIndex: 'borrowCardId' },
+    { title: 'Borrower', dataIndex: 'borrower' },
     { title: 'Borrow Date', dataIndex: 'borrowDate' },
-    { title: 'Expected Return Date', dataIndex: 'expectedReturnDate'},
+    { title: 'Expected Return Date', dataIndex: 'expectedReturnDate' },
     { title: 'Status', dataIndex: 'isReturned' },
     { title: 'Action', dataIndex: 'action' }
   ];
@@ -24,7 +24,7 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
       return data.data.data.doc.map((item: BorrowCardType) => {
         return {
           borrowCardId: item._id,
-          borrower: item.borrower.fullName,
+          borrower: item.borrower != null ? item.borrower.fullName : 'N/A',
           borrowDate: new Date(item.borrowDate).toLocaleDateString('en-GB'),
           expectedReturnDate: new Date(item.expectedReturnDate).toLocaleDateString('en-GB'),
           isReturned: item.isReturned ? 'Returned' : 'Not returned'

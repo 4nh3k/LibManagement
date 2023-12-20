@@ -8,9 +8,8 @@ import PaymentForm from './PaymentForm';
 // import React, { useState } from 'react';
 const Payment = () => {
   return (
-    <div className='bg-background h-screen w-screen overflow-auto'>
-      <Sidebar></Sidebar>
-      <div className='bg-background pt-2 pl-[5rem] lg:pl-[7rem] w-full overflow-auto flex-1 flex-row h-screen'>
+    <div className='bg-gray-100 h-screen w-screen overflow-auto'>
+      <div className='bg-gray-100 pt-2 ml-5 pl-20 lg:pl-36 w-full overflow-auto flex-1 flex-row h-screen'>
         <div id='horizontal-header' className='pl-5 pr-5 lg:pr-10 py-2'>
           <div className='flex justify-between items-center'>
             <span className='text-xl lg:text-2xl font-bold'>Payment</span>

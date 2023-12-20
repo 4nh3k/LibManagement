@@ -15,8 +15,17 @@ import { path } from './constants/path';
 import MainLayout from './layouts/MainLayout/MainLayout';
 import { useAppContext } from './contexts/app.contexts';
 
-function ProtectedRoute() {
-  const { isAuthenticated } = useAppContext();
+function AdminRoute() {
+  const { isAuthenticated, profile } = useAppContext();
+  const isAdmin = profile?.role === 'admin';
+
+  return isAdmin ? <Outlet /> : <Navigate to='/' />;
+}
+
+function AuthRoute() {
+  const { isAuthenticated, profile } = useAppContext();
+  const isUser = isAuthenticated;
+
   return isAuthenticated ? <Outlet /> : <Navigate to='/login' />;
 }
 
@@ -56,8 +65,47 @@ export default function useRouteElement() {
       ]
     },
     {
-      element: <ProtectedRoute />,
+      element: <AuthRoute />,
       children: [
+        {
+          element: <AdminRoute />,
+          path: path.admin,
+          children: [
+            {
+              element: <MainLayout />,
+              children: [
+                {
+                  path: path.library,
+                  element: <Library />
+                },
+                {
+                  path: path.book,
+                  element: <BookPage />
+                },
+                {
+                  path: 'books/:id',
+                  element: <BookDetails />
+                },
+                {
+                  path: path.member,
+                  element: <Member />
+                },
+                {
+                  path: path.transactions,
+                  element: <Transactions />
+                },
+                {
+                  path: 'configuration',
+                  element: <Configuration />
+                }
+              ]
+            },
+            {
+              path: path.payment,
+              element: <Payment />
+            }
+          ]
+        },
         {
           element: <MainLayout />,
           children: [
@@ -65,31 +113,20 @@ export default function useRouteElement() {
               path: path.library,
               element: <Library />
             },
-            {
-              path: path.book,
-              element: <BookPage />
-            },
+
             {
               path: 'books/:id',
               element: <BookDetails />
             },
             {
-              path: path.member,
-              element: <Member />
-            },
-            {
               path: path.transactions,
-              element: <Transactions />
+              element: <p>User transaction</p>
             }
           ]
         },
         {
           path: path.payment,
           element: <Payment />
-        },
-        {
-          path: 'configuration',
-          element: <Configuration />
         }
       ]
     }

@@ -1,5 +1,6 @@
 export const path = {
   library: '',
+  admin: 'admin',
   transactions: 'transactions',
   login: 'login',
   register: 'register',
@@ -8,5 +9,6 @@ export const path = {
   book: 'books',
   payment: 'payment',
   member: 'member',
-  id: ':id'
+  id: ':id',
+  userAccount: 'account'
 };
