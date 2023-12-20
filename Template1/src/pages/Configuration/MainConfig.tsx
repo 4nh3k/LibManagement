@@ -10,11 +10,10 @@ import TransactionConfig from './Transaction/TransactionConfig';
 const Configuration = () => {
   return (
     <div className='h-screen w-screen overflow-auto'>
-      <Sidebar></Sidebar>
-      <div className='bg-background pt-2 pl-[5rem] lg:pl-[7rem] w-full overflow-auto flex-1 flex-row h-screen'>
+      <div className='px-4 bg-background pt-2 w-full overflow-auto flex-1 flex-row h-screen'>
         <div className='pr-5 lg:pr-10 py-2'>
           <div className='flex justify-between  items-center'>
-            <span className='text-xl lg:text-2xl font-bold'>Configuration</span>
+            <span className='px-4 text-xl lg:text-2xl font-bold'>Configuration</span>
             <div className='inline'>
               <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black'></Button>
             </div>
