@@ -10,11 +10,11 @@ import payment from 'src/assets/img/payment.png';
 import MenuItem from 'src/components/MenuItem';
 import { Link } from 'react-router-dom';
 
-interface SidebarProp{
+interface SidebarProp {
   isAdmin: boolean;
 }
 
-const Sidebar: React.FC<SidebarProp> = ({isAdmin = false}) => {
+const Sidebar: React.FC<SidebarProp> = ({ isAdmin = false }) => {
   return (
     <div className='bg-gray-300 shadow fixed top-0 left-0 bottom-0 w-18 lg:w-36'>
       <div className='flex flex-col items-center justify-center'>
@@ -28,10 +28,20 @@ const Sidebar: React.FC<SidebarProp> = ({isAdmin = false}) => {
         </Link>
         <ul className='flex flex-col gap-[0.1rem]'>
           <MenuItem iconSrc={library} label='Library' to='' />
-          <MenuItem iconSrc={transaction} label='Transaction' to='transactions' />
-          {isAdmin && <MenuItem iconSrc={book} label='Book' to='books' />}
-          {isAdmin && <MenuItem iconSrc={group} label='Member' />}
-          {isAdmin && <MenuItem iconSrc={configuration} label='Configuration'></MenuItem>}
+          <MenuItem
+            iconSrc={transaction}
+            label='Transaction'
+            to={isAdmin ? 'admin/transactions' : 'transactions'}
+          />
+          {isAdmin && <MenuItem iconSrc={book} label='Book' to='admin/books' />}
+          {isAdmin && <MenuItem iconSrc={group} label='Member' to='admin/member' />}
+          {isAdmin && (
+            <MenuItem
+              iconSrc={configuration}
+              label='Configuration'
+              to='admin/configuration'
+            ></MenuItem>
+          )}
           {!isAdmin && <MenuItem iconSrc={account} label='Account' to='account'></MenuItem>}
           {!isAdmin && <MenuItem iconSrc={payment} label='Payment'></MenuItem>}
         </ul>

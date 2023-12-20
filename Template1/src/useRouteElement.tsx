@@ -7,7 +7,6 @@ import ForgotPass from './pages/ForgotPass/ForgotPass';
 import ResetPass from './pages/ResetPassword/ResetPass';
 import Transactions from './pages/Transactions';
 import BookDetails from './pages/BookDetails/BookDetails';
-import UserAccount from './pages/UserAccount/UserAccount';
 import BookPage from './pages/BookPage/BookPage';
 import Payment from './pages/Payment';
 import Configuration from './pages/Configuration/MainConfig';
@@ -15,19 +14,20 @@ import Member from './pages/Member';
 import { path } from './constants/path';
 import MainLayout from './layouts/MainLayout/MainLayout';
 import { useAppContext } from './contexts/app.contexts';
+import { transaction } from 'src/assets/icons/transaction.svg';
 
 function AdminRoute() {
   const { isAuthenticated, profile } = useAppContext();
-  const isAdmin = isAuthenticated && profile?.role === 'admin';
+  const isAdmin = profile?.role === 'admin';
 
-  return isAdmin ? <Outlet /> : <Navigate to='/login' />;
+  return isAdmin ? <Outlet /> : <Navigate to='/' />;
 }
 
-function UserRoute() {
+function AuthRoute() {
   const { isAuthenticated, profile } = useAppContext();
-  const isUser = isAuthenticated && profile?.role === 'user';
+  const isUser = isAuthenticated;
 
-  return isUser ? <Outlet /> : <Navigate to='/login' />;
+  return isAuthenticated ? <Outlet /> : <Navigate to='/login' />;
 }
 
 function RejectedRoute() {
@@ -66,61 +66,62 @@ export default function useRouteElement() {
       ]
     },
     {
-      element: <AdminRoute />,
-      path: path.admin,
+      element: <AuthRoute />,
       children: [
         {
-          element: <MainLayout />,
+          element: <AdminRoute />,
+          path: path.admin,
           children: [
             {
-              path: path.library,
-              element: <Library />
+              element: <MainLayout />,
+              children: [
+                {
+                  path: path.library,
+                  element: <Library />
+                },
+                {
+                  path: path.book,
+                  element: <BookPage />
+                },
+                {
+                  path: 'books/:id',
+                  element: <BookDetails />
+                },
+                {
+                  path: path.member,
+                  element: <Member />
+                },
+                {
+                  path: path.transactions,
+                  element: <Transactions />
+                },
+                {
+                  path: 'configuration',
+                  element: <Configuration />
+                }
+              ]
             },
             {
-              path: path.book,
-              element: <BookPage />
-            },
-            {
-              path: 'books/:id',
-              element: <BookDetails />
-            },
-            {
-              path: path.member,
-              element: <Member />
-            },
-            {
-              path: path.transactions,
-              element: <Transactions />
-            },
-            {
-              path: 'configuration',
-              element: <Configuration />
+              path: path.payment,
+              element: <Payment />
             }
           ]
         },
         {
-          path: path.payment,
-          element: <Payment />
-        }
-      ]
-    },
-    {
-      element: <UserRoute />,
-      children: [
-        {
           element: <MainLayout />,
           children: [
             {
               path: path.library,
               element: <Library />
             },
+
             {
               path: 'books/:id',
               element: <BookDetails />
             },
             {
-              path: path.userAccount,
-              element: <UserAccount />
+              path: path.transactions,
+              element: <p>User transaction</p>
             }
           ]
         },
