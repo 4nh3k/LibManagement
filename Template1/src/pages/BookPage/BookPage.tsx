@@ -8,7 +8,7 @@ interface Props {
 
 function BookPage({ onToggle }: Props) {
   return (
-    <div className='w-full h-full'>
+    <div className='px-4 w-full h-full'>
       <div className='flex justify-between items-center pt-2 pl-2'>
         <span className='text-2xl font-bold'>Book</span>
         <div className='inline'>

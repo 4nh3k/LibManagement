@@ -43,7 +43,7 @@ export default function Library() {
   });
 
   return (
-    <div className='w-full h-screen overflow-auto px-4'>
+    <div className='w-full h-screen overflow-auto px-5'>
       <div
         id='horizontal-header'
         className='mb-10 mt-2 relative flex flex-col space-y-3 lg:flex-row lg:space-y-0 items-center justify-between ml-2 mr-6'
