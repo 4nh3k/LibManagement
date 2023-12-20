@@ -14,6 +14,7 @@ import authApi from 'src/apis/auth.api';
 import { clearLS } from 'src/utils/auth';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import Pagination from 'src/components/Pagination/Pagination';
 
 export default function Library() {
   const { data: booksData, isLoading } = useQuery({
@@ -51,21 +52,7 @@ export default function Library() {
 
         <Search />
 
-        <div>
-          <label htmlFor='quantity' className='font-normal'>
-            Quantity
-          </label>
-          <InputBox placeholder='1' type='number' />
-        </div>
-
         <div id='button-container' className='inline space-x-[1.5rem] right-10'>
-          <Button
-            label='Search'
-            bg_color='#5632A1'
-            icon={search_icon}
-            color='white'
-            border_color='#D7C9FF'
-          />
           <Button
             label='User'
             bg_color='#E0E0E0'
@@ -76,7 +63,7 @@ export default function Library() {
         </div>
       </div>
 
-      <div className='flex flex-col items-center md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 mb-10 mr-10'>
+      <div className='flex flex-col items-center md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 mb-5 mr-10'>
         {isLoading && (
           <div role='status'>
             <svg
@@ -113,6 +100,11 @@ export default function Library() {
             />
           ))}
       </div>
+      {!isLoading && (
+        <div className='align-center'>
+          <Pagination totalPages={10} currentPage={1} onPageChange={null}></Pagination>
+        </div>
+      )}
     </div>
   );
 }

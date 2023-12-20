@@ -21,7 +21,7 @@ const PaymentForm = () => {
             </div>
             Money receipt
           </div>
-          <div className='flex flex-col gap-10'>
+          <div className='ml-auto mr-auto flex flex-col gap-10 w-18 lg:w-72'>
             <span className='ml-auto mr-auto text-[1.5rem] font-bold'>Payment Detail</span>
             <div
               id='member-name-input'

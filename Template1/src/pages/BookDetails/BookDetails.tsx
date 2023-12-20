@@ -67,6 +67,17 @@ const BookDetails = () => {
               <h2 className='text-sm font-semibold'>
                 by <span className='text-linkText text-base font-semibold'>{book.author}</span>
               </h2>
+              <h2 className='text-sm font-semibold'>{book.pages} pages</h2>
+              <h2 className='text-sm font-semibold'>
+                Publisher:{' '}
+                <span className='text-linkText text-base font-semibold'>{book.publisher}</span>
+              </h2>
+              <h2 className='text-sm font-semibold'>
+                Genres:{' '}
+                <span className='text-linkText text-base font-semibold'>
+                  {book.genres.join(', ')}
+                </span>
+              </h2>
 
               <div className='flex items-center'>
                 <p className='text-xl font-semibold'>{book.rating || 4}</p>
