@@ -88,7 +88,7 @@ export default function useRouteElement() {
           element: <Payment />
         },
         {
-          path: '/configuration',
+          path: 'configuration',
           element: <Configuration />
         }
       ]

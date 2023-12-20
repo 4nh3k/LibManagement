@@ -24,7 +24,6 @@ class Http {
 
     this.instance.interceptors.request.use(
       config => {
-        console.log(this.accessToken);
         if (this.accessToken && config.headers) {
           config.headers.Authorization = `Bearer ${this.accessToken}`;
         }
@@ -37,6 +36,19 @@ class Http {
         return Promise.reject(error);
       }
     );
+
+    this.instance.interceptors.response.use(response => {
+      const { url } = response.config;
+      if (url === 'login') {
+        const data = response.data as AuthResponse;
+        this.accessToken = data.token;
+        // this.refreshToken = response.data.data.refresh_token;
+      } else if (url === 'logout') {
+        this.accessToken = '';
+        clearLS();
+      }
+      return response;
+    });
   }
 }
 

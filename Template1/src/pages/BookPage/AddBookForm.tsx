@@ -67,7 +67,7 @@ function AddBookForm({ onToggle }: Props) {
     }
   });
 
-  const onSubmit = (e: React.FormEventHandler<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (file === null) {
       toast.error('Please upload book image!', {
@@ -80,20 +80,16 @@ function AddBookForm({ onToggle }: Props) {
     createBookMutation.mutate(book, {
       onSuccess: data => {
         updateImageBookMutation.mutate({ id: data.data.data.doc._id, image: file });
-      },
-      onError: (error: AxiosError) => {
-        console.log(error);
-        toast.error(error.response.data.message);
       }
+      // onError: (error: AxiosError) => {
+      //   console.log(error);
+      //   toast.error(error.response.data.message);
+      // }
     });
   };
 
   return (
-<<<<<<< HEAD
-    <form className='flex flex-col mb-10 ml-2'>
-=======
     <form onSubmit={onSubmit} className='flex flex-col mb-10'>
->>>>>>> 85aa8e8b0584cfeed6b1fd3bd67cf4fd280260b5
       <div id='horizontal-header' className='flex items-center relative mt-5 mb-10'>
         <h2 className='font-bold text-xl'>Add book</h2>
       </div>

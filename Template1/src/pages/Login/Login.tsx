@@ -33,7 +33,6 @@ export default function Login() {
   });
 
   const onSubmit = handleSubmit(data => {
-    console.log(data);
     loginMutation.mutate(data, {
       onSuccess: data => {
         toast.success('Successfully login!', {
@@ -43,7 +42,6 @@ export default function Login() {
           setAccessTokenToLS(data.data?.token as string);
           setIsAuthenticated(true);
         }, 1000);
-        navigate('/');
       },
       onError: (error: unknown) => {
         toast.error('Login failed!', {
