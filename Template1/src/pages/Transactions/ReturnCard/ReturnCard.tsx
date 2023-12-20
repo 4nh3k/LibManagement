@@ -22,9 +22,9 @@ const ReturnCard: React.FC<ReturnCardProps> = ({ onToggle }) => {
       return data.data.data.doc.map((item: ReturnCard) => {
         return {
           returnCardId: item._id,
-          username: item.borrower.fullName,
+          username: item.borrower != null ? item.borrower.fullName : 'N/A',
           returnDate: new Date(item.returnDate).toLocaleDateString('en-GB'),
-          fee: item.fee.toFixed(2),
+          fee: item.fee.toFixed(2) + '$',
           action: (
             <button type='button' className='primary-btn'>
               auto
