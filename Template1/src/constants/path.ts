@@ -10,5 +10,5 @@ export const path = {
   payment: 'payment',
   member: 'member',
   id: ':id',
-  userAccount: 'account',
+  account: 'account'
 };
