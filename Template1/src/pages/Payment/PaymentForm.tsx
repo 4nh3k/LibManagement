@@ -1,11 +1,11 @@
-import money_icon from '../../assets/img/dong.png';
+import money_icon from '../../assets/icons/dollar.svg';
 import Button from 'src/components/Button';
 const PaymentForm = () => {
   return (
     <div>
       <div id='current-balance' className='text-center space-y-[1.5rem] mt-5 mb-5'>
         <span className='text-[1.5rem] block'>Current balance</span>
-        <span className='text-[2.5rem] block'>69,000đ</span>
+        <span className='text-[2.5rem] block'>20$</span>
       </div>
       <div className=''>
         <div id='top-up-account' className='mb-5 w-full pr-10'>
@@ -59,10 +59,7 @@ const PaymentForm = () => {
                 placeholder='Enter member ID'
               />
             </div>
-            <div
-              id='top-up-container'
-              className='flex flex-col mr-auto ml-auto lg:ml-auto mb-3'
-            >
+            <div id='top-up-container' className='flex flex-col mr-auto ml-auto lg:ml-auto mb-3'>
               <label
                 htmlFor='member-price'
                 id='member-price'
@@ -79,7 +76,7 @@ const PaymentForm = () => {
                   type='number'
                   min={0}
                   id='top-up-amount'
-                  placeholder='69,000đ'
+                  placeholder='20$'
                 ></input>
                 <img
                   src={money_icon}
@@ -101,7 +98,7 @@ const PaymentForm = () => {
               >
                 Total Fee
               </label>
-              <span className='text-[1.5rem]'>40,000đ</span>
+              <span className='text-[1.5rem]'>0.5$</span>
             </div>
 
             <div
@@ -115,7 +112,7 @@ const PaymentForm = () => {
               >
                 Your Wallet
               </label>
-              <span className='inline text-[1.5rem]'>29,000đ</span>
+              <span className='inline text-[1.5rem]'>19.5$</span>
             </div>
             <div id='pay-button-container' className='flex ml-auto mr-auto'>
               <Button label='Pay' bg_color='#5632A1' color='white'></Button>

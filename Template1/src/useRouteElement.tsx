@@ -7,6 +7,7 @@ import ForgotPass from './pages/ForgotPass/ForgotPass';
 import ResetPass from './pages/ResetPassword/ResetPass';
 import Transactions from './pages/Transactions';
 import BookDetails from './pages/BookDetails/BookDetails';
+import UserAccount from './pages/UserAccount/UserAccount';
 import BookPage from './pages/BookPage/BookPage';
 import Payment from './pages/Payment';
 import Configuration from './pages/Configuration/MainConfig';
@@ -116,6 +117,10 @@ export default function useRouteElement() {
             {
               path: 'books/:id',
               element: <BookDetails />
+            },
+            {
+              path: path.userAccount,
+              element: <UserAccount />
             }
           ]
         },

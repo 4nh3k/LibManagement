@@ -26,7 +26,7 @@ export default function Search() {
         <input
           value={query}
           onChange={e => setQuery(e.target.value)}
-          placeholder='Search Instacloud'
+          placeholder='Search books'
           className='grow bg-gray-200 text-gray-500 outline-none focus:text-gray-500 focus:outline-none'
           maxLength={100}
         />

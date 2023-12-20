@@ -9,5 +9,6 @@ export const path = {
   book: 'books',
   payment: 'payment',
   member: 'member',
-  id: ':id'
+  id: ':id',
+  userAccount: 'account',
 };
