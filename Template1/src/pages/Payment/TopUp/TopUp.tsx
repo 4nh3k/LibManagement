@@ -21,7 +21,7 @@ const TopUp = () => {
             </div>
             Top up account
           </div>
-          <div className='flex flex-col gap-10'>
+          <div className='ml-auto mr-auto w-18 lg:w-72 flex flex-col gap-10'>
             <div
               id='member-name-input'
               className='w-18 desktop:w-72 ml-flex flex-col desktop:flex-row desktop:mr-auto ml-[1rem] desktop:ml-auto items-center align-middle'
