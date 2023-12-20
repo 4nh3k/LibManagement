@@ -66,6 +66,7 @@ export default function useRouteElement() {
     },
     {
       element: <AdminRoute />,
+      path: path.admin,
       children: [
         {
           element: <MainLayout />,
@@ -91,7 +92,7 @@ export default function useRouteElement() {
               element: <Transactions />
             },
             {
-              path: '/configuration',
+              path: 'configuration',
               element: <Configuration />
             }
           ]

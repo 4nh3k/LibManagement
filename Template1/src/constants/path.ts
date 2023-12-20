@@ -1,5 +1,6 @@
 export const path = {
   library: '',
+  admin: 'admin',
   transactions: 'transactions',
   login: 'login',
   register: 'register',
