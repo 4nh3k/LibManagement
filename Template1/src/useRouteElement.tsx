@@ -14,6 +14,7 @@ import Member from './pages/Member';
 import { path } from './constants/path';
 import MainLayout from './layouts/MainLayout/MainLayout';
 import { useAppContext } from './contexts/app.contexts';
+import UserAccount from './pages/UserAccount/UserAccount';
 
 function AdminRoute() {
   const { isAuthenticated, profile } = useAppContext();
@@ -121,13 +122,18 @@ export default function useRouteElement() {
             {
               path: path.transactions,
               element: <p>User transaction</p>
+            },
+            {
+              path: path.payment,
+              element: <Payment />
+            },
+            {
+              path: path.userAccount,
+              element: <UserAccount />
             }
           ]
         },
-        {
-          path: path.payment,
-          element: <Payment />
-        }
+        
       ]
     }
 

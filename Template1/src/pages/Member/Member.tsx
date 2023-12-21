@@ -27,17 +27,12 @@ export default function Member() {
     setFile(files[0]);
     // do something with your files...
   };
-  const dummyHeaders = [
-    { title: 'ID', dataIndex: 'memberId' },
-    { title: 'Name', dataIndex: 'name' },
-    { title: 'Member date', dataIndex: 'memberDate' }
-  ];
 
-  const dummyData = [
-    { memberId: 21520579, name: 'John Doe', memberDate: '2021-01-01' },
-    { memberId: 2, name: 'Jane Smith', memberDate: '2021-02-15' },
-    { memberId: 3, name: 'Bob Johnson', memberDate: '2021-03-10' }
-  ];
+  const onTargetClick = () => {
+    console.log('onTargetClick');
+
+    fileInputRef?.current.click();
+  };
 
   const headers = [
     { title: 'Name', dataIndex: 'fullName' },
@@ -57,11 +52,6 @@ export default function Member() {
   });
 
   const data = readerMemberData?.data.data.doc;
-  const onTargetClick = () => {
-    console.log('onTargetClick');
-
-    fileInputRef?.current.click();
-  };
 
   const [selectedMember, setSelectedMember] = useState({
     id: '',
@@ -71,6 +61,7 @@ export default function Member() {
     email: '',
     date: ''
   });
+  
   const [id, setId] = useState<number | null>(null);
   const {
     data: memberData,
