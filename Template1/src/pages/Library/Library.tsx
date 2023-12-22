@@ -102,7 +102,7 @@ export default function Library() {
             />
           ))}
       </div>
-      {!isLoading && (
+      {(!isLoading || books == null || books.length == 0) && (
         <div className='align-center'>
           <Pagination totalPages={10} currentPage={1} onPageChange={null}></Pagination>
         </div>
