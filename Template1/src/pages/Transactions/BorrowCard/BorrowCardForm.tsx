@@ -12,25 +12,25 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle }) => {
       <h2 className='font-bold text-xl'>Borrow Card</h2>
       <div className='flex flex-col lg:flex-row lg:inline-flex gap-x-20'>
         <div className='w-72 mt-5'>
-          <label className='custom-label' htmlFor='book-id'>
-            Member name
-          </label>
-          <input
-            type='text'
-            className='custom-input mt-1'
-            id='member_name'
-            placeholder='Enter member name'
-          />
-        </div>
-        <div className='w-72 mt-5'>
-          <label className='custom-label' htmlFor='book-id'>
-            Book ID
+          <label className='custom-label' htmlFor='member-id'>
+            Member ID
           </label>
           <input
             type='text'
             className='custom-input mt-1'
             id='member_id'
             placeholder='Enter member id'
+          />
+        </div>
+        <div className='w-72 mt-5'>
+          <label className='custom-label' htmlFor='member-name'>
+            Member name
+          </label>
+          <input
+            type='text'
+            className='custom-input mt-1'
+            id='member-name'
+            placeholder='Enter member name'
           />
         </div>
       </div>
