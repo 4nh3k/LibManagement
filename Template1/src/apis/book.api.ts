@@ -1,15 +1,20 @@
 import Book from 'src/types/book.type';
-import CreateBookDto from 'src/types/create-book.type';
+import { CreateBookDto } from 'src/types/create-book-dto.type';
 import { SuccessResponse } from 'src/types/utils.type';
 import http from 'src/utils/http';
 
 export const bookApi = {
-  getAllBooks() {
+  getAllBooks(keyword?: string, signal?: AbortSignal) {
     return http.get<
       SuccessResponse<{
         doc: Book[];
       }>
-    >('/api/v1/books');
+    >('/api/v1/books', {
+      params: {
+        q: keyword
+      },
+      signal
+    });
   },
   getBook(id: string) {
     return http.get<SuccessResponse<{ doc: Book }>>(`/api/v1/books/${id}`);

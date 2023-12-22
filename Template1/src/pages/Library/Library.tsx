@@ -17,19 +17,13 @@ import { useNavigate } from 'react-router-dom';
 import Pagination from 'src/components/Pagination/Pagination';
 
 export default function Library() {
-  const { data: booksData, isLoading } = useQuery({
-    queryKey: ['library'],
-    queryFn: () => bookApi.getAllBooks()
-  });
-
   const navigate = useNavigate();
 
-  const books = booksData?.data.data.doc;
   const groupList = ['All books', 'Author', 'Publisher'];
   const [isAllBook, setAllBook] = useState(true);
   const [isAuthorGrouped, setAuthorGroup] = useState(true);
   const [isPublishGrouped, setPublishGroup] = useState(true);
-
+  const [filter, setFilter] = useState<string>('');
   const logoutMutation = useMutation({
     mutationFn: authApi.logout,
     onSuccess: () => {
@@ -42,6 +36,14 @@ export default function Library() {
     }
   });
 
+  const { data: booksData, isLoading } = useQuery({
+    queryKey: ['library', { filter }],
+    queryFn: ({ signal }) => {
+      return bookApi.getAllBooks(filter || undefined, signal);
+    }
+  });
+  const books = booksData?.data.data.doc;
+
   return (
     <div className='w-full h-screen overflow-auto px-5'>
       <div
@@ -50,7 +52,7 @@ export default function Library() {
       >
         <DropdownList list={groupList} />
 
-        <Search />
+        <Search query={filter} onChange={setFilter} />
 
         <div id='button-container' className='inline space-x-[1.5rem] right-10'>
           <Button
