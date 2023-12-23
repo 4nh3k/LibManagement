@@ -2,6 +2,8 @@ import axios, { AxiosError, HttpStatusCode, type AxiosInstance } from 'axios';
 import { clearLS, getAccessTokenFromLS } from './auth';
 import { toast } from 'react-toastify';
 import { AuthResponse } from 'src/types/auth.type';
+import { request } from 'http';
+import { URL_BASE, URL_LOGIN, URL_LOGOUT, URL_REGISTER } from 'src/constants/endpoint';
 
 class Http {
   private accessToken: string;
@@ -15,16 +17,17 @@ class Http {
     // this.refreshTokenRequest = null;
 
     this.instance = axios.create({
-      baseURL: 'http://localhost:8000',
+      baseURL: URL_BASE,
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json'
-      },
-      withCredentials: true
+      }
+      //withCredentials: true
     });
 
     this.instance.interceptors.request.use(
       config => {
+        console.log(this.accessToken, config.headers);
         if (this.accessToken && config.headers) {
           config.headers.Authorization = `Bearer ${this.accessToken}`;
         }
@@ -40,11 +43,13 @@ class Http {
 
     this.instance.interceptors.response.use(response => {
       const { url } = response.config;
-      if (url === 'login') {
+      console.log(url);
+      if (url === URL_LOGIN || url === URL_REGISTER) {
         const data = response.data as AuthResponse;
         this.accessToken = data.token;
+        console.log('this.accessToken', this.accessToken);
         // this.refreshToken = response.data.data.refresh_token;
-      } else if (url === 'logout') {
+      } else if (url === URL_LOGOUT) {
         this.accessToken = '';
         clearLS();
       }

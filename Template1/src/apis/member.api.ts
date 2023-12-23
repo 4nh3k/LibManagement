@@ -1,6 +1,7 @@
 import Member from 'src/types/readerMember.type';
 import { SuccessResponse } from 'src/types/utils.type';
 import http from 'src/utils/http';
+import { URL_READERS } from 'src/constants/endpoint';
 
 export const memberApi = {
   getAllMembers() {
@@ -8,6 +9,6 @@ export const memberApi = {
       SuccessResponse<{
         doc: Member[];
       }>
-    >('/api/v1/readers');
+    >(URL_READERS);
   }
 };

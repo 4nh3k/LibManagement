@@ -1,9 +1,6 @@
+import { URL_REGISTER, URL_LOGIN, URL_LOGOUT } from 'src/constants/endpoint';
 import { AuthResponse } from 'src/types/auth.type';
 import http from 'src/utils/http';
-
-export const URL_REGISTER = 'register';
-export const URL_LOGIN = '/api/v1/users/login';
-export const URL_LOGOUT = '/api/v1/users/logout';
 
 const authApi = {
   register(body: { email: string; password: string }) {
