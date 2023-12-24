@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import icon_edit from '../../assets/img/edit.png';
 import icon_trash from '../../assets/img/trash.png';
+import { number } from 'prop-types';
 interface Header {
   title: string;
   dataIndex: string;
@@ -10,8 +11,8 @@ interface TableProps {
   headers: Header[];
   data: any[];
   className?: string;
-  onSelect?: (row: any) => void;
-  selectedRow?: number;
+  onSelect?: (row: any, index: number) => void;
+  selectedRow?: number | null;
   onRowClick?: (row: any) => void;
 }
 
@@ -23,15 +24,23 @@ const SimpleTable: React.FC<TableProps> = ({
   selectedRow,
   onRowClick
 }) => {
-  const [selected, setSelected] = useState(selectedRow || null);
+  console.log(selectedRow);
+  const [selected, setSelected] = useState<number | null>(null);
   const handleRowClick = (row: any, index: number) => {
     setSelected(index);
     if (onRowClick) {
       onRowClick(row);
     }
     if (onSelect) {
-      onSelect(row);
+      onSelect(row, index);
     }
+  };
+
+  const getSelectedRow = () => {
+    if (selectedRow !== undefined) {
+      return selectedRow;
+    }
+    return selected;
   };
 
   return (
@@ -49,7 +58,7 @@ const SimpleTable: React.FC<TableProps> = ({
         <tbody className='divide-y divide-gray-100 border-t  border-gray-100'>
           {data.map((row, index) => (
             <tr
-              className={` ${selected === index ? 'bg-primary2/10' : 'hover:bg-[#F7F6FE]'}`}
+              className={` ${getSelectedRow() === index ? 'bg-primary2/10' : 'hover:bg-[#F7F6FE]'}`}
               key={index}
               onClick={() => handleRowClick(row, index)}
             >
@@ -65,7 +74,7 @@ const SimpleTable: React.FC<TableProps> = ({
                     row[header.dataIndex]
                   ) : (
                     'N/A'
-                  /*{ Check if the cell value is a React component
+                    /*{ Check if the cell value is a React component
                   {typeof row[header.dataIndex] === 'object' ? (
                     // If it's a component, render it
                     <>{row[header.dataIndex]}</>

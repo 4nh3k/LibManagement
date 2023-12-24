@@ -4,7 +4,7 @@ import Button from 'src/components/Button';
 import upload_img from '../../assets/img/upload-img.png';
 import submit_img from '../../assets/img/submit.png';
 import { FileDrop } from 'react-file-drop';
-import { CreateBookDto } from 'src/types/create-book-dto.type';
+import { CreateBookDto } from 'src/types/create-book.dto';
 import { useMutation } from '@tanstack/react-query';
 import { bookApi } from 'src/apis/book.api';
 import { toast } from 'react-toastify';

@@ -6,6 +6,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   register?: UseFormRegister<any>;
   ruleName?: RegisterOptions;
   classNameError?: string;
+  name?: string;
   errorMessage?: string;
 }
 
@@ -22,7 +23,7 @@ export default function Input(props: InputProps) {
   const registerResult = register && name ? register(name, ruleName) : null;
   return (
     <div className='min-h-[2rem] '>
-      <input className={classNameInput} {...registerResult} {...rest} />
+      <input className={classNameInput} name={name} {...registerResult} {...rest} />
       <p className={classNames(classNameError, { hidden: !errorMessage })}>{errorMessage}</p>
     </div>
   );

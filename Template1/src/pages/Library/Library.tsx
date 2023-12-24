@@ -15,6 +15,7 @@ import { clearLS } from 'src/utils/auth';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Pagination from 'src/components/Pagination/Pagination';
+import { useAppContext } from 'src/contexts/app.contexts';
 
 export default function Library() {
   const navigate = useNavigate();
@@ -24,11 +25,14 @@ export default function Library() {
   const [isAuthorGrouped, setAuthorGroup] = useState(true);
   const [isPublishGrouped, setPublishGroup] = useState(true);
   const [filter, setFilter] = useState<string>('');
+
+  const { setIsAuthenticated } = useAppContext();
+
   const logoutMutation = useMutation({
     mutationFn: authApi.logout,
     onSuccess: () => {
-      clearLS();
       toast.success('Log out successfully.');
+      setIsAuthenticated(false);
       navigate('/');
     },
     onError: () => {

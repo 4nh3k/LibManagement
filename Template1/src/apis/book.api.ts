@@ -1,6 +1,6 @@
 import { URL_BOOKS } from 'src/constants/endpoint';
 import Book from 'src/types/book.type';
-import { CreateBookDto } from 'src/types/create-book-dto.type';
+import { CreateBookDto } from 'src/types/create-book.dto';
 import { SuccessResponse } from 'src/types/utils.type';
 import http from 'src/utils/http';
 

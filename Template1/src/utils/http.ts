@@ -47,7 +47,6 @@ class Http {
       if (url === URL_LOGIN || url === URL_REGISTER) {
         const data = response.data as AuthResponse;
         this.accessToken = data.token;
-        console.log('this.accessToken', this.accessToken);
         // this.refreshToken = response.data.data.refresh_token;
       } else if (url === URL_LOGOUT) {
         this.accessToken = '';

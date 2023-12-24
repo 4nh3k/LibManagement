@@ -10,5 +10,22 @@ export const memberApi = {
         doc: Member[];
       }>
     >(URL_READERS);
+  },
+  createMember(data: CreateMemberDto) {
+    return http.post<
+      SuccessResponse<{
+        doc: Member;
+      }>
+    >(URL_READERS, data);
+  },
+  updateMember(id: string, data: Partial<CreateMemberDto>) {
+    return http.patch<
+      SuccessResponse<{
+        doc: Member;
+      }>
+    >(`${URL_READERS}/${id}`, data);
+  },
+  deleteMember(id: string) {
+    return http.delete(`${URL_READERS}/${id}`);
   }
 };
