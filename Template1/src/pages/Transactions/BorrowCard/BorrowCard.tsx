@@ -9,8 +9,8 @@ interface BorrowCardProps {
 
 const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
   const headers = [
-    { title: 'Borrow Card ID', dataIndex: 'borrowCardId' },
     { title: 'Borrower', dataIndex: 'borrower' },
+    { title: 'Borrow Card ID', dataIndex: 'borrowCardId' },
     { title: 'Borrow Date', dataIndex: 'borrowDate' },
     { title: 'Expected Return Date', dataIndex: 'expectedReturnDate' },
     { title: 'Status', dataIndex: 'isReturned' },
