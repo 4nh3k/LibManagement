@@ -10,6 +10,10 @@ import { bookApi } from 'src/apis/book.api';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
 import { PencilSimple, UploadSimple } from '@phosphor-icons/react';
+import { useParams } from 'react-router-dom';
+import useBook from 'src/hooks/useBook';
+import LoadingIndicator from 'src/components/LoadingIndicator/LoadingIndicator';
+import Book from 'src/types/book.type';
 
 interface Props {
   id?: string;
@@ -19,6 +23,8 @@ interface Props {
 // eslint-disable-next-line no-empty-pattern
 function EditBookForm({ onToggle }: Props) {
   const fileInputRef = useRef<File | null>(null);
+
+  const { id } = useParams<{ id: string }>();
 
   const [file, setFile] = useState<File | null>(null); // array of currently uploaded files
 
@@ -54,20 +60,23 @@ function EditBookForm({ onToggle }: Props) {
     setBook(prevBook => ({ ...prevBook, [name]: value }));
   };
 
-  const createBookMutation = useMutation({
-    mutationFn: (body: CreateBookDto) => bookApi.createBook(body)
-  });
+  const onGetBookSuccess = (data: Book) => {
+    setBook({
+      nameBook: data.title,
+      typeBook: 'A',
+      author: data.author,
+      publicationYear: data.publishDate,
+      publisher: data.publisher,
+      price: data.price,
+      description: data.description,
+      numberOfBooks: 0
+    });
+  };
 
-  const updateImageBookMutation = useMutation({
-    mutationFn: (data: { id: string; image: File }) => bookApi.updateImageBook(data),
-    onSuccess: data => {
-      toast.success('Create book successfully!');
-      console.log(data);
-    },
-    onError: (error: unknown) => {
-      console.log(error);
-    }
-  });
+  const { createBookMutation, updateBookImageMutation, getBookQuery } = useBook(id);
+
+  const { data: bookData, isLoading } = getBookQuery;
+  if (isLoading) return <LoadingIndicator />;
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,7 +90,7 @@ function EditBookForm({ onToggle }: Props) {
     console.log('Submitted book:', book);
     createBookMutation.mutate(book, {
       onSuccess: data => {
-        updateImageBookMutation.mutate({ id: data.data.data.doc._id, image: file });
+        updateBookImageMutation.mutate({ id: data.data.data.doc._id, image: file });
       }
       // onError: (error: AxiosError) => {
       //   console.log(error);

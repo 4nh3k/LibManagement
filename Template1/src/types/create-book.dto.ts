@@ -1,8 +1,10 @@
 export type CreateBookDto = {
   nameBook: string;
-  typeBook: string;
   author: string;
   publicationYear: number;
+  pages: number;
+  genres: string[];
+  language: string;
   publisher: string;
   price: string;
   description: string;

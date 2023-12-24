@@ -1,19 +1,12 @@
-import React from 'react';
 import BookListItem from 'src/components/BookListItem/BookListItem';
 import Button from 'src/components/Button/Button';
 import user_icon from '../../assets/img/user.png';
-import book from 'src/assets/img/book.png';
 import { Link } from 'react-router-dom';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { bookApi } from 'src/apis/book.api';
+import useBook from 'src/hooks/useBook';
 
 const BookList = () => {
-  const { data: booksData, isLoading } = useQuery({
-    queryKey: ['bookList'],
-    queryFn: ({ signal }) => {
-      return bookApi.getAllBooks('' || undefined, signal);
-    }
-  });
+  const { getAllBooksQuery } = useBook();
+  const { data: booksData, isLoading } = getAllBooksQuery;
   const books = booksData?.data.data.doc;
 
   return (
@@ -27,7 +20,7 @@ const BookList = () => {
         </div>
       </div>
       <div className='flex justify-end pl-5 pr-5 lg:pr-10 py-2'>
-        <Link to={`/admin/addBook`}>
+        <Link to={`/admin/book`}>
           <Button label='Add book' bg_color='#5632a1 ' color='white'></Button>
         </Link>
       </div>
@@ -37,8 +30,9 @@ const BookList = () => {
           books.map(book => (
             <BookListItem
               key={book._id}
-              coverImg={book.coverImg}
-              title={book.title}
+              id={book._id}
+              coverImg={book.photoUrls[0]}
+              title={book.nameBook}
               description={book.description}
             />
           ))}

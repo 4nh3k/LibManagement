@@ -102,20 +102,19 @@ export default function useRouteElement() {
                   element: <Configuration />
                 },
                 {
-                  path: 'addBook',
+                  path: 'book',
                   element: <BookPage />
                 },
                 {
-                  path: 'editBook',
-                  element: <EditBookForm></EditBookForm>
+                  path: 'book/:id',
+                  element: <BookPage />
                 }
               ]
             },
             {
               path: path.payment,
               element: <Payment />
-            },
-            
+            }
           ]
         },
         {
@@ -141,11 +140,9 @@ export default function useRouteElement() {
             {
               path: path.userAccount,
               element: <UserAccount />
-            },
-            
+            }
           ]
-        },
-        
+        }
       ]
     }
 

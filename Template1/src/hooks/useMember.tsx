@@ -13,6 +13,7 @@ const useMember = () => {
   const { refetch } = getMemberQuery;
 
   const createMemberMutation = useMutation({
+    mutationKey: ['createMember'],
     mutationFn: (data: CreateMemberDto) => memberApi.createMember(data),
     onSuccess: data => {
       toast.success('Create member successfully');
@@ -36,6 +37,7 @@ const useMember = () => {
       data: Partial<CreateMemberDto>;
     }
   >({
+    mutationKey: ['updateMember'],
     mutationFn: (props: { id: string; data: Partial<CreateMemberDto> }) =>
       memberApi.updateMember(props.id, props.data),
     onSuccess: data => {

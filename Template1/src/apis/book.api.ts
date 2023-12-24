@@ -23,6 +23,12 @@ export const bookApi = {
   createBook(book: CreateBookDto) {
     return http.post<SuccessResponse<{ doc: Book }>>(URL_BOOKS, book);
   },
+  deleteBook(id: string) {
+    return http.delete<SuccessResponse<{ doc: Book }>>(`${URL_BOOKS}/${id}`);
+  },
+  updateBook(id: string, book: CreateBookDto) {
+    return http.patch<SuccessResponse<{ doc: Book }>>(`${URL_BOOKS}/${id}`, book);
+  },
   updateImageBook(data: { id: string; image: File }) {
     const formData = new FormData();
     console.log(data.image.name);

@@ -3,15 +3,15 @@ import { useRef, useState } from 'react';
 import { FileDrop } from 'react-file-drop';
 import Input from 'src/components/Input';
 import SimpleTable from 'src/components/Table/SimpleTable';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { borrowCardApi } from 'src/apis/borrow-card.api';
-import { BorrowCard } from 'src/types/borrow-card.type';
 import LoadingIndicator from 'src/components/LoadingIndicator/LoadingIndicator';
 import { User } from 'src/types/user.type';
 import Select from 'react-select';
-import { userApi } from 'src/apis/user.api';
 import useMember from 'src/hooks/useMember';
 import { calculateMinMaxDates } from 'src/utils/utils';
+import { useUser } from 'src/hooks/useUser';
+import { BorrowCardType } from 'src/types/borrow-card.type';
 
 interface MemberProps {
   name: string;
@@ -41,7 +41,8 @@ export default function Member() {
   const headers = [
     { title: 'Name', dataIndex: 'fullName' },
     { title: 'Address', dataIndex: 'address' },
-    { title: 'Email', dataIndex: 'email' }
+    { title: 'Email', dataIndex: 'email' },
+    { title: 'Reader Type', dataIndex: 'readerType' }
   ];
 
   const borrowHeaders = [
@@ -57,7 +58,6 @@ export default function Member() {
 
   const data = readerMemberData?.data.data.doc;
   const [selectedOption, setSelectedOption] = useState(null);
-
   const [selectedMember, setSelectedMember] = useState({
     id: '',
     name: '',
@@ -79,7 +79,7 @@ export default function Member() {
     queryKey: ['borrowers'],
     queryFn: () => borrowCardApi.getAllBorrowCard({ borrower: id }),
     select: data => {
-      return data.data.data.doc.map((item: BorrowCard) => {
+      return data.data.data.doc.map((item: BorrowCardType) => {
         return {
           borrowId: item._id,
           date: new Date(item.borrowDate).toLocaleDateString('en-GB'),
@@ -89,20 +89,9 @@ export default function Member() {
     }
   });
 
-  const { data: userData, isLoading: isUserDataLoading } = useQuery({
-    queryKey: ['users'],
-    queryFn: () => userApi.getAllUser(),
-    select: data => {
-      console.log(data);
-      return data.data.data.doc.map((item: User) => {
-        return {
-          value: item._id,
-          name: item.firstName + ' ' + item.lastName,
-          label: item.email
-        };
-      });
-    }
-  });
+  const { getAllUserQuery } = useUser();
+
+  const { data: userData } = getAllUserQuery;
 
   const handleDeleteMember = () => {
     if (selectedMember.id === '') return;
@@ -115,7 +104,6 @@ export default function Member() {
       return;
     }
     setSelectedRow(index);
-    console.log(row);
     setSelectedMember({
       id: row._id.toString(),
       name: row.fullName,
@@ -124,9 +112,10 @@ export default function Member() {
       readerType: row.readerType,
       date: new Date(row.cardCreatedAt).toLocaleDateString('en-GB')
     });
+    console.log(row);
     setSelectedOption(userData.find(item => item.value === row.user) || null);
     setId(row._id);
-    refetch();
+    // refetch();
   };
 
   const [onEditMember, setEditMember] = useState(false);
@@ -227,7 +216,7 @@ export default function Member() {
           </div>
 
           <form onSubmit={onSubmit} className='space-y-5 mt-5'>
-            <FileDrop
+            {/* <FileDrop
               className='lg:w-48 lg:h-48 m-auto rounded-full cursor-pointer block'
               targetClassName={`w-48 h-48 border-2 mx-auto ${
                 file === null ? 'border-dashed' : 'border-solid'
@@ -263,7 +252,7 @@ export default function Member() {
               accept='image/png, image/gif, image/jpeg'
               type='file'
               className='hidden'
-            />
+            /> */}
             <div className='flex flex-col lg:flex-row justify-between  lg:items-center'>
               <label htmlFor='member-id' className='member-label text-lg mr-16'>
                 Member ID

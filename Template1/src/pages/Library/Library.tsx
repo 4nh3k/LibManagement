@@ -99,10 +99,10 @@ export default function Library() {
             <BookCard
               key={book._id}
               id={book._id}
-              coverImg={book.coverImg}
+              coverImg={book.photoUrls[0]}
               overview={book.description}
-              title={book.title}
-              rating={Math.floor(book.rating) || 4}
+              title={book.nameBook}
+              rating={Math.floor(book.ratingsAverage) || 4}
             />
           ))}
       </div>

@@ -1,26 +1,21 @@
-import { useEffect } from 'react';
-import { useQuery } from 'react-query';
-import { getMe } from 'src/helpers/api';
-import { LoginResponse } from 'src/helpers/localStorage';
-import * as userLocalStorage from 'src/helpers/localStorage';
+import { useQuery } from '@tanstack/react-query';
+import { userApi } from 'src/apis/user.api';
 
 export function useUser() {
-  const { data: user } = useQuery(['user'], async (): Promise<LoginResponse | null> => getMe(), {
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    initialData: userLocalStorage.getUser,
-    onError: () => {
-      userLocalStorage.removeUser();
+  const getAllUserQuery = useQuery({
+    queryKey: ['users'],
+    queryFn: () => userApi.getAllUser(),
+    select: data => {
+      return data.data.data.doc.map((item: User) => {
+        return {
+          value: item._id,
+          label: item.email
+        };
+      });
     }
   });
 
-  useEffect(() => {
-    if (!user) userLocalStorage.removeUser();
-    else userLocalStorage.saveUser(user);
-  }, [user]);
-
   return {
-    user: user ?? null
+    getAllUserQuery
   };
 }
