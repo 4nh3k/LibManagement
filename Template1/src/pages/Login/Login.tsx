@@ -113,7 +113,7 @@ export default function Login() {
 
       <div className='mt-1 flex'>
         <span className='text-xs text-primaryBorder'>Don&apos;t have an account?</span>
-        <Link className='ml-auto text-primary hover:text-primaryBtn' to='register'>
+        <Link className='ml-auto text-primary hover:text-primaryBtn' to='/register'>
           <span className='text-xs'>Sign up</span>
         </Link>
       </div>

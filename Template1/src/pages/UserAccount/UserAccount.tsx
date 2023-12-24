@@ -3,7 +3,7 @@ import { PencilSimple, UploadSimple } from '@phosphor-icons/react';
 import { FileDrop } from 'react-file-drop';
 import Button from 'src/components/Button';
 import { useRef, useState } from 'react';
-import { userInfoApi } from 'src/apis/user.api';
+import { userApi } from 'src/apis/user.api';
 import { useQuery } from '@tanstack/react-query';
 const UserAccount = () => {
   const fileInputRef = useRef<File | null>(null);
@@ -29,7 +29,7 @@ const UserAccount = () => {
   const { data: userInfo, isLoading } = useQuery({
     queryKey: ['user'],
     queryFn: () => {
-      return userInfoApi.getCurrentUserInformation();
+      return userApi.getCurrentUserInformation();
     }
   });
   // Get the data based on json object structure
