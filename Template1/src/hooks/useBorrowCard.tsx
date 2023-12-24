@@ -55,10 +55,22 @@ const useBorrowCard = () => {
     }
   });
 
+  const deleteBorrowCardMutation = useMutation({
+    mutationFn: (id: string) => borrowCardApi.deleteBorrowCard(id),
+    onSuccess: () => {
+      toast.success('Delete borrow card successfully');
+      getAllBorrowCardQuery.refetch();
+    },
+    onError: error => {
+      toast.error(error.response.data.message);
+    }
+  });
+
   return {
     createBorrowCardMutation,
     getAllBorrowCardQuery,
-    getAllNotReturnedBorrowCardQuery
+    getAllNotReturnedBorrowCardQuery,
+    deleteBorrowCardMutation
   };
 };
 

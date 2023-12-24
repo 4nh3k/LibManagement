@@ -15,10 +15,11 @@ interface TableProps {
   headers: Header[];
   data: any[];
   onToggle?: () => void;
+  deleteAction?: (row: any) => void;
   onAdd?: boolean;
 }
 
-const Table: React.FC<TableProps> = ({ headers, data, onToggle, onAdd = true }) => {
+const Table: React.FC<TableProps> = ({ headers, data, onToggle, onAdd = true, deleteAction }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
 
@@ -116,13 +117,24 @@ const Table: React.FC<TableProps> = ({ headers, data, onToggle, onAdd = true }) 
         className='overflow-x-auto rounded-md overflow-hidden shadow-md mt-4'
         headers={headers}
         data={currentItems}
+        deleteAction={deleteAction}
       ></SimpleTable>
       <div className='flex mt-5 items-center'>
-        <div className='inline ml-auto mr-auto lg:pr-10 hover:text-[#4d6be3]' onClick={handlePreviousPage}>Previous</div>
+        <div
+          className='inline ml-auto mr-auto lg:pr-10 hover:text-[#4d6be3]'
+          onClick={handlePreviousPage}
+        >
+          Previous
+        </div>
         <div id='pagination' className='inline flex-row gap-5'>
           {renderPaginationButtons()}
         </div>
-        <div className='inline ml-auto mr-auto lg:pl-10 hover:text-[#4d6be3]' onClick={handleNextPage}>Next</div>
+        <div
+          className='inline ml-auto mr-auto lg:pl-10 hover:text-[#4d6be3]'
+          onClick={handleNextPage}
+        >
+          Next
+        </div>
       </div>
     </div>
   );

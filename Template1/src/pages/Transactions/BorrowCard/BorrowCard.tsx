@@ -17,21 +17,32 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
     { title: 'Status', dataIndex: 'isReturned' },
     { title: 'Action', dataIndex: 'action' }
   ];
-  const { getAllBorrowCardQuery } = useBorrowCard();
+  const { getAllBorrowCardQuery, deleteBorrowCardMutation } = useBorrowCard();
   const { data: BorrowCardData, isLoading } = getAllBorrowCardQuery;
 
   if (isLoading) return <div>Loading...</div>;
-  console.log(BorrowCardData);
+
   const sortedBorrowCardData = BorrowCardData.sort((a, b) => {
     const dateA = new Date(a.borrowDate.split('/').reverse().join('-'));
     const dateB = new Date(b.borrowDate.split('/').reverse().join('-'));
 
     return dateB - dateA;
   });
+
+  const handleDelete = (row: any) => {
+    console.log(row);
+    deleteBorrowCardMutation.mutate(row.borrowCardId);
+  };
+
   return (
     <div id='body' className='mt-5 m-3 lg:mr-20'>
       <span className='text-xl font-bold'>Borrow Card List</span>
-      <Table headers={headers} data={sortedBorrowCardData} onToggle={onToggle}></Table>
+      <Table
+        headers={headers}
+        data={sortedBorrowCardData}
+        onToggle={onToggle}
+        deleteAction={handleDelete}
+      />
     </div>
   );
 };

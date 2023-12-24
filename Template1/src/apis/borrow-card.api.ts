@@ -14,5 +14,8 @@ export const borrowCardApi = {
   },
   createBorrowCard(data: CreateBorrowCardDto) {
     return http.post<SuccessResponse<BorrowCardType>>(URL_BORROW_CARD, data);
+  },
+  deleteBorrowCard(id: string) {
+    return http.delete<SuccessResponse<BorrowCardType>>(`${URL_BORROW_CARD}/${id}`);
   }
 };

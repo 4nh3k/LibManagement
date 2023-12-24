@@ -8,9 +8,12 @@ import BorrowCardForm from './BorrowCard/BorrowCardForm';
 import ReturnCardForm from './ReturnCard/ReturnCardForm';
 import FeeCard from './FeeCard/FeeCard';
 import RemindCard from './RemindCard/RemindCard';
+import { useSearchParams } from 'react-router-dom';
 
 const Transactions = () => {
   const [showBorrowForm, setShowBorrowForm] = useState(false);
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const toggleBorrowForm = () => {
     setShowBorrowForm(showBorrowForm => !showBorrowForm);
@@ -34,7 +37,7 @@ const Transactions = () => {
       </div>
 
       <div id='tab-navigator text-center'>
-        <Tabs>
+        <Tabs defaultIndex={searchParams.get('tab') === 'return' ? 1 : 0}>
           <TabList className='flex flex-col lg:flex-row max-w-fit mb-10'>
             <Tab>Borrow Card</Tab>
             <Tab>Return Card</Tab>

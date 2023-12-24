@@ -15,6 +15,7 @@ interface TableProps {
   classNameHeader?: string;
   onSelect?: (row: any, index: number) => void;
   selectedRow?: number | null;
+  deleteAction?: (row: any) => void;
   onRowClick?: (row: any) => void;
 }
 
@@ -25,6 +26,7 @@ const SimpleTable: React.FC<TableProps> = ({
   classNameHeader = 'bg-gray-100',
   onSelect,
   selectedRow,
+  deleteAction,
   onRowClick
 }) => {
   const [selected, setSelected] = useState<number | null>(null);
@@ -69,7 +71,13 @@ const SimpleTable: React.FC<TableProps> = ({
                   {header.dataIndex === 'action' ? (
                     <div className='inline-flex gap-1 lg:gap-5'>
                       <img alt='icon-edit' src={icon_edit}></img>
-                      <img alt='icon-trash' src={icon_trash}></img>
+                      <button
+                        onClick={() => {
+                          deleteAction && deleteAction(row);
+                        }}
+                      >
+                        <img alt='icon-trash' src={icon_trash}></img>
+                      </button>
                     </div>
                   ) : // If it's not a component, render the text
                   row[header.dataIndex] !== undefined ? (

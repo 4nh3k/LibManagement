@@ -4,6 +4,7 @@ import Select from 'react-select';
 import useBorrowCard from 'src/hooks/useBorrowCard';
 import { toast } from 'react-toastify';
 import useReturnCard from 'src/hooks/useReturnCard';
+import LoadingIndicator from 'src/components/LoadingIndicator/LoadingIndicator';
 
 interface Props {
   id?: string;
@@ -189,9 +190,16 @@ const ReturnCardForm: React.FC<Props> = ({ onToggle }) => {
           </button>
         </div>
       </div>
-      <button type='submit' className='primary-btn-fit p-4 mt-9 w-20 block mx-auto'>
-        Create
-      </button>
+      {createReturnCardMutation.isLoading && (
+        <div className='w-20 mx-auto'>
+          <LoadingIndicator />
+        </div>
+      )}
+      {!createReturnCardMutation.isLoading && (
+        <button type='submit' className='primary-btn-fit p-4 mt-9 w-20 block mx-auto'>
+          Create
+        </button>
+      )}
     </form>
   );
 };
