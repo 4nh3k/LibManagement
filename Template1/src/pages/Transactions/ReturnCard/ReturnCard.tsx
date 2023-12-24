@@ -10,7 +10,9 @@ const ReturnCard: React.FC<ReturnCardProps> = ({ onToggle }) => {
   const headers = [
     { title: 'Return Card ID', dataIndex: 'returnCardId' },
     { title: 'Username', dataIndex: 'username' },
+    { title: 'Expired Date', dataIndex: 'expectedReturnDate' },
     { title: 'Return Date', dataIndex: 'returnDate' },
+    { title: 'Lost Book', dataIndex: 'lostBook' },
     { title: 'Fee', dataIndex: 'fee' }
   ];
 
@@ -18,18 +20,21 @@ const ReturnCard: React.FC<ReturnCardProps> = ({ onToggle }) => {
     queryKey: ['ReturnCard'],
     queryFn: () => returnCardApi.getAllReturnCard(),
     select: data => {
-      console.log(data);
       return data.data.data.doc.map((item: ReturnCard) => {
+        let totalAmount = 0;
+
+        item.lostBooks.forEach(lostBook => {
+          totalAmount += lostBook.quantity;
+        });
         return {
           returnCardId: item._id,
-          username: item.borrower != null ? item.borrower.fullName : 'N/A',
+          username: item.borrowBookForm.borrower.fullName,
           returnDate: new Date(item.returnDate).toLocaleDateString('en-GB'),
-          fee: item.fee.toFixed(2) + '$',
-          action: (
-            <button type='button' className='primary-btn'>
-              auto
-            </button>
-          )
+          expectedReturnDate: new Date(item.borrowBookForm.expectedReturnDate).toLocaleDateString(
+            'en-GB'
+          ),
+          lostBook: totalAmount,
+          fee: item.fee.toFixed(2) + '$'
         };
       });
     }

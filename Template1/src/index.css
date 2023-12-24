@@ -65,7 +65,7 @@ body {
   @apply rounded py-2 px-3 w-full bg-primaryBtn font-medium text-white text-sm hover:bg-primary active:bg-primaryBtnPress;
 }
 .primary-btn-fit {
-  @apply rounded py-1 px-2 bg-primaryBtn text-white text-sm hover:bg-primary active:bg-primaryBtnPress;
+  @apply rounded py-2 px-2 bg-primaryBtn text-white text-sm hover:bg-primary active:bg-primaryBtnPress;
 }
 ::-ms-reveal {
   display: none;

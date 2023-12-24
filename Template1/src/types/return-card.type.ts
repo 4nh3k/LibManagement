@@ -19,7 +19,7 @@ type ReturnCard = {
       _id: string;
       fullName: string;
     };
-    borrowDate: string;
+    expectedReturnDate: string;
   };
   fee: number;
   returnDate: string;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import icon_edit from '../../assets/img/edit.png';
 import icon_trash from '../../assets/img/trash.png';
 import { number } from 'prop-types';
+import { classNames } from 'classnames';
 interface Header {
   title: string;
   dataIndex: string;
@@ -11,6 +12,7 @@ interface TableProps {
   headers: Header[];
   data: any[];
   className?: string;
+  classNameHeader?: string;
   onSelect?: (row: any, index: number) => void;
   selectedRow?: number | null;
   onRowClick?: (row: any) => void;
@@ -20,11 +22,11 @@ const SimpleTable: React.FC<TableProps> = ({
   headers,
   data,
   className,
+  classNameHeader = 'bg-gray-100',
   onSelect,
   selectedRow,
   onRowClick
 }) => {
-  console.log(selectedRow);
   const [selected, setSelected] = useState<number | null>(null);
   const handleRowClick = (row: any, index: number) => {
     setSelected(index);
@@ -46,7 +48,7 @@ const SimpleTable: React.FC<TableProps> = ({
   return (
     <div className={className}>
       <table className='w-full border-collapse table-auto bg-white text-left text-sm text-gray-500'>
-        <thead className='bg-gray-100'>
+        <thead className={classNameHeader}>
           <tr>
             {headers.map(header => (
               <th className='px-6 py-4 font-bold text-gray-900' key={header.dataIndex}>
