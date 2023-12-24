@@ -50,7 +50,7 @@ export default function Library() {
         id='horizontal-header'
         className='mb-10 mt-2 relative flex flex-col space-y-3 lg:flex-row lg:space-y-0 items-center justify-between ml-2 mr-6'
       >
-        <DropdownList list={groupList} />
+        {/* <DropdownList list={groupList}/> */}
 
         <Search query={filter} onChange={setFilter} />
 

@@ -16,7 +16,7 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   };
 
   return (
-    <ul className='space-x-2 mb-5 mt-0 flex items-center justify-center'>
+    <ul className='text-xl font-medium space-x-2 mb-5 mt-0 flex items-center justify-center'>
       <li>
         <button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
           &laquo; Previous

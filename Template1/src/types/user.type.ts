@@ -10,3 +10,15 @@ export interface User {
   lastName: string;
   avatar?: string;
 }
+
+export interface UserInfo {
+  _id: string;
+  role: Role;
+  username?: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  avatar?: string;
+  readerType: string;
+}

@@ -23,7 +23,7 @@ export default function Search({
     <div className='flex w-80 justify-between rounded-full border bg-gray-200 px-4 py-2 text-base font-normal outline-none transition duration-500'>
       <div className='flex w-full basis-11/12 items-center gap-3'>
         {query === '' && (
-          <span className='flex h-6 basis-6  items-center justify-center'>
+          <span className='flex h-6 basis-6 items-center justify-center'>
             <img src='/src/assets/icons/search-bar.svg' alt='Search logo' />
           </span>
         )}
