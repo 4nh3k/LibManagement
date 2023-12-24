@@ -39,7 +39,7 @@ const BookList = () => {
               key={book._id}
               coverImg={book.coverImg}
               title={book.title}
-              overview={book.description}
+              description={book.description}
             />
           ))}
       </div>
