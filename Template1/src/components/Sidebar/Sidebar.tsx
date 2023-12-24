@@ -33,7 +33,7 @@ const Sidebar: React.FC<SidebarProp> = ({ isAdmin = false }) => {
             label='Transaction'
             to={isAdmin ? 'admin/transactions' : 'transactions'}
           />
-          {isAdmin && <MenuItem iconSrc={book} label='Book' to='admin/books' />}
+          {isAdmin && <MenuItem iconSrc={book} label='Book' to='admin/booklist' />}
           {isAdmin && <MenuItem iconSrc={group} label='Member' to='admin/member' />}
           {isAdmin && (
             <MenuItem

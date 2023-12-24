@@ -12,3 +12,13 @@ export const userApi = {
     >(URL_USERS);
   }
 };
+
+export const userInfoApi = {
+  getCurrentUserInformation(params?: any) {
+    return http.get<
+      SuccessResponse<{
+        doc: UserInfo[];
+      }>
+    >(URL_USER, { params });
+  }
+};

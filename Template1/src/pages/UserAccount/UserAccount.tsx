@@ -3,7 +3,8 @@ import { PencilSimple, UploadSimple } from '@phosphor-icons/react';
 import { FileDrop } from 'react-file-drop';
 import Button from 'src/components/Button';
 import { useRef, useState } from 'react';
-
+import { userInfoApi } from 'src/apis/user.api';
+import { useQuery } from '@tanstack/react-query';
 const UserAccount = () => {
   const fileInputRef = useRef<File | null>(null);
   const [file, setFile] = useState(null); // array of currently uploaded files
@@ -24,6 +25,15 @@ const UserAccount = () => {
 
     fileInputRef?.current.click();
   };
+
+  const { data: userInfo, isLoading } = useQuery({
+    queryKey: ['user'],
+    queryFn: () => {
+      return userInfoApi.getCurrentUserInformation();
+    }
+  });
+  // Get the data based on json object structure
+  const user = userInfo?.data.data.doc;
 
   return (
     <div className='bg-gray-100 w-full h-screen overflow-auto px-4'>
@@ -63,8 +73,9 @@ const UserAccount = () => {
               <img src={URL.createObjectURL(file)} alt='Uploaded File' className='w-full h-full ' />
             )}
           </FileDrop>
-          <h3 className='custom-label'>abcxyz</h3>
-          <h4 className='text-sm block'>abc@gmail.com</h4>
+          <h3 id='usernameLabel' className='custom-label'>
+            {!isLoading && user.firstName + ' ' + user.lastName}
+          </h3>
         </div>
         <div className='flex flex-col'>
           <div className='flex space-x-0 flex-col lg:flex-row lg:space-x-20'>
@@ -73,7 +84,7 @@ const UserAccount = () => {
                 First Name
               </h3>
               <div className='flex space-x-3'>
-                <input className='custom-input'></input>
+                <input className='custom-input' value={!isLoading && user.firstName}></input>
                 <PencilSimple className='inline' size={24} />
               </div>
             </div>
@@ -82,7 +93,7 @@ const UserAccount = () => {
                 Last Name
               </h3>
               <div className='flex space-x-3'>
-                <input className='custom-input'></input>
+                <input className='custom-input' value={!isLoading && user.lastName}></input>
                 <PencilSimple className='inline' size={24} />
               </div>
             </div>
@@ -92,7 +103,7 @@ const UserAccount = () => {
               Email
             </h3>
             <div className='flex space-x-3'>
-              <input className='custom-input'></input>
+              <input className='custom-input' value={!isLoading && user.email}></input>
               <PencilSimple className='inline' size={24} />
             </div>
           </div>
@@ -101,7 +112,7 @@ const UserAccount = () => {
               Reader type
             </h3>
             <div className='flex space-x-3'>
-              <input className='custom-input'></input>
+              <input className='custom-input' value={!isLoading && user.readerType}></input>
               <PencilSimple className='inline' size={24} />
             </div>
           </div>
@@ -110,7 +121,7 @@ const UserAccount = () => {
               Password
             </h3>
             <div className='flex space-x-3'>
-              <input className='custom-input'></input>
+              <input className='custom-input' value={!isLoading && '********'}></input>
               <PencilSimple className='inline' size={24} />
             </div>
           </div>

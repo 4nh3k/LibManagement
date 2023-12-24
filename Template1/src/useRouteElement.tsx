@@ -15,6 +15,8 @@ import { path } from './constants/path';
 import MainLayout from './layouts/MainLayout/MainLayout';
 import { useAppContext } from './contexts/app.contexts';
 import UserAccount from './pages/UserAccount/UserAccount';
+import BookList from './pages/BookList/BookList';
+import EditBookForm from './pages/BookPage/EditBookForm';
 
 function AdminRoute() {
   const { isAuthenticated, profile } = useAppContext();
@@ -81,7 +83,7 @@ export default function useRouteElement() {
                 },
                 {
                   path: path.book,
-                  element: <BookPage />
+                  element: <BookList></BookList>
                 },
                 {
                   path: 'books/:id',
@@ -98,13 +100,22 @@ export default function useRouteElement() {
                 {
                   path: 'configuration',
                   element: <Configuration />
+                },
+                {
+                  path: 'addBook',
+                  element: <BookPage />
+                },
+                {
+                  path: 'editBook',
+                  element: <EditBookForm></EditBookForm>
                 }
               ]
             },
             {
               path: path.payment,
               element: <Payment />
-            }
+            },
+            
           ]
         },
         {
@@ -130,7 +141,8 @@ export default function useRouteElement() {
             {
               path: path.userAccount,
               element: <UserAccount />
-            }
+            },
+            
           ]
         },
         
