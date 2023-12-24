@@ -39,9 +39,16 @@ const useBorrowCard = () => {
       return data.data.data.doc.map((item: BorrowCardType) => {
         return {
           value: item._id,
-          id: item._id,
+          label: item._id,
           fullName: item.borrower.fullName,
           borrowDate: new Date(item.borrowDate).toLocaleDateString('en-GB'),
+          books: item.books.map(book => {
+            return {
+              value: book.bookId._id,
+              label: book.bookId.nameBook,
+              quantity: book.quantity
+            };
+          }),
           expectedReturnDate: new Date(item.expectedReturnDate).toLocaleDateString('en-GB')
         };
       });
@@ -50,7 +57,8 @@ const useBorrowCard = () => {
 
   return {
     createBorrowCardMutation,
-    getAllBorrowCardQuery
+    getAllBorrowCardQuery,
+    getAllNotReturnedBorrowCardQuery
   };
 };
 

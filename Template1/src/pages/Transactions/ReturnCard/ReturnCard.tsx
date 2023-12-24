@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { returnCardApi } from 'src/apis/return-form.api';
 import Table from 'src/components/Table/Table';
+import useReturnCard from 'src/hooks/useReturnCard';
 
 interface ReturnCardProps {
   onToggle?: () => void;
@@ -16,29 +17,9 @@ const ReturnCard: React.FC<ReturnCardProps> = ({ onToggle }) => {
     { title: 'Fee', dataIndex: 'fee' }
   ];
 
-  const { data: ReturnCardData, isLoading } = useQuery({
-    queryKey: ['ReturnCard'],
-    queryFn: () => returnCardApi.getAllReturnCard(),
-    select: data => {
-      return data.data.data.doc.map((item: ReturnCard) => {
-        let totalAmount = 0;
+  const { getAllReturnCardQuery } = useReturnCard();
 
-        item.lostBooks.forEach(lostBook => {
-          totalAmount += lostBook.quantity;
-        });
-        return {
-          returnCardId: item._id,
-          username: item.borrowBookForm.borrower.fullName,
-          returnDate: new Date(item.returnDate).toLocaleDateString('en-GB'),
-          expectedReturnDate: new Date(item.borrowBookForm.expectedReturnDate).toLocaleDateString(
-            'en-GB'
-          ),
-          lostBook: totalAmount,
-          fee: item.fee.toFixed(2) + '$'
-        };
-      });
-    }
-  });
+  const { data: ReturnCardData, isLoading } = getAllReturnCardQuery;
 
   if (isLoading) return <div>Loading...</div>;
   console.log(ReturnCardData);

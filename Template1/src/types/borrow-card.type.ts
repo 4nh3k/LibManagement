@@ -1,7 +1,10 @@
 export interface BorrowCardType {
   _id: string;
   books: {
-    bookId: string;
+    bookId: {
+      _id: string;
+      nameBook: string;
+    };
     quantity: number;
     _id: string;
   }[];
