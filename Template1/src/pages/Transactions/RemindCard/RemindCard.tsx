@@ -16,12 +16,12 @@ const RemindCard: React.FC<Props> = ({ onToggle }) => {
       remindCardID: '#20462',
       violateTime: '1',
       action: ''
-    },
+    }
   ];
 
   return (
     <div id='body' className='mt-5 m-3 lg:mr-20'>
-      <span className='text-xl font-bold'>Borrow Card List</span>
+      <span className='text-xl font-bold'>Remind Card List</span>
       <Table headers={headers} data={data} onToggle={onToggle} onAdd={false}></Table>
     </div>
   );

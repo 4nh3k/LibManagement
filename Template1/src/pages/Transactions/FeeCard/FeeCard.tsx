@@ -20,7 +20,7 @@ const FeeCard: React.FC<Props> = ({ onToggle }) => {
       adminID: 'Hat',
       overtimeBook: '5',
       overtimeDay: '2',
-      feeCharge: '10,000đ',
+      feeCharge: '10.0$',
       action: ''
     },
     {
@@ -28,7 +28,7 @@ const FeeCard: React.FC<Props> = ({ onToggle }) => {
       adminID: 'Hat',
       overtimeBook: '5',
       overtimeDay: '2',
-      feeCharge: '10,000đ',
+      feeCharge: '12.5$',
       action: ''
     },
     {
@@ -36,7 +36,7 @@ const FeeCard: React.FC<Props> = ({ onToggle }) => {
       adminID: 'Hat',
       overtimeBook: '5',
       overtimeDay: '2',
-      feeCharge: '10,000đ',
+      feeCharge: '10.3$',
       action: ''
     },
     {
@@ -44,7 +44,7 @@ const FeeCard: React.FC<Props> = ({ onToggle }) => {
       adminID: 'Hat',
       overtimeBook: '5',
       overtimeDay: '2',
-      feeCharge: '10,000đ',
+      feeCharge: '15.3$',
       action: ''
     },
     {
@@ -52,7 +52,7 @@ const FeeCard: React.FC<Props> = ({ onToggle }) => {
       adminID: 'Hat',
       overtimeBook: '5',
       overtimeDay: '2',
-      feeCharge: '10,000đ',
+      feeCharge: '12.4$',
       action: ''
     },
     {
@@ -60,14 +60,14 @@ const FeeCard: React.FC<Props> = ({ onToggle }) => {
       adminID: 'Hat',
       overtimeBook: '5',
       overtimeDay: '2',
-      feeCharge: '10,000đ',
+      feeCharge: '25.3$',
       action: ''
     }
   ];
 
   return (
     <div id='body' className='mt-5 m-3 lg:mr-20'>
-      <span className='text-xl font-bold'>Borrow Card List</span>
+      <span className='text-xl font-bold'>Fee Card List</span>
       <Table headers={headers} data={data} onToggle={onToggle} onAdd={false}></Table>
     </div>
   );

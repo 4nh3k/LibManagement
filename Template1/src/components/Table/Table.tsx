@@ -74,7 +74,7 @@ const Table: React.FC<TableProps> = ({ headers, data, onToggle, onAdd = true, de
         id='utilsRow'
         className='bg-white w-full m-auto flex flex-col items-center gap-y-5 lg:flex-row overflow-y-auto'
       >
-        <div className='inline-flex ml-1 lg:ml-6 items-center gap-5 align-middle'>
+        <div className='inline-flex ml-1 lg:ml-6 items-center gap-5 py-4 align-middle'>
           <span className='inline-block align-middle'>Show</span>
           <input
             className='px-2 py-1 border-none outline-none rounded font-medium text-black'

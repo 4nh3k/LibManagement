@@ -51,6 +51,7 @@ function AddBookForm({ onToggle }: Props) {
       return bookApi.getBook(id || '');
     },
     enabled: id !== undefined,
+    staleTime: 0,
     onSuccess: data => {
       const book = data.data.data.doc;
       const genres = book.genres.map(genre => ({ value: genre, label: genre }));
@@ -163,7 +164,7 @@ function AddBookForm({ onToggle }: Props) {
   return (
     <form onSubmit={onSubmit} className='flex flex-col mb-10'>
       <div id='horizontal-header' className='flex items-center relative mt-5 mb-10'>
-        <h2 className='font-bold text-xl'>Add book</h2>
+        <h2 className='font-bold text-xl'>{id ? 'Update Book' : 'Add Book'}</h2>
       </div>
       <div className='flex flex-col gap-y-5 lg:flex-row gap-x-20'>
         <div className='flex flex-col items-center mr-3 shrink-0'>
