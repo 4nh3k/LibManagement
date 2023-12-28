@@ -1,5 +1,4 @@
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
-import Sidebar from 'src/components/Sidebar/Sidebar';
 import Button from 'src/components/Button';
 import user_icon from '../../assets/img/user.png';
 import BookConfig from './Book/BookConfig';
@@ -9,7 +8,7 @@ import TransactionConfig from './Transaction/TransactionConfig';
 // import React, { useState } from 'react';
 const Configuration = () => {
   return (
-    <div className='h-screen w-screen overflow-auto'>
+    <>
       <div className='px-4 bg-background pt-2 w-full overflow-auto flex-1 flex-row h-screen'>
         <div className='pr-5 lg:pr-10 py-2'>
           <div className='flex justify-between  items-center'>
@@ -19,6 +18,7 @@ const Configuration = () => {
             </div>
           </div>
         </div>
+
         <div id='tab-navigator text-center'>
           <Tabs>
             <TabList className='flex flex-col lg:flex-row max-w-fit mb-10'>
@@ -27,18 +27,18 @@ const Configuration = () => {
               <Tab>Transaction</Tab>
             </TabList>
             <TabPanel>
-              <ReaderConfig></ReaderConfig>
+              <ReaderConfig />
             </TabPanel>
             <TabPanel>
-              <BookConfig></BookConfig>
+              <BookConfig />
             </TabPanel>
             <TabPanel>
-              <TransactionConfig></TransactionConfig>
+              <TransactionConfig />
             </TabPanel>
           </Tabs>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

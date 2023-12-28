@@ -26,7 +26,7 @@ function AdminRoute() {
 }
 
 function AuthRoute() {
-  const { isAuthenticated, profile } = useAppContext();
+  const { isAuthenticated } = useAppContext();
   const isUser = isAuthenticated;
 
   return isAuthenticated ? <Outlet /> : <Navigate to='/login' />;
@@ -83,7 +83,7 @@ export default function useRouteElement() {
                 },
                 {
                   path: path.book,
-                  element: <BookList></BookList>
+                  element: <BookList />
                 },
                 {
                   path: 'books/:id',

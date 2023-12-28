@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface RatingStarProps {
   className?: string;
   rating: number;
@@ -26,7 +24,6 @@ function RatingStar({ rating, className }: RatingStarProps) {
   );
 
   const stars = Array.from({ length: 5 }, (_, index) => renderStar(index < rating, index));
-
   return <div className={`flex ${className}`}>{stars}</div>;
 }
 
