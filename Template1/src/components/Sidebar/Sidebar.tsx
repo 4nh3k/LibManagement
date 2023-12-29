@@ -14,7 +14,7 @@ interface SidebarProp {
   isAdmin: boolean;
 }
 
-const Sidebar: React.FC<SidebarProp> = ({ isAdmin = false }) => {
+const Sidebar: React.FC<SidebarProp> = ({ isAdmin = false }: SidebarProp) => {
   return (
     <div className='bg-gray-300 shadow fixed top-0 left-0 bottom-0 w-18 lg:w-36'>
       <div className='flex flex-col items-center justify-center'>

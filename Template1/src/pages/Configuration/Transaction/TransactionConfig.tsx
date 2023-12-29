@@ -1,77 +1,83 @@
+import { memberApi } from 'src/apis/member.api';
 import edit_icon from '../../../assets/img/edit.png';
 
 import Button from 'src/components/Button';
+import { Validation } from 'src/types/validation.type';
+import { useQuery } from '@tanstack/react-query';
+import Spinner from 'src/components/Spinner';
 const TransactionConfig = () => {
+  const { data: validationData, isLoading } = useQuery({
+    queryKey: ['validation'],
+    queryFn: () => {
+      return memberApi.getValidation();
+    }
+  });
+
+  const validation = validationData?.data.validation as Validation;
   return (
-    <div>
-      <div className=''>
-        <div id='top-up-account' className='mb-5 w-full pr-10'>
-          <div
-            id='top-up-account-label'
-            className='inline-flex flex-row items-center align-middle mb-10'
-          >
+    <>
+      {isLoading && <Spinner />}
+      {!isLoading && (
+        <div>
+          <div id='top-up-account' className='mb-5 w-full pr-10 flex-col'>
             <div
-              id='top-up-label-header'
-              className='inline w-[0.25rem] h-[2.5625rem] bg-[#8352fd] rounded mr-3 items-center align-middle'
+              id='top-up-account-label'
+              className='inline-flex flex-row lg:items-center align-middle mb-10'
             >
-              &nbsp;
-            </div>
-            <span className='text-[1.375rem] font-semibold mr-5'>Borrow card</span>
-            <img
-              alt='edit-icon'
-              src={edit_icon}
-              width={20}
-              height={20}
-              className='inline items-center align-middle'
-            ></img>
-          </div>
-          <div className='flex flex-col gap-10'>
-            <div
-              id='max-num-book-input'
-              className='w-18 lg:w-72 ml-flex flex-col lg:flex-row lg:mr-auto ml-[1rem] items-center align-middle'
-            >
-              <label
-                htmlFor='max-num-book'
-                id='max-num-book'
-                className='text-[22px] font-semibold w-[400px]'
+              <div
+                id='top-up-label-header'
+                className='inline w-[0.25rem] h-[2.5625rem] bg-[#8352fd] rounded mr-3 items-center align-middle'
               >
-                Maximum book to order/day:
-              </label>
-              <input
-                type='number'
-                min={0}
-                className='custom-input mt-1'
-                id='max-book-order-input'
-                placeholder='10'
+                &nbsp;
+              </div>
+              <span className='text-[1.375rem] font-semibold mr-5'>Borrow card</span>
+              <img
+                alt='edit-icon'
+                src={edit_icon}
+                width={20}
+                height={20}
+                className='block shrink-0 w-5 h-5'
               />
             </div>
-            <div
-              id='max-day-order-container'
-              className='w-18 lg:w-72 ml-flex flex-col lg:flex-row lg:mr-auto ml-[1rem] items-center align-middle'
-            >
-              <label
-                htmlFor='max-day-order'
-                id='max-day-order'
-                className='text-[22px] font-semibold w-[400px]'
+
+            <div className='flex flex-col gap-10'>
+              <div
+                id='member-max-publication-year-input'
+                className='flex lg:flex-row flex-col ml-[1rem] lg:items-center align-middle'
               >
-                Maximum ordering days:
-              </label>
-              <input
-                type='number'
-                min={0}
-                className='custom-input mt-1'
-                id='max-day-order-input'
-                placeholder='10'
-              />
+                <label
+                  htmlFor='max-publication'
+                  id='max-publicaton-label'
+                  className='text-[1.375rem] font-semibold lg:basis-48 shrink-0'
+                >
+                  Maximum borrowing days:
+                </label>
+                <input
+                  type='number'
+                  min={0}
+                  className='custom-input mt-1 max-w-[25rem] h-10 text-black font-medium'
+                  id='max-publication-year-input'
+                  placeholder='Max years'
+                  value={validation.publicationYear}
+                />
+              </div>
             </div>
-            <div id='pay-button-container' className='flex ml-auto mr-auto lg:ml-[4rem] space-x-10'>
-              <Button label='Save' bg_color='#FFD900' color='black'></Button>
-              <Button label='Undo' bg_color='#FFEC80' color='black'></Button>
+
+            <div
+              id='pay-button-container'
+              className='flex ml-auto mr-auto lg:ml-[4rem] space-x-10 mt-10'
+            >
+              <button className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'>
+                Save
+              </button>
+              <button className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'>
+                Undo
+              </button>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

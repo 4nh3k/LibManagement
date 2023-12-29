@@ -1,6 +1,5 @@
 import edit_icon from '../../../assets/img/edit.png';
 
-import Button from 'src/components/Button';
 const ReaderConfig = () => {
   return (
     <div>
@@ -23,24 +22,25 @@ const ReaderConfig = () => {
               width={20}
               height={20}
               className='inline items-center align-middle'
-            ></img>
+            />
           </div>
+
           <div className='flex flex-col gap-10'>
             <div
               id='member-max-publication-year-input'
-              className='w-18 lg:w-72 ml-flex flex-col lg:flex-row lg:mr-auto ml-[1rem] items-center align-middle'
+              className='flex lg:flex-row flex-col ml-[1rem] lg:items-center align-middle'
             >
               <label
                 htmlFor='max-publication'
                 id='max-publicaton-label'
-                className='text-[1.375rem] font-semibold w-[25rem]'
+                className='text-[1.375rem] font-semibold lg:basis-48 shrink-0'
               >
                 Maxium years:
               </label>
               <input
                 type='number'
                 min={0}
-                className='custom-input mt-1 w-[25rem]'
+                className='custom-input mt-1 max-w-[25rem] h-10 text-black font-medium'
                 id='max-publication-year-input'
                 placeholder='Max years'
               />
@@ -49,31 +49,33 @@ const ReaderConfig = () => {
             <div className='flex flex-col gap-10'>
               <div
                 id='member-max-amount-book-input'
-                className='w-18 lg:w-72 ml-flex flex-col lg:flex-row lg:mr-auto ml-[1rem] items-center align-middle'
+                className='flex w-18 ml-flex flex-col lg:flex-row ml-[1rem] lg:items-center align-middle'
               >
                 <label
                   htmlFor='max-book-amount'
                   id='max-book-amount'
-                  className='text-[1.375rem] font-semibold w-[10rem]'
+                  className='text-[1.375rem] font-semibold lg:basis-48'
                 >
                   Maxium amount of a book:
                 </label>
                 <input
                   type='number'
                   min={0}
-                  className='custom-input mt-1 w-[25rem]'
+                  className='custom-input mt-1 max-w-[25rem] h-10 text-black font-medium'
                   id='max-amount-book-input'
                   placeholder='Max book'
                 />
               </div>
+            </div>
 
-              <div
-                id='pay-button-container'
-                className='flex ml-auto mr-auto lg:ml-[4rem] space-x-10'
-              >
-                <Button label='Save' bg_color='#FFD900' color='black'></Button>
-                <Button label='Undo' bg_color='#FFEC80' color='black'></Button>
-              </div>
+            <div id='pay-button-container' className='flex ml-auto mr-auto lg:ml-[4rem] space-x-10'>
+              <button className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'>
+                Save
+              </button>
+
+              <button className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'>
+                Undo
+              </button>
             </div>
           </div>
         </div>

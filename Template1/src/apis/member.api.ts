@@ -2,6 +2,7 @@ import Member from 'src/types/readerMember.type';
 import { SuccessResponse } from 'src/types/utils.type';
 import http from 'src/utils/http';
 import { URL_READERS } from 'src/constants/endpoint';
+import { Validation } from 'src/types/validation.type';
 
 export const memberApi = {
   getAllMembers() {
@@ -27,5 +28,8 @@ export const memberApi = {
   },
   deleteMember(id: string) {
     return http.delete(`${URL_READERS}/${id}`);
+  },
+  getValidation() {
+    return http.get<{ validation: Validation }>(`api/v1/validation`);
   }
 };

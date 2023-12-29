@@ -303,7 +303,7 @@ function AddBookForm({ onToggle }: Props) {
                 Description
               </label>
               <textarea
-                className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 outline-none focus:ring-1'
+                className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 outline-none focus:ring-1 h-64'
                 id='book-description'
                 name='description'
                 required

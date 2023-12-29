@@ -16,6 +16,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import Pagination from 'src/components/Pagination/Pagination';
 import { useAppContext } from 'src/contexts/app.contexts';
+import Popover from 'src/components/Popover';
 
 export default function Library() {
   const navigate = useNavigate();
@@ -27,18 +28,6 @@ export default function Library() {
   const [filter, setFilter] = useState<string>('');
 
   const { setIsAuthenticated } = useAppContext();
-
-  const logoutMutation = useMutation({
-    mutationFn: authApi.logout,
-    onSuccess: () => {
-      toast.success('Log out successfully.');
-      setIsAuthenticated(false);
-      navigate('/');
-    },
-    onError: () => {
-      toast.error('Somethings went wrong.');
-    }
-  });
 
   const { data: booksData, isLoading } = useQuery({
     queryKey: ['library', { filter }],
@@ -59,13 +48,19 @@ export default function Library() {
         <Search query={filter} onChange={setFilter} />
 
         <div id='button-container' className='inline space-x-[1.5rem] right-10'>
-          <Button
-            label='User'
-            bg_color='#E0E0E0'
-            icon={user_icon}
-            color='black'
-            onclick={() => logoutMutation.mutate()}
-          ></Button>
+          <Popover
+            placement='bottom'
+            hasArrow
+            renderPopover={
+              <ul className='bg-white p-2 rounded'>
+                <button className='font-medium' onClick={() => logoutMutation.mutate()}>
+                  Log out
+                </button>
+              </ul>
+            }
+          >
+            <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black' />
+          </Popover>
         </div>
       </div>
 

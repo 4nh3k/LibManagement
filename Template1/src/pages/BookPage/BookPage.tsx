@@ -1,4 +1,3 @@
-import Sidebar from 'src/components/Sidebar/Sidebar';
 import AddBookForm from './AddBookForm';
 import Button from 'src/components/Button';
 import user_icon from '../../assets/img/user.png';
