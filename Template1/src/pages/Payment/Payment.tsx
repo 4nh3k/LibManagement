@@ -25,10 +25,10 @@ const Payment = () => {
               <Tab>Payment</Tab>
             </TabList>
             <TabPanel>
-              <TopUp></TopUp>
+              <TopUp />
             </TabPanel>
             <TabPanel>
-              <PaymentForm></PaymentForm>
+              <PaymentForm />
             </TabPanel>
           </Tabs>
         </div>

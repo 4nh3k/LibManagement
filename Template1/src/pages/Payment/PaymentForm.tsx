@@ -23,42 +23,6 @@ const PaymentForm = () => {
           </div>
           <div className='ml-auto mr-auto flex flex-col gap-10 w-18 lg:w-72'>
             <span className='ml-auto mr-auto text-[1.5rem] font-bold'>Payment Detail</span>
-            <div
-              id='member-name-input'
-              className='w-18 lg:w-72 ml-flex flex-col lg:flex-row lg:mr-auto ml-[1rem] lg:ml-auto items-center align-middle'
-            >
-              <label
-                htmlFor='member_name'
-                id='member-label'
-                className='text-[1.375rem] font-semibold w-[25rem]'
-              >
-                Member name
-              </label>
-              <input
-                type='text'
-                className='custom-input mt-1'
-                id='member_name'
-                placeholder='Enter member name'
-              />
-            </div>
-            <div
-              id='member-id-input'
-              className='w-18 lg:w-72 ml-flex flex-col lg:flex-row lg:mr-auto ml-[1rem] lg:ml-auto items-center align-middle'
-            >
-              <label
-                htmlFor='member-id'
-                id='member-label'
-                className='text-[1.375rem] font-semibold w-[25rem]'
-              >
-                Member ID
-              </label>
-              <input
-                type='text'
-                className='custom-input mt-1'
-                id='member_name'
-                placeholder='Enter member ID'
-              />
-            </div>
             <div id='top-up-container' className='flex flex-col mr-auto ml-auto lg:ml-auto mb-3'>
               <label
                 htmlFor='member-price'

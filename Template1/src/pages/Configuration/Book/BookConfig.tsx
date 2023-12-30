@@ -1,7 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import edit_icon from '../../../assets/img/edit.png';
 import { memberApi } from 'src/apis/member.api';
 import { Validation } from 'src/types/validation.type';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 const BookConfig = () => {
   const { data: validationData, isLoading } = useQuery({
     queryKey: ['validation'],
@@ -9,8 +11,32 @@ const BookConfig = () => {
       return memberApi.getValidation();
     }
   });
+  const [regulation, setRegulation] = useState<Validation>({} as Validation);
 
   const validation = validationData?.data.validation as Validation;
+
+  useEffect(() => {
+    setRegulation(validation);
+  }, [validation]);
+
+  const onChange = (name: keyof Validation) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRegulation({ ...regulation, [name]: Number(event.target.value) });
+  };
+
+  const updateRegulationMutation = useMutation({
+    mutationFn: () => {
+      return memberApi.updateValidation(regulation);
+    }
+  });
+  const queryClient = useQueryClient();
+  const onSubmit = () => {
+    updateRegulationMutation.mutate(undefined, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['validation']);
+        toast.success('Update successfully!');
+      }
+    });
+  };
   return (
     <>
       {isLoading && (
@@ -70,10 +96,11 @@ const BookConfig = () => {
                 <input
                   type='number'
                   min={0}
-                  value={validation?.ageMin}
+                  value={regulation?.ageMin}
                   className='custom-input mt-1 max-w-[25rem] h-10 text-black font-medium'
                   id='member_minium_age'
                   placeholder='Minimum age'
+                  onChange={onChange('ageMin')}
                 />
               </div>
 
@@ -93,7 +120,8 @@ const BookConfig = () => {
                   className='custom-input mt-1 max-w-[25rem] h-10 text-black font-medium'
                   id='member_max-age-input'
                   placeholder='Max age'
-                  value={validation?.ageMax}
+                  value={regulation?.ageMax}
+                  onChange={onChange('ageMax')}
                 />
               </div>
 
@@ -113,7 +141,8 @@ const BookConfig = () => {
                   className='custom-input mt-1 max-w-[25rem] h-10 text-black font-medium'
                   id='member_card_expire_time'
                   placeholder='Enter card expiration time'
-                  value={validation?.expiredMonth}
+                  value={regulation?.expiredMonth}
+                  onChange={onChange('expiredMonth')}
                   min={0}
                 />
               </div>
@@ -122,7 +151,10 @@ const BookConfig = () => {
                 id='pay-button-container'
                 className='flex ml-auto mr-auto lg:ml-[4rem] space-x-10'
               >
-                <button className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'>
+                <button
+                  className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'
+                  onClick={onSubmit}
+                >
                   Save
                 </button>
                 <button className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'>

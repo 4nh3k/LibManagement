@@ -3,8 +3,10 @@ import edit_icon from '../../../assets/img/edit.png';
 
 import Button from 'src/components/Button';
 import { Validation } from 'src/types/validation.type';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Spinner from 'src/components/Spinner';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 const TransactionConfig = () => {
   const { data: validationData, isLoading } = useQuery({
     queryKey: ['validation'],
@@ -12,8 +14,33 @@ const TransactionConfig = () => {
       return memberApi.getValidation();
     }
   });
+  const [regulation, setRegulation] = useState<Validation>({} as Validation);
 
   const validation = validationData?.data.validation as Validation;
+
+  useEffect(() => {
+    setRegulation(validation);
+  }, [validation]);
+
+  const onChange = (name: keyof Validation) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRegulation({ ...regulation, [name]: Number(event.target.value) });
+  };
+
+  const updateRegulationMutation = useMutation({
+    mutationFn: () => {
+      return memberApi.updateValidation(regulation);
+    }
+  });
+  const queryClient = useQueryClient();
+  const onSubmit = () => {
+    updateRegulationMutation.mutate(undefined, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['validation']);
+        toast.success('Update successfully!');
+      }
+    });
+  };
+
   return (
     <>
       {isLoading && <Spinner />}
@@ -58,7 +85,8 @@ const TransactionConfig = () => {
                   className='custom-input mt-1 max-w-[25rem] h-10 text-black font-medium'
                   id='max-publication-year-input'
                   placeholder='Max years'
-                  value={validation.publicationYear}
+                  value={regulation.borrowingDate}
+                  onChange={onChange('borrowingDate')}
                 />
               </div>
             </div>
@@ -67,7 +95,10 @@ const TransactionConfig = () => {
               id='pay-button-container'
               className='flex ml-auto mr-auto lg:ml-[4rem] space-x-10 mt-10'
             >
-              <button className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'>
+              <button
+                className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'
+                onClick={onSubmit}
+              >
                 Save
               </button>
               <button className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'>

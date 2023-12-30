@@ -17,5 +17,25 @@ export const userApi = {
         doc: UserInfo[];
       }>
     >(URL_USERS_ME, { params });
+  },
+  getFinancialMe() {
+    return http.get<{
+      success: true;
+      userFinancials: {
+        _id: string;
+        user: string;
+        balance: number;
+        totalDebt: number;
+      };
+    }>('/api/v1/user-financials/me');
+  },
+  topUpAccount(money: number) {
+    return http.post<{
+      session: {
+        url: string;
+      };
+    }>(`/api/v1/users/top-up`, {
+      money
+    });
   }
 };

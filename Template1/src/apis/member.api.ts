@@ -31,5 +31,8 @@ export const memberApi = {
   },
   getValidation() {
     return http.get<{ validation: Validation }>(`api/v1/validation`);
+  },
+  updateValidation(data: Validation) {
+    return http.post<{ validation: Validation }>(`api/v1/validation`, data);
   }
 };

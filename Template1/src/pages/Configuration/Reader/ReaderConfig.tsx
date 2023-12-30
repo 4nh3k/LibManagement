@@ -1,6 +1,42 @@
+import { memberApi } from 'src/apis/member.api';
 import edit_icon from '../../../assets/img/edit.png';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { Validation } from 'src/types/validation.type';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 const ReaderConfig = () => {
+  const { data: validationData } = useQuery({
+    queryKey: ['validation'],
+    queryFn: () => {
+      return memberApi.getValidation();
+    }
+  });
+  const [regulation, setRegulation] = useState<Validation>({} as Validation);
+
+  const validation = validationData?.data.validation as Validation;
+
+  useEffect(() => {
+    setRegulation(validation);
+  }, [validation]);
+
+  const onChange = (name: keyof Validation) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRegulation({ ...regulation, [name]: Number(event.target.value) });
+  };
+  const updateRegulationMutation = useMutation({
+    mutationFn: () => {
+      return memberApi.updateValidation(regulation);
+    }
+  });
+  const queryClient = useQueryClient();
+  const onSubmit = () => {
+    updateRegulationMutation.mutate(undefined, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['validation']);
+        toast.success('Update successfully!');
+      }
+    });
+  };
   return (
     <div>
       <div className=''>
@@ -43,6 +79,8 @@ const ReaderConfig = () => {
                 className='custom-input mt-1 max-w-[25rem] h-10 text-black font-medium'
                 id='max-publication-year-input'
                 placeholder='Max years'
+                value={regulation?.publicationYear}
+                onChange={onChange('publicationYear')}
               />
             </div>
 
@@ -64,12 +102,17 @@ const ReaderConfig = () => {
                   className='custom-input mt-1 max-w-[25rem] h-10 text-black font-medium'
                   id='max-amount-book-input'
                   placeholder='Max book'
+                  value={regulation?.numberOfBooks}
+                  onChange={onChange('numberOfBooks')}
                 />
               </div>
             </div>
 
             <div id='pay-button-container' className='flex ml-auto mr-auto lg:ml-[4rem] space-x-10'>
-              <button className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'>
+              <button
+                className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'
+                onClick={onSubmit}
+              >
                 Save
               </button>
 

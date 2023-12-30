@@ -17,6 +17,7 @@ import { useAppContext } from './contexts/app.contexts';
 import UserAccount from './pages/UserAccount/UserAccount';
 import BookList from './pages/BookList/BookList';
 import EditBookForm from './pages/BookPage/EditBookForm';
+import TransactionSuccess from './pages/Transactions/TransactionResult/TransactionSuccess';
 
 function AdminRoute() {
   const { isAuthenticated, profile } = useAppContext();
@@ -140,6 +141,10 @@ export default function useRouteElement() {
             {
               path: path.userAccount,
               element: <UserAccount />
+            },
+            {
+              path: 'transaction_success',
+              element: <TransactionSuccess />
             }
           ]
         }
