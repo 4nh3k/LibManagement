@@ -10,3 +10,8 @@ export const calculateMinMaxDates = () => {
     max: maxDate.toISOString().split('T')[0]
   };
 };
+
+export const shortenID = (id: string): string => {
+  const shortenedID = id.slice(-7);
+  return `#${shortenedID}`;
+};

@@ -1,14 +1,14 @@
-import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import { useState } from 'react';
-import ReturnCard from './ReturnCard/ReturnCard';
+import { useSearchParams } from 'react-router-dom';
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import Button from 'src/components/Button';
 import user_icon from '../../assets/img/user.png';
 import BorrowCard from './BorrowCard/BorrowCard';
 import BorrowCardForm from './BorrowCard/BorrowCardForm';
-import ReturnCardForm from './ReturnCard/ReturnCardForm';
 import FeeCard from './FeeCard/FeeCard';
 import RemindCard from './RemindCard/RemindCard';
-import { useSearchParams } from 'react-router-dom';
+import ReturnCard from './ReturnCard/ReturnCard';
+import ReturnCardForm from './ReturnCard/ReturnCardForm';
 
 const Transactions = () => {
   const [showBorrowForm, setShowBorrowForm] = useState(false);
@@ -38,7 +38,7 @@ const Transactions = () => {
 
       <div id='tab-navigator text-center'>
         <Tabs defaultIndex={searchParams.get('tab') === 'return' ? 1 : 0}>
-          <TabList className='flex flex-col lg:flex-row max-w-fit mb-10'>
+          <TabList className='flex flex-col lg:flex-row max-w-fit mb-1'>
             <Tab>Borrow Card</Tab>
             <Tab>Return Card</Tab>
             <Tab>Fee Card</Tab>

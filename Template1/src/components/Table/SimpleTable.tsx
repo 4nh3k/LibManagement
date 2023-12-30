@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import icon_edit from '../../assets/img/edit.png';
 import icon_trash from '../../assets/img/trash.png';
-import { number } from 'prop-types';
-import { classNames } from 'classnames';
 interface Header {
   title: string;
   dataIndex: string;
@@ -17,6 +15,7 @@ interface TableProps {
   selectedRow?: number | null;
   deleteAction?: (row: any) => void;
   onRowClick?: (row: any) => void;
+  nullMessage?: string;
 }
 
 const SimpleTable: React.FC<TableProps> = ({
@@ -27,6 +26,7 @@ const SimpleTable: React.FC<TableProps> = ({
   onSelect,
   selectedRow,
   deleteAction,
+  nullMessage,
   onRowClick
 }) => {
   const [selected, setSelected] = useState<number | null>(null);
@@ -60,6 +60,13 @@ const SimpleTable: React.FC<TableProps> = ({
           </tr>
         </thead>
         <tbody className='divide-y divide-gray-100 border-t  border-gray-100'>
+          {data.length === 0 && (
+            <tr>
+              <td colSpan={headers.length} className='text-center py-5'>
+                {nullMessage || 'No data'}
+              </td>
+            </tr>
+          )}
           {data.map((row, index) => (
             <tr
               className={` ${getSelectedRow() === index ? 'bg-primary2/10' : 'hover:bg-[#F7F6FE]'}`}
@@ -72,6 +79,7 @@ const SimpleTable: React.FC<TableProps> = ({
                     <div className='inline-flex gap-1 lg:gap-5'>
                       <img alt='icon-edit' src={icon_edit}></img>
                       <button
+                        type='button'
                         onClick={() => {
                           deleteAction && deleteAction(row);
                         }}
@@ -81,16 +89,15 @@ const SimpleTable: React.FC<TableProps> = ({
                     </div>
                   ) : // If it's not a component, render the text
                   row[header.dataIndex] !== undefined ? (
-                    row[header.dataIndex]
+                    typeof row[header.dataIndex] === 'object' ? (
+                      // If it's a component, render it
+                      <>{row[header.dataIndex]}</>
+                    ) : (
+                      // If it's not a component, render the text
+                      row[header.dataIndex]
+                    )
                   ) : (
                     'N/A'
-                    /*{ Check if the cell value is a React component
-                  {typeof row[header.dataIndex] === 'object' ? (
-                    // If it's a component, render it
-                    <>{row[header.dataIndex]}</>
-                  ) : (
-                    // If it's not a component, render the text
-                    row[header.dataIndex] */
                   )}
                 </td>
               ))}

@@ -1,14 +1,14 @@
-import website_logo from '../../assets/img/logo.png';
-import library from 'src/assets/icons/library.svg';
 import book from 'src/assets/icons/book.svg';
 import group from 'src/assets/icons/group.svg';
+import library from 'src/assets/icons/library.svg';
 import transaction from 'src/assets/icons/transaction.svg';
 import configuration from 'src/assets/img/configuration.png';
-import account from 'src/assets/img/user.png';
 import payment from 'src/assets/img/payment.png';
+import account from 'src/assets/img/user.png';
+import website_logo from '../../assets/img/logo.png';
 
-import MenuItem from 'src/components/MenuItem';
 import { Link } from 'react-router-dom';
+import MenuItem from 'src/components/MenuItem';
 
 interface SidebarProp {
   isAdmin: boolean;

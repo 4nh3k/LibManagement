@@ -1,17 +1,15 @@
-import { DotsThreeOutline, PencilSimple, Trash, UploadSimple } from '@phosphor-icons/react';
-import { useRef, useState } from 'react';
-import { FileDrop } from 'react-file-drop';
-import Input from 'src/components/Input';
-import SimpleTable from 'src/components/Table/SimpleTable';
+import { DotsThreeOutline, PencilSimple, Trash } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { borrowCardApi } from 'src/apis/borrow-card.api';
-import LoadingIndicator from 'src/components/LoadingIndicator/LoadingIndicator';
-import { User } from 'src/types/user.type';
+import { useRef, useState } from 'react';
 import Select from 'react-select';
+import { borrowCardApi } from 'src/apis/borrow-card.api';
+import Input from 'src/components/Input';
+import LoadingIndicator from 'src/components/LoadingIndicator/LoadingIndicator';
+import SimpleTable from 'src/components/Table/SimpleTable';
 import useMember from 'src/hooks/useMember';
-import { calculateMinMaxDates } from 'src/utils/utils';
 import { useUser } from 'src/hooks/useUser';
 import { BorrowCardType } from 'src/types/borrow-card.type';
+import { calculateMinMaxDates, shortenID } from 'src/utils/utils';
 
 interface MemberProps {
   name: string;
@@ -81,7 +79,7 @@ export default function Member() {
     select: data => {
       return data.data.data.doc.map((item: BorrowCardType) => {
         return {
-          borrowId: item._id,
+          borrowId: shortenID(item._id),
           date: new Date(item.borrowDate).toLocaleDateString('en-GB'),
           status: item.isReturned ? 'Returned' : 'Borrowing'
         };
@@ -175,7 +173,7 @@ export default function Member() {
   };
 
   return (
-    <div className='w-full min-h-screen overflow-y-auto lg:overflow-y-hidden'>
+    <div className='w-full min-h-screen overflow-y-auto  lg:overflow-y-hidden'>
       <select className='custom-select ml-5 mt-5'>
         <option value='1'>All Members</option>
       </select>
