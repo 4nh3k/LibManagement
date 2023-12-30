@@ -36,7 +36,9 @@ const BookDetails = () => {
     },
     onSuccess: () => {
       toast.success('Add comment successfully');
-      queryClient.invalidateQueries(['reviews', id]);
+      queryClient.invalidateQueries({
+        queryKey: ['reviews', id]
+      });
       reset();
     },
     onError: () => {

@@ -143,7 +143,7 @@ export default function useRouteElement() {
               element: <UserAccount />
             },
             {
-              path: 'transaction_success',
+              path: 'transaction_success/:id?',
               element: <TransactionSuccess />
             }
           ]

@@ -1,7 +1,22 @@
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import transactionSuccess from 'src/assets/img/transactionSuccess.png';
+import http from 'src/utils/http';
 const TransactionSuccess = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+  if (!id) {
+    navigate('/');
+  }
+  useEffect(() => {
+    http.post('/api/v1/user-transactions', undefined, {
+      params: {
+        user: id,
+        status: 'success'
+      }
+    });
+  }, [id]);
+
   return (
     <div className='p-4 w-full h-full overflow-y-auto lg:overflow-y-hidden flex items-center justify-center'>
       <div className='pt-10 flex flex-col items-center align-middle space-y-8'>

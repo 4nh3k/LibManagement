@@ -37,5 +37,20 @@ export const userApi = {
     }>(`/api/v1/users/top-up`, {
       money
     });
+  },
+  payDebt({
+    balance,
+    totalDebt,
+    amountPaid
+  }: {
+    balance: number;
+    totalDebt: number;
+    amountPaid: number;
+  }) {
+    return http.post('/api/v1/fee-receipts', {
+      balance,
+      totalDebt,
+      amountPaid
+    });
   }
 };

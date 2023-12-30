@@ -1,5 +1,4 @@
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
-import Sidebar from 'src/components/Sidebar/Sidebar';
 import Button from 'src/components/Button';
 import user_icon from '../../assets/img/user.png';
 import TopUp from './TopUp/TopUp';

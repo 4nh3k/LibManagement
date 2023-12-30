@@ -13,7 +13,7 @@ import ReturnCardForm from './ReturnCard/ReturnCardForm';
 const Transactions = () => {
   const [showBorrowForm, setShowBorrowForm] = useState(false);
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const toggleBorrowForm = () => {
     setShowBorrowForm(showBorrowForm => !showBorrowForm);
@@ -54,10 +54,10 @@ const Transactions = () => {
             {showReturnForm && <ReturnCardForm onToggle={toggleReturnForm}></ReturnCardForm>}
           </TabPanel>
           <TabPanel>
-            <FeeCard></FeeCard>
+            <FeeCard />
           </TabPanel>
           <TabPanel>
-            <RemindCard></RemindCard>
+            <RemindCard />
           </TabPanel>
         </Tabs>
       </div>
