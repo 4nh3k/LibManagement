@@ -203,9 +203,6 @@ export default function Member() {
                     <Trash size={24} />
                   </button>
                 </li>
-                <li>
-                  <DotsThreeOutline size={24} />
-                </li>
               </ul>
             )}
           </div>
