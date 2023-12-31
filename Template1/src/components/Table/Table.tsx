@@ -100,7 +100,7 @@ const Table: React.FC<TableProps> = ({ headers, data, onToggle, onAdd = true, de
         </div>
         <div className='inline-flex items-center align-middle ml-auto space-x-5'>
           {onAdd && (
-            <button className='primary-btn' onClick={onToggle}>
+            <button className='primary-btn-fit w-20' onClick={onToggle}>
               Add
             </button>
           )}
