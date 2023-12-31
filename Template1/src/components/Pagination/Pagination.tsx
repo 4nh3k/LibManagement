@@ -7,7 +7,9 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
     for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(
         <li key={i} className={i === currentPage ? 'active' : ''}>
-          <button onClick={() => onPageChange(i)}>{i}</button>
+          <button onClick={() => onPageChange(i)} className='hover:underline'>
+            {i}
+          </button>
         </li>
       );
     }
@@ -16,15 +18,23 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   };
 
   return (
-    <ul className='text-xl font-medium space-x-2 mb-5 mt-0 flex items-center justify-center'>
+    <ul className='font-medium space-x-2 mb-5 mt-0 flex items-center justify-center text-sm'>
       <li>
-        <button onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
+        <button
+          onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className='hover:underline'
+        >
           &laquo; Previous
         </button>
       </li>
       {renderPageNumbers()}
       <li>
-        <button onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+        <button
+          onClick={() => onPageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className='hover:underline'
+        >
           Next &raquo;
         </button>
       </li>
