@@ -16,9 +16,9 @@ interface SidebarProp {
 
 const Sidebar: React.FC<SidebarProp> = ({ isAdmin = false }: SidebarProp) => {
   return (
-    <div className='bg-gray-300 shadow fixed top-0 left-0 bottom-0 w-18 lg:w-36'>
+    <div className='bg-gray-50 shadow fixed top-0 left-0 bottom-0 w-18 lg:w-64'>
       <div className='flex flex-col items-center justify-center'>
-        <Link to='/' className='text-center items-center justify-center mx-1 lg:mx-2 shrink-0'>
+        <Link to='/' className='text-center flex items-center justify-center mx-1 lg:mx-2 shrink-0'>
           <img
             alt='Website Logo'
             src={website_logo}
@@ -26,7 +26,7 @@ const Sidebar: React.FC<SidebarProp> = ({ isAdmin = false }: SidebarProp) => {
           />
           <span className='font-bold text-xl hidden lg:inline-block'>LibMa</span>
         </Link>
-        <ul className='flex flex-col gap-[0.1rem]'>
+        <ul className='flex flex-col mt-2 gap-[0.1rem] w-full px-3'>
           <MenuItem iconSrc={library} label='Library' to='' />
           <MenuItem
             iconSrc={transaction}

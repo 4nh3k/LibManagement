@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import icon_add from '../../assets/img/add.png';
-import icon_search from '../../assets/img/search_icon.svg';
+import { PiMagnifyingGlass } from 'react-icons/pi';
 import DropdownList from '../BookFilterDropdown/BookFilterDropdown';
-import Button from '../Button';
+
 import SimpleTable from './SimpleTable';
 
 interface Header {
@@ -55,8 +54,8 @@ const Table: React.FC<TableProps> = ({ headers, data, onToggle, onAdd = true, de
       buttons.push(
         <button
           key={i}
-          className={`bg-[#E0E0E0] hover:bg-[#624DE3] text-white font-bold py-2 px-2 lg:px-3 rounded-lg mx-3 ${
-            currentPage === i ? 'bg-[#9E9E9E]' : ''
+          className={`bg-[#E0E0E0] hover:bg-[#aba1e7] text-white font-bold py-2 px-2 lg:px-3 rounded-lg mx-3 ${
+            currentPage === i ? 'bg-[#624DE3]' : ''
           }`}
           onClick={() => handlePageChange(i)}
         >
@@ -68,15 +67,15 @@ const Table: React.FC<TableProps> = ({ headers, data, onToggle, onAdd = true, de
   };
 
   return (
-    <div className='w-full flex flex-col'>
+    <div className='w-full flex bg-gray flex-col'>
       <div
         id='utilsRow'
-        className='bg-white w-full m-auto flex flex-col items-center gap-y-5 lg:flex-row overflow-y-auto'
+        className='w-full m-auto flex flex-col items-center gap-y-5 lg:flex-row overflow-y-auto'
       >
-        <div className='inline-flex ml-1 lg:ml-6 items-center gap-5  py-4 align-middle'>
+        <div className='inline-flex ml-1 items-center gap-5  py-4 align-middle'>
           <span className='inline-block align-middle'>Show</span>
           <input
-            className='px-2 py-1 border-none outline-none rounded font-medium text-black'
+            className='px-2 py-1 border-gray-200 border-2 outline-none rounded-lg font-medium text-black'
             placeholder={'5'}
             type={'number'}
             value={itemsPerPage}
@@ -88,7 +87,7 @@ const Table: React.FC<TableProps> = ({ headers, data, onToggle, onAdd = true, de
         </div>
         <div className='inline-flex ml-1 lg:ml-12 md:ml-20 items-center align-middle'>
           <div className='inline-flex bg-white text-black pt-2 pb-2 pl-3 pr-3 rounded-xl border-2 overflow-hidden'>
-            <img alt='icon-search' src={icon_search} className='w-6 mr-3'></img>
+            <PiMagnifyingGlass className='mr-2' size={24} color={'gray'} />
             <input
               className='w-32 lg:w-64 p-0 m-0 bg-white  outline-0'
               placeholder='Search'
@@ -99,16 +98,11 @@ const Table: React.FC<TableProps> = ({ headers, data, onToggle, onAdd = true, de
         <div className='inline-flex ml-auto mr-auto items-center'>
           <DropdownList list={['UserID', 'BorrowCardID']}></DropdownList>
         </div>
-        <div className='inline-flex items-center align-middle ml-auto mr-auto lg:mr-5 space-x-5'>
-          <Button label='All' bg_color='#C0BBF4' color='#5632A1'></Button>
+        <div className='inline-flex items-center align-middle ml-auto space-x-5'>
           {onAdd && (
-            <Button
-              label='Add'
-              icon={icon_add}
-              bg_color='#E8E7FD'
-              color='#9C55F6'
-              onclick={onToggle}
-            ></Button>
+            <button className='primary-btn-fit w-20' onClick={onToggle}>
+              Add
+            </button>
           )}
         </div>
       </div>

@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import { PiMagnifyingGlass, PiXCircle } from 'react-icons/pi';
+
 export default function Search({
   query,
   onChange
@@ -20,28 +22,24 @@ export default function Search({
     };
   }, [onChange]);
   return (
-    <div className='flex w-80 justify-between rounded-full border bg-gray-200 px-4 py-2 text-base font-normal outline-none transition duration-500'>
+    <div className='flex w-80 justify-between rounded-full border-2 px-4 py-2 text-base font-normal outline-none transition duration-500'>
       <div className='flex w-full basis-11/12 items-center gap-3'>
-        {query === '' && (
-          <span className='flex h-6 basis-6 items-center justify-center'>
-            <img src='/src/assets/icons/search-bar.svg' alt='Search logo' />
-          </span>
-        )}
+        {query === '' && <PiMagnifyingGlass className='mr-2' size={24} color={'gray'} />}
         <input
           value={query}
           onChange={e => onChange(e.target.value)}
-          placeholder='Search books'
-          className='grow bg-gray-200 text-gray-500 outline-none focus:text-gray-500 focus:outline-none'
+          placeholder='Search books...'
+          className='grow  text-gray-500 outline-none focus:text-gray-500 focus:outline-none'
           maxLength={100}
         />
       </div>
 
       {query !== '' && (
         <button
-          className='hover:pointer flex h-6 basis-6 cursor-pointer items-center justify-center rounded-full bg-gray-300 '
+          className='hover:pointer flex h-6 basis-6 cursor-pointer items-center justify-center rounded-full '
           onClick={() => onChange('')}
         >
-          <img src='/src/assets/icons/close.svg' alt='Close' />
+          <PiXCircle color={'gray'} size={24} />
         </button>
       )}
     </div>
