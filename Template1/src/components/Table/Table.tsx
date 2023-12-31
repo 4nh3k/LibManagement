@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { PiMagnifyingGlass } from 'react-icons/pi';
 import DropdownList from '../BookFilterDropdown/BookFilterDropdown';
 
@@ -9,23 +9,56 @@ interface Header {
   dataIndex: string;
 }
 
+interface SearchBy {
+  label: string;
+  dataIndex: string;
+}
+
 interface TableProps {
   headers: Header[];
   data: any[];
+  searchBy?: SearchBy[];
   onToggle?: () => void;
   deleteAction?: (row: any) => void;
   onAdd?: boolean;
 }
 
-const Table: React.FC<TableProps> = ({ headers, data, onToggle, onAdd = true, deleteAction }) => {
+const Table: React.FC<TableProps> = ({
+  headers,
+  data,
+  onToggle,
+  onAdd = true,
+  deleteAction,
+  searchBy
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedSearchBy, setSelectedSearchBy] = useState(searchBy?.[0]?.label);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const filteredData = useMemo(() => {
+    return data.filter(item => {
+      if (selectedSearchBy) {
+        const dataIndex = searchBy?.find(item => item.label === selectedSearchBy)?.dataIndex;
+        console.log(selectedSearchBy, searchQuery, dataIndex);
+        if (dataIndex === undefined) return true;
+        const value = item[dataIndex];
+        return value.toString().toLowerCase().includes(searchQuery.toLowerCase());
+      }
+      return true;
+    });
+  }, [data, searchBy, selectedSearchBy, searchQuery]);
+
+  const currentItems = useMemo(() => {
+    return filteredData.slice(indexOfFirstItem, indexOfLastItem);
+  }, [filteredData, indexOfFirstItem, indexOfLastItem]);
+
+  const totalPages = useMemo(() => {
+    return Math.ceil(filteredData.length / itemsPerPage);
+  }, [filteredData.length, itemsPerPage]);
 
   const handleEntriesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setItemsPerPage(parseInt(event.target.value, 10));
@@ -46,6 +79,18 @@ const Table: React.FC<TableProps> = ({ headers, data, onToggle, onAdd = true, de
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
     }
+  };
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+    setCurrentPage(1); // Reset to the first page when changing search query
+  };
+
+  const handleSearchByChange = (selectedValue: string) => {
+    console.log(selectedValue);
+    setSelectedSearchBy(selectedValue);
+    setSearchQuery('');
+    setCurrentPage(1); // Reset to the first page when changing searchBy
   };
 
   const renderPaginationButtons = () => {
@@ -92,12 +137,19 @@ const Table: React.FC<TableProps> = ({ headers, data, onToggle, onAdd = true, de
               className='w-32 lg:w-64 p-0 m-0 bg-white  outline-0'
               placeholder='Search'
               type='string'
+              value={searchQuery}
+              onChange={handleSearch}
             ></input>
           </div>
         </div>
-        <div className='inline-flex ml-auto mr-auto items-center'>
-          <DropdownList list={headers.map(header => header['title'])}></DropdownList>
-        </div>
+        {searchBy && (
+          <div className='inline-flex ml-auto mr-auto items-center'>
+            <DropdownList
+              list={searchBy.map(item => item.label)}
+              onChange={handleSearchByChange}
+            ></DropdownList>
+          </div>
+        )}
         <div className='inline-flex items-center align-middle ml-auto space-x-5'>
           {onAdd && (
             <button className='primary-btn-fit w-20' onClick={onToggle}>

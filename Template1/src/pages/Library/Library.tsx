@@ -34,8 +34,6 @@ export default function Library() {
         id='horizontal-header'
         className='mb-4 mt-5 relative flex flex-col space-y-3 lg:flex-row lg:space-y-0 items-center justify-between ml-2 mr-6'
       >
-        {/* <DropdownList list={groupList}/> */}
-
         <Search query={filter} onChange={setFilter} />
 
         <User />
@@ -61,6 +59,7 @@ export default function Library() {
             />
           ))}
       </div>
+
       {(!isLoading || (books != undefined && books.length > 0)) && (
         <div className='align-center'>
           <Pagination totalPages={10} currentPage={1} onPageChange={null}></Pagination>

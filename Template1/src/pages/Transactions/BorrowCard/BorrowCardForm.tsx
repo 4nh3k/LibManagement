@@ -13,20 +13,20 @@ interface Props {
 }
 const headers = [
   { dataIndex: 'bookName', title: 'Book Name' },
-  { dataIndex: 'quantity', title: 'Quantity' },
   { dataIndex: 'quantityInput', title: 'Quantity' },
   { dataIndex: 'action', title: 'Action' }
 ];
+
 interface OrderList {
   bookId: string;
   bookName: string;
-  quantity: number;
   quantityInput?: React.ReactNode;
 }
 // eslint-disable-next-line no-empty-pattern
 const BorrowCardForm: React.FC<Props> = ({ onToggle }) => {
   const [selectedMember, setSelectedMember] = useState(null);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [quantityList, setQuantityList] = useState<Map<string, number>>(new Map());
   const { createBorrowCardMutation } = useBorrowCard();
   const { getMemberQuery } = useMember();
   const { data: memberData } = getMemberQuery;
@@ -42,12 +42,6 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle }) => {
   });
   const [orderList, setOrderList] = useState<OrderList[]>([]);
 
-  const handleUndo = () => {
-    const lastOrder = orderList[orderList.length - 1];
-    const updatedOrderList = orderList.filter(item => item !== lastOrder);
-    setOrderList(updatedOrderList);
-  };
-
   const onSubmit = event => {
     event.preventDefault();
     if (!selectedMember) {
@@ -61,7 +55,7 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle }) => {
     const data = {
       borrower: selectedMember.value,
       books: orderList.map(item => {
-        return { bookId: item.bookId, quantity: item.quantity };
+        return { bookId: item.bookId, quantity: quantityList.get(item.bookId) };
       })
     };
     console.log(data);
@@ -71,46 +65,88 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle }) => {
       }
     });
   };
+  const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>, bookId: string) => {
+    const newQuantityList = new Map(quantityList);
+    newQuantityList.set(bookId, Number(event.target.value));
+    setQuantityList(newQuantityList);
+    setOrderList(prevOrderList =>
+      prevOrderList.map(item =>
+        item.bookId === bookId
+          ? {
+              ...item,
+              quantityInput: (
+                <input
+                  className='w-10 sm:w-20 md:w-40'
+                  type='number'
+                  min={1}
+                  required
+                  onChange={e => handleQuantityChange(e, item.bookId)}
+                  value={event.target.value}
+                />
+              )
+            }
+          : item
+      )
+    );
+  };
 
   const handleBookSelect = (selectedBook: any) => {
     const book = selectedBook;
     const existingOrder = orderList.find(item => item.bookId === book.value);
 
     if (existingOrder) {
-      const updatedOrderList = orderList.map(item => {
-        if (item.bookId === book.value) {
-          return { ...item, quantity: item.quantity + 1 };
-        }
-        return item;
-      });
-      setOrderList(updatedOrderList);
+      toast.warning('Book already added');
     } else {
+      console.log(book.value);
+
       const newOrderList = [
         ...orderList,
         {
           bookId: book.value,
           bookName: book.label,
-          quantity: 1,
-          quantityInput: <input type='number' min={1} value={1} />
+          quantityInput: (
+            <input
+              className='w-10 sm:w-20 md:w-40'
+              type='number'
+              min={1}
+              required
+              onChange={e => handleQuantityChange(e, book.value)}
+              value={1}
+            />
+          )
         }
       ];
+
+      const newQuantityList = new Map(quantityList);
+      newQuantityList.set(book.value, 1);
+
+      setQuantityList(newQuantityList);
       setOrderList(newOrderList);
     }
+
     setSelectedBook(null);
+  };
+
+  const handleDelete = (order: OrderList) => {
+    const updatedOrderList = orderList.filter(item => item.bookId !== order.bookId);
+    const updatedQuantityList = new Map(quantityList);
+    updatedQuantityList.delete(order.bookId);
+    setQuantityList(updatedQuantityList);
+    setOrderList(updatedOrderList);
   };
 
   return (
     <form onSubmit={onSubmit}>
       <div className='lg:flex'>
         <div>
-          <div className='grid grid-cols-3 gap-4 mt-5'>
+          <div className='lg:grid lg:grid-cols-3 gap-4 mt-5'>
             <div>
               <label className='custom-label' htmlFor='book-name'>
                 Book Name:
               </label>
               <Select
                 classNames={{
-                  control: () => 'w-[25rem]'
+                  control: () => 'lg:w-[20rem]'
                 }}
                 value={selectedBook}
                 placeholder='Select a book'
@@ -159,16 +195,25 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle }) => {
         <SimpleTable
           headers={headers}
           data={orderList}
+          deleteAction={handleDelete}
           nullMessage='No book added yet'
-          className='shadow-gray-400 shadow-sm rounded-md w-full '
+          className='shadow-gray-400 shadow-sm rounded-md w-full mt-2'
         />
-        <button type='button' className='secondary-btn mt-4 lg:ml-auto block' onClick={handleUndo}>
-          Undo
+      </div>
+      <div className='flex mt-9 w-60 space-x-6 mx-auto'>
+        <button type='submit' className='primary-btn-fit p-4  w-20 block '>
+          Create
+        </button>
+        <button
+          type='button'
+          onClick={() => {
+            console.log(quantityList);
+          }}
+          className='secondary-btn p-4 w-20 block '
+        >
+          Cancel
         </button>
       </div>
-      <button type='submit' className='primary-btn-fit p-4 mt-9 w-20 block mx-auto'>
-        Create
-      </button>
     </form>
   );
 };

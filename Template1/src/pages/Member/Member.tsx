@@ -183,6 +183,7 @@ export default function Member() {
               className='overflow-x-auto rounded-md overflow-hidden shadow-md mt-4'
               headers={headers}
               data={data}
+              canSelected={true}
               selectedRow={selectedRow}
               onSelect={onRowSelected}
             ></SimpleTable>
