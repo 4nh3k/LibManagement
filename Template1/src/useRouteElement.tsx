@@ -86,10 +86,7 @@ export default function useRouteElement() {
                   path: path.book,
                   element: <BookList />
                 },
-                {
-                  path: 'books/:id',
-                  element: <BookDetails />
-                },
+
                 {
                   path: path.member,
                   element: <Member />
@@ -107,9 +104,9 @@ export default function useRouteElement() {
                   element: <BookPage />
                 },
                 {
-                  path: 'book/:id',
-                  element: <BookPage />
-                }
+                  path: 'books/:id',
+                  element: <BookDetails />
+                },
               ]
             },
             {

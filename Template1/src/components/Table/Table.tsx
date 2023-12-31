@@ -96,7 +96,7 @@ const Table: React.FC<TableProps> = ({ headers, data, onToggle, onAdd = true, de
           </div>
         </div>
         <div className='inline-flex ml-auto mr-auto items-center'>
-          <DropdownList list={['UserID', 'BorrowCardID']}></DropdownList>
+          <DropdownList list={headers.map(header => header['title'])}></DropdownList>
         </div>
         <div className='inline-flex items-center align-middle ml-auto space-x-5'>
           {onAdd && (

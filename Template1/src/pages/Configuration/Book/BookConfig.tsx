@@ -149,7 +149,7 @@ const BookConfig = () => {
 
               <div
                 id='pay-button-container'
-                className='flex ml-auto mr-auto lg:ml-[4rem] space-x-10'
+                className='flex ml-auto mr-auto lg:ml-[17rem] space-x-10'
               >
                 <button
                   className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'
