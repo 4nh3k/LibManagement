@@ -13,6 +13,8 @@ interface TableProps {
   onSelect?: (row: any, index: number) => void;
   selectedRow?: number | null;
   deleteAction?: (row: any) => void;
+  editAction?: (row: any) => void;
+  canSelected?: boolean;
   onRowClick?: (row: any) => void;
   nullMessage?: string;
 }
@@ -25,6 +27,8 @@ const SimpleTable: React.FC<TableProps> = ({
   onSelect,
   selectedRow,
   deleteAction,
+  editAction,
+  canSelected,
   nullMessage,
   onRowClick
 }) => {
@@ -68,7 +72,9 @@ const SimpleTable: React.FC<TableProps> = ({
           )}
           {data.map((row, index) => (
             <tr
-              className={` ${getSelectedRow() === index ? 'bg-primary2/10' : 'hover:bg-[#F7F6FE]'}`}
+              className={` ${
+                canSelected && getSelectedRow() === index ? 'bg-primary2/10' : 'hover:bg-[#F7F6FE]'
+              }`}
               key={index}
               onClick={() => handleRowClick(row, index)}
             >
@@ -76,15 +82,17 @@ const SimpleTable: React.FC<TableProps> = ({
                 <td className='px-6 py-4' key={header.dataIndex}>
                   {header.dataIndex === 'action' ? (
                     <div className='inline-flex gap-1 lg:gap-5'>
-                      <PiNotePencil className='text-primary' size={24} />
-                      <button
-                        type='button'
-                        onClick={() => {
-                          deleteAction && deleteAction(row);
-                        }}
-                      >
-                        <PiTrash className='text-red-500' size={24} />
-                      </button>
+                      {editAction && <PiNotePencil className='text-primary' size={24} />}
+                      {deleteAction && (
+                        <button
+                          type='button'
+                          onClick={() => {
+                            deleteAction && deleteAction(row);
+                          }}
+                        >
+                          <PiTrash className='text-red-500' size={24} />
+                        </button>
+                      )}
                     </div>
                   ) : // If it's not a component, render the text
                   row[header.dataIndex] !== undefined ? (

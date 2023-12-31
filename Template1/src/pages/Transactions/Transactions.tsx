@@ -9,6 +9,19 @@ import RemindCard from './RemindCard/RemindCard';
 import ReturnCard from './ReturnCard/ReturnCard';
 import ReturnCardForm from './ReturnCard/ReturnCardForm';
 
+const getIndexOfTab = (tab: string | null) => {
+  switch (tab) {
+    case 'return':
+      return 1;
+    case 'fee':
+      return 2;
+    case 'remind':
+      return 3;
+    default:
+      return 0;
+  }
+};
+
 const Transactions = () => {
   const [showBorrowForm, setShowBorrowForm] = useState(false);
 
@@ -34,7 +47,7 @@ const Transactions = () => {
       </div>
 
       <div id='tab-navigator text-center'>
-        <Tabs defaultIndex={searchParams.get('tab') === 'return' ? 1 : 0}>
+        <Tabs defaultIndex={getIndexOfTab(searchParams.get('tab'))}>
           <TabList>
             <Tab>Borrow Card</Tab>
             <Tab>Return Card</Tab>

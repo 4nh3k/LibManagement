@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import { returnCardApi } from 'src/apis/return-form.api';
 import ReturnCardDto from 'src/types/return-card.dto';
+import { shortenID } from 'src/utils/utils';
 
 const useReturnCard = () => {
   const getAllReturnCardQuery = useQuery({
@@ -15,7 +16,7 @@ const useReturnCard = () => {
           totalAmount += lostBook.quantity;
         });
         return {
-          returnCardId: item._id,
+          returnCardId: shortenID(item._id),
           username: item.borrowBookForm.borrower.fullName,
           returnDate: new Date(item.returnDate).toLocaleDateString('en-GB'),
           expectedReturnDate: new Date(item.borrowBookForm.expectedReturnDate).toLocaleDateString(

@@ -7,12 +7,19 @@ interface BorrowCardProps {
 
 const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
   const headers = [
-    { title: 'Borrower', dataIndex: 'borrower' },
     { title: 'Borrow Card ID', dataIndex: 'borrowCardId' },
+    { title: 'Borrower', dataIndex: 'borrower' },
     { title: 'Borrow Date', dataIndex: 'borrowDate' },
     { title: 'Expected Return Date', dataIndex: 'expectedReturnDate' },
     { title: 'Status', dataIndex: 'isReturned' },
     { title: 'Action', dataIndex: 'action' }
+  ];
+  const searchBy = [
+    { label: 'Borrower', dataIndex: 'borrower' },
+    { label: 'Borrow Card ID', dataIndex: 'borrowCardId' },
+    { label: 'Borrow Date', dataIndex: 'borrowDate' },
+    { label: 'Expected Return Date', dataIndex: 'expectedReturnDate' },
+    { label: 'Status', dataIndex: 'isReturned' }
   ];
   const { getAllBorrowCardQuery, deleteBorrowCardMutation } = useBorrowCard();
   const { data: BorrowCardData, isLoading } = getAllBorrowCardQuery;
@@ -37,6 +44,7 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
         headers={headers}
         data={sortedBorrowCardData}
         onToggle={onToggle}
+        searchBy={searchBy}
         deleteAction={handleDelete}
       />
     </div>
