@@ -24,21 +24,21 @@ export default function User() {
       placement='bottom'
       hasArrow
       renderPopover={
-        <ul className='bg-white border-gray-50 border p-2 rounded'>
-          <button className='font-medium' onClick={() => logoutMutation.mutate()}>
+        <ul className='bg-white border-gray-50 border p-2 rounded shadow'>
+          <button className='font-normal' onClick={() => logoutMutation.mutate()}>
             Log out
           </button>
         </ul>
       }
     >
-      <div className='flex items-center'>
+      <button className='flex items-center'>
         {/* <span className='hidden lg:inline-block mr-2 font-semibold'>Admin</span> */}
         <img
           src={'https://ui-avatars.com/api/?background=0D8ABC&color=fff'}
           alt='User'
           className='w-10 h-10 rounded-full border border-purple-100'
         />
-      </div>
+      </button>
     </Popover>
   );
 }

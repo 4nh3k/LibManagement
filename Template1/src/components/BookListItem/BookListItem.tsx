@@ -14,23 +14,33 @@ interface BookItemProps {
 
 const BookListItem = ({ coverImg, title, description, id }: BookItemProps) => {
   const { deleteBookMutation } = useBook();
+
+  const handleDeleteClick = () => {
+    const confirmBox = window.confirm('Do you really want to delete this book?');
+    console.log('delete clicked'
+    )
+    if (confirmBox === true) {
+      deleteBookMutation.mutate(id);
+    }
+  };
+
   if (deleteBookMutation.isLoading) return <LoadingIndicator />;
   return (
     <div className='flex justify-between items-center align-middle space-x-2'>
       <div className='flex items-center align-middle space-x-3'>
-        <img src={coverImg} alt='book_picture' className='w-8 h-8'></img>
+        <img src={coverImg} alt='book_picture' className='h-20'></img>
         <div className='flex flex-col space-y-1'>
           <span className='text-primary2 text-lg font-bold line-clamp-3'>{title}</span>
-          <span className='max-w-[50ch] truncate text-gray-500 text-xs font-semibold line-clamp-3'>
+          <p className='w-[10rem] lg:w-[40rem] text-gray-500 text-xs font-semibold line-clamp-3 text-ellipsis overflow-hidden ... text-justify'>
             {description}
-          </span>
+          </p>
         </div>
       </div>
       <div className='flex space-x-5'>
         <Link to={`/admin/book/${id}`}>
           <PencilSimple size={24}></PencilSimple>
         </Link>
-        <button onClick={() => deleteBookMutation.mutate(id)}>
+        <button onClick={() => handleDeleteClick}>
           <Trash size={24}></Trash>
         </button>
       </div>

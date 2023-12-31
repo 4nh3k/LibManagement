@@ -116,9 +116,9 @@ const ReaderConfig = () => {
                 Save
               </button>
 
-              <button className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'>
+              {/* <button className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'>
                 Undo
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

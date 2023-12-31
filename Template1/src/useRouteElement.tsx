@@ -128,7 +128,7 @@ export default function useRouteElement() {
 
             {
               path: 'books/:id',
-              element: <BookDetails />
+              element: <BookDetails/>
             },
             {
               path: path.transactions,
