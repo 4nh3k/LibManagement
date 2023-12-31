@@ -17,8 +17,7 @@ const BookListItem = ({ coverImg, title, description, id }: BookItemProps) => {
 
   const handleDeleteClick = () => {
     const confirmBox = window.confirm('Do you really want to delete this book?');
-    console.log('delete clicked'
-    )
+    console.log('delete clicked')
     if (confirmBox === true) {
       deleteBookMutation.mutate(id);
     }
@@ -40,7 +39,7 @@ const BookListItem = ({ coverImg, title, description, id }: BookItemProps) => {
         <Link to={`/admin/book/${id}`}>
           <PencilSimple size={24}></PencilSimple>
         </Link>
-        <button onClick={() => handleDeleteClick}>
+        <button onClick={handleDeleteClick}>
           <Trash size={24}></Trash>
         </button>
       </div>
