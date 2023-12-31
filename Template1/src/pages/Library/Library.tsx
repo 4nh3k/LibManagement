@@ -43,25 +43,9 @@ export default function Library() {
         id='horizontal-header'
         className='mb-10 mt-2 relative flex flex-col space-y-3 lg:flex-row lg:space-y-0 items-center justify-between ml-2 mr-6'
       >
-        {/* <DropdownList list={groupList}/> */}
-
         <Search query={filter} onChange={setFilter} />
 
-        <div id='button-container' className='inline space-x-[1.5rem] right-10'>
-          <Popover
-            placement='bottom'
-            hasArrow
-            renderPopover={
-              <ul className='bg-white p-2 rounded'>
-                <button className='font-medium' onClick={() => logoutMutation.mutate()}>
-                  Log out
-                </button>
-              </ul>
-            }
-          >
-            <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black' />
-          </Popover>
-        </div>
+        <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black' />
       </div>
 
       <div className='flex flex-col items-center md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 mb-5 mr-10'>
@@ -101,6 +85,7 @@ export default function Library() {
             />
           ))}
       </div>
+
       {(!isLoading || (books != undefined && books.length > 0)) && (
         <div className='align-center'>
           <Pagination totalPages={10} currentPage={1} onPageChange={null}></Pagination>
