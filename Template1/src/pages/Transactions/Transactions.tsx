@@ -38,7 +38,7 @@ const Transactions = () => {
 
       <div id='tab-navigator text-center'>
         <Tabs defaultIndex={searchParams.get('tab') === 'return' ? 1 : 0}>
-          <TabList className='flex flex-col lg:flex-row max-w-fit mb-1'>
+          <TabList>
             <Tab>Borrow Card</Tab>
             <Tab>Return Card</Tab>
             <Tab>Fee Card</Tab>

@@ -1,7 +1,4 @@
 import Table from 'src/components/Table/Table';
-import { borrowCardApi } from 'src/apis/borrow-card.api';
-import { useQuery } from '@tanstack/react-query';
-import { BorrowCardType } from 'src/types/borrow-card.type';
 import useBorrowCard from 'src/hooks/useBorrowCard';
 
 interface BorrowCardProps {
@@ -36,7 +33,6 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
 
   return (
     <div id='body' className='mt-5 m-3 lg:mr-20'>
-      <span className='text-xl font-bold'>Borrow Card List</span>
       <Table
         headers={headers}
         data={sortedBorrowCardData}

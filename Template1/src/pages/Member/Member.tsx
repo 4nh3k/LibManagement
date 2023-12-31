@@ -174,12 +174,9 @@ export default function Member() {
 
   return (
     <div className='w-full min-h-screen overflow-y-auto  lg:overflow-y-hidden'>
-      <select className='custom-select ml-5 mt-5'>
-        <option value='1'>All Members</option>
-      </select>
       <div className='w-full flex flex-col lg:flex-row'>
-        <div className='ml-5 mt-5 w-5/6 lg:w-2/5'>
-          <h2 className='text-xl lg:text-3xl text-primary2 font-bold'>All Members</h2>
+        <div className='pl-5 mt-5 w-5/6 lg:w-1/2'>
+          <h2 className='text-xl lg:text-3xl  font-bold'>All Members</h2>
 
           {!isLoading && data && (
             <SimpleTable
@@ -191,11 +188,11 @@ export default function Member() {
             ></SimpleTable>
           )}
         </div>
-        <div className='ml-4 lg:ml-12 mr-9 mt-5 w-5/6 lg:w-3/5'>
+        <div className='pl-8 pr-9 mt-5 w-5/6 lg:w-1/2'>
           <div className='flex items-center'>
-            <h2 className='text-xl lg:text-3xl text-primary2 font-bold'>Member latest record</h2>
+            <h2 className='text-xl lg:text-3xl  font-bold'>Member latest record</h2>
             {selectedRow !== null && (
-              <ul className='ml-auto flex space-x-4 text-primary2'>
+              <ul className='ml-auto flex space-x-4 '>
                 <li>
                   <button type='button' onClick={onEditMemberClick}>
                     <PencilSimple size={24} />
@@ -252,23 +249,23 @@ export default function Member() {
               className='hidden'
             /> */}
             <div className='flex flex-col lg:flex-row justify-between  lg:items-center'>
-              <label htmlFor='member-id' className='member-label text-lg mr-16'>
+              <label htmlFor='member-id' className='member-label'>
                 Member ID
               </label>
               <Input
                 id='member-id'
-                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[24rem]'
                 disabled={true}
                 value={selectedMember.id}
               />
             </div>
             <div className='flex flex-col lg:flex-row justify-between  lg:items-center'>
-              <label htmlFor='member-name' className='member-label mr-16'>
+              <label htmlFor='member-name' className='member-label'>
                 Name
               </label>
               <Input
                 id='member-name'
-                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[24rem]'
                 name='name'
                 readOnly={!onEditMember && selectedRow !== null}
                 required={true}
@@ -277,15 +274,15 @@ export default function Member() {
               />
             </div>
             <div className='flex flex-col lg:flex-row justify-between lg:items-center '>
-              <label htmlFor='member-email' className='member-label mr-16'>
+              <label htmlFor='member-email' className='member-label'>
                 Email
               </label>
               <Select
                 classNames={{
                   control: state =>
                     !state.isFocused
-                      ? 'rounded border-1 text-sm border-textboxBorder w-full lg:w-[32rem] focus:ring-0'
-                      : 'rounded border-1 text-sm border-textboxBorder w-full lg:w-[32rem]',
+                      ? 'rounded border-1 text-sm border-textboxBorder w-full lg:w-[24rem] focus:ring-0'
+                      : 'rounded border-1 text-sm border-textboxBorder w-full lg:w-[24rem]',
                   valueContainer: state => ''
                 }}
                 isDisabled={selectedRow !== null}
@@ -298,28 +295,28 @@ export default function Member() {
               {/* <Input
                 id='member-email'
                 name='email'
-                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[24rem]'
                 readOnly={!onEditMember && selectedRow !== null}
                 value={selectedMember.email}
                 onChange={handleInputChange}
               /> */}
             </div>
             <div className='flex flex-col lg:flex-row justify-between lg:items-center'>
-              <label htmlFor='member-readerType' className='member-label mr-16'>
+              <label htmlFor='member-readerType' className='member-label'>
                 Reader Type
               </label>
               <Input
                 id='member-readerType'
                 name='readerType'
                 required={true}
-                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[24rem]'
                 readOnly={!onEditMember && selectedRow !== null}
                 value={selectedMember.readerType}
                 onChange={handleInputChange}
               />
             </div>
             <div className='flex flex-col lg:flex-row justify-between  lg:items-center'>
-              <label htmlFor='member-dob' className='member-label mr-16'>
+              <label htmlFor='member-dob' className='member-label'>
                 Date of birth
               </label>
               <Input
@@ -329,33 +326,33 @@ export default function Member() {
                 min={min}
                 max={max}
                 required={true}
-                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[24rem]'
                 readOnly={!onEditMember && selectedRow !== null}
                 value={selectedMember.dob !== '' ? selectedMember.dob : ''}
                 onChange={handleInputChange}
               />
             </div>
             <div className='flex flex-col lg:flex-row justify-between lg:items-center'>
-              <label htmlFor='member-address' className='member-label mr-16'>
+              <label htmlFor='member-address' className='member-label'>
                 Address
               </label>
               <Input
                 id='member-address'
                 name='address'
                 required={true}
-                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[24rem]'
                 readOnly={!onEditMember && selectedRow !== null}
                 value={selectedMember.address}
                 onChange={handleInputChange}
               />
             </div>
             <div className='flex flex-col lg:flex-row justify-between lg:items-center'>
-              <label htmlFor='member-date' className='member-label mr-16'>
+              <label htmlFor='member-date' className='member-label'>
                 Member date
               </label>
               <Input
                 id='member-date'
-                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[32rem]'
+                className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[24rem]'
                 disabled={true}
                 value={selectedMember.date}
               />
@@ -380,7 +377,7 @@ export default function Member() {
           </form>
 
           <div className='flex mt-8'>
-            <h2 className='text-xl lg:text-3xl text-primary2 font-bold'>Borrowed History</h2>
+            <h2 className='text-xl lg:text-3xl  font-bold'>Borrowed History</h2>
             <select className='custom-select ml-auto'>
               <option value='1'>All</option>
             </select>

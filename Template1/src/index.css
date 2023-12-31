@@ -39,7 +39,7 @@ body {
 }
 
 .member-label {
-  @apply text-xl font-semibold text-primary2 whitespace-nowrap w-40;
+  @apply font-medium whitespace-nowrap w-40;
 }
 
 .custom-input {
@@ -75,11 +75,11 @@ body {
 }
 
 .react-tabs__tab-list {
-  @apply mb-2 p-0;
+  @apply relative flex flex-wrap list-none border-gray-200 border-b-2 space-x-2;
 }
 .react-tabs__tab {
-  @apply inline-block relative list-none px-4 py-2 cursor-pointer -bottom-px text-xl font-semibold;
+  @apply inline-block relative list-none px-4 py-2 cursor-pointer -bottom-px text-sm font-medium hover:border-primaryBorder hover:border-b-2 hover:text-primaryBtn;
 }
 .react-tabs__tab--selected {
-  @apply border-b-4 border-primaryBtn text-primaryBtn;
+  @apply border-b-2 border-primaryBtn text-primaryBtn hover:border-primaryBtn;
 }
