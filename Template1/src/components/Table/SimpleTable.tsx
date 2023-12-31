@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import icon_edit from '../../assets/img/edit.png';
-import icon_trash from '../../assets/img/trash.png';
+import { PiNotePencil, PiTrash } from 'react-icons/pi';
 interface Header {
   title: string;
   dataIndex: string;
@@ -77,14 +76,14 @@ const SimpleTable: React.FC<TableProps> = ({
                 <td className='px-6 py-4' key={header.dataIndex}>
                   {header.dataIndex === 'action' ? (
                     <div className='inline-flex gap-1 lg:gap-5'>
-                      <img alt='icon-edit' src={icon_edit}></img>
+                      <PiNotePencil className='text-primary' size={24} />
                       <button
                         type='button'
                         onClick={() => {
                           deleteAction && deleteAction(row);
                         }}
                       >
-                        <img alt='icon-trash' src={icon_trash}></img>
+                        <PiTrash className='text-red-500' size={24} />
                       </button>
                     </div>
                   ) : // If it's not a component, render the text

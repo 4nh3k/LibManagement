@@ -358,7 +358,7 @@ export default function Member() {
               />
             </div>
             {selectedRow === null && (
-              <button type='submit' className='primary-btn-fit block mt-5 ml-auto'>
+              <button type='submit' className='primary-btn-fit block w-20 mt-5 ml-auto'>
                 Add
               </button>
             )}
