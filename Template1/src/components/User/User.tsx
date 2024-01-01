@@ -1,9 +1,10 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import authApi from 'src/apis/auth.api';
 import { useAppContext } from 'src/contexts/app.contexts';
 import Popover from '../Popover';
+import { userApi } from 'src/apis/user.api';
 
 export default function User() {
   const { setIsAuthenticated } = useAppContext();
@@ -19,6 +20,16 @@ export default function User() {
       toast.error('Somethings went wrong.');
     }
   });
+
+  const { data: userInfo, isLoading } = useQuery({
+    queryKey: ['currentUser'],
+    queryFn: () => {
+      return userApi.getCurrentUserInformation();
+    }
+  });
+
+  const user = userInfo?.data.data.doc;
+  
   return (
     <Popover
       placement='bottom'
@@ -33,11 +44,15 @@ export default function User() {
     >
       <button className='flex items-center'>
         {/* <span className='hidden lg:inline-block mr-2 font-semibold'>Admin</span> */}
-        <img
-          src={'https://ui-avatars.com/api/?background=0D8ABC&color=fff'}
+        {!isLoading && (<img
+            src={
+              'https://ui-avatars.com/api/?background=0D8ABC&color=fff&' +
+              'name=' +
+              user.firstName + user.lastName
+            }
           alt='User'
           className='w-10 h-10 rounded-full border border-purple-100'
-        />
+        />)}
       </button>
     </Popover>
   );
