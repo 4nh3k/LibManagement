@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import SimpleTable from 'src/components/Table/SimpleTable';
+import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
-import useBorrowCard from 'src/hooks/useBorrowCard';
 import { toast } from 'react-toastify';
-import useReturnCard from 'src/hooks/useReturnCard';
 import LoadingIndicator from 'src/components/LoadingIndicator/LoadingIndicator';
+import SimpleTable from 'src/components/Table/SimpleTable';
+import useBorrowCard from 'src/hooks/useBorrowCard';
+import useReturnCard from 'src/hooks/useReturnCard';
 
 interface Props {
   id?: string;
@@ -12,69 +12,80 @@ interface Props {
 }
 const headers = [
   { dataIndex: 'bookName', title: 'Book Name' },
-  { dataIndex: 'quantity', title: 'Quantity' }
+  { dataIndex: 'quantity', title: 'Quantity' },
+  { dataIndex: 'lostQuantity', title: 'Lost Quantity' }
 ];
 interface OrderList {
   bookId: string;
   bookName: string;
   quantity: number;
+  lostQuantity: React.ReactNode;
 }
 // eslint-disable-next-line no-empty-pattern
 const ReturnCardForm: React.FC<Props> = ({ onToggle }) => {
   const [selectedBorrowCard, setSelectedBorrowCard] = useState(null);
-  const [selectedBook, setSelectedBook] = useState(null);
-  const [quantity, setQuantity] = useState(1);
-
-  const { getAllNotReturnedBorrowCardQuery } = useBorrowCard();
-
-  const handleBorrowCardChange = (value: any) => {
-    setSelectedBorrowCard(value);
-    setSelectedBook(null);
-    setQuantity(1);
-    setOrderList([]);
-  };
   const [orderList, setOrderList] = useState<OrderList[]>([]);
+  const { createReturnCardMutation } = useReturnCard();
+  const { getAllNotReturnedBorrowCardQuery } = useBorrowCard();
+  const { data: borrowCardData } = getAllNotReturnedBorrowCardQuery;
 
-  const handleAddBook = () => {
-    if (!selectedBook) {
-      toast.error('Please select a book');
-      return;
-    }
-    if (!quantity) {
-      toast.error('Please enter quantity');
-      return;
-    }
-    if (quantity < 1) {
-      toast.error('Please enter quantity greater than 0');
-      return;
-    }
-    const book = selectedBook;
-    const existingOrder = orderList.find(item => item.bookId === book.value);
-    if (quantity + existingOrder?.quantity > selectedBook?.quantity) {
-      toast.error('Please enter quantity less than book quantity');
-      return;
-    }
+  console.log('render');
+  useEffect(() => {
+    console.log('mounted');
+  }, []);
+  useEffect(() => {
+    console.log('Order list changed:', orderList);
+  }, [orderList]);
 
-    if (existingOrder) {
-      const updatedOrderList = orderList.map(item => {
-        if (item.bookId === book.value) {
-          return { ...item, quantity: item.quantity + quantity };
+  const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>, bookId: string) => {
+    setOrderList(prevOrderList =>
+      prevOrderList.map(item => {
+        if (item.bookId === bookId) {
+          return {
+            ...item,
+            lostQuantity: (
+              <input
+                className='w-10 sm:w-20 md:w-40'
+                name='init'
+                type='number'
+                min={0}
+                max={item.quantity}
+                required
+                onChange={e => handleQuantityChange(e, item.bookId)}
+                value={event.target.value}
+              />
+            )
+          };
         }
         return item;
-      });
-      setOrderList(updatedOrderList);
-    } else {
-      const newOrderList = [...orderList, { bookId: book.value, bookName: book.label, quantity }];
-      setOrderList(newOrderList);
-    }
+      })
+    );
   };
-  const handleUndo = () => {
-    const lastOrder = orderList[orderList.length - 1];
-    const updatedOrderList = orderList.filter(item => item !== lastOrder);
-    setOrderList(updatedOrderList);
+
+  const handleBorrowCardChange = (value: any) => {
+    const newOrderList = value.books.map(item => {
+      return {
+        bookId: item.bookId,
+        bookName: item.bookName,
+        quantity: item.quantity,
+        lostQuantity: (
+          <input
+            className='w-10 sm:w-20 md:w-40'
+            name='init'
+            type='number'
+            min={0}
+            max={item.quantity}
+            required
+            onChange={e => handleQuantityChange(e, item.bookId)}
+            value={0}
+          />
+        )
+      };
+    });
+    setOrderList(newOrderList);
+    setSelectedBorrowCard(value);
   };
-  const { data: borrowCardData } = getAllNotReturnedBorrowCardQuery;
-  const { createReturnCardMutation } = useReturnCard();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!selectedBorrowCard) {
@@ -82,9 +93,11 @@ const ReturnCardForm: React.FC<Props> = ({ onToggle }) => {
       return;
     }
     const data = {
-      lostBooks: orderList.map(item => {
-        return { bookId: item.bookId, quantity: item.quantity };
-      })
+      lostBooks: orderList
+        .filter(item => parseInt(item.lostQuantity.props.value) > 0)
+        .map(item => {
+          return { bookId: item.bookId, quantity: parseInt(item.lostQuantity.props.value) };
+        })
     };
     console.log(data);
     createReturnCardMutation.mutate(
@@ -100,105 +113,64 @@ const ReturnCardForm: React.FC<Props> = ({ onToggle }) => {
   return (
     <form onSubmit={handleSubmit}>
       <h2 className='font-bold text-xl'>Return Card</h2>
-      <div className='lg:flex'>
-        <div>
-          <div className='flex flex-col lg:flex-row lg:inline-flex gap-x-6'>
-            <div className='w-80 mt-5'>
-              <label className='custom-label' htmlFor='member-id'>
-                Borrow Card ID
-              </label>
-              <Select
-                classNames={{
-                  control: () => 'w-full'
-                }}
-                value={selectedBorrowCard}
-                placeholder='Select a user'
-                required={true}
-                onChange={handleBorrowCardChange}
-                options={borrowCardData}
-
-                // options={memberData?.data.data.doc.map(item => {
-                //   return { value: item._id, label: item.email, fullName: item.fullName };
-                // })}
-              />
-            </div>
-            <div className='w-72 mt-5'>
-              <label className='custom-label' htmlFor='member-name'>
-                Member name
-              </label>
-              <input
-                type='text'
-                className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded ring-indigo-500 focus:border-indigo-500 block w-full p-2 outline-none focus:ring-1'
-                disabled={true}
-                value={selectedBorrowCard?.fullName}
-                id='member-name'
-                placeholder='Enter member name'
-              />
-            </div>
-          </div>
-          <div className='mt-6'>
-            <label className='custom-label' htmlFor='book-name'>
-              Lost Book Name:
-            </label>
-            <div className='flex items-center'>
-              <Select
-                classNames={{
-                  control: () => 'w-80'
-                }}
-                value={selectedBook}
-                placeholder='Select a book'
-                required={true}
-                onChange={setSelectedBook}
-                options={selectedBorrowCard?.books || []}
-                //options={bookData}
-              />
-              <button type='button' className='ml-6 secondary-btn' onClick={handleAddBook}>
-                Add
-              </button>
-            </div>
-          </div>
-          <div className='w-80 mt-5'>
-            <label className='custom-label' htmlFor='number-of-book'>
-              Number Of Book Lost
-            </label>
-            <input
-              className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded ring-indigo-500 focus:border-indigo-500 block w-full p-2 outline-none focus:ring-1'
-              type='number'
-              value={quantity}
-              onChange={e => setQuantity(+e.target.value)}
-              min={1}
-              id='number-of-book'
-              placeholder='Enter number of book'
-            />
-          </div>
-        </div>
-        <div className='lg:ml-5 mt-5'>
-          <label className='custom-label' htmlFor='book-order-list'>
-            Book Lost List
+      <div className='md:flex'>
+        <div className='md:w-[32rem] mt-5 md:mr-4'>
+          <label className='custom-label' htmlFor='member-id'>
+            Borrow Card ID
           </label>
-          <SimpleTable
-            headers={headers}
-            data={orderList}
-            className='shadow-gray-400 shadow-sm rounded-md lg:w-[40rem]'
+          <Select
+            classNames={{
+              control: () => 'w-full'
+            }}
+            value={selectedBorrowCard}
+            placeholder='Select a user'
+            required={true}
+            onChange={handleBorrowCardChange}
+            options={borrowCardData}
+
+            // options={memberData?.data.data.doc.map(item => {
+            //   return { value: item._id, label: item.email, fullName: item.fullName };
+            // })}
           />
-          <button
-            type='button'
-            className='secondary-btn mt-4 lg:ml-auto block'
-            onClick={handleUndo}
-          >
-            Undo
-          </button>
+        </div>
+        <div className='md:w-[32rem] mt-5'>
+          <label className='custom-label' htmlFor='member-name'>
+            Member name
+          </label>
+          <input
+            type='text'
+            className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded ring-indigo-500 focus:border-indigo-500 block w-full p-2 outline-none focus:ring-1'
+            disabled={true}
+            value={selectedBorrowCard?.fullName}
+            id='member-name'
+            placeholder='Enter member name'
+          />
         </div>
       </div>
+      <div className=' mt-5'>
+        <label className='custom-label' htmlFor='book-order-list'>
+          Borrowed Book List
+        </label>
+        <SimpleTable
+          headers={headers}
+          data={orderList}
+          className='shadow-gray-400 shadow-sm rounded-md mt-2'
+        />
+      </div>
       {createReturnCardMutation.isLoading && (
-        <div className='w-20 mx-auto'>
+        <div className='w-20 mx-auto mt-9'>
           <LoadingIndicator />
         </div>
       )}
       {!createReturnCardMutation.isLoading && (
-        <button type='submit' className='primary-btn-fit p-4 mt-9 w-20 block mx-auto'>
-          Create
-        </button>
+        <div className='flex mt-9 w-60 space-x-6 mx-auto'>
+          <button type='submit' className='primary-btn-fit p-4 w-20 block'>
+            Create
+          </button>
+          <button type='button' onClick={onToggle} className='secondary-btn p-4 w-20 block '>
+            Cancel
+          </button>
+        </div>
       )}
     </form>
   );

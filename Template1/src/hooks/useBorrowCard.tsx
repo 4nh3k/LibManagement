@@ -49,10 +49,9 @@ const useBorrowCard = () => {
           fullName: item.borrower.fullName,
           borrowDate: new Date(item.borrowDate).toLocaleDateString('en-GB'),
           books: item.books.map(book => {
-            console.log(book);
             return {
-              value: book.bookId._id,
-              label: book.bookId.nameBook,
+              bookId: book.bookId._id,
+              bookName: book.bookId.nameBook,
               quantity: book.quantity
             };
           }),

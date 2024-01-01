@@ -46,6 +46,9 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
         onToggle={onToggle}
         searchBy={searchBy}
         deleteAction={handleDelete}
+        editAction={() => {
+          console.log('edit');
+        }}
       />
     </div>
   );
