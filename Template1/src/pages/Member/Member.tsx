@@ -6,6 +6,7 @@ import { borrowCardApi } from 'src/apis/borrow-card.api';
 import Input from 'src/components/Input';
 import LoadingIndicator from 'src/components/LoadingIndicator/LoadingIndicator';
 import SimpleTable from 'src/components/Table/SimpleTable';
+import User from 'src/components/User/User';
 import useMember from 'src/hooks/useMember';
 import { useUser } from 'src/hooks/useUser';
 import { BorrowCardType } from 'src/types/borrow-card.type';
@@ -174,6 +175,12 @@ export default function Member() {
 
   return (
     <div className='w-full min-h-screen overflow-y-auto  lg:overflow-y-hidden'>
+      <div id='horizontal-header' className='pl-2 pr-5 lg:pr-10 py-2'>
+        <div className='flex justify-between items-center'>
+          <span className='pl-5 text-xl lg:text-2xl font-bold'>Members</span>
+          <User />
+        </div>
+      </div>
       <div className='w-full flex flex-col lg:flex-row'>
         <div className='pl-5 mt-5 w-5/6 lg:w-1/2'>
           <h2 className='text-xl lg:text-3xl  font-bold'>All Members</h2>

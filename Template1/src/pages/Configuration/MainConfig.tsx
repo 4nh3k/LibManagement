@@ -4,6 +4,7 @@ import user_icon from '../../assets/img/user.png';
 import BookConfig from './Book/BookConfig';
 import ReaderConfig from './Reader/ReaderConfig';
 import TransactionConfig from './Transaction/TransactionConfig';
+import User from 'src/components/User/User';
 
 // import React, { useState } from 'react';
 const Configuration = () => {
@@ -14,7 +15,7 @@ const Configuration = () => {
           <div className='flex justify-between  items-center'>
             <span className='px-4 text-xl lg:text-2xl font-bold'>Configuration</span>
             <div className='inline'>
-              <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black'></Button>
+              <User></User>
             </div>
           </div>
         </div>
