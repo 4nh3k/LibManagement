@@ -9,7 +9,7 @@ import TransactionConfig from './Transaction/TransactionConfig';
 const Configuration = () => {
   return (
     <>
-      <div className='px-4 bg-background pt-2 w-full overflow-auto flex-1 flex-row h-screen'>
+      <div className='px-4 bg-white pt-2 w-full overflow-auto flex-1 flex-row h-screen'>
         <div className='pr-5 lg:pr-10 py-2'>
           <div className='flex justify-between  items-center'>
             <span className='px-4 text-xl lg:text-2xl font-bold'>Configuration</span>
