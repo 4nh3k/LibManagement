@@ -99,9 +99,8 @@ const Table: React.FC<TableProps> = ({
       buttons.push(
         <button
           key={i}
-          className={`bg-[#E0E0E0] hover:bg-[#aba1e7] text-white font-bold py-2 px-2 lg:px-3 rounded-lg mx-3 ${
-            currentPage === i ? 'bg-[#624DE3]' : ''
-          }`}
+          className={`bg-[#E0E0E0] hover:bg-[#aba1e7] text-white font-bold py-2 px-2 lg:px-3 rounded-lg mx-3`}
+          style={{ backgroundColor: currentPage === i ? '#624DE3' : '' }}
           onClick={() => handlePageChange(i)}
         >
           {i}
