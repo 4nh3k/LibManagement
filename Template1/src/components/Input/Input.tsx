@@ -16,7 +16,7 @@ export default function Input(props: InputProps) {
     ruleName,
     name,
     classNameInput = `custom-input`,
-    classNameError = 'ml-1 mt-1 min-h-[1.25rem] text-sm font-medium text-red-600',
+    classNameError = 'ml-1 mt-1 min-h-[1.25rem] text-xs font-medium text-red-600',
     register,
     ...rest
   } = props;

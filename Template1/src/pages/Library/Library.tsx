@@ -17,7 +17,7 @@ export default function Library() {
   const [isAuthorGrouped, setAuthorGroup] = useState(true);
   const [isPublishGrouped, setPublishGroup] = useState(true);
   const [filter, setFilter] = useState<string>('');
-
+  const [currentPage, setCurrentPage] = useState(1);
   const { setIsAuthenticated } = useAppContext();
 
   const { data: booksData, isLoading } = useQuery({
@@ -60,9 +60,9 @@ export default function Library() {
           ))}
       </div>
 
-      {(!isLoading || (books != undefined && books.length > 0)) && (
+      {(!isLoading || books != undefined || (books?.length || 0) > 0) && (
         <div className='align-center'>
-          <Pagination totalPages={10} currentPage={1} onPageChange={null}></Pagination>
+          <Pagination totalPages={10} currentPage={currentPage} onPageChange={setCurrentPage} />
         </div>
       )}
     </div>

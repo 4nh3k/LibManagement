@@ -2,7 +2,7 @@ import { Eye, EyeSlash } from '@phosphor-icons/react';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Schema, schema } from 'src/utils/rules';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
@@ -12,13 +12,11 @@ import Input from 'src/components/Input';
 import { useAppContext } from 'src/contexts/app.contexts';
 
 const loginSchema = schema.pick(['email', 'password']);
-
+type FormData = Pick<Schema, 'email' | 'password'>;
 export default function Login() {
-  const navigate = useNavigate();
   const { setIsAuthenticated, setProfile } = useAppContext();
 
   const [showPassword, setShowPassword] = useState(false);
-  type FormData = Pick<Schema, 'email' | 'password'>;
 
   const loginMutation = useMutation({
     mutationFn: (body: FormData) => authApi.login(body)

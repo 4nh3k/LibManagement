@@ -1,5 +1,5 @@
 export const URL_BASE = 'http://localhost:8000';
-export const URL_REGISTER = '/api/v1/user/register';
+export const URL_REGISTER = '/api/v1/users/signup';
 export const URL_LOGIN = '/api/v1/users/login';
 export const URL_LOGOUT = '/api/v1/users/logout';
 export const URL_USERS_ME = '/api/v1/users/me';

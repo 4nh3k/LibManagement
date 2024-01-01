@@ -1,13 +1,27 @@
+import classNames from 'classnames';
 import React from 'react';
 
-const Pagination = ({ totalPages, currentPage, onPageChange }) => {
+const Pagination = ({
+  totalPages,
+  currentPage,
+  onPageChange
+}: {
+  totalPages: number;
+  currentPage: number;
+  onPageChange: React.Dispatch<React.SetStateAction<number>>;
+}) => {
   const renderPageNumbers = () => {
     const pageNumbers = [];
 
     for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(
         <li key={i} className={i === currentPage ? 'active' : ''}>
-          <button onClick={() => onPageChange(i)} className='hover:underline'>
+          <button
+            onClick={() => onPageChange(i)}
+            className={classNames('hover:underline', {
+              underline: i === currentPage
+            })}
+          >
             {i}
           </button>
         </li>
