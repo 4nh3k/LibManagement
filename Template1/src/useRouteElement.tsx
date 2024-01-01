@@ -3,7 +3,7 @@ import Library from './pages/Library';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import FormLayout from './layouts/FormLayout';
-import ForgotPass from './pages/ForgotPass/ForgotPass';
+import ForgotPass from './pages/ForgotPassword/ForgotPass';
 import ResetPass from './pages/ResetPassword/ResetPass';
 import Transactions from './pages/Transactions';
 import BookDetails from './pages/BookDetails/BookDetails';
@@ -106,7 +106,7 @@ export default function useRouteElement() {
                 {
                   path: 'books/:id',
                   element: <BookDetails />
-                },
+                }
               ]
             },
             {
@@ -125,7 +125,7 @@ export default function useRouteElement() {
 
             {
               path: 'books/:id',
-              element: <BookDetails/>
+              element: <BookDetails />
             },
             {
               path: path.transactions,
