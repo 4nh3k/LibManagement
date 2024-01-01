@@ -1,17 +1,20 @@
+import { Rating } from 'react-simple-star-rating';
+
 interface RatingStarProps {
   className?: string;
-  rating: number;
+  initialValue?: number;
+  onClick?: (rate: number) => void;
+  readonly?: boolean;
 }
 
-function RatingStar({ rating, className }: RatingStarProps) {
-  const renderStar = (isFilled: boolean, key: number) => (
+function RatingStar({ className, initialValue, readonly, onClick }: RatingStarProps) {
+  const renderStar = (isFilled: boolean) => (
     <svg
-      key={key}
       xmlns='http://www.w3.org/2000/svg'
       fill='none'
       viewBox='0 0 26 26'
       strokeWidth='1'
-      className={`w-6 h-6 stroke-yellow-400 ${
+      className={`w-6 h-6 stroke-yellow-400 inline-block ${
         isFilled ? 'fill-yellow-400 stroke-none' : 'fill-transparent'
       }`}
     >
@@ -23,8 +26,20 @@ function RatingStar({ rating, className }: RatingStarProps) {
     </svg>
   );
 
-  const stars = Array.from({ length: 5 }, (_, index) => renderStar(index < rating, index));
-  return <div className={`flex ${className}`}>{stars}</div>;
+  return (
+    <div className={className}>
+      <Rating
+        initialValue={initialValue}
+        readonly={readonly}
+        onClick={onClick}
+        transition={true}
+        showTooltip={false}
+        //tooltipArray={['Terrible', 'Bad', 'Average', 'Great', 'Prefect']}
+        emptyIcon={renderStar(false)}
+        fillIcon={renderStar(true)}
+      />
+    </div>
+  );
 }
 
 export default RatingStar;

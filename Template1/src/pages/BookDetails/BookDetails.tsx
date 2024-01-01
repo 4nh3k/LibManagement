@@ -1,13 +1,14 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import Button from 'src/components/Button';
-import RatingStar from 'src/components/RatingStar/RatingStar';
-import user_icon from '../../assets/img/user.png';
 import { ArrowLeft } from '@phosphor-icons/react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { bookApi } from 'src/apis/book.api';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { bookApi } from 'src/apis/book.api';
+import Button from 'src/components/Button';
+import RatingStar from 'src/components/RatingStar/RatingStar';
 import { formatDate } from 'src/utils/helper';
+import user_icon from '../../assets/img/user.png';
 
 interface FormData {
   comment: string;
@@ -16,6 +17,10 @@ const BookDetails = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { id } = useParams<{ id: string }>();
+  const [rating, setRating] = useState(0);
+  const onRatingChange = (value: number) => {
+    setRating(value);
+  };
   const { data: bookData, isLoading } = useQuery({
     queryKey: ['books', id],
     queryFn: () => bookApi.getBook(id || '1')
@@ -31,7 +36,7 @@ const BookDetails = () => {
       return bookApi.addComment({
         bookId: id || '1',
         comment: data.comment,
-        rating: 4
+        rating: rating
       });
     },
     onSuccess: () => {
@@ -47,11 +52,15 @@ const BookDetails = () => {
     }
   });
   const { handleSubmit, reset, register } = useForm<FormData>();
-  const onSubmit = handleSubmit(data =>
+  const onSubmit = handleSubmit(data => {
+    if (rating === 0) {
+      toast.error('Please rate this book');
+      return;
+    }
     addCommentMutation.mutate({
       comment: data.comment
-    })
-  );
+    });
+  });
   const book = bookData?.data.data.doc;
 
   return (
@@ -119,7 +128,11 @@ const BookDetails = () => {
 
               <div className='flex items-center'>
                 <p className='text-xl font-semibold'>{book.ratingsAverage || 4}</p>
-                <RatingStar className='ml-5 scale-125' rating={book.ratingsAverage || 4} />
+                <RatingStar
+                  className='ml-5 scale-125'
+                  initialValue={book.ratingsAverage}
+                  readonly
+                />
               </div>
               <p className='text-justify leading-6 font-normal'>{book.description}</p>
             </div>
@@ -134,6 +147,7 @@ const BookDetails = () => {
               </div>
 
               <form onSubmit={onSubmit}>
+                <RatingStar initialValue={rating} onClick={onRatingChange} />
                 <div className='py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700'>
                   <label htmlFor='comment' className='sr-only'>
                     Your comment
