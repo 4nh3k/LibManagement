@@ -1,7 +1,8 @@
-import { SuccessResponse } from 'src/types/utils.type';
-import http from 'src/utils/http';
-import { URL_USERS, URL_USERS_ME } from 'src/constants/endpoint';
+import { URL_UPDATE_ME, URL_USERS, URL_USERS_ME } from 'src/constants/endpoint';
 import { User, UserInfo } from 'src/types/user.type';
+import { SuccessResponse } from 'src/types/utils.type';
+import { getProfileFromLS } from 'src/utils/auth';
+import http from 'src/utils/http';
 
 export const userApi = {
   getAllUser() {
@@ -17,6 +18,14 @@ export const userApi = {
         doc: UserInfo[];
       }>
     >(URL_USERS_ME, { params });
+  },
+  updateUserInformation(data: FormData) {
+    const profile = getProfileFromLS();
+    return http.patch<SuccessResponse<{ doc: UserInfo }>>(`${URL_UPDATE_ME}/${profile._id}`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
   },
   getFinancialMe() {
     return http.get<{
