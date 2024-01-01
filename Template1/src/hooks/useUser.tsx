@@ -16,7 +16,6 @@ export function useUser() {
       });
     }
   });
-
   return {
     getAllUserQuery
   };

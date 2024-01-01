@@ -177,13 +177,13 @@ export default function Member() {
     <div className='w-full min-h-screen overflow-y-auto  lg:overflow-y-hidden'>
       <div id='horizontal-header' className='pl-2 pr-5 lg:pr-10 py-2'>
         <div className='flex justify-between items-center'>
-          <span className='pl-5 text-xl lg:text-2xl font-bold'>Members</span>
+          <span className='pl-3 text-xl lg:text-2xl font-bold'>Members</span>
           <User />
         </div>
       </div>
       <div className='w-full flex flex-col lg:flex-row'>
         <div className='pl-5 mt-5 w-5/6 lg:w-1/2'>
-          <h2 className='text-xl lg:text-3xl  font-bold'>All Members</h2>
+          <h2 className='text-xl lg:text-xl  font-bold'>All Members</h2>
 
           {!isLoading && data && (
             <SimpleTable
@@ -198,7 +198,7 @@ export default function Member() {
         </div>
         <div className='pl-8 pr-9 mt-5 w-5/6 lg:w-1/2'>
           <div className='flex items-center'>
-            <h2 className='text-xl lg:text-3xl  font-bold'>Member latest record</h2>
+            <h2 className='text-xl lg:text-xl  font-bold'>Member latest record</h2>
             {selectedRow !== null && (
               <ul className='ml-auto flex space-x-4 '>
                 <li>
@@ -382,7 +382,7 @@ export default function Member() {
           </form>
 
           <div className='flex mt-8'>
-            <h2 className='text-xl lg:text-3xl  font-bold'>Borrowed History</h2>
+            <h2 className='text-xl lg:text-xl  font-bold'>Borrowed History</h2>
             <select className='custom-select ml-auto'>
               <option value='1'>All</option>
             </select>
