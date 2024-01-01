@@ -82,7 +82,16 @@ const SimpleTable: React.FC<TableProps> = ({
                 <td className='px-6 py-4' key={header.dataIndex}>
                   {header.dataIndex === 'action' ? (
                     <div className='inline-flex gap-1 lg:gap-5'>
-                      {editAction && <PiNotePencil className='text-primary' size={24} />}
+                      {editAction && (
+                        <button
+                          type='button'
+                          onClick={() => {
+                            editAction && editAction(row);
+                          }}
+                        >
+                          <PiNotePencil className='text-primary' size={24} />
+                        </button>
+                      )}
                       {deleteAction && (
                         <button
                           type='button'

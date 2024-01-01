@@ -20,6 +20,7 @@ interface TableProps {
   searchBy?: SearchBy[];
   onToggle?: () => void;
   deleteAction?: (row: any) => void;
+  editAction?: (row: any) => void;
   onAdd?: boolean;
 }
 
@@ -29,6 +30,7 @@ const Table: React.FC<TableProps> = ({
   onToggle,
   onAdd = true,
   deleteAction,
+  editAction,
   searchBy
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -99,8 +101,8 @@ const Table: React.FC<TableProps> = ({
       buttons.push(
         <button
           key={i}
-          className={`bg-[#E0E0E0] hover:bg-[#aba1e7] text-white font-bold py-2 px-2 lg:px-3 rounded-lg mx-3 ${
-            currentPage === i ? 'bg-[#624DE3]' : ''
+          className={`  text-white font-bold py-2 px-2 lg:px-3 rounded-lg mx-3 ${
+            currentPage === i ? 'bg-[#624DE3]' : 'bg-[#E0E0E0] hover:bg-[#aba1e7] '
           }`}
           onClick={() => handlePageChange(i)}
         >
@@ -163,6 +165,7 @@ const Table: React.FC<TableProps> = ({
         headers={headers}
         data={currentItems}
         deleteAction={deleteAction}
+        editAction={editAction}
       ></SimpleTable>
       <div className='flex mt-5 items-center'>
         <div

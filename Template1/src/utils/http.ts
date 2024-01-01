@@ -1,9 +1,8 @@
 import axios, { AxiosError, HttpStatusCode, type AxiosInstance } from 'axios';
-import { clearLS, getAccessTokenFromLS } from './auth';
 import { toast } from 'react-toastify';
-import { AuthResponse } from 'src/types/auth.type';
-import { request } from 'http';
 import { URL_BASE, URL_LOGIN, URL_LOGOUT, URL_REGISTER } from 'src/constants/endpoint';
+import { AuthResponse } from 'src/types/auth.type';
+import { clearLS, getAccessTokenFromLS } from './auth';
 
 class Http {
   private accessToken: string;
@@ -27,7 +26,6 @@ class Http {
 
     this.instance.interceptors.request.use(
       config => {
-        console.log(this.accessToken, config.headers);
         if (this.accessToken && config.headers) {
           config.headers.Authorization = `Bearer ${this.accessToken}`;
         }
@@ -43,7 +41,6 @@ class Http {
 
     this.instance.interceptors.response.use(response => {
       const { url } = response.config;
-      console.log(url);
       if (url === URL_LOGIN || url === URL_REGISTER) {
         const data = response.data as AuthResponse;
         this.accessToken = data.token;
