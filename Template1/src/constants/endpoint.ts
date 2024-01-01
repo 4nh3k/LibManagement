@@ -3,6 +3,7 @@ export const URL_REGISTER = '/api/v1/users/signup';
 export const URL_LOGIN = '/api/v1/users/login';
 export const URL_LOGOUT = '/api/v1/users/logout';
 export const URL_USERS_ME = '/api/v1/users/me';
+export const URL_UPDATE_ME = '/api/v1/users/update-me';
 export const URL_BOOKS = '/api/v1/books';
 export const URL_BORROW_CARD = '/api/v1/borrow-book-forms';
 export const URL_RETURN_CARD = '/api/v1/return-book-forms';

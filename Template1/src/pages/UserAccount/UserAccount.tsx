@@ -1,10 +1,9 @@
-import user_icon from '../../assets/img/user.png';
-import { PencilSimple, UploadSimple } from '@phosphor-icons/react';
-import { FileDrop } from 'react-file-drop';
-import Button from 'src/components/Button';
+import { PencilSimple } from '@phosphor-icons/react';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
 import { userApi } from 'src/apis/user.api';
-import { useQuery } from '@tanstack/react-query';
+import Button from 'src/components/Button';
 import User from 'src/components/User/User';
 const UserAccount = () => {
   const fileInputRef = useRef<File | null>(null);
@@ -79,6 +78,28 @@ const UserAccount = () => {
     });
   };
 
+  const updateUserInfo = useMutation({
+    mutationFn: (data: FormData) => {
+      return userApi.updateUserInformation(data);
+    },
+    onSuccess: () => {
+      toast.success('Update user information successfully');
+    },
+    onError: error => {
+      toast.error(error.response.data.message);
+    }
+  });
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const formdata = new FormData();
+    formdata.append('firstName', userInformation.firstName);
+    formdata.append('lastName', userInformation.lastName);
+    formdata.append('readerType', userInformation.readerType);
+    updateUserInfo.mutate(formdata);
+    console.log('submit');
+  };
+
   return (
     <div className='bg-white w-full h-screen overflow-auto px-4'>
       <div id='horizontal-header' className='pl-5 pr-5 lg:pr-10 py-2'>
@@ -89,7 +110,10 @@ const UserAccount = () => {
           </div>
         </div>
       </div>
-      <div className='flex flex-col lg:flex-row items-center align-middle lg:space-x-12 mt-5 lg:mt-20 lg:ml-5 space-y-5'>
+      <form
+        onSubmit={handleSubmit}
+        className='flex flex-col lg:flex-row items-center align-middle lg:space-x-12 mt-5 lg:mt-20 lg:ml-5 space-y-5'
+      >
         <div className='flex flex-col '>
           <div className='ml-auto'>
             <PencilSimple size={24} onClick={toggleEditUser}></PencilSimple>
@@ -165,13 +189,19 @@ const UserAccount = () => {
             <Button
               label={'Reset'}
               color={'white'}
+              type={'button'}
               bg_color={'#738296'}
               onclick={resetUserInformation}
             ></Button>
-            <Button label={'Save change'} color={'white'} bg_color={'#738296'}></Button>
+            <Button
+              label={'Save change'}
+              color={'white'}
+              type='submit'
+              bg_color={'#738296'}
+            ></Button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
