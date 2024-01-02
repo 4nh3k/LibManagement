@@ -1,74 +1,52 @@
+import { useState } from 'react';
+import { feeApi } from 'src/apis/fee.api';
 import Table from 'src/components/Table/Table';
-
+import { useQuery } from '@tanstack/react-query';
+import Fee from 'src/types/fee.type';
 interface Props {
   onToggle?: () => void;
 }
 
 const FeeCard: React.FC<Props> = ({ onToggle }) => {
   const headers = [
-    { title: 'Borrow Card ID', dataIndex: 'borrowCardID' },
-    { title: 'Admin ID', dataIndex: 'adminID' },
-    { title: 'Overtime book', dataIndex: 'overtimeBook' },
-    { title: 'Overtime day', dataIndex: 'overtimeDay' },
-    { title: 'Fee Charge', dataIndex: 'feeCharge' },
-    { title: 'Action', dataIndex: 'action' }
+    { title: 'Fee Card ID', dataIndex: '_id' },
+    { title: 'User Financials ID', dataIndex: 'userFinancials' },
+    { title: 'Total Debt', dataIndex: 'totalDebt' },
+    { title: 'Amount Paid', dataIndex: 'amountPaid' }
   ];
 
-  const data = [
-    {
-      borrowCardID: '#20462',
-      adminID: 'Hat',
-      overtimeBook: '5',
-      overtimeDay: '2',
-      feeCharge: '10.0$',
-      action: ''
-    },
-    {
-      borrowCardID: '#20462',
-      adminID: 'Hat',
-      overtimeBook: '5',
-      overtimeDay: '2',
-      feeCharge: '12.5$',
-      action: ''
-    },
-    {
-      borrowCardID: '#20462',
-      adminID: 'Hat',
-      overtimeBook: '5',
-      overtimeDay: '2',
-      feeCharge: '10.3$',
-      action: ''
-    },
-    {
-      borrowCardID: '#20462',
-      adminID: 'Hat',
-      overtimeBook: '5',
-      overtimeDay: '2',
-      feeCharge: '15.3$',
-      action: ''
-    },
-    {
-      borrowCardID: '#20462',
-      adminID: 'Hat',
-      overtimeBook: '5',
-      overtimeDay: '2',
-      feeCharge: '12.4$',
-      action: ''
-    },
-    {
-      borrowCardID: '#20462',
-      adminID: 'Hat',
-      overtimeBook: '5',
-      overtimeDay: '2',
-      feeCharge: '25.3$',
-      action: ''
+  const { data: feeData, isLoading } = useQuery({
+    queryKey: ['feeData'],
+    queryFn: () => feeApi.getAllFeeCard(),
+    select: data => {
+      return data.data.data.doc.map((item: Fee) => {
+        return {
+          _id: item._id,
+          userFinancials: item.userFinancials,
+          totalDebt: item.totalDebt.toFixed(2) + '$',
+          amountPaid: item.amountPaid.toFixed(2) + '$'
+        };
+      });
     }
+  });
+
+  const searchBy = [
+    { label: 'Fee Card ID', dataIndex: '_id' },
+    { label: 'User Financials ID', dataIndex: 'userFinancials' }
   ];
 
   return (
     <div id='body' className='mt-5 m-3 lg:mr-20'>
       <span className='text-xl font-bold'>Fee Card List</span>
-      <Table headers={headers} data={data} onToggle={onToggle} onAdd={false}></Table>
+      {!isLoading && feeData && (
+        <Table
+          headers={headers}
+          data={feeData}
+          onToggle={onToggle}
+          onAdd={false}
+          searchBy={searchBy}
+        ></Table>
+      )}
     </div>
   );
 };

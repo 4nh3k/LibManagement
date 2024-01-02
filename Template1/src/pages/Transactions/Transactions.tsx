@@ -51,8 +51,8 @@ const Transactions = () => {
           <TabList>
             <Tab>Borrow Card</Tab>
             <Tab>Return Card</Tab>
+            {/* <Tab>Remind Card</Tab> */}
             <Tab>Fee Card</Tab>
-            <Tab>Remind Card</Tab>
           </TabList>
 
           <TabPanel>
@@ -63,11 +63,11 @@ const Transactions = () => {
             {!showReturnForm && <ReturnCard onToggle={toggleReturnForm}></ReturnCard>}
             {showReturnForm && <ReturnCardForm onToggle={toggleReturnForm}></ReturnCardForm>}
           </TabPanel>
+          {/* <TabPanel>
+            <RemindCard />
+          </TabPanel> */}
           <TabPanel>
             <FeeCard />
-          </TabPanel>
-          <TabPanel>
-            <RemindCard />
           </TabPanel>
         </Tabs>
       </div>
