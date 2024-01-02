@@ -1,4 +1,4 @@
-import { DotsThreeOutline, PencilSimple, Trash } from '@phosphor-icons/react';
+import { PencilSimple, Trash } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import Select from 'react-select';
@@ -75,8 +75,9 @@ export default function Member() {
     isFetching: isMemberDataFetching,
     refetch
   } = useQuery({
-    queryKey: ['borrowers'],
-    queryFn: () => borrowCardApi.getAllBorrowCard({ borrower: id }),
+    queryKey: ['borrowers', selectedMember.id],
+    queryFn: () => borrowCardApi.getAllBorrowCard({ borrower: selectedMember.id }),
+    enabled: selectedMember.id !== '',
     select: data => {
       return data.data.data.doc.map((item: BorrowCardType) => {
         return {
@@ -117,8 +118,7 @@ export default function Member() {
     });
     console.log(row);
     setSelectedOption(userData.find(item => item.value === row.user) || null);
-    setId(row._id);
-    // refetch();
+    refetch();
   };
 
   const [onEditMember, setEditMember] = useState(false);

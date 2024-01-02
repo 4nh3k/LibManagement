@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import User from 'src/components/User/User';
 import { useAppContext } from 'src/contexts/app.contexts';
@@ -10,26 +10,15 @@ import FeeCard from './FeeCard/FeeCard';
 import ReturnCardForm from './ReturnCard/ReturnCardForm';
 import ReturnCardPage from './ReturnCard/ReturnCardPage';
 
-const getIndexOfTab = (tab: string | null) => {
-  switch (tab) {
-    case 'return':
-      return 1;
-    case 'fee':
-      return 2;
-    case 'remind':
-      return 3;
-    default:
-      return 0;
-  }
-};
-
 const Transactions = () => {
   const [showBorrowForm, setShowBorrowForm] = useState(false);
 
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const toggleBorrowForm = () => {
-    setShowBorrowForm(showBorrowForm => !showBorrowForm);
+    setShowBorrowForm(!showBorrowForm);
+    navigate('/admin/transactions');
   };
   const { profile } = useAppContext();
   const isAdmin = profile?.role === 'admin';
@@ -38,11 +27,42 @@ const Transactions = () => {
   if (!isAdmin) {
     getUserMemberCardQuery.refetch();
   }
-  console.log(data);
-  const [showReturnForm, setShowReturnForm] = useState(false);
 
+  const tab = searchParams.get('tab');
+  const id = searchParams.get('borrowCardId');
+
+  const [showReturnForm, setShowReturnForm] = useState(false);
+  const getSelectedIndex = () => {
+    switch (searchParams.get('tab')) {
+      case 'borrow':
+        return 0;
+      case 'return':
+        return 1;
+      case 'fee':
+        return 2;
+      default:
+        return 0;
+    }
+  };
+
+  useEffect(() => {
+    setSelectedIndex(getSelectedIndex());
+  }, [tab]);
+
+  useEffect(() => {
+    if (searchParams.get('borrowCardId')) {
+      setShowReturnForm(true);
+    }
+  }, [id]);
+
+  const onSelect = (index: number, lastIndex: number, event: Event) => {
+    setSelectedIndex(index);
+  };
+
+  const [selectedIndex, setSelectedIndex] = useState(getSelectedIndex());
   const toggleReturnForm = () => {
-    setShowReturnForm(showReturnForm => !showReturnForm);
+    navigate('/admin/transactions');
+    setShowReturnForm(!showReturnForm);
   };
 
   return (
@@ -58,7 +78,7 @@ const Transactions = () => {
       )}
       {(isAdmin || data?._id) && (
         <div id='tab-navigator text-center'>
-          <Tabs defaultIndex={getIndexOfTab(searchParams.get('tab'))}>
+          <Tabs onSelect={onSelect} selectedIndex={selectedIndex}>
             <TabList>
               <Tab>Borrow Card</Tab>
               <Tab>Return Card</Tab>
@@ -68,13 +88,15 @@ const Transactions = () => {
 
             <TabPanel>
               {!showBorrowForm && <BorrowCard onToggle={toggleBorrowForm} memberId={data?._id} />}
-              {showBorrowForm && <BorrowCardForm onToggle={toggleBorrowForm}></BorrowCardForm>}
+              {showBorrowForm && <BorrowCardForm onToggle={toggleBorrowForm} />}
             </TabPanel>
             <TabPanel>
               {!showReturnForm && (
                 <ReturnCardPage onToggle={toggleReturnForm} memberId={data?._id} />
               )}
-              {showReturnForm && <ReturnCardForm onToggle={toggleReturnForm}></ReturnCardForm>}
+              {showReturnForm && (
+                <ReturnCardForm onToggle={toggleReturnForm} id={searchParams.get('borrowCardId')} />
+              )}
             </TabPanel>
             {/* <TabPanel>
             <RemindCard />

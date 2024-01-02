@@ -13,6 +13,13 @@ export const borrowCardApi = {
       }>
     >(URL_BORROW_CARD, { params });
   },
+  getBorrowCardById(id: string) {
+    return http.get<
+      SuccessResponse<{
+        doc: BorrowCardType;
+      }>
+    >(`${URL_BORROW_CARD}/${id}`);
+  },
   createBorrowCard(data: CreateBorrowCardDto) {
     return http.post<SuccessResponse<BorrowCardType>>(URL_BORROW_CARD, data);
   },

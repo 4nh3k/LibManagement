@@ -1,4 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
+import { PiKeyReturn } from 'react-icons/pi';
+import { useNavigate } from 'react-router-dom';
 import { borrowCardApi } from 'src/apis/borrow-card.api';
 import Table from 'src/components/Table/Table';
 import { useAppContext } from 'src/contexts/app.contexts';
@@ -49,7 +51,7 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle, memberId }: BorrowCar
     }
   });
   const { data: UserBorrowCardData, isLoading: isUserBorrowCardLoading } = getUserBorrowCardQuery;
-
+  const navigate = useNavigate();
   const isAdmin = profile?.role === 'admin';
   if (isAdmin) getAllBorrowCardQuery.refetch();
   else getUserBorrowCardQuery.refetch();
@@ -70,6 +72,10 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle, memberId }: BorrowCar
     console.log(row);
     deleteBorrowCardMutation.mutate(row._id);
   };
+  const handleReturn = (row: any) => {
+    console.log(row);
+    navigate(`?tab=return&borrowCardId=${row._id}`);
+  };
 
   return (
     <div id='body' className='mt-5 m-3 lg:mr-20'>
@@ -79,9 +85,8 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle, memberId }: BorrowCar
         onToggle={onToggle}
         searchBy={searchBy}
         deleteAction={handleDelete}
-        editAction={() => {
-          console.log('edit');
-        }}
+        editIcon={<PiKeyReturn className='text-primary ' size={24} />}
+        editAction={handleReturn}
       />
     </div>
   );

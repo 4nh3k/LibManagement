@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useState } from 'react';
 import Select from 'react-select';
 import { toast } from 'react-toastify';
+import { borrowCardApi } from 'src/apis/borrow-card.api';
 import LoadingIndicator from 'src/components/LoadingIndicator/LoadingIndicator';
 import SimpleTable from 'src/components/Table/SimpleTable';
 import useBorrowCard from 'src/hooks/useBorrowCard';
 import useReturnCard from 'src/hooks/useReturnCard';
 
 interface Props {
-  id?: string;
+  id: string | null;
   onToggle?: () => void;
-  isAdmin?: boolean;
 }
 const headers = [
   { dataIndex: 'bookName', title: 'Book Name' },
@@ -23,21 +24,44 @@ interface OrderList {
   lostQuantity: React.ReactNode;
 }
 // eslint-disable-next-line no-empty-pattern
-const ReturnCardForm: React.FC<Props> = ({ onToggle, isAdmin = true }) => {
+const ReturnCardForm: React.FC<Props> = ({ onToggle, id }) => {
   const [selectedBorrowCard, setSelectedBorrowCard] = useState(null);
   const [orderList, setOrderList] = useState<OrderList[]>([]);
   const { createReturnCardMutation } = useReturnCard();
   const { getAllNotReturnedBorrowCardQuery } = useBorrowCard();
   const { data: borrowCardData } = getAllNotReturnedBorrowCardQuery;
-  getAllNotReturnedBorrowCardQuery.refetch();
 
-  console.log('render');
-  useEffect(() => {
-    console.log('mounted');
-  }, []);
-  useEffect(() => {
-    console.log('Order list changed:', orderList);
-  }, [orderList]);
+  const getBorrowCardQuery = useQuery({
+    queryKey: ['borrowCard', id],
+    queryFn: () => borrowCardApi.getBorrowCardById(id || ''),
+    enabled: id !== null,
+    select: data => {
+      const item = data.data.data.doc;
+      return {
+        value: item._id,
+        label: item._id,
+        fullName: item.borrower.fullName,
+        borrowDate: new Date(item.borrowDate).toLocaleDateString('en-GB'),
+        books: item.books.map(book => {
+          return {
+            bookId: book.bookId._id,
+            bookName: book.bookId.nameBook,
+            quantity: book.quantity
+          };
+        }),
+        expectedReturnDate: new Date(item.expectedReturnDate).toLocaleDateString('en-GB')
+      };
+    },
+    onSuccess: data => {
+      handleBorrowCardChange(data);
+    }
+  });
+  const { data: borrowCard } = getBorrowCardQuery;
+  if (id) {
+    //getBorrowCardQuery.refetch();
+  } else {
+    getAllNotReturnedBorrowCardQuery.refetch();
+  }
 
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>, bookId: string) => {
     setOrderList(prevOrderList =>
@@ -127,6 +151,7 @@ const ReturnCardForm: React.FC<Props> = ({ onToggle, isAdmin = true }) => {
             value={selectedBorrowCard}
             placeholder='Select a user'
             required={true}
+            isDisabled={id !== null}
             onChange={handleBorrowCardChange}
             options={borrowCardData}
 

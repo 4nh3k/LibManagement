@@ -21,6 +21,8 @@ interface TableProps {
   onToggle?: () => void;
   deleteAction?: (row: any) => void;
   editAction?: (row: any) => void;
+  editIcon?: React.ReactNode;
+  deleteIcon?: React.ReactNode;
   onAdd?: boolean;
 }
 
@@ -31,6 +33,8 @@ const Table: React.FC<TableProps> = ({
   onAdd = true,
   deleteAction,
   editAction,
+  editIcon,
+  deleteIcon,
   searchBy
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -165,6 +169,8 @@ const Table: React.FC<TableProps> = ({
         data={currentItems}
         deleteAction={deleteAction}
         editAction={editAction}
+        editIcon={editIcon}
+        deleteIcon={deleteIcon}
       ></SimpleTable>
       <div className='flex mt-5 items-center'>
         <div

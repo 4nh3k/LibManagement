@@ -42,8 +42,8 @@ const useBorrowCard = () => {
       select: data => {
         //console.log(data.data.data.doc);
 
+        console.log(data);
         return data.data.data.doc.map((item: BorrowCardType) => {
-          //console.log(item);
           return {
             value: item._id,
             label: item._id,

@@ -16,6 +16,8 @@ interface TableProps {
   editAction?: (row: any) => void;
   canSelected?: boolean;
   onRowClick?: (row: any) => void;
+  editIcon?: React.ReactNode;
+  deleteIcon?: React.ReactNode;
   nullMessage?: string;
 }
 
@@ -28,6 +30,8 @@ const SimpleTable: React.FC<TableProps> = ({
   selectedRow,
   deleteAction,
   editAction,
+  editIcon = <PiNotePencil className='text-primary' size={24} />,
+  deleteIcon = <PiTrash className='text-red-500' size={24} />,
   canSelected,
   nullMessage,
   onRowClick
@@ -53,7 +57,7 @@ const SimpleTable: React.FC<TableProps> = ({
   return (
     <div className={className}>
       <table className='w-full border-collapse table-auto bg-white text-left text-sm text-gray-500'>
-        <thead className={classNameHeader} style={{textAlign: 'center'}}>
+        <thead className={classNameHeader} style={{ textAlign: 'center' }}>
           <tr>
             {headers.map(header => (
               <th className='px-6 py-4 font-bold text-gray-900' key={header.dataIndex}>
@@ -63,14 +67,14 @@ const SimpleTable: React.FC<TableProps> = ({
           </tr>
         </thead>
         <tbody className='divide-y divide-gray-100 border-t  border-gray-100 text-center'>
-          {data.length === 0 && (
+          {data?.length === 0 && (
             <tr>
               <td colSpan={headers.length} className='text-center py-5'>
                 {nullMessage || 'No data'}
               </td>
             </tr>
           )}
-          {data.map((row, index) => (
+          {data?.map((row, index) => (
             <tr
               className={` ${
                 canSelected && getSelectedRow() === index ? 'bg-primary2/10' : 'hover:bg-[#F7F6FE]'
@@ -82,16 +86,16 @@ const SimpleTable: React.FC<TableProps> = ({
                 <td className='px-6 py-4' key={header.dataIndex}>
                   {header.dataIndex === 'action' ? (
                     <div className='inline-flex gap-1 lg:gap-5'>
-                      {/* {editAction && (
+                      {editAction && (
                         <button
                           type='button'
                           onClick={() => {
                             editAction && editAction(row);
                           }}
                         >
-                          <PiNotePencil className='text-primary' size={24} />
+                          {editIcon}
                         </button>
-                      )} */}
+                      )}
                       {deleteAction && (
                         <button
                           type='button'
@@ -99,7 +103,7 @@ const SimpleTable: React.FC<TableProps> = ({
                             deleteAction && deleteAction(row);
                           }}
                         >
-                          <PiTrash className='text-red-500' size={24} />
+                          {deleteIcon}
                         </button>
                       )}
                     </div>
