@@ -5,7 +5,7 @@ interface ReturnCardProps {
   onToggle?: () => void;
 }
 
-const ReturnCard: React.FC<ReturnCardProps> = ({ onToggle }) => {
+const ReturnCard: React.FC<ReturnCardProps> = ({ onToggle, isAdmin = true}) => {
   const headers = [
     { title: 'Return Card ID', dataIndex: 'returnCardId' },
     { title: 'Borrower', dataIndex: 'username' },
