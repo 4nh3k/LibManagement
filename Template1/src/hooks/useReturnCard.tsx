@@ -15,13 +15,12 @@ const useReturnCard = () => {
         item.lostBooks.forEach(lostBook => {
           totalAmount += lostBook.quantity;
         });
+        console.log(item);
         return {
           returnCardId: shortenID(item._id),
           username: item.borrowBookForm.borrower.fullName,
           returnDate: new Date(item.returnDate).toLocaleDateString('en-GB'),
-          expectedReturnDate: new Date(item.borrowBookForm.expectedReturnDate).toLocaleDateString(
-            'en-GB'
-          ),
+          expectedReturnDate: new Date(item.expectedReturnDate).toLocaleDateString('en-GB'),
           lostBook: totalAmount,
           fee: item.fee.toFixed(2) + '$'
         };

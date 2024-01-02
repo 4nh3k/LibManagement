@@ -20,11 +20,12 @@ const useBorrowCard = () => {
   const getAllBorrowCardQuery = useQuery({
     queryKey: ['BorrowCardType'],
     queryFn: () => borrowCardApi.getAllBorrowCard(),
-    enable: false,
+    enabled: false,
     select: data => {
       return data.data.data.doc.map((item: BorrowCardType) => {
         return {
           borrowCardId: shortenID(item._id),
+          _id: item._id,
           borrower: item.borrower != null ? item.borrower.fullName : 'N/A',
           borrowDate: new Date(item.borrowDate).toLocaleDateString('en-GB'),
           expectedReturnDate: new Date(item.expectedReturnDate).toLocaleDateString('en-GB'),
@@ -34,32 +35,34 @@ const useBorrowCard = () => {
     }
   });
 
-  const getAllNotReturnedBorrowCardQuery = useQuery({
-    queryKey: ['NotReturnBorrowCardType'],
-    queryFn: () => borrowCardApi.getAllBorrowCard({ isReturned: false }),
-    enable: false,
-    select: data => {
-      //console.log(data.data.data.doc);
+  const getAllNotReturnedBorrowCardQuery = useQuery(
+    ['NotReturnBorrowCardType'],
+    () => borrowCardApi.getAllBorrowCard({ isReturned: false }),
+    {
+      select: data => {
+        //console.log(data.data.data.doc);
 
-      return data.data.data.doc.map((item: BorrowCardType) => {
-        //console.log(item);
-        return {
-          value: item._id,
-          label: item._id,
-          fullName: item.borrower.fullName,
-          borrowDate: new Date(item.borrowDate).toLocaleDateString('en-GB'),
-          books: item.books.map(book => {
-            return {
-              bookId: book.bookId._id,
-              bookName: book.bookId.nameBook,
-              quantity: book.quantity
-            };
-          }),
-          expectedReturnDate: new Date(item.expectedReturnDate).toLocaleDateString('en-GB')
-        };
-      });
+        return data.data.data.doc.map((item: BorrowCardType) => {
+          //console.log(item);
+          return {
+            value: item._id,
+            label: item._id,
+            fullName: item.borrower.fullName,
+            borrowDate: new Date(item.borrowDate).toLocaleDateString('en-GB'),
+            books: item.books.map(book => {
+              return {
+                bookId: book.bookId._id,
+                bookName: book.bookId.nameBook,
+                quantity: book.quantity
+              };
+            }),
+            expectedReturnDate: new Date(item.expectedReturnDate).toLocaleDateString('en-GB')
+          };
+        });
+      },
+      enabled: false
     }
-  });
+  );
 
   const deleteBorrowCardMutation = useMutation({
     mutationFn: (id: string) => borrowCardApi.deleteBorrowCard(id),

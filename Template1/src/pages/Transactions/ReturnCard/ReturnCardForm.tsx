@@ -28,6 +28,7 @@ const ReturnCardForm: React.FC<Props> = ({ onToggle }) => {
   const { createReturnCardMutation } = useReturnCard();
   const { getAllNotReturnedBorrowCardQuery } = useBorrowCard();
   const { data: borrowCardData } = getAllNotReturnedBorrowCardQuery;
+  getAllNotReturnedBorrowCardQuery.refetch();
 
   console.log('render');
   useEffect(() => {

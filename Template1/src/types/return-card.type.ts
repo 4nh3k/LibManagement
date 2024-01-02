@@ -3,7 +3,7 @@ type ReturnCard = {
   borrower: {
     _id: string;
     fullName: string;
-  };
+  } | null;
   lostBooks: {
     bookId: {
       _id: string;
@@ -19,8 +19,10 @@ type ReturnCard = {
       _id: string;
       fullName: string;
     };
-    expectedReturnDate: string;
+    borrowDate: string;
   };
   fee: number;
   returnDate: string;
+  __v?: number;
+  expectedReturnDate?: string;
 };

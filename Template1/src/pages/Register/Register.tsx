@@ -127,7 +127,7 @@ export default function Register() {
 
       <div className='mt-1 flex'>
         <span className='text-xs text-primaryBorder'>Already have a account?</span>
-        <Link className='ml-auto text-primary hover:text-primaryBtn' to='login'>
+        <Link className='ml-auto text-primary hover:text-primaryBtn' to='/login'>
           <span className='text-xs'>Sign in</span>
         </Link>
       </div>

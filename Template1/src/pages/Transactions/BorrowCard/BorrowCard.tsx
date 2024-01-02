@@ -23,6 +23,7 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
   ];
   const { getAllBorrowCardQuery, deleteBorrowCardMutation } = useBorrowCard();
   const { data: BorrowCardData, isLoading } = getAllBorrowCardQuery;
+  getAllBorrowCardQuery.refetch();
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -35,7 +36,7 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
 
   const handleDelete = (row: any) => {
     console.log(row);
-    deleteBorrowCardMutation.mutate(row.borrowCardId);
+    deleteBorrowCardMutation.mutate(row._id);
   };
 
   return (
