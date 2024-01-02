@@ -5,7 +5,7 @@ interface BorrowCardProps {
   onToggle?: () => void;
 }
 
-const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle }) => {
+const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle, isAdmin = true }) => {
   const headers = [
     { title: 'Borrow Card ID', dataIndex: 'borrowCardId' },
     { title: 'Borrower', dataIndex: 'borrower' },

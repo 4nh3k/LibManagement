@@ -10,6 +10,7 @@ import useMember from 'src/hooks/useMember';
 interface Props {
   id?: string;
   onToggle?: () => void;
+  isAdmin?: boolean;
 }
 const headers = [
   { dataIndex: 'bookName', title: 'Book Name' },
@@ -23,7 +24,7 @@ interface OrderList {
   quantityInput?: React.ReactNode;
 }
 // eslint-disable-next-line no-empty-pattern
-const BorrowCardForm: React.FC<Props> = ({ onToggle }) => {
+const BorrowCardForm: React.FC<Props> = ({ onToggle, isAdmin= true }) => {
   const [selectedMember, setSelectedMember] = useState(null);
   const [selectedBook, setSelectedBook] = useState(null);
   const [quantityList, setQuantityList] = useState<Map<string, number>>(new Map());

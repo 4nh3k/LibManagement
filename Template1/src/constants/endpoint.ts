@@ -10,3 +10,4 @@ export const URL_RETURN_CARD = '/api/v1/return-book-forms';
 export const URL_READERS = '/api/v1/readers';
 export const URL_USERS = '/api/v1/users';
 export const URL_FORGOT_PASSWORD = 'api/v1/users/forgot-password';
+export const URL_FEE = 'api/v1/fee-receipts/';

@@ -9,6 +9,7 @@ import useReturnCard from 'src/hooks/useReturnCard';
 interface Props {
   id?: string;
   onToggle?: () => void;
+  isAdmin?: boolean;
 }
 const headers = [
   { dataIndex: 'bookName', title: 'Book Name' },
@@ -22,7 +23,7 @@ interface OrderList {
   lostQuantity: React.ReactNode;
 }
 // eslint-disable-next-line no-empty-pattern
-const ReturnCardForm: React.FC<Props> = ({ onToggle }) => {
+const ReturnCardForm: React.FC<Props> = ({ onToggle, isAdmin = true }) => {
   const [selectedBorrowCard, setSelectedBorrowCard] = useState(null);
   const [orderList, setOrderList] = useState<OrderList[]>([]);
   const { createReturnCardMutation } = useReturnCard();

@@ -22,7 +22,7 @@ const getIndexOfTab = (tab: string | null) => {
   }
 };
 
-const Transactions = () => {
+const Transactions = ({ isAdmin = true }) => {
   const [showBorrowForm, setShowBorrowForm] = useState(false);
 
   const [searchParams] = useSearchParams();
@@ -51,24 +51,32 @@ const Transactions = () => {
           <TabList>
             <Tab>Borrow Card</Tab>
             <Tab>Return Card</Tab>
-            <Tab>Fee Card</Tab>
-            <Tab>Remind Card</Tab>
+            {/* <Tab>Remind Card</Tab> */}
+            {isAdmin && <Tab>Fee Card</Tab>}
           </TabList>
 
           <TabPanel>
-            {!showBorrowForm && <BorrowCard onToggle={toggleBorrowForm} />}
-            {showBorrowForm && <BorrowCardForm onToggle={toggleBorrowForm}></BorrowCardForm>}
+            {!showBorrowForm && <BorrowCard onToggle={toggleBorrowForm} isAdmin={isAdmin} />}
+            {showBorrowForm && (
+              <BorrowCardForm onToggle={toggleBorrowForm} isAdmin={isAdmin}></BorrowCardForm>
+            )}
           </TabPanel>
           <TabPanel>
-            {!showReturnForm && <ReturnCard onToggle={toggleReturnForm}></ReturnCard>}
-            {showReturnForm && <ReturnCardForm onToggle={toggleReturnForm}></ReturnCardForm>}
+            {!showReturnForm && (
+              <ReturnCard onToggle={toggleReturnForm} isAdmin={isAdmin}></ReturnCard>
+            )}
+            {showReturnForm && (
+              <ReturnCardForm onToggle={toggleReturnForm} isAdmin={isAdmin}></ReturnCardForm>
+            )}
           </TabPanel>
-          <TabPanel>
-            <FeeCard />
-          </TabPanel>
-          <TabPanel>
+          {/* <TabPanel>
             <RemindCard />
-          </TabPanel>
+          </TabPanel> */}
+          {isAdmin && (
+            <TabPanel>
+              <FeeCard />
+            </TabPanel>
+          )}
         </Tabs>
       </div>
     </div>

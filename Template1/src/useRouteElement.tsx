@@ -129,7 +129,7 @@ export default function useRouteElement() {
             },
             {
               path: path.transactions,
-              element: <p>User transaction</p>
+              element: <Transactions isAdmin={false} />
             },
             {
               path: path.payment,
