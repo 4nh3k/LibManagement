@@ -8,6 +8,7 @@ const useReturnCard = () => {
   const getAllReturnCardQuery = useQuery({
     queryKey: ['ReturnCard'],
     queryFn: () => returnCardApi.getAllReturnCard(),
+    enabled: false,
     select: data => {
       return data.data.data.doc.map((item: ReturnCard) => {
         let totalAmount = 0;

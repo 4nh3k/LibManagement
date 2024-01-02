@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import User from 'src/components/User/User';
+import { useAppContext } from 'src/contexts/app.contexts';
+import useMember from 'src/hooks/useMember';
 import BorrowCard from './BorrowCard/BorrowCard';
 import BorrowCardForm from './BorrowCard/BorrowCardForm';
 import FeeCard from './FeeCard/FeeCard';
-import RemindCard from './RemindCard/RemindCard';
-import ReturnCard from './ReturnCard/ReturnCard';
 import ReturnCardForm from './ReturnCard/ReturnCardForm';
+import ReturnCardPage from './ReturnCard/ReturnCardPage';
 
 const getIndexOfTab = (tab: string | null) => {
   switch (tab) {
@@ -22,7 +23,7 @@ const getIndexOfTab = (tab: string | null) => {
   }
 };
 
-const Transactions = ({ isAdmin = true }) => {
+const Transactions = () => {
   const [showBorrowForm, setShowBorrowForm] = useState(false);
 
   const [searchParams] = useSearchParams();
@@ -30,7 +31,14 @@ const Transactions = ({ isAdmin = true }) => {
   const toggleBorrowForm = () => {
     setShowBorrowForm(showBorrowForm => !showBorrowForm);
   };
-
+  const { profile } = useAppContext();
+  const isAdmin = profile?.role === 'admin';
+  const { getUserMemberCardQuery } = useMember();
+  const { data, isLoading } = getUserMemberCardQuery;
+  if (!isAdmin) {
+    getUserMemberCardQuery.refetch();
+  }
+  console.log(data);
   const [showReturnForm, setShowReturnForm] = useState(false);
 
   const toggleReturnForm = () => {
@@ -45,40 +53,40 @@ const Transactions = ({ isAdmin = true }) => {
           <User />
         </div>
       </div>
+      {!isAdmin && !data?._id && (
+        <div className='text-center'>You don&apos;t have a member card.</div>
+      )}
+      {(isAdmin || data?._id) && (
+        <div id='tab-navigator text-center'>
+          <Tabs defaultIndex={getIndexOfTab(searchParams.get('tab'))}>
+            <TabList>
+              <Tab>Borrow Card</Tab>
+              <Tab>Return Card</Tab>
+              {/* <Tab>Remind Card</Tab> */}
+              {isAdmin && <Tab>Fee Card</Tab>}
+            </TabList>
 
-      <div id='tab-navigator text-center'>
-        <Tabs defaultIndex={getIndexOfTab(searchParams.get('tab'))}>
-          <TabList>
-            <Tab>Borrow Card</Tab>
-            <Tab>Return Card</Tab>
-            {/* <Tab>Remind Card</Tab> */}
-            {isAdmin && <Tab>Fee Card</Tab>}
-          </TabList>
-
-          <TabPanel>
-            {!showBorrowForm && <BorrowCard onToggle={toggleBorrowForm} isAdmin={isAdmin} />}
-            {showBorrowForm && (
-              <BorrowCardForm onToggle={toggleBorrowForm} isAdmin={isAdmin}></BorrowCardForm>
-            )}
-          </TabPanel>
-          <TabPanel>
-            {!showReturnForm && (
-              <ReturnCard onToggle={toggleReturnForm} isAdmin={isAdmin}></ReturnCard>
-            )}
-            {showReturnForm && (
-              <ReturnCardForm onToggle={toggleReturnForm} isAdmin={isAdmin}></ReturnCardForm>
-            )}
-          </TabPanel>
-          {/* <TabPanel>
+            <TabPanel>
+              {!showBorrowForm && <BorrowCard onToggle={toggleBorrowForm} memberId={data?._id} />}
+              {showBorrowForm && <BorrowCardForm onToggle={toggleBorrowForm}></BorrowCardForm>}
+            </TabPanel>
+            <TabPanel>
+              {!showReturnForm && (
+                <ReturnCardPage onToggle={toggleReturnForm} memberId={data?._id} />
+              )}
+              {showReturnForm && <ReturnCardForm onToggle={toggleReturnForm}></ReturnCardForm>}
+            </TabPanel>
+            {/* <TabPanel>
             <RemindCard />
           </TabPanel> */}
-          {isAdmin && (
-            <TabPanel>
-              <FeeCard />
-            </TabPanel>
-          )}
-        </Tabs>
-      </div>
+            {isAdmin && (
+              <TabPanel>
+                <FeeCard />
+              </TabPanel>
+            )}
+          </Tabs>
+        </div>
+      )}
     </div>
   );
 };

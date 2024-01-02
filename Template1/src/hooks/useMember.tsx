@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { type AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import { memberApi } from 'src/apis/member.api';
+import { useAppContext } from 'src/contexts/app.contexts';
 import Member from 'src/types/readerMember.type';
 import { SuccessResponse } from 'src/types/utils.type';
 
@@ -11,6 +12,14 @@ const useMember = () => {
     queryFn: () => memberApi.getAllMembers()
   });
   const { refetch } = getMemberQuery;
+  const { profile } = useAppContext();
+
+  const getUserMemberCardQuery = useQuery({
+    queryKey: ['userReaders', profile?._id],
+    queryFn: () => memberApi.getUserMember(profile?._id ?? ''),
+    select: data => data?.data.data.doc[0],
+    enabled: false
+  });
 
   const createMemberMutation = useMutation({
     mutationKey: ['createMember'],
@@ -63,7 +72,13 @@ const useMember = () => {
     }
   );
 
-  return { getMemberQuery, createMemberMutation, updateMemberMutation, deleteMemberMutation };
+  return {
+    getMemberQuery,
+    getUserMemberCardQuery,
+    createMemberMutation,
+    updateMemberMutation,
+    deleteMemberMutation
+  };
 };
 
 export default useMember;

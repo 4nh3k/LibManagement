@@ -4,13 +4,13 @@ import Select from 'react-select';
 import { toast } from 'react-toastify';
 import { bookApi } from 'src/apis/book.api';
 import SimpleTable from 'src/components/Table/SimpleTable';
+import { useAppContext } from 'src/contexts/app.contexts';
 import useBorrowCard from 'src/hooks/useBorrowCard';
 import useMember from 'src/hooks/useMember';
 
 interface Props {
   id?: string;
   onToggle?: () => void;
-  isAdmin?: boolean;
 }
 const headers = [
   { dataIndex: 'bookName', title: 'Book Name' },
@@ -24,13 +24,15 @@ interface OrderList {
   quantityInput?: React.ReactNode;
 }
 // eslint-disable-next-line no-empty-pattern
-const BorrowCardForm: React.FC<Props> = ({ onToggle, isAdmin= true }) => {
+const BorrowCardForm: React.FC<Props> = ({ onToggle }) => {
   const [selectedMember, setSelectedMember] = useState(null);
   const [selectedBook, setSelectedBook] = useState(null);
   const [quantityList, setQuantityList] = useState<Map<string, number>>(new Map());
   const { createBorrowCardMutation } = useBorrowCard();
   const { getMemberQuery } = useMember();
   const { data: memberData } = getMemberQuery;
+  const { profile } = useAppContext();
+  const isAdmin = profile?.role === 'admin';
   const { data: bookData } = useQuery({
     queryKey: ['book'],
     queryFn: () => bookApi.getAllBooks(),
@@ -163,8 +165,9 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle, isAdmin= true }) => {
                 classNames={{
                   control: () => 'w-full'
                 }}
-                value={selectedMember}
+                value={isAdmin ? selectedMember : { value: profile?._id, label: profile?.email }}
                 placeholder='Select a user'
+                isDisabled={!isAdmin}
                 required={true}
                 onChange={setSelectedMember}
                 options={memberData?.data.data.doc.map(item => {
@@ -180,7 +183,9 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle, isAdmin= true }) => {
                 type='text'
                 className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded ring-indigo-500 focus:border-indigo-500 block w-full p-2 outline-none focus:ring-1'
                 disabled={true}
-                value={selectedMember?.fullName}
+                value={
+                  isAdmin ? selectedMember?.fullName : profile?.firstName + ' ' + profile?.lastName
+                }
                 id='member-name'
                 placeholder='Enter member name'
               />

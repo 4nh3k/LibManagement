@@ -1,23 +1,22 @@
-import { Navigate, Outlet, type RouteObject, useRoutes } from 'react-router-dom';
+import { Navigate, Outlet, useRoutes, type RouteObject } from 'react-router-dom';
+import { path } from './constants/path';
+import { useAppContext } from './contexts/app.contexts';
+import FormLayout from './layouts/FormLayout';
+import MainLayout from './layouts/MainLayout/MainLayout';
+import BookDetails from './pages/BookDetails/BookDetails';
+import BookList from './pages/BookList/BookList';
+import BookPage from './pages/BookPage/BookPage';
+import Configuration from './pages/Configuration/MainConfig';
+import ForgotPass from './pages/ForgotPassword/ForgotPass';
 import Library from './pages/Library';
 import Login from './pages/Login';
+import Member from './pages/Member';
+import Payment from './pages/Payment';
 import Register from './pages/Register';
-import FormLayout from './layouts/FormLayout';
-import ForgotPass from './pages/ForgotPassword/ForgotPass';
 import ResetPass from './pages/ResetPassword/ResetPass';
 import Transactions from './pages/Transactions';
-import BookDetails from './pages/BookDetails/BookDetails';
-import BookPage from './pages/BookPage/BookPage';
-import Payment from './pages/Payment';
-import Configuration from './pages/Configuration/MainConfig';
-import Member from './pages/Member';
-import { path } from './constants/path';
-import MainLayout from './layouts/MainLayout/MainLayout';
-import { useAppContext } from './contexts/app.contexts';
-import UserAccount from './pages/UserAccount/UserAccount';
-import BookList from './pages/BookList/BookList';
-import EditBookForm from './pages/BookPage/EditBookForm';
 import TransactionSuccess from './pages/Transactions/TransactionResult/TransactionSuccess';
+import UserAccount from './pages/UserAccount/UserAccount';
 
 function AdminRoute() {
   const { isAuthenticated, profile } = useAppContext();
@@ -129,7 +128,7 @@ export default function useRouteElement() {
             },
             {
               path: path.transactions,
-              element: <Transactions isAdmin={false} />
+              element: <Transactions />
             },
             {
               path: path.payment,

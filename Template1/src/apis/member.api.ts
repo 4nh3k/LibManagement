@@ -1,8 +1,8 @@
+import { URL_READERS } from 'src/constants/endpoint';
 import Member from 'src/types/readerMember.type';
 import { SuccessResponse } from 'src/types/utils.type';
-import http from 'src/utils/http';
-import { URL_READERS } from 'src/constants/endpoint';
 import { Validation } from 'src/types/validation.type';
+import http from 'src/utils/http';
 
 export const memberApi = {
   getAllMembers() {
@@ -11,6 +11,9 @@ export const memberApi = {
         doc: Member[];
       }>
     >(URL_READERS);
+  },
+  getUserMember(id: string) {
+    return http.get<SuccessResponse<{ doc: Member[] }>>(`${URL_READERS}?user=${id}`);
   },
   createMember(data: CreateMemberDto) {
     return http.post<

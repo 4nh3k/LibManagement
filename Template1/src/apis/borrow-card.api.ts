@@ -6,6 +6,7 @@ import http from 'src/utils/http';
 
 export const borrowCardApi = {
   getAllBorrowCard(params?: any) {
+    console.log(params);
     return http.get<
       SuccessResponse<{
         doc: BorrowCardType[];
