@@ -93,8 +93,12 @@ export default function Member() {
   const { data: userData } = getAllUserQuery;
 
   const handleDeleteMember = () => {
-    if (selectedMember.id === '') return;
-    deleteMemberMutation.mutate(selectedMember.id);
+    const confirmBox = window.confirm('Do you really want to delete this member?');
+    console.log('delete clicked');
+    if (confirmBox === true) {
+      if (selectedMember.id === '') return;
+      deleteMemberMutation.mutate(selectedMember.id);
+    }
   };
 
   const onRowSelected = (row, index) => {

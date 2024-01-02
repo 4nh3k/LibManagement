@@ -9,6 +9,7 @@ import Button from 'src/components/Button';
 import RatingStar from 'src/components/RatingStar/RatingStar';
 import { formatDate } from 'src/utils/helper';
 import user_icon from '../../assets/img/user.png';
+import User from 'src/components/User/User';
 
 interface FormData {
   comment: string;
@@ -69,7 +70,7 @@ const BookDetails = () => {
         <button onClick={() => navigate(-1)}>
           <ArrowLeft size={32} />
         </button>
-        <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black' />
+        <User />
       </div>
 
       {isLoading && (

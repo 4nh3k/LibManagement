@@ -53,7 +53,7 @@ const SimpleTable: React.FC<TableProps> = ({
   return (
     <div className={className}>
       <table className='w-full border-collapse table-auto bg-white text-left text-sm text-gray-500'>
-        <thead className={classNameHeader}>
+        <thead className={classNameHeader} style={{textAlign: 'center'}}>
           <tr>
             {headers.map(header => (
               <th className='px-6 py-4 font-bold text-gray-900' key={header.dataIndex}>
@@ -62,7 +62,7 @@ const SimpleTable: React.FC<TableProps> = ({
             ))}
           </tr>
         </thead>
-        <tbody className='divide-y divide-gray-100 border-t  border-gray-100'>
+        <tbody className='divide-y divide-gray-100 border-t  border-gray-100 text-center'>
           {data.length === 0 && (
             <tr>
               <td colSpan={headers.length} className='text-center py-5'>
@@ -82,7 +82,7 @@ const SimpleTable: React.FC<TableProps> = ({
                 <td className='px-6 py-4' key={header.dataIndex}>
                   {header.dataIndex === 'action' ? (
                     <div className='inline-flex gap-1 lg:gap-5'>
-                      {editAction && (
+                      {/* {editAction && (
                         <button
                           type='button'
                           onClick={() => {
@@ -91,7 +91,7 @@ const SimpleTable: React.FC<TableProps> = ({
                         >
                           <PiNotePencil className='text-primary' size={24} />
                         </button>
-                      )}
+                      )} */}
                       {deleteAction && (
                         <button
                           type='button'
