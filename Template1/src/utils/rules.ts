@@ -10,8 +10,8 @@ export const schema = yup.object({
   password: yup
     .string()
     .required('Password is required')
-    .min(10, 'The length of password should be 10 - 255 characters')
-    .max(255, 'The length of password should be 10 - 255 characters'),
+    .min(5, 'The length of password should be 5 - 255 characters')
+    .max(255, 'The length of password should be 5 - 255 characters'),
   username: yup
     .string()
     .required('Username is required')
