@@ -1,14 +1,14 @@
-import { Eye, EyeSlash } from '@phosphor-icons/react';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Eye, EyeSlash } from '@phosphor-icons/react';
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import authApi from 'src/apis/auth.api';
 import Input from 'src/components/Input';
 import { useQueryString } from 'src/hooks/useQueryString';
 import { schema } from 'src/utils/rules';
-import authApi from 'src/apis/auth.api';
-import { useMutation } from '@tanstack/react-query';
 
 const resetSchema = schema.pick(['password', 'confirmPassword']);
 const ResetPass = () => {

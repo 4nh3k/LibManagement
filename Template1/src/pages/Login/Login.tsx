@@ -1,15 +1,15 @@
-import { Eye, EyeSlash } from '@phosphor-icons/react';
-import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Eye, EyeSlash } from '@phosphor-icons/react';
+import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { Schema, schema } from 'src/utils/rules';
-import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { setAccessTokenToLS, setProfileToLS } from 'src/utils/auth';
 import authApi from 'src/apis/auth.api';
 import Input from 'src/components/Input';
 import { useAppContext } from 'src/contexts/app.contexts';
+import { setAccessTokenToLS, setProfileToLS } from 'src/utils/auth';
+import { Schema, schema } from 'src/utils/rules';
 
 const loginSchema = schema.pick(['email', 'password']);
 type FormData = Pick<Schema, 'email' | 'password'>;
@@ -53,7 +53,7 @@ export default function Login() {
 
   return (
     <form onSubmit={onSubmit} noValidate>
-      <h1 className='text-3xl text-center text-primary2 mb-7 font-bold'>Sign in</h1>
+      <h1 className='text-3xl text-center text-gray-800 mb-7 font-bold'>Sign in</h1>
       {/* USERNAME */}
       <>
         <label htmlFor='email' className='block custom-label mb-1'>

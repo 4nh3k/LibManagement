@@ -18,7 +18,8 @@ const Transactions = () => {
 
   const toggleBorrowForm = () => {
     setShowBorrowForm(!showBorrowForm);
-    navigate('/admin/transactions');
+    if (isAdmin) navigate('/admin/transactions');
+    else navigate('/transactions');
   };
   const { profile } = useAppContext();
   const isAdmin = profile?.role === 'admin';
@@ -61,7 +62,8 @@ const Transactions = () => {
 
   const [selectedIndex, setSelectedIndex] = useState(getSelectedIndex());
   const toggleReturnForm = () => {
-    navigate('/admin/transactions');
+    if (isAdmin) navigate('/admin/transactions');
+    else navigate('/transactions');
     setShowReturnForm(!showReturnForm);
   };
 
@@ -88,7 +90,9 @@ const Transactions = () => {
 
             <TabPanel>
               {!showBorrowForm && <BorrowCard onToggle={toggleBorrowForm} memberId={data?._id} />}
-              {showBorrowForm && <BorrowCardForm onToggle={toggleBorrowForm} />}
+              {showBorrowForm && (
+                <BorrowCardForm onToggle={toggleBorrowForm} memberId={data?._id} />
+              )}
             </TabPanel>
             <TabPanel>
               {!showReturnForm && (

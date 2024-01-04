@@ -11,6 +11,7 @@ import useMember from 'src/hooks/useMember';
 interface Props {
   id?: string;
   onToggle?: () => void;
+  memberId?: string;
 }
 const headers = [
   { dataIndex: 'bookName', title: 'Book Name' },
@@ -24,7 +25,7 @@ interface OrderList {
   quantityInput?: React.ReactNode;
 }
 // eslint-disable-next-line no-empty-pattern
-const BorrowCardForm: React.FC<Props> = ({ onToggle }) => {
+const BorrowCardForm: React.FC<Props> = ({ onToggle, memberId }) => {
   const [selectedMember, setSelectedMember] = useState(null);
   const [selectedBook, setSelectedBook] = useState(null);
   const [quantityList, setQuantityList] = useState<Map<string, number>>(new Map());
@@ -47,7 +48,7 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle }) => {
 
   const onSubmit = event => {
     event.preventDefault();
-    if (!selectedMember) {
+    if (!selectedMember && isAdmin) {
       toast.error('Please select a member');
       return;
     }
@@ -56,7 +57,7 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle }) => {
       return;
     }
     const data = {
-      borrower: selectedMember.value,
+      borrower: isAdmin ? selectedMember.value : memberId,
       books: orderList.map(item => {
         return { bookId: item.bookId, quantity: quantityList.get(item.bookId) };
       })
@@ -79,7 +80,7 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle }) => {
               ...item,
               quantityInput: (
                 <input
-                  className='w-10 sm:w-20 md:w-40'
+                  className='w-10 sm:w-20 md:w-40 text-center'
                   type='number'
                   min={1}
                   required
@@ -109,7 +110,7 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle }) => {
           bookName: book.label,
           quantityInput: (
             <input
-              className='w-10 sm:w-20 md:w-40'
+              className='w-10 sm:w-20 md:w-40 text-center'
               type='number'
               min={1}
               required

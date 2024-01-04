@@ -32,7 +32,7 @@ export default function Library() {
     <div className='w-full h-screen overflow-auto px-5'>
       <div
         id='horizontal-header'
-        className='mb-4 mt-5 relative flex flex-col space-y-3 lg:flex-row lg:space-y-0 items-center justify-between ml-2 mr-6'
+        className='mb-4 mt-6 relative flex flex-col space-y-3 lg:flex-row lg:space-y-0 items-center justify-between ml-2 mr-7'
       >
         <Search query={filter} onChange={setFilter} />
 

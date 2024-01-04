@@ -84,7 +84,7 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle, memberId }: BorrowCar
         data={sortedBorrowCardData}
         onToggle={onToggle}
         searchBy={searchBy}
-        deleteAction={handleDelete}
+        deleteAction={isAdmin ? handleDelete : undefined}
         editIcon={<PiKeyReturn className='text-primary ' size={24} />}
         editAction={handleReturn}
       />

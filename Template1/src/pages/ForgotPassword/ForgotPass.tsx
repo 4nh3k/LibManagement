@@ -34,7 +34,7 @@ const ForgotPass = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <h1 className='text-3xl text-center text-primary2 mb-7 font-bold'>Forgot Password</h1>
+      <h1 className='text-3xl text-center text-gray-800 mb-7 font-bold'>Forgot Password</h1>
       <p className='text-sm font-semibold text-center text'>
         Enter your email and we&apos;ll send you a link to reset your password.
       </p>

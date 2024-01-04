@@ -61,9 +61,9 @@ const ReturnCardPage: React.FC<ReturnCardProps> = ({ onToggle, memberId }: Retur
   return (
     <div>
       <div id='body' className='mt-5 m-3 lg:mr-20'>
-        <span className='text-xl font-bold'>Return Card List</span>
         <Table
           headers={headers}
+          onAdd={isAdmin}
           data={isAdmin ? ReturnCardData : UserReturnCardData}
           onToggle={onToggle}
           searchBy={searchBy}

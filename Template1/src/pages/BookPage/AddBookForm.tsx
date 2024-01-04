@@ -1,19 +1,19 @@
 import React, { useRef, useState } from 'react';
 import Button from 'src/components/Button';
 // import user_icon from '../../assets/img/user.png';
-import upload_img from '../../assets/img/upload-img.png';
-import submit_img from '../../assets/img/submit.png';
+import { useQuery } from '@tanstack/react-query';
 import { FileDrop } from 'react-file-drop';
-import { CreateBookDto } from 'src/types/create-book.dto';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { bookApi } from 'src/apis/book.api';
-import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 import Select from 'react-select';
+import { toast } from 'react-toastify';
+import { bookApi } from 'src/apis/book.api';
 import genresOptions from 'src/assets/json/genres.json';
 import languagesOptions from 'src/assets/json/lang.json';
-import useBook from 'src/hooks/useBook';
 import LoadingIndicator from 'src/components/LoadingIndicator/LoadingIndicator';
-import { useParams } from 'react-router-dom';
+import useBook from 'src/hooks/useBook';
+import { CreateBookDto } from 'src/types/create-book.dto';
+import submit_img from '../../assets/img/submit.png';
+import upload_img from '../../assets/img/upload-img.png';
 
 interface Props {
   id?: string;
@@ -162,8 +162,8 @@ function AddBookForm({ onToggle }: Props) {
   };
 
   return (
-    <form onSubmit={onSubmit} className='flex flex-col mb-10'>
-      <div id='horizontal-header' className='flex items-center relative mt-5 mb-10'>
+    <form onSubmit={onSubmit} className='flex flex-col '>
+      <div id='horizontal-header' className='flex items-center relative mt-5 mb-4'>
         <h2 className='font-bold text-xl'>{id ? 'Update Book' : 'Add Book'}</h2>
       </div>
       <div className='flex flex-col gap-y-5 lg:flex-row gap-x-20'>

@@ -1,9 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import edit_icon from '../../../assets/img/edit.png';
-import { memberApi } from 'src/apis/member.api';
-import { Validation } from 'src/types/validation.type';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { memberApi } from 'src/apis/member.api';
+import { Validation } from 'src/types/validation.type';
+import edit_icon from '../../../assets/img/edit.png';
 const BookConfig = () => {
   const { data: validationData, isLoading } = useQuery({
     queryKey: ['validation'],
