@@ -1,9 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import money_icon from '../../assets/icons/dollar.svg';
-import { userApi } from 'src/apis/user.api';
 import { useState } from 'react';
-import Spinner from 'src/components/Spinner';
 import { toast } from 'react-toastify';
+import { userApi } from 'src/apis/user.api';
+import Spinner from 'src/components/Spinner';
+import money_icon from '../../assets/icons/dollar.svg';
 function PaymentForm() {
   const {
     data: financialData,
@@ -36,7 +36,7 @@ function PaymentForm() {
             <span className='text-[2.5rem] block'>{userFinancial?.balance}$</span>
           </div>
           <div className=''>
-            <div id='top-up-account' className='mb-5 w-full pr-10'>
+            <div id='top-up-account' className='mb-5 w-full'>
               <div
                 id='top-up-account-label'
                 className='inline-flex flex-row items-center align-middle mb-10 text-2xl'

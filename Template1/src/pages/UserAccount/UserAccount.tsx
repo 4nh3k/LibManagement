@@ -101,7 +101,7 @@ const UserAccount = () => {
   };
 
   return (
-    <div className='bg-white w-full h-screen overflow-auto px-4'>
+    <div className='w-full h-screen overflow-auto p-4'>
       <div id='horizontal-header' className='pl-5 pr-5 lg:pr-10 py-2'>
         <div className='flex justify-between items-center'>
           <span className='text-xl lg:text-2xl font-bold'>Account</span>
@@ -112,9 +112,9 @@ const UserAccount = () => {
       </div>
       <form
         onSubmit={handleSubmit}
-        className='flex flex-col lg:flex-row items-center align-middle lg:space-x-12 mt-5 lg:mt-20 lg:ml-5 space-y-5'
+        className='flex flex-col lg:flex-row items-center lg:mt-20 lg:ml-5 '
       >
-        <div className='flex flex-col '>
+        <div className='flex flex-col mx-auto'>
           <div className='ml-auto'>
             <PencilSimple size={24} onClick={toggleEditUser}></PencilSimple>
           </div>

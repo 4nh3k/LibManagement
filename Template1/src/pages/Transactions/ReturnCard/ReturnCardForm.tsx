@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { borrowCardApi } from 'src/apis/borrow-card.api';
 import LoadingIndicator from 'src/components/LoadingIndicator/LoadingIndicator';
 import SimpleTable from 'src/components/Table/SimpleTable';
+import { useAppContext } from 'src/contexts/app.contexts';
 import useBorrowCard from 'src/hooks/useBorrowCard';
 import useReturnCard from 'src/hooks/useReturnCard';
 
@@ -30,7 +31,8 @@ const ReturnCardForm: React.FC<Props> = ({ onToggle, id }) => {
   const { createReturnCardMutation } = useReturnCard();
   const { getAllNotReturnedBorrowCardQuery } = useBorrowCard();
   const { data: borrowCardData } = getAllNotReturnedBorrowCardQuery;
-
+  const { profile } = useAppContext();
+  const isAdmin = profile?.role === 'admin';
   const getBorrowCardQuery = useQuery({
     queryKey: ['borrowCard', id],
     queryFn: () => borrowCardApi.getBorrowCardById(id || ''),
@@ -71,7 +73,7 @@ const ReturnCardForm: React.FC<Props> = ({ onToggle, id }) => {
             ...item,
             lostQuantity: (
               <input
-                className='w-10 sm:w-20 md:w-40'
+                className='w-10 sm:w-20 md:w-40 text-center'
                 name='init'
                 type='number'
                 min={0}
@@ -96,7 +98,7 @@ const ReturnCardForm: React.FC<Props> = ({ onToggle, id }) => {
         quantity: item.quantity,
         lostQuantity: (
           <input
-            className='w-10 sm:w-20 md:w-40'
+            className='w-10 sm:w-20 md:w-40 text-center'
             name='init'
             type='number'
             min={0}
@@ -138,7 +140,6 @@ const ReturnCardForm: React.FC<Props> = ({ onToggle, id }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2 className='font-bold text-xl'>Return Card</h2>
       <div className='md:flex'>
         <div className='md:w-[32rem] mt-5 md:mr-4'>
           <label className='custom-label' htmlFor='member-id'>
@@ -191,11 +192,13 @@ const ReturnCardForm: React.FC<Props> = ({ onToggle, id }) => {
       )}
       {!createReturnCardMutation.isLoading && (
         <div className='flex mt-9 w-60 space-x-6 mx-auto'>
-          <button type='submit' className='primary-btn-fit p-4 w-20 block'>
-            Create
-          </button>
+          {isAdmin && (
+            <button type='submit' className='primary-btn-fit p-4 w-20 block'>
+              Create
+            </button>
+          )}
           <button type='button' onClick={onToggle} className='secondary-btn p-4 w-20 block '>
-            Cancel
+            {isAdmin ? 'Cancel' : 'Back'}
           </button>
         </div>
       )}

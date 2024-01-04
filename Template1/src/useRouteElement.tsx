@@ -103,6 +103,10 @@ export default function useRouteElement() {
                   element: <BookPage />
                 },
                 {
+                  path: 'book/:id',
+                  element: <BookPage />
+                },
+                {
                   path: 'books/:id',
                   element: <BookDetails />
                 }

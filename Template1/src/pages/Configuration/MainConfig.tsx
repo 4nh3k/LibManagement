@@ -1,16 +1,14 @@
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
-import Button from 'src/components/Button';
-import user_icon from '../../assets/img/user.png';
+import User from 'src/components/User/User';
 import BookConfig from './Book/BookConfig';
 import ReaderConfig from './Reader/ReaderConfig';
 import TransactionConfig from './Transaction/TransactionConfig';
-import User from 'src/components/User/User';
 
 // import React, { useState } from 'react';
 const Configuration = () => {
   return (
     <>
-      <div className='px-4 bg-white pt-2 w-full overflow-auto flex-1 flex-row h-screen'>
+      <div className='px-4 pt-2 w-full overflow-auto flex-1 flex-row h-screen'>
         <div className='pr-5 lg:pr-10 py-2'>
           <div className='flex justify-between  items-center'>
             <span className='px-4 text-xl lg:text-2xl font-bold'>Configuration</span>

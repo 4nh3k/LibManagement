@@ -48,7 +48,7 @@ export default function Register() {
 
   return (
     <form onSubmit={onSubmit}>
-      <h1 className='text-3xl text-center text-primary2 mb-7 font-bold'>Sign up</h1>
+      <h1 className='text-3xl text-center text-gray-800 mb-7 font-bold'>Sign up</h1>
       <label htmlFor='email' className='block custom-label'>
         Email
       </label>

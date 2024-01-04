@@ -1,8 +1,7 @@
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
-import Button from 'src/components/Button';
-import user_icon from '../../assets/img/user.png';
-import TopUp from './TopUp/TopUp';
+import User from 'src/components/User/User';
 import PaymentForm from './PaymentForm';
+import TopUp from './TopUp/TopUp';
 
 // import React, { useState } from 'react';
 const Payment = () => {
@@ -13,7 +12,7 @@ const Payment = () => {
           <div className='flex justify-between items-center'>
             <span className='text-xl lg:text-2xl font-bold'>Payment</span>
             <div className='inline'>
-              <Button label='User' bg_color='#E0E0E0' icon={user_icon} color='black'></Button>
+              <User></User>
             </div>
           </div>
         </div>
