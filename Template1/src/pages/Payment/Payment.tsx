@@ -17,7 +17,7 @@ const Payment = () => {
       </div>
     );
   return (
-    <div className='bg-white w-full h-full overflow-hidden p-4 '>
+    <div className='w-full h-full overflow-hidden p-4 '>
       <div id='horizontal-header' className='pl-2 pr-5 lg:pr-10 py-2'>
         <div className='flex justify-between items-center'>
           <span className='text-xl lg:text-2xl font-bold'>Transaction</span>
