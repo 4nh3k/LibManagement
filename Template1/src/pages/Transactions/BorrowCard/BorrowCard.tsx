@@ -76,6 +76,10 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle, memberId }: BorrowCar
     console.log(row);
     navigate(`?tab=return&borrowCardId=${row._id}`);
   };
+  const handleSelected = (row: any, index: number) => {
+    navigate(`?tab=borrow&borrowCardId=${row._id}`);
+    console.log(row, index);
+  };
 
   return (
     <div id='body' className='mt-5 m-3 lg:mr-20'>
@@ -85,6 +89,8 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle, memberId }: BorrowCar
         onToggle={onToggle}
         searchBy={searchBy}
         deleteAction={isAdmin ? handleDelete : undefined}
+        canSelected={true}
+        onSelected={handleSelected}
         editIcon={<PiKeyReturn className='text-primary ' size={24} />}
         editAction={handleReturn}
       />

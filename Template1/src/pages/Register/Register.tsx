@@ -65,13 +65,13 @@ export default function Register() {
       </div>
 
       <label htmlFor='username' className='block custom-label mt-3'>
-        Username
+        Full name
       </label>
       <Input
         className='custom-input'
         id='username'
         type='text'
-        placeholder='Username'
+        placeholder='Full name'
         register={register}
         name='username'
         errorMessage={errors.username?.message}

@@ -51,9 +51,12 @@ const Transactions = () => {
   }, [tab]);
 
   useEffect(() => {
-    if (searchParams.get('borrowCardId')) {
+    if (searchParams.get('borrowCardId') && searchParams.get('tab') === 'return') {
       setShowReturnForm(true);
-    }
+    } else
+      searchParams.get('borrowCardId') &&
+        searchParams.get('tab') === 'borrow' &&
+        setShowBorrowForm(true);
   }, [id]);
 
   const onSelect = (index: number, lastIndex: number, event: Event) => {
@@ -76,7 +79,10 @@ const Transactions = () => {
         </div>
       </div>
       {!isAdmin && !data?._id && (
-        <div className='text-center'>You don&apos;t have a member card.</div>
+        <div className='text-center font-medium mt-10'>
+          <p>You don&apos;t have a member card.</p>
+          <p>Please visit the library to create one.</p>
+        </div>
       )}
       {(isAdmin || data?._id) && (
         <div id='tab-navigator text-center'>
@@ -91,7 +97,11 @@ const Transactions = () => {
             <TabPanel>
               {!showBorrowForm && <BorrowCard onToggle={toggleBorrowForm} memberId={data?._id} />}
               {showBorrowForm && (
-                <BorrowCardForm onToggle={toggleBorrowForm} memberId={data?._id} />
+                <BorrowCardForm
+                  onToggle={toggleBorrowForm}
+                  memberId={data?._id}
+                  id={searchParams.get('borrowCardId')}
+                />
               )}
             </TabPanel>
             <TabPanel>

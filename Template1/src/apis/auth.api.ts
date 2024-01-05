@@ -1,4 +1,4 @@
-import { URL_REGISTER, URL_LOGIN, URL_LOGOUT, URL_FORGOT_PASSWORD } from 'src/constants/endpoint';
+import { URL_FORGOT_PASSWORD, URL_LOGIN, URL_LOGOUT, URL_REGISTER } from 'src/constants/endpoint';
 import { AuthResponse } from 'src/types/auth.type';
 import http from 'src/utils/http';
 
@@ -19,6 +19,13 @@ const authApi = {
   },
   resetPassword(body: { password: string; confirmPassword: string; token: string }) {
     return http.patch(`/api/v1/users/reset-password/${body.token}`, {
+      password: body.password,
+      passwordConfirm: body.confirmPassword
+    });
+  },
+  changePassword(body: { passwordCurrent: string; password: string; confirmPassword: string }) {
+    return http.patch('/api/v1/users/update-my-password', {
+      passwordCurrent: body.passwordCurrent,
       password: body.password,
       passwordConfirm: body.confirmPassword
     });

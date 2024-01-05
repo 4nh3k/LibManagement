@@ -80,46 +80,55 @@ const SimpleTable: React.FC<TableProps> = ({
                 canSelected && getSelectedRow() === index ? 'bg-primary2/10' : 'hover:bg-[#F7F6FE]'
               }`}
               key={index}
-              onClick={() => handleRowClick(row, index)}
             >
               {headers.map(header => (
-                <td className='px-6 py-4' key={header.dataIndex}>
+                <>
                   {header.dataIndex === 'action' ? (
-                    <div className='inline-flex gap-1 lg:gap-5'>
-                      {editAction && (
-                        <button
-                          type='button'
-                          onClick={() => {
-                            editAction && editAction(row);
-                          }}
-                        >
-                          {editIcon}
-                        </button>
-                      )}
-                      {deleteAction && (
-                        <button
-                          type='button'
-                          onClick={() => {
-                            deleteAction && deleteAction(row);
-                          }}
-                        >
-                          {deleteIcon}
-                        </button>
-                      )}
-                    </div>
-                  ) : // If it's not a component, render the text
-                  row[header.dataIndex] !== undefined ? (
-                    typeof row[header.dataIndex] === 'object' ? (
-                      // If it's a component, render it
-                      <>{row[header.dataIndex]}</>
-                    ) : (
-                      // If it's not a component, render the text
-                      row[header.dataIndex]
-                    )
+                    <td className='px-6 py-4' key={header.dataIndex}>
+                      <div className='inline-flex gap-1 lg:gap-5'>
+                        {editAction && (
+                          <button
+                            type='button'
+                            onClick={() => {
+                              editAction && editAction(row);
+                            }}
+                          >
+                            {editIcon}
+                          </button>
+                        )}
+                        {deleteAction && (
+                          <button
+                            type='button'
+                            onClick={() => {
+                              deleteAction && deleteAction(row);
+                            }}
+                          >
+                            {deleteIcon}
+                          </button>
+                        )}
+                      </div>
+                    </td>
                   ) : (
-                    'N/A'
+                    // If it's not a component, render the text
+                    <td
+                      className='px-6 py-4'
+                      key={header.dataIndex}
+                      onClick={() => handleRowClick(row, index)}
+                    >
+                      {row[header.dataIndex] !== undefined ? (
+                        typeof row[header.dataIndex] === 'object' ? (
+                          // If it's a component, render it
+                          <>{row[header.dataIndex]}</>
+                        ) : (
+                          // If it's not a component, render the text
+                          row[header.dataIndex]
+                        )
+                      ) : (
+                        'N/A'
+                      )}
+                    </td>
                   )}
-                </td>
+                </>
               ))}
             </tr>
           ))}

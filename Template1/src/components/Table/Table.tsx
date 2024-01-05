@@ -21,6 +21,8 @@ interface TableProps {
   onToggle?: () => void;
   deleteAction?: (row: any) => void;
   editAction?: (row: any) => void;
+  canSelected?: boolean;
+  onSelected?: (row: any, index: number) => void;
   editIcon?: React.ReactNode;
   deleteIcon?: React.ReactNode;
   onAdd?: boolean;
@@ -33,6 +35,8 @@ const Table: React.FC<TableProps> = ({
   onAdd = true,
   deleteAction,
   editAction,
+  canSelected,
+  onSelected,
   editIcon,
   deleteIcon,
   searchBy
@@ -167,6 +171,8 @@ const Table: React.FC<TableProps> = ({
         className='overflow-x-auto rounded-md overflow-hidden shadow-md mt-4'
         headers={headers}
         data={currentItems}
+        canSelected={canSelected}
+        onSelect={onSelected}
         deleteAction={deleteAction}
         editAction={editAction}
         editIcon={editIcon}

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 import { toast } from 'react-toastify';
 import { bookApi } from 'src/apis/book.api';
+import { borrowCardApi } from 'src/apis/borrow-card.api';
+import LoadingIndicator from 'src/components/LoadingIndicator/LoadingIndicator';
 import SimpleTable from 'src/components/Table/SimpleTable';
 import { useAppContext } from 'src/contexts/app.contexts';
 import useBorrowCard from 'src/hooks/useBorrowCard';
@@ -18,6 +20,10 @@ const headers = [
   { dataIndex: 'quantityInput', title: 'Quantity' },
   { dataIndex: 'action', title: 'Action' }
 ];
+const ViewHeaders = [
+  { dataIndex: 'bookName', title: 'Book Name' },
+  { dataIndex: 'quantityInput', title: 'Quantity' }
+];
 
 interface OrderList {
   bookId: string;
@@ -25,15 +31,47 @@ interface OrderList {
   quantityInput?: React.ReactNode;
 }
 // eslint-disable-next-line no-empty-pattern
-const BorrowCardForm: React.FC<Props> = ({ onToggle, memberId }) => {
+const BorrowCardForm: React.FC<Props> = ({ onToggle, memberId, id }) => {
   const [selectedMember, setSelectedMember] = useState(null);
   const [selectedBook, setSelectedBook] = useState(null);
   const [quantityList, setQuantityList] = useState<Map<string, number>>(new Map());
+  const [expectedReturnDate, setExpectedReturnDate] = useState<Date>(() => {
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 14);
+    return currentDate;
+  });
   const { createBorrowCardMutation } = useBorrowCard();
   const { getMemberQuery } = useMember();
   const { data: memberData } = getMemberQuery;
   const { profile } = useAppContext();
   const isAdmin = profile?.role === 'admin';
+
+  const getBorrowCardQuery = useQuery(
+    ['borrowCard', id],
+    () => borrowCardApi.getBorrowCardById(id),
+    {
+      enabled: !!id,
+      select: data => {
+        const borrowCard = data.data.data.doc;
+        return borrowCard;
+      },
+      onSuccess: data => {
+        setSelectedMember({
+          value: data.borrower._id,
+          fullName: data.borrower.fullName
+        });
+        setExpectedReturnDate(new Date(data.expectedReturnDate));
+        setOrderList(
+          data.books.map(item => ({
+            bookId: item.bookId._id,
+            bookName: item.bookId.nameBook,
+            quantityInput: item.quantity
+          }))
+        );
+      }
+    }
+  );
+
   const { data: bookData } = useQuery({
     queryKey: ['book'],
     queryFn: () => bookApi.getAllBooks(),
@@ -60,7 +98,8 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle, memberId }) => {
       borrower: isAdmin ? selectedMember.value : memberId,
       books: orderList.map(item => {
         return { bookId: item.bookId, quantity: quantityList.get(item.bookId) };
-      })
+      }),
+      expectedReturnDate: expectedReturnDate.toISOString()
     };
     console.log(data);
     createBorrowCardMutation.mutate(data, {
@@ -92,6 +131,10 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle, memberId }) => {
           : item
       )
     );
+  };
+
+  const handleExpectedReturnDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setExpectedReturnDate(new Date(event.target.value));
   };
 
   const handleBookSelect = (selectedBook: any) => {
@@ -139,23 +182,31 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle, memberId }) => {
     setOrderList(updatedOrderList);
   };
 
+  if (id && getBorrowCardQuery.isLoading)
+    return (
+      <div className='w-full h-full flex items-center justify-center'>
+        <LoadingIndicator />
+      </div>
+    );
+
   return (
     <form onSubmit={onSubmit}>
       <div className='lg:flex'>
         <div>
-          <div className='lg:grid lg:grid-cols-3 gap-4 mt-5'>
+          <div className='lg:flex lg:space-x-4'>
             <div>
               <label className='custom-label' htmlFor='book-name'>
                 Book Name:
               </label>
               <Select
                 classNames={{
-                  control: () => 'lg:w-[20rem]'
+                  control: () => 'lg:w-[15rem]'
                 }}
                 value={selectedBook}
                 placeholder='Select a book'
                 onChange={handleBookSelect}
                 options={bookData}
+                isDisabled={id !== undefined}
               />
             </div>
             <div>
@@ -164,11 +215,11 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle, memberId }) => {
               </label>
               <Select
                 classNames={{
-                  control: () => 'w-full'
+                  control: () => 'lg:w-[15rem]'
                 }}
                 value={isAdmin ? selectedMember : { value: profile?._id, label: profile?.email }}
                 placeholder='Select a user'
-                isDisabled={!isAdmin}
+                isDisabled={!isAdmin || id !== undefined}
                 required={true}
                 onChange={setSelectedMember}
                 options={memberData?.data.data.doc.map(item => {
@@ -191,6 +242,20 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle, memberId }) => {
                 placeholder='Enter member name'
               />
             </div>
+            <div>
+              <label className='custom-label' htmlFor='member-name'>
+                Expected Return Date
+              </label>
+              <input
+                className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded ring-indigo-500 focus:border-indigo-500 block w-full p-2 outline-none focus:ring-1'
+                type='date'
+                required={true}
+                value={expectedReturnDate.toISOString().split('T')[0]}
+                onChange={handleExpectedReturnDateChange}
+                id='member-name'
+                placeholder='Enter member name'
+              />
+            </div>
           </div>
         </div>
         <div className='mt-6'></div>
@@ -200,7 +265,7 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle, memberId }) => {
           Book Order List
         </label>
         <SimpleTable
-          headers={headers}
+          headers={id ? ViewHeaders : headers}
           data={orderList}
           deleteAction={handleDelete}
           nullMessage='No book added yet'

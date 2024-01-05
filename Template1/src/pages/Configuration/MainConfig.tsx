@@ -21,8 +21,8 @@ const Configuration = () => {
         <div id='tab-navigator text-center'>
           <Tabs>
             <TabList className='flex flex-col lg:flex-row max-w-fit mb-10'>
-              <Tab>Reader</Tab>
               <Tab>Book</Tab>
+              <Tab>Reader</Tab>
               <Tab>Transaction</Tab>
             </TabList>
             <TabPanel>

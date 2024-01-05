@@ -15,7 +15,7 @@ export const userApi = {
   getCurrentUserInformation(params?: any) {
     return http.get<
       SuccessResponse<{
-        doc: UserInfo[];
+        doc: UserInfo;
       }>
     >(URL_USERS_ME, { params });
   },

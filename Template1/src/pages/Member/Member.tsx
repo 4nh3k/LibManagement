@@ -10,7 +10,7 @@ import User from 'src/components/User/User';
 import useMember from 'src/hooks/useMember';
 import { useUser } from 'src/hooks/useUser';
 import { BorrowCardType } from 'src/types/borrow-card.type';
-import { calculateMinMaxDates, shortenID } from 'src/utils/utils';
+import { shortenID } from 'src/utils/utils';
 
 interface MemberProps {
   name: string;
@@ -139,7 +139,6 @@ export default function Member() {
     });
     setSelectedRow(null);
   };
-  const { min, max } = calculateMinMaxDates();
 
   const onSubmit = event => {
     event.preventDefault();
@@ -332,8 +331,6 @@ export default function Member() {
                 id='member-dob'
                 type='date'
                 name='dob'
-                min={min}
-                max={max}
                 required={true}
                 className='rounded py-1 px-3 border-1 text-sm border-textboxBorder w-full lg:w-[24rem]'
                 readOnly={!onEditMember && selectedRow !== null}

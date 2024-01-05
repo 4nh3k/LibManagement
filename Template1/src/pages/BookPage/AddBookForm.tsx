@@ -385,7 +385,6 @@ function AddBookForm({ onToggle }: Props) {
                 value={book.numberOfBooks}
                 onChange={handleInputChange}
                 min={1}
-                max={200}
                 placeholder='Enter number of books'
               />
             </div>

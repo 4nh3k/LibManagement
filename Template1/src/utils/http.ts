@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import { URL_BASE, URL_LOGIN, URL_LOGOUT, URL_REGISTER } from 'src/constants/endpoint';
 import { AuthResponse } from 'src/types/auth.type';
 import { clearLS, getAccessTokenFromLS } from './auth';
-
 class Http {
   private accessToken: string;
   // private refreshToken: string;
@@ -39,18 +38,31 @@ class Http {
       }
     );
 
-    this.instance.interceptors.response.use(response => {
-      const { url } = response.config;
-      if (url === URL_LOGIN || url === URL_REGISTER) {
-        const data = response.data as AuthResponse;
-        this.accessToken = data.token;
-        // this.refreshToken = response.data.data.refresh_token;
-      } else if (url === URL_LOGOUT) {
-        this.accessToken = '';
-        clearLS();
+    this.instance.interceptors.response.use(
+      response => {
+        const { url } = response.config;
+        if (url === URL_LOGIN || url === URL_REGISTER) {
+          const data = response.data as AuthResponse;
+          this.accessToken = data.token;
+          // this.refreshToken = response.data.data.refresh_token;
+        } else if (url === URL_LOGOUT) {
+          this.accessToken = '';
+          clearLS();
+        }
+        return response;
+      },
+      (error: AxiosError) => {
+        if (
+          error.response?.status === HttpStatusCode.Unauthorized &&
+          error.response?.config.url !== URL_LOGIN
+        ) {
+          toast.error('Your session has expired. Please log in again to continue.');
+          clearLS();
+          window.location.reload();
+        }
+        return Promise.reject(error);
       }
-      return response;
-    });
+    );
   }
 }
 
