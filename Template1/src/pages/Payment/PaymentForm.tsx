@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { userApi } from 'src/apis/user.api';
-import Spinner from 'src/components/Spinner';
+import LoadingIndicator from 'src/components/LoadingIndicator/LoadingIndicator';
 import money_icon from '../../assets/icons/dollar.svg';
 function PaymentForm() {
   const {
@@ -28,7 +28,11 @@ function PaymentForm() {
 
   return (
     <>
-      {isLoading && <Spinner />}
+      {isLoading && (
+        <div className='w-full flex justify-center items-center'>
+          <LoadingIndicator />
+        </div>
+      )}
       {!isLoading && (
         <div>
           <div id='current-balance' className='text-center space-y-[1.5rem] mb-5'>

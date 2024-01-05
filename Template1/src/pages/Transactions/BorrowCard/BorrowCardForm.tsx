@@ -191,7 +191,7 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle, memberId, id }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className='lg:flex'>
+      <div className='lg:flex mt-4'>
         <div>
           <div className='lg:flex lg:space-x-4'>
             <div>
@@ -206,7 +206,7 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle, memberId, id }) => {
                 placeholder='Select a book'
                 onChange={handleBookSelect}
                 options={bookData}
-                isDisabled={id !== undefined}
+                isDisabled={id !== undefined && !isAdmin}
               />
             </div>
             <div>
@@ -219,7 +219,7 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle, memberId, id }) => {
                 }}
                 value={isAdmin ? selectedMember : { value: profile?._id, label: profile?.email }}
                 placeholder='Select a user'
-                isDisabled={!isAdmin || id !== undefined}
+                isDisabled={id !== undefined && !isAdmin}
                 required={true}
                 onChange={setSelectedMember}
                 options={memberData?.data.data.doc.map(item => {
@@ -235,9 +235,7 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle, memberId, id }) => {
                 type='text'
                 className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded ring-indigo-500 focus:border-indigo-500 block w-full p-2 outline-none focus:ring-1'
                 disabled={true}
-                value={
-                  isAdmin ? selectedMember?.fullName : profile?.firstName + ' ' + profile?.lastName
-                }
+                value={isAdmin ? selectedMember?.fullName : profile?.username || ''}
                 id='member-name'
                 placeholder='Enter member name'
               />

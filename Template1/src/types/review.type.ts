@@ -6,6 +6,7 @@ export interface Review {
     _id: string;
     firstName: string;
     lastName: string;
+    username: string;
   };
   _id: string;
   createdAt: string;

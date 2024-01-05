@@ -22,6 +22,13 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle, memberId }: BorrowCar
     { title: 'Status', dataIndex: 'isReturned' },
     { title: 'Action', dataIndex: 'action' }
   ];
+  const userHeaders = [
+    { title: 'Borrow Card ID', dataIndex: 'borrowCardId' },
+    { title: 'Borrower', dataIndex: 'borrower' },
+    { title: 'Borrow Date', dataIndex: 'borrowDate' },
+    { title: 'Expected Return Date', dataIndex: 'expectedReturnDate' },
+    { title: 'Status', dataIndex: 'isReturned' }
+  ];
   const searchBy = [
     { label: 'Borrower', dataIndex: 'borrower' },
     { label: 'Borrow Card ID', dataIndex: 'borrowCardId' },
@@ -84,12 +91,13 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle, memberId }: BorrowCar
   return (
     <div id='body' className='mt-5 m-3 lg:mr-20'>
       <Table
-        headers={headers}
+        headers={isAdmin ? headers : userHeaders}
         data={sortedBorrowCardData}
         onToggle={onToggle}
         searchBy={searchBy}
         deleteAction={isAdmin ? handleDelete : undefined}
         canSelected={true}
+        onAdd={isAdmin}
         onSelected={handleSelected}
         editIcon={<PiKeyReturn className='text-primary ' size={24} />}
         editAction={handleReturn}

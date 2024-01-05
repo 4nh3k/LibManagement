@@ -5,11 +5,9 @@ import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { bookApi } from 'src/apis/book.api';
-import Button from 'src/components/Button';
 import RatingStar from 'src/components/RatingStar/RatingStar';
-import { formatDate } from 'src/utils/helper';
-import user_icon from '../../assets/img/user.png';
 import User from 'src/components/User/User';
+import { formatDate } from 'src/utils/helper';
 
 interface FormData {
   comment: string;
@@ -172,7 +170,8 @@ const BookDetails = () => {
               </form>
 
               {reviews.map(review => {
-                const fullName = `${review.user.firstName} ${review.user.lastName}`;
+                const fullName =
+                  review.user.username ?? `${review.user.firstName} ${review.user.lastName}`;
                 return (
                   <article className='p-6 text-base bg-white rounded-lg' key={review._id}>
                     <footer className='flex justify-between items-center mb-2'>

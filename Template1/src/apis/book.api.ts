@@ -32,6 +32,7 @@ export const bookApi = {
   },
   updateImageBook(data: { id: string; image: File }) {
     const formData = new FormData();
+    console.log(data.image);
     formData.append('photos', data.image);
     return http.patch<SuccessResponse<{ doc: Book }>>(`${URL_BOOKS}/${data.id}`, formData, {
       headers: {

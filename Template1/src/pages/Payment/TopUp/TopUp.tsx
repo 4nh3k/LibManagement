@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import money_icon from '../../../assets/icons/dollar.svg';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import { userApi } from 'src/apis/user.api';
-import { Spinner } from '@phosphor-icons/react';
+import LoadingIndicator from 'src/components/LoadingIndicator/LoadingIndicator';
+import money_icon from '../../../assets/icons/dollar.svg';
 const TopUp = () => {
   const { data: financialData, isLoading } = useQuery({
     queryKey: ['financial-me'],
@@ -21,7 +21,11 @@ const TopUp = () => {
 
   return (
     <>
-      {isLoading && <Spinner />}
+      {isLoading && (
+        <div className='w-full flex justify-center items-center'>
+          <LoadingIndicator />
+        </div>
+      )}
       {!isLoading && (
         <div>
           <div id='current-balance' className='text-center space-y-[1.5rem] mt-5 mb-5'>
