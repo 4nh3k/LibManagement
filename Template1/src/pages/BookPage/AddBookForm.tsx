@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react';
 import Button from 'src/components/Button';
 // import user_icon from '../../assets/img/user.png';
+import { ArrowLeft } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FileDrop } from 'react-file-drop';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Select from 'react-select';
 import { toast } from 'react-toastify';
 import { bookApi } from 'src/apis/book.api';
@@ -74,14 +75,14 @@ function AddBookForm({ onToggle }: Props) {
       console.log(data);
     }
   });
-
+  const navigate = useNavigate();
   const onFileDrop = (files, event) => {
     setFile(files[0]);
     // do something with your files...
   };
   const onFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
-    if (!files) return;
+    if (!files[0]) return;
     setFile(files[0]);
     // do something with your files...
   };
@@ -151,6 +152,7 @@ function AddBookForm({ onToggle }: Props) {
           description: '',
           numberOfBooks: 0
         });
+        setFile(null);
         setSelectedGenres([]);
         setSelectedLanguage([]);
         createBookImageMutation.mutate({ id: data.data.data.doc._id, image: file });
@@ -164,7 +166,10 @@ function AddBookForm({ onToggle }: Props) {
   return (
     <form onSubmit={onSubmit} className='flex flex-col '>
       <div id='horizontal-header' className='flex items-center relative mt-5 mb-4'>
-        <h2 className='font-bold text-xl'>{id ? 'Update Book' : 'Add Book'}</h2>
+        <button type='button' onClick={() => navigate(-1)}>
+          <ArrowLeft size={32} />
+        </button>
+        <h2 className='font-bold text-xl ml-4'>{id ? 'Update Book' : 'Add Book'}</h2>
       </div>
       <div className='flex flex-col gap-y-5 lg:flex-row gap-x-20'>
         <div className='flex flex-col items-center mr-3 shrink-0'>
