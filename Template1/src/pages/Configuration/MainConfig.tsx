@@ -8,8 +8,8 @@ import TransactionConfig from './Transaction/TransactionConfig';
 const Configuration = () => {
   return (
     <>
-      <div className='px-4 pt-2 w-full overflow-auto flex-1 flex-row h-screen'>
-        <div className='pr-5 lg:pr-10 py-2'>
+      <div className='px-3 pt-4 pb-2 w-full overflow-auto flex-1 flex-row h-screen'>
+        <div className='pl-0 pr-6 py-2'>
           <div className='flex justify-between  items-center'>
             <span className='px-4 text-xl lg:text-2xl font-bold'>Configuration</span>
             <div className='inline'>
@@ -20,7 +20,7 @@ const Configuration = () => {
 
         <div id='tab-navigator text-center'>
           <Tabs>
-            <TabList className='flex flex-col lg:flex-row max-w-fit mb-10'>
+            <TabList className='flex lg:flex-row max-w-fit mb-10'>
               <Tab>Book</Tab>
               <Tab>Reader</Tab>
               <Tab>Transaction</Tab>

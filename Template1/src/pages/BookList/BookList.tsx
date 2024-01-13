@@ -11,7 +11,7 @@ const BookList = () => {
 
   return (
     <div className='flex flex-col'>
-      <div id='horizontal-header' className='pl-5 pr-5 lg:pr-10 py-2'>
+      <div id='horizontal-header' className='pl-5 pr-5 lg:pr-10 pt-6 pb-2'>
         <div className='flex justify-between items-center'>
           <span className='text-xl lg:text-2xl font-bold'>Book List</span>
           <User />

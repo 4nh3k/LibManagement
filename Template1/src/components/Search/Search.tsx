@@ -22,14 +22,14 @@ export default function Search({
     };
   }, [onChange]);
   return (
-    <div className='flex w-80 justify-between rounded-full border-2 px-4 py-2 text-base font-normal outline-none transition duration-500'>
+    <div className='flex w-64 lg:w-80 justify-between rounded-full border-2 px-4 py-2 text-base font-normal outline-none transition duration-500'>
       <div className='flex w-full basis-11/12 items-center gap-3'>
         {query === '' && <PiMagnifyingGlass className='mr-2' size={24} color={'gray'} />}
         <input
           value={query}
           onChange={e => onChange(e.target.value)}
           placeholder='Search books...'
-          className='grow  text-gray-500 outline-none focus:text-gray-500 focus:outline-none'
+          className='bg-gray-50 grow  text-gray-500 outline-none focus:text-gray-500 focus:outline-none'
           maxLength={100}
         />
       </div>

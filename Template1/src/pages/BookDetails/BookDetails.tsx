@@ -63,8 +63,8 @@ const BookDetails = () => {
   const book = bookData?.data.data.doc;
 
   return (
-    <div className='p-4'>
-      <div className='mr-14 mb-10 mt-4 flex items-center justify-between ml-'>
+    <div className='p-10 pr-8'>
+      <div className='mb-10 flex items-center justify-between ml-'>
         <button onClick={() => navigate(-1)}>
           <ArrowLeft size={32} />
         </button>
@@ -95,7 +95,7 @@ const BookDetails = () => {
 
       {!isLoading && book && (
         <>
-          <div className='flex flex-col items-center md:items-start md:flex-row gap-y-3 shadow-[0_0px_10px_rgba(0,0,0,0.25)] mt-12 mr-14 p-6'>
+          <div className='flex flex-col items-center md:items-start md:flex-row gap-y-3 shadow-[0_0px_10px_rgba(0,0,0,0.25)] mt-12 mr-0 lg:mr-0 p-6'>
             <img
               className='w-40 h-60 lg:w-60 lg:h-80 shrink-0'
               crossOrigin='anonymous'

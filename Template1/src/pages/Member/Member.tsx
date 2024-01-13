@@ -178,7 +178,7 @@ export default function Member() {
 
   return (
     <div className='w-full min-h-screen overflow-y-auto  lg:overflow-y-hidden'>
-      <div id='horizontal-header' className='pl-2 pr-5 lg:pr-10 py-2'>
+      <div id='horizontal-header' className='pl-2 pr-5 lg:pr-10 pt-6 pb-2'>
         <div className='flex justify-between items-center'>
           <span className='pl-3 text-xl lg:text-2xl font-bold'>Members</span>
           <User />

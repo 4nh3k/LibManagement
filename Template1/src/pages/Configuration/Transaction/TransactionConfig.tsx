@@ -49,7 +49,7 @@ const TransactionConfig = () => {
           <div id='top-up-account' className='mb-5 w-full pr-10 flex-col'>
             <div
               id='top-up-account-label'
-              className='inline-flex flex-row lg:items-center align-middle mb-10'
+              className='inline-flex flex-row items-center align-middle mb-10'
             >
               <div
                 id='top-up-label-header'
@@ -89,21 +89,20 @@ const TransactionConfig = () => {
                   onChange={onChange('borrowingDate')}
                 />
               </div>
-            </div>
-
-            <div
-              id='pay-button-container'
-              className='flex ml-auto mr-auto lg:ml-[17rem] space-x-10 mt-10'
-            >
-              <button
-                className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'
-                onClick={onSubmit}
+              <div
+                id='pay-button-container'
+                className='flex ml-auto mr-auto lg:ml-[17rem] space-x-10 mt-10'
               >
-                Save
-              </button>
-              {/* <button className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'>
+                <button
+                  className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'
+                  onClick={onSubmit}
+                >
+                  Save
+                </button>
+                {/* <button className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'>
                 Undo
               </button> */}
+              </div>
             </div>
           </div>
         </div>
