@@ -114,13 +114,13 @@ const UserAccount = () => {
         </div>
       </div>
       <Tabs>
-        <TabList className='flex flex-col lg:flex-row max-w-fit mb-10'>
+        <TabList>
           <Tab>Profile</Tab>
           <Tab>Change password</Tab>
         </TabList>
         <TabPanel>
-          <form onSubmit={handleSubmit} className='mx-auto w-[41rem] lg:mt-20  '>
-            <div className='w-18 lg:w-[41rem] mb-5'>
+          <form onSubmit={handleSubmit} className='lg:mx-auto mx-4 lg:w-[41rem] mt-10 lg:mt-20  '>
+            <div className='md:w-18 lg:w-[41rem] mb-5'>
               <h3 className='custom-label' id='firstname'>
                 First Name
               </h3>
@@ -186,7 +186,10 @@ const UserAccount = () => {
           </form>
         </TabPanel>
         <TabPanel>
-          <form onSubmit={handlePasswordSubmit} className='mx-auto w-[41rem] lg:mt-20  '>
+          <form
+            onSubmit={handlePasswordSubmit}
+            className='lg:mx-auto mx-4 lg:w-[41rem] mt-10 lg:mt-20  '
+          >
             <div className='w-18 lg:w-[41rem] mb-5'>
               <h3 className='custom-label' id='firstname'>
                 Current Password

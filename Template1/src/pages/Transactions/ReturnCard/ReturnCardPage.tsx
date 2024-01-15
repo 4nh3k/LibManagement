@@ -60,7 +60,7 @@ const ReturnCardPage: React.FC<ReturnCardProps> = ({ onToggle, memberId }: Retur
 
   return (
     <div>
-      <div id='body' className='mt-5 m-3 lg:mr-20'>
+      <div id='body' className='mt-5 m-3 lg:mr-10'>
         <Table
           headers={headers}
           onAdd={isAdmin}

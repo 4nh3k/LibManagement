@@ -124,48 +124,43 @@ const Table: React.FC<TableProps> = ({
     <div className='w-full flex bg-gray flex-col'>
       <div
         id='utilsRow'
-        className='w-full m-auto flex flex-col items-center gap-y-5 lg:flex-row overflow-y-auto'
+        className='w-full m-auto space-y-4 md:space-y-0 md:flex justify-between items-center gap-y-5 overflow-y-auto'
       >
-        <div className='inline-flex ml-1 items-center gap-5  py-4 align-middle'>
-          <span className='inline-block align-middle'>Show</span>
+        <div className='flex items-center gap-3 align-middle'>
+          <span className='align-middle'>Show</span>
           <input
-            className='px-2 py-1 border-gray-200 border-2 outline-none rounded-lg font-medium text-black'
+            className='px-2 py-1 w-16 border-gray-200 border-2 outline-none rounded-lg font-medium text-black'
             placeholder={'5'}
             type={'number'}
             value={itemsPerPage}
             onChange={handleEntriesChange}
             min={1}
-            max={6}
           />
-          <span className='inline-block align-middle'>entries</span>
+          <span className='align-middle'>entries</span>
         </div>
-        <div className='inline-flex ml-1 lg:ml-12 md:ml-20 items-center align-middle'>
-          <div className='inline-flex bg-white text-black pt-2 pb-2 pl-3 pr-3 rounded-xl border-2 overflow-hidden'>
-            <PiMagnifyingGlass className='mr-2' size={24} color={'gray'} />
-            <input
-              className='w-32 lg:w-64 p-0 m-0 bg-white  outline-0'
-              placeholder='Search'
-              type='string'
-              value={searchQuery}
-              onChange={handleSearch}
-            ></input>
-          </div>
+        <div className='flex items-center bg-white text-black pt-2 pb-2 pl-3 pr-3 rounded-xl border-2 overflow-hidden'>
+          <PiMagnifyingGlass className='mr-2' size={24} color={'gray'} />
+          <input
+            className='w-32 lg:w-64 p-0 m-0 bg-white  outline-0'
+            placeholder='Search'
+            type='string'
+            value={searchQuery}
+            onChange={handleSearch}
+          ></input>
         </div>
         {searchBy && (
-          <div className='inline-flex ml-auto mr-auto items-center'>
+          <div className='inline-block'>
             <DropdownList
               list={searchBy.map(item => item.label)}
               onChange={handleSearchByChange}
             ></DropdownList>
           </div>
         )}
-        <div className='inline-flex items-center align-middle ml-auto space-x-5'>
-          {onAdd && (
-            <button className='primary-btn-fit w-20' onClick={onToggle}>
-              Add
-            </button>
-          )}
-        </div>
+        {onAdd && (
+          <button className='primary-btn-fit w-20 ml-5 md:ml-0' onClick={onToggle}>
+            Add
+          </button>
+        )}
       </div>
       <SimpleTable
         className='overflow-x-auto rounded-md overflow-hidden shadow-md mt-4'

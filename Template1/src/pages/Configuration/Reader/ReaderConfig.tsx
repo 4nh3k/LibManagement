@@ -1,9 +1,9 @@
-import { memberApi } from 'src/apis/member.api';
-import edit_icon from '../../../assets/img/edit.png';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Validation } from 'src/types/validation.type';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { memberApi } from 'src/apis/member.api';
+import { Validation } from 'src/types/validation.type';
+import edit_icon from '../../../assets/img/edit.png';
 
 const ReaderConfig = () => {
   const { data: validationData } = useQuery({
@@ -108,7 +108,10 @@ const ReaderConfig = () => {
               </div>
             </div>
 
-            <div id='pay-button-container' className='flex ml-auto mr-auto lg:ml-[17rem] space-x-10'>
+            <div
+              id='pay-button-container'
+              className='flex ml-auto mr-auto lg:ml-[17rem] space-x-10'
+            >
               <button
                 className='rounded-full h-10 w-20 bg-slate-500 text-white font-medium text-sm hover:opacity-90'
                 onClick={onSubmit}

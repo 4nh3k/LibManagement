@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import book from 'src/assets/icons/book.svg';
 import group from 'src/assets/icons/group.svg';
 import library from 'src/assets/icons/library.svg';
@@ -5,11 +7,9 @@ import transaction from 'src/assets/icons/transaction.svg';
 import account from 'src/assets/icons/user.svg';
 import configuration from 'src/assets/img/configuration.png';
 import payment from 'src/assets/img/payment.png';
+import MenuItem from 'src/components/MenuItem';
 import website_logo from '../../assets/icons/AHB Logo.svg';
 import small_website_logo from '../../assets/icons/AHB Small Logo.svg';
-import { Link } from 'react-router-dom';
-import MenuItem from 'src/components/MenuItem';
-import { useEffect, useState } from 'react';
 
 interface SidebarProp {
   isAdmin: boolean;
@@ -20,7 +20,7 @@ const Sidebar: React.FC<SidebarProp> = ({ isAdmin = false }: SidebarProp) => {
   const [isMobile, setIsMobile] = useState(false);
 
   // Define the media query
-  const mobileMediaQuery = window.matchMedia('(max-width: 768px)');
+  const mobileMediaQuery = window.matchMedia('(max-width: 1024px)');
 
   // Function to update the state based on the media query match
   const handleMediaQueryChange = event => {
@@ -54,12 +54,12 @@ const Sidebar: React.FC<SidebarProp> = ({ isAdmin = false }: SidebarProp) => {
               <img
                 alt='Website Logo'
                 src={website_logo}
-                className='invisible lg:visible block p-2 text-center max-w-full h-auto'
+                className='hidden lg:block p-2 text-center max-w-full h-auto '
               />
             )}
             {isMobile && (
               <div className='rounded-lg px-4 py-3 mx-0 lg:px-2 menu-item flex justify-center lg:justify-start items-center '>
-                <img alt='menu-icon' src={small_website_logo} className='w-4 h-4' />
+                <img alt='menu-icon' src={small_website_logo} className='w-4 h-4 ' />
               </div>
             )}
           </Link>

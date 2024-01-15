@@ -89,7 +89,7 @@ const BorrowCard: React.FC<BorrowCardProps> = ({ onToggle, memberId }: BorrowCar
   };
 
   return (
-    <div id='body' className='mt-5 m-3 lg:mr-20'>
+    <div id='body' className='mt-5 m-3 lg:mr-10'>
       <Table
         headers={isAdmin ? headers : userHeaders}
         data={sortedBorrowCardData}

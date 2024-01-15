@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { feeApi } from 'src/apis/fee.api';
 import Table from 'src/components/Table/Table';
-import { useQuery } from '@tanstack/react-query';
 import Fee from 'src/types/fee.type';
 interface Props {
   onToggle?: () => void;
@@ -36,7 +35,7 @@ const FeeCard: React.FC<Props> = ({ onToggle }) => {
   ];
 
   return (
-    <div id='body' className='mt-5 m-3 lg:mr-20'>
+    <div id='body' className='mt-5 m-3 lg:mr-10'>
       <span className='text-xl font-bold'>Fee Card List</span>
       {!isLoading && feeData && (
         <Table

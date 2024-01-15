@@ -89,7 +89,7 @@ const BookConfig = () => {
                 <label
                   htmlFor='member_minimum-age'
                   id='member-label'
-                  className='text-[1.375rem] font-semibold w-[25rem]'
+                  className='text-[1.375rem] font-semibold md:w-[25rem]'
                 >
                   Minimum age
                 </label>
@@ -111,7 +111,7 @@ const BookConfig = () => {
                 <label
                   htmlFor='member-max-age'
                   id='member-max-age'
-                  className='text-[1.375rem] font-semibold w-[25rem]'
+                  className='text-[1.375rem] font-semibold  md:w-[25rem]'
                 >
                   Maximum age
                 </label>
@@ -132,7 +132,7 @@ const BookConfig = () => {
                 <label
                   htmlFor='member-card-expi-label'
                   id='member-label'
-                  className='text-[1.375rem] font-semibold w-[25rem]'
+                  className='text-[1.375rem] font-semibold  md:w-[25rem]'
                 >
                   Card expiration time (<span>month</span>)
                 </label>

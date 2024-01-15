@@ -17,7 +17,7 @@ const DropdownList: React.FC<DropdownListProps> = ({ list, onChange }) => {
     <select
       value={selectedValue}
       onChange={handleSelectChange}
-      className='px-3 py-1 rounded-lg block lg:inline border-2 focus:ring-1 focus:ring-gray-500 border-gray-200 appearance-none  outline-0 cursor-pointer'
+      className='pl-3 py-1 rounded-lg block lg:inline border-2 focus:ring-1 focus:ring-gray-500 border-gray-200 appearance-none  outline-0 cursor-pointer'
     >
       {list.map(option => (
         <option key={option} value={option} className='rounded-none'>
