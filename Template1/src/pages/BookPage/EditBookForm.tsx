@@ -104,7 +104,7 @@ function EditBookForm({ onToggle }: Props) {
       <div id='horizontal-header' className='flex items-center relative mt-5 mb-10'>
         <h2 className='font-bold text-xl'>Edit book</h2>
       </div>
-      <div className='flex flex-col gap-y-5 lg:flex-row gap-x-20'>
+      <div className='flex flex-col gap-y-5 lg:flex-row gap-x-20 mb-5'>
         <div className='flex flex-col items-center mr-3 shrink-0'>
           <FileDrop
             className='text-center h-48 mb-4 lg:h-96 cursor-pointer'

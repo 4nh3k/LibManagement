@@ -171,7 +171,7 @@ function AddBookForm({ onToggle }: Props) {
         </button>
         <h2 className='font-bold text-xl ml-4'>{id ? 'Update Book' : 'Add Book'}</h2>
       </div>
-      <div className='flex flex-col gap-y-5 lg:flex-row gap-x-20'>
+      <div className='flex flex-col gap-y-5 lg:flex-row gap-x-20 mb-5'>
         <div className='flex flex-col items-center mr-3 shrink-0'>
           <FileDrop
             className='text-center h-48 mb-4 lg:h-96 cursor-pointer'
