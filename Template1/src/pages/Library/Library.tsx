@@ -22,6 +22,11 @@ export default function Library() {
     }
   });
   const books = booksData?.data.data.doc;
+  const handleChange = (value: string) => {
+    setFilter(value);
+    console.log(value);
+    setCurrentPage(1);
+  };
 
   return (
     <div className='w-full h-screen overflow-auto px-5'>
@@ -29,7 +34,7 @@ export default function Library() {
         id='horizontal-header'
         className='mb-4 mt-6 relative flex lg:flex-row lg:space-y-0 items-center justify-between ml-2 mr-7 align-middle'
       >
-        <Search query={filter} onChange={setFilter} />
+        <Search query={filter} onChange={handleChange} />
 
         <User />
       </div>
@@ -55,9 +60,9 @@ export default function Library() {
           ))}
       </div>
 
-      {(!isLoading || (books?.length || 0) > 0) && (
+      {((!isLoading && books?.length === 12) || currentPage != 1) && (
         <div className='align-center'>
-          <Pagination totalPages={10} currentPage={currentPage} onPageChange={setCurrentPage} />
+          <Pagination totalPages={4} currentPage={currentPage} onPageChange={setCurrentPage} />
         </div>
       )}
     </div>
