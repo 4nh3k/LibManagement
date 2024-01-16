@@ -1,29 +1,24 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { bookApi } from 'src/apis/book.api';
 import BookCard from 'src/components/BookCard/BookCard';
 import LoadingIndicator from 'src/components/LoadingIndicator/LoadingIndicator';
 import Pagination from 'src/components/Pagination/Pagination';
 import Search from 'src/components/Search';
 import User from 'src/components/User/User';
-import { useAppContext } from 'src/contexts/app.contexts';
 
 export default function Library() {
-  const navigate = useNavigate();
-
-  const groupList = ['All books', 'Author', 'Publisher'];
-  const [isAllBook, setAllBook] = useState(true);
-  const [isAuthorGrouped, setAuthorGroup] = useState(true);
-  const [isPublishGrouped, setPublishGroup] = useState(true);
+  // const groupList = ['All books', 'Author', 'Publisher'];
+  // const [isAllBook, setAllBook] = useState(true);
+  // const [isAuthorGrouped, setAuthorGroup] = useState(true);
+  // const [isPublishGrouped, setPublishGroup] = useState(true);
   const [filter, setFilter] = useState<string>('');
   const [currentPage, setCurrentPage] = useState(1);
-  const { setIsAuthenticated } = useAppContext();
 
   const { data: booksData, isLoading } = useQuery({
-    queryKey: ['library', { filter }],
+    queryKey: ['library', { filter, currentPage }],
     queryFn: ({ signal }) => {
-      return bookApi.getAllBooks(filter || undefined, signal);
+      return bookApi.getAllBooks(currentPage, filter || undefined, signal);
     }
   });
   const books = booksData?.data.data.doc;
@@ -44,9 +39,9 @@ export default function Library() {
           <LoadingIndicator />
         </div>
       )}
+
       <div className='flex flex-col items-center md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 mb-5 mr-10'>
-        {isAllBook &&
-          !isLoading &&
+        {!isLoading &&
           books &&
           books.map(book => (
             <BookCard
@@ -60,7 +55,7 @@ export default function Library() {
           ))}
       </div>
 
-      {(!isLoading || books != undefined || (books?.length || 0) > 0) && (
+      {(!isLoading || (books?.length || 0) > 0) && (
         <div className='align-center'>
           <Pagination totalPages={10} currentPage={currentPage} onPageChange={setCurrentPage} />
         </div>

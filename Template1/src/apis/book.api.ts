@@ -6,14 +6,16 @@ import { SuccessResponse } from 'src/types/utils.type';
 import http from 'src/utils/http';
 
 export const bookApi = {
-  getAllBooks(keyword?: string, signal?: AbortSignal) {
+  getAllBooks(page: number, keyword?: string, signal?: AbortSignal) {
     return http.get<
       SuccessResponse<{
         doc: Book[];
       }>
     >(URL_BOOKS, {
       params: {
-        q: keyword
+        q: keyword,
+        limit: 10,
+        page
       },
       signal
     });
@@ -49,5 +51,10 @@ export const bookApi = {
   getReviews(bookId: string) {
     console.log(`${URL_BOOKS}/${bookId}/reviews`);
     return http.get<SuccessResponse<{ reviews: Review[] }>>(`${URL_BOOKS}/${bookId}/reviews`);
+  },
+  deleteReview(bookId: string, reviewId: string) {
+    return http.delete<SuccessResponse<{ doc: Review }>>(
+      `${URL_BOOKS}/${bookId}/reviews/${reviewId}`
+    );
   }
 };

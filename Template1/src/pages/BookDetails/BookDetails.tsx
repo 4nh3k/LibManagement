@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { bookApi } from 'src/apis/book.api';
+import Popover from 'src/components/Popover';
 import RatingStar from 'src/components/RatingStar/RatingStar';
 import User from 'src/components/User/User';
 import { formatDate } from 'src/utils/helper';
@@ -59,6 +60,15 @@ const BookDetails = () => {
     addCommentMutation.mutate({
       comment: data.comment
     });
+  });
+  const deleteReviewMutation = useMutation({
+    mutationFn: (reviewId: string) => bookApi.deleteReview(id || '1', reviewId || '1'),
+    onSuccess: () => {
+      toast.success('Delete reviews successfully');
+      queryClient.invalidateQueries({
+        queryKey: ['reviews', id]
+      });
+    }
   });
   const book = bookData?.data.data.doc;
 
@@ -190,23 +200,38 @@ const BookDetails = () => {
                           </time>
                         </p>
                       </div>
-                      <button
-                        id='dropdownComment1Button'
-                        data-dropdown-toggle='dropdownComment1'
-                        className='inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50  dark:hover:bg-gray-700 dark:focus:ring-gray-600'
-                        type='button'
+                      <Popover
+                        placement='bottom'
+                        hasArrow
+                        renderPopover={
+                          <div className='h-10 rounded bg-white shadow'>
+                            <button
+                              className='w-32 h-10 hover:bg-gray-100 text-sm font-medium'
+                              onClick={() => deleteReviewMutation.mutate(review._id)}
+                            >
+                              Delete comment
+                            </button>
+                          </div>
+                        }
                       >
-                        <svg
-                          className='w-4 h-4'
-                          aria-hidden='true'
-                          xmlns='http://www.w3.org/2000/svg'
-                          fill='currentColor'
-                          viewBox='0 0 16 3'
+                        <button
+                          id='dropdownComment1Button'
+                          data-dropdown-toggle='dropdownComment1'
+                          className='inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50  dark:hover:bg-gray-700 dark:focus:ring-gray-600'
+                          type='button'
                         >
-                          <path d='M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z' />
-                        </svg>
-                        <span className='sr-only'>Comment settings</span>
-                      </button>
+                          <svg
+                            className='w-4 h-4'
+                            aria-hidden='true'
+                            xmlns='http://www.w3.org/2000/svg'
+                            fill='currentColor'
+                            viewBox='0 0 16 3'
+                          >
+                            <path d='M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z' />
+                          </svg>
+                          <span className='sr-only'>Comment settings</span>
+                        </button>
+                      </Popover>
                     </footer>
                     <p className='text-gray-500'>{review.review}</p>
                     <div className='flex items-center mt-4 space-x-4'></div>
