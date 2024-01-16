@@ -14,7 +14,7 @@ export const bookApi = {
     >(URL_BOOKS, {
       params: {
         q: keyword,
-        limit: 10,
+        limit: 12,
         page
       },
       signal
