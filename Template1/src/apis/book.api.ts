@@ -6,7 +6,19 @@ import { SuccessResponse } from 'src/types/utils.type';
 import http from 'src/utils/http';
 
 export const bookApi = {
-  getAllBooks(page: number, keyword?: string, signal?: AbortSignal) {
+  getAllBooks(keyword?: string, signal?: AbortSignal) {
+    return http.get<
+      SuccessResponse<{
+        doc: Book[];
+      }>
+    >(URL_BOOKS, {
+      params: {
+        q: keyword
+      },
+      signal
+    });
+  },
+  getBookByPage(page: number, keyword?: string, signal?: AbortSignal) {
     return http.get<
       SuccessResponse<{
         doc: Book[];

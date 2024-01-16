@@ -18,7 +18,7 @@ export default function Library() {
   const { data: booksData, isLoading } = useQuery({
     queryKey: ['library', { filter, currentPage }],
     queryFn: ({ signal }) => {
-      return bookApi.getAllBooks(currentPage, filter || undefined, signal);
+      return bookApi.getBookByPage(currentPage, filter || undefined, signal);
     }
   });
   const books = booksData?.data.data.doc;

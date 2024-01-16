@@ -78,7 +78,7 @@ const Transactions = () => {
           <User />
         </div>
       </div>
-      {!isAdmin && !data?._id && (
+      {!isAdmin && !data?._id && !isLoading && (
         <div className='text-center font-medium mt-10'>
           <p>You don&apos;t have a member card.</p>
           <p>Please visit the library to create one.</p>

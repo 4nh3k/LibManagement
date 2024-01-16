@@ -271,9 +271,11 @@ const BorrowCardForm: React.FC<Props> = ({ onToggle, memberId, id }) => {
         />
       </div>
       <div className='flex mt-9 w-60 space-x-6 mx-auto'>
-        <button type='submit' className='primary-btn-fit p-4  w-20 block '>
-          Create
-        </button>
+        {!id && (
+          <button type='submit' className='primary-btn-fit p-4  w-20 block '>
+            Create
+          </button>
+        )}
         <button type='button' onClick={onToggle} className='secondary-btn p-4 w-20 block '>
           Cancel
         </button>
