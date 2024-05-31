@@ -180,8 +180,7 @@ const BookDetails = () => {
               </form>
 
               {reviews.map(review => {
-                const fullName =
-                  review.user.username ?? `${review.user.firstName} ${review.user.lastName}`;
+                const fullName = review.user?.username ?? `Anonymous`;
                 return (
                   <article className='p-6 text-base bg-white rounded-lg' key={review._id}>
                     <footer className='flex justify-between items-center mb-2'>
